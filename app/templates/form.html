@@ -1,0 +1,61 @@
+<md-content style="width: 100%; height: 100%; top: 20px;" layout="row" class="hide-scroll" flex layout-align="center">
+
+<md-content class="hide-scroll md-whiteframe-1dp" flex layout-align="center" style=" width: 100%; min-width: 820px; max-width: 820px; background-color: #fff; margin: 0;" >
+
+		<md-subheader class="md-warn" style="background-color: #f7f7f7; font-size: 24px;">Monthly Summary</md-subheader>
+
+	 <md-divider ></md-divider>
+<section style="padding: 20px;">
+      <form name="userForm">
+        <div layout-gt-xs="row">
+			<span flex></span>
+          <md-datepicker style="background-color: #fff;" ng-model="user.submissionDate" md-placeholder="Enter date">
+          </md-datepicker>
+			<br>
+        </div>
+        <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>First name</label>
+            <input ng-model="user.firstName">
+          </md-input-container>
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Last Name</label>
+            <input ng-model="theMax">
+          </md-input-container>
+        </div>
+        <md-input-container class="md-block">
+          <label>Address</label>
+          <input ng-model="user.address">
+        </md-input-container>
+         <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>City</label>
+            <input ng-model="user.city">
+          </md-input-container>
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>State</label>
+            <md-select ng-model="user.state">
+              <md-option ng-repeat="state in states" value="{{state.abbrev}}">
+                {{state.abbrev}}
+              </md-option>
+            </md-select>
+          </md-input-container>
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Postal Code</label>
+            <input name="postalCode" ng-model="user.postalCode" placeholder="12345"
+				   required ng-pattern="/^[0-9]{5}$/" md-maxlength="5">
+            <div ng-messages="userForm.postalCode.$error" role="alert" multiple>
+              <div ng-message="required" class="my-message">You must supply a postal code.</div>
+              <div ng-message="pattern" class="my-message">That doesn't look like a valid postal
+                code.
+              </div>
+              <div ng-message="md-maxlength" class="my-message">
+                Don't use the long version silly...we don't need to be that specific...
+              </div>
+            </div>
+          </md-input-container>
+        </div>
+        </form>
+	</section>
+  </md-content>
+</md-content>

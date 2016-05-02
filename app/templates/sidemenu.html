@@ -1,0 +1,8 @@
+<md-button class="md-button-toggle" ng-click="toggle()" aria-controls="side-menu-{{section.name | nospace}}" flex layout="row" aria-expanded="{{isOpen()}}">{{section.name}}
+   <!--  <md-icon class="md-icon-button" ng-class="{'toggled' : isOpen()}">arrow_drop_down</md-icon>-->
+</md-button>
+<ul ng-show="isOpen()" id="side-menu-{{section.name | nospace}}" class="menu-toggle-list">
+    <li ng-repeat="page in section.pages">
+        <menu-link section="page"></menu-link>
+    </li>
+</ul>

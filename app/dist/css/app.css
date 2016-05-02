@@ -1,0 +1,47 @@
+.primary-bg {
+  background-color: #B8C480; }
+
+.secondary-bg {
+  background-color: #D9D375; }
+
+.favorite-bg {
+  background-color: #A1AF83; }
+
+.danger-bg {
+  background-color: #B8C480; }
+
+.dark-bg {
+  background-color: #323434; }
+
+.light-bg {
+  background-color: #f7f7f7; }
+
+.dark-grey-bg {
+  background-color: #5E6261; }
+
+.light-grey-bg {
+  background-color: #CBCDCD; }
+
+.primary-color {
+  color: #B8C480; }
+
+.secondary-color {
+  color: #D9D375; }
+
+.favorite-color {
+  color: #A1AF83; }
+
+.danger-color {
+  color: #B8C480; }
+
+.dark-color {
+  color: #323434; }
+
+.light-color {
+  color: #f7f7f7; }
+
+.dark-grey-color {
+  color: #5E6261; }
+
+.light-grey-color {
+  color: #CBCDCD; }

@@ -1,93 +1,122 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
   <head>
     <title>Angular Material - Starter App</title>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
-
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no"/>
     <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic'>
-    <link rel="stylesheet" href="../node_modules/angular-material/angular-material.css"/>
-    <link rel="stylesheet" href="assets/app.css"/>
-
+   	<link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,600' rel='stylesheet' type='text/css'>
+  	<link href='https://fonts.googleapis.com/css?family=Raleway:400,500,600,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="./dist/lib/angular-material/angular-material.css"/>
+    <link rel="stylesheet" href="./dist/css/styles.css"/>
+	  <link rel="stylesheet" href="./dist/css/app.css"/>
+ <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	  <script src="./dist/lib/highcharts/highcharts.js"></script>
+<script src="./dist/lib/highcharts/highcharts-more.js"></script>
+<script src="./dist/lib/highcharts/modules/solid-gauge.js"></script>
     <style type="text/css">
-        /**
-         * Hide when Angular is not yet loaded and initialized
-         */
         [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
-          display: none !important;
-        }
+			display: none !important;
+		}
     </style>
+
+	  <script type="text/javascript"
+			  src='https://www.google.com/jsapi?autoload={
+        "modules":[{
+        "name":"visualization",
+        "version":"1"
+        }]
+      }'></script>
 
   </head>
 
-  <body ng-app="starterApp" layout="column" ng-controller="UserController as ul" ng-cloak>
+  <body ng-app="app" layout="column" ng-controller="AppCtrl as app" style="margin: 0; padding: 0; width: 100%; height: 100%;"  ng-init="initMenu()">
 
-    <md-toolbar layout="row">
-      <md-button class="menu" hide-gt-sm ng-click="ul.toggleList()" aria-label="Show User List">
-        <md-icon md-svg-icon="menu" ></md-icon>
-      </md-button>
-      <h1>Angular Material - Starter App</h1>
-    </md-toolbar>
+  	<md-toolbar layout="row" style="z-index: 10;" class="md-warn md-hue-3 ">
+		  <md-button class="menu" ng-click="toggleLeft()" aria-label="Show User List">
+			<md-icon class="material-icons">menu</md-icon>
+		  </md-button>
+		<div class="md-toolbar-tools">
 
-    <div flex layout="row">
+	  <h1 class="md-display-4" style="font-size: 28px; margin-left: 24px;">
+						{{ title }}
+				  </h1>
+			<span flex></span>
+<md-input-container>
+			 <md-select ng-model="myAccounts" name="myAccounts" id="myAccounts" placeholder="Please Select a Property"
+						ng-change="updateModel()" style="margin-top: 0px; margin-right: 150px; font-size: 20px; z-index: 1000; background-color: #EAEBEB;">
+				<md-option style="z-index: 1000;" ng-value="site" ng-repeat="site in sites">{{site.accountName}}</md-option>
+			</md-select>
+			</md-input-container>
 
-        <md-sidenav  ng-click="ul.toggleList()" md-is-locked-open="$mdMedia('gt-sm')" md-component-id="left" class="md-whiteframe-z2" >
-          <md-list>
-            <md-list-item ng-repeat="it in ul.users">
-                <md-button ng-click="ul.selectUser(it)" ng-class="{'selected' : it === ul.selected }">
-                  <md-icon md-svg-icon="{{it.avatar}}" class="avatar"></md-icon>
-                  {{it.name}}
-                </md-button>
-            </md-list-item>
-          </md-list>
-        </md-sidenav>
+		</div>
+	</md-toolbar>
+  	<div flex layout="row" style="top: 50px;">
+		<md-sidenav md-component-id="left" class="md-sidenav-left md-whiteframe-z2" style="background-color: #3C3E3E;">
+			<md-toolbar layout="row" class="md-whiteframe-1dp md-accent md-hue-2" style="background-color: #3C3E3E;">
+				 <div class="md-toolbar-tools">
+					<h2>
+					  <span>Menu</span>
+					</h2>
+					 <span flex></span>
+					<md-button class="menu" ng-click="close()" aria-label="Show User List">
+						<md-icon md-svg-icon="menu"></md-icon>
+					</md-button>
+				  </div>
+			</md-toolbar>
+			<md-content role="navigation" style="background-color: #E0E1E1;">
+				<ul class="side-menu">
+					<li ng-repeat="section in app.menu.sections" class="parent-list-item"					ng-class="{'parentActive' : app.isSectionSelected(section)}">
+						<h2 class="menu-heading" ng-if="section.type === 'heading'"	id="heading_{{ section.name | nospace }}">
+						  {{section}}
+						</h2>
+						<menu-link section="section" ng-if="section.type === 'link'"></menu-link>
+						<menu-toggle section="section" ng-if="section.type === 'toggle'"></menu-toggle>
+					</li>
+				</ul>
+			</md-content>
+		</md-sidenav>
+		<md-content style="width: 100%;" class="hide-scroll" >
+			<md-content style="width: 100%;" class="hide-scroll" >
+			<md-toolbar style="background-color: #f7f7f7; height: 80px; width: 100%; position: fixed; top: 52px;">
+				<div class="md-toolbar-tools">
+					<span flex></span>
+	<span style="color: #3C3E3E; font-size: 42px; margin-left: 20px; margin-top: 30px;">{{ myAccounts.accountName }}</span>
+					 <span flex></span>
+				</div>
+			</md-toolbar>
+				</md-content>
+			<md-content flex layout-align="center" layout="row" style="position: fixed; height: 56px; width: 100%; background-color: #f7f7f7; margin: 0;  top: 130px; z-index: 10;" class="hide-scroll md-primary md-hue-1 md-whiteframe-1dp">
+				<span flex></span>
 
-        <md-content flex id="content">
-          <md-icon md-svg-icon="{{ul.selected.avatar}}" class="avatar"></md-icon>
-          <h2>{{ul.selected.name}}</h2>
-          <p>{{ul.selected.content}}</p>
+					<span style="color: #3C3E3E; font-size: 26px; margin-left: 20px;">{{ myAccounts.website }}</span>
 
-          <md-button class="share" md-no-ink ng-click="ul.makeContact(ul.selected)" aria-label="Share with {{ ul.selected.name }}">
-            <md-icon md-svg-icon="share"></md-icon>
-          </md-button>
-        </md-content>
+				<span flex></span>
+			</md-content>
+			<div ui-view="menu" class="hide-scroll" layout="row" layout-align="center start" style="width: 100%; height: 100%; top: 120px; position: absolute; "></div>
+		</md-content>
+	</div>
 
-    </div>
-
-    <script src="../node_modules/angular/angular.js"></script>
-    <script src="../node_modules/angular-animate/angular-animate.js"></script>
-    <script src="../node_modules/angular-aria/angular-aria.js"></script>
-    <script type="text/javascript" src="../node_modules/angular-material/angular-material.js"></script>
-
-    <script src="./src/users/Users.js"></script>
-    <script src="./src/users/UserController.js"></script>
-    <script src="./src/users/UserService.js"></script>
-
-    <script type="text/javascript">
-
-          angular
-              .module('starterApp', ['ngMaterial', 'users'])
-              .config(function($mdThemingProvider, $mdIconProvider){
-
-                  $mdIconProvider
-                      .defaultIconSet("./assets/svg/avatars.svg", 128)
-                      .icon("menu"       , "./assets/svg/menu.svg"        , 24)
-                      .icon("share"      , "./assets/svg/share.svg"       , 24)
-                      .icon("google_plus", "./assets/svg/google_plus.svg" , 512)
-                      .icon("hangouts"   , "./assets/svg/hangouts.svg"    , 512)
-                      .icon("twitter"    , "./assets/svg/twitter.svg"     , 512)
-                      .icon("phone"      , "./assets/svg/phone.svg"       , 512);
-
-                      $mdThemingProvider.theme('default')
-                          .primaryPalette('brown')
-                          .accentPalette('red');
-
-              });
-
+	<script src="./dist/lib/angular/angular.js"></script>
+	<script src="./dist/lib/angular-ui-router/release/angular-ui-router.js"></script>
+	<script src="./dist/lib/angular-animate/angular-animate.js"></script>
+	<script src="./dist/lib/angular-aria/angular-aria.js"></script>
+	<script src="./dist/lib/angular-messages/angular-messages.js"></script>
+	<script type="text/javascript" src="./dist/lib/angular-material/angular-material.js"></script>
+	<script src="js/app.js"></script>
+	<script src="js/controllers.js"></script>
+  	<script src="js/directives.js"></script>
+   	<script src="js/services.js"></script>
+   <script>
+	    (function(w,d,s,g,js,fjs){
+			g=w.gapi||(w.gapi={});g.analytics={q:[],ready:function(cb){this.q.push(cb)}};
+			js=d.createElement(s);fjs=d.getElementsByTagName(s)[0];
+			js.src='https://apis.google.com/js/platform.js';
+			fjs.parentNode.insertBefore(js,fjs);js.onload=function(){g.load('analytics')};
+		}(window,document,'script'));
     </script>
-
   </body>
 </html>

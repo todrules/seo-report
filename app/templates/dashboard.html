@@ -1,0 +1,513 @@
+<md-content style="width: 100%; height: 100%; top: 0px; max-width: 1400px;" layout="row" layout-wrap class="hide-scroll" layout-align="center start">
+		<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; min-width: 600px; max-width: 600px; background-color: #fff; margin: 10px; padding: 0; overflow: hidden;" >
+		<div >
+			<md-subheader style="background-color: #f7f7f7; color: #3C3E3E; font-size: 24px;">Impressions</md-subheader>
+		</div>
+		<md-divider ></md-divider>
+		<section layout="row" style="margin-top: 20px; margin-left: 20px;">
+			<section layout="column" layout-align="start center">
+
+			 <md-button class="md-warn" style="background-color: #2B0B32; color: #fff; width: 125px; height: 100px;" aria-label="Favorite">
+				 <span>THIS MONTH</span><br>
+				 <span style="font-size: 1.8em;">{{ totalImpressions | number:0 }}</span>
+
+			  </md-button>
+				 <md-button class="md-warn" aria-label="Favorite" style="color: #2B0B32; background-color: #f2f2f2; width: 125px; height: 100px;">
+				 <span style="font-size: 1.2em;">CHANGE</span><br>
+				 <md-icon class="material-icons" ng-if="lastImpressions > totalImpressions" style="color: #2B0B32; font-size: 1.8em; margin-bottom: 10px;">arrow_downward</md-icon>
+				  <md-icon class="material-icons" ng-if="lastImpressions < totalImpressions" style="color: #2B0B32; font-size: 1.8em; margin-bottom: 10px;">arrow_upward</md-icon>
+				 <span style="font-size: 2em;">{{ diffImpressions | number:0 }}</span>
+
+			  </md-button>
+
+			</section>
+			<section layout="column" layout-align="start center">
+
+			 <md-button class="md-warn" style="background-color: #3F334D; color: #fff; width: 125px; height: 100px;" aria-label="Favorite">
+				 <span>LAST MONTH</span><br>
+				 <span style="font-size: 1.8em;">{{ lastImpressions | number:0 }}</span>
+
+			  </md-button>
+			</section>
+			<section layout="column" layout-align="start center" style="margin: 0; padding: 0; margin-bottom: 20px; margin-left: 40px;">
+				<div id="impression-gauge" style="width: 250px; height: 250px; margin: 0 auto">
+				</div>
+			</section>
+		</section>
+		<section layout="row" layout-align="center" style="margin: 0; padding: 0;">
+			<div id="impression-container" style="position: relative; bottom: 0px; left: 0; top: 0px; width: 600px; height: 250px;  z-index: 0; padding: 0; margin: 0; background: none;">
+			</div>
+		</section>
+
+	</md-content>
+
+	<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; min-width: 600px; max-width: 600px; background-color: #fff; margin: 10px; overflow: hidden;" >
+		<div >
+			<md-subheader style="background-color: #f7f7f7; color: #3C3E3E; font-size: 24px;">Clicks</md-subheader>
+		</div>
+		<md-divider ></md-divider>
+		<section layout="row" style="margin-top: 20px; margin-left: 20px;">
+			<section layout="column" layout-align="start center">
+
+			 <md-button class="md-warn" style="background-color: #2B0B32; color: #fff; width: 125px; height: 100px;" aria-label="Favorite">
+				 <span>THIS MONTH</span><br>
+				 <span style="font-size: 1.8em;">{{ totalClicks | number:0 }}</span>
+
+			  </md-button>
+ 			 <md-button class="md-warn" aria-label="Favorite" style="color: #2B0B32; background-color: #f2f2f2; width: 125px; height: 100px;">
+				 <span style="font-size: 1.2em;">CHANGE</span><br>
+				 <md-icon class="material-icons" ng-if="lastClicks > totalClicks" style="color: #2B0B32; font-size: 1.8em; margin-bottom: 10px;">arrow_downward</md-icon>
+				  <md-icon class="material-icons" ng-if="lastClicks < totalClicks" style="color: #2B0B32; font-size: 1.8em; margin-bottom: 10px;">arrow_upward</md-icon>
+				 <span style="font-size: 2em;">{{ diffClicks | number:0 }}</span>
+
+			  </md-button>
+			</section>
+			<section layout="column" layout-align="start center">
+
+			 <md-button class="md-warn" style="background-color: #3F334D; color: #fff; width: 125px; height: 100px;" aria-label="Favorite">
+				 <span>LAST MONTH</span><br>
+				 <span style="font-size: 1.8em;">{{ lastClicks | number:0 }}</span>
+
+			  </md-button>
+			</section>
+		<section layout="column" layout-align="start center" style="margin: 0; padding: 0; margin-bottom: 20px; margin-left: 40px;">
+				<div id="clicks-gauge" style="width: 250px; height: 250px; margin: 0 auto">
+				</div>
+			</section>
+
+		</section>
+		<section layout="row" layout-align="center" style="margin: 0; padding: 0;">
+			<div id="clicks-container" style="position: relative; bottom: 0px; left: 0; top: 0px; width: 600px; height: 250px;  z-index: 0; padding: 0; margin: 0; background: none;">
+			</div>
+		</section>
+	</md-content>
+
+	<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; min-width: 600px; max-width: 600px; background-color: #fff; margin: 10px; overflow: hidden;" >
+		<div >
+			<md-subheader style="background-color: #f7f7f7; color: #3C3E3E; font-size: 24px;">CTR</md-subheader>
+		</div>
+		<md-divider ></md-divider>
+		<section layout="row" style="margin-top: 20px; margin-left: 20px;">
+			<section layout="column" layout-align="start center">
+
+			 <md-button class="md-warn" style="background-color: #2B0B32; color: #fff; width: 125px; height: 100px;" aria-label="Favorite">
+				 <span>THIS MONTH</span><br>
+				 <span style="font-size: 1.8em;">{{ (totalCTR*100) | number:2 }}%</span>
+
+			  </md-button>
+ 				 <md-button class="md-warn" aria-label="Favorite" style="color: #2B0B32; background-color: #f2f2f2; width: 125px; height: 100px;">
+				 <span style="font-size: 1.2em;">CHANGE</span><br>
+				<md-icon class="material-icons" ng-if="lastCTR > totalCTR" style="color: #2B0B32; font-size: 1.8em; margin-bottom: 10px;">arrow_downward</md-icon>
+				  <md-icon class="material-icons" ng-if="lastCTR < totalCTR" style="color: #2B0B32; font-size: 1.8em; margin-bottom: 10px;">arrow_upward</md-icon>
+				 <span style="font-size: 2em;">{{ diffCTR*100 | number:2 }}%</span>
+
+			  </md-button>
+			</section>
+			<section layout="column" layout-align="start center">
+
+			 <md-button class="md-warn" style="background-color: #3F334D; color: #fff; width: 125px; height: 100px;" aria-label="Favorite">
+				 <span>LAST MONTH</span><br>
+				 <span style="font-size: 1.8em;">{{ lastCTR*100 | number:2 }}%</span>
+
+			  </md-button>
+			</section>
+			<section layout="column" layout-align="start center" style="margin: 0; padding: 0; margin-bottom: 20px; margin-left: 40px;">
+				<div id="ctr-gauge" style="width: 250px; height: 250px; margin: 0 auto">
+				</div>
+			</section>
+
+		</section>
+		<section layout="row" layout-align="center" style="margin: 0; padding: 0;">
+			<div id="ctr-container" style="position: relative; bottom: 0px; left: 0; top: 0px; width: 600px; height: 250px;  z-index: 0; padding: 0; margin: 0; background: none;">
+			</div>
+		</section>
+
+	</md-content>
+
+	<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; min-width: 600px; max-width: 600px; background-color: #fff; margin: 10px; overflow: hidden;" >
+		<div >
+			<md-subheader style="background-color: #f7f7f7; color: #3C3E3E; font-size: 24px;">Position</md-subheader>
+		</div>
+		<md-divider ></md-divider>
+		<section layout="row" style="margin-top: 20px; margin-left: 20px;">
+			<section layout="column" layout-align="start center">
+
+			 <md-button class="md-warn" style="background-color: #2B0B32; color: #fff; width: 125px; height: 100px;" aria-label="Favorite">
+				 <span>THIS MONTH</span><br>
+				 <span style="font-size: 1.8em;">{{ avgPosition | number:2 }}</span>
+
+			  </md-button>
+				  <md-button class="md-warn" aria-label="Favorite" style="color: #2B0B32; background-color: #f2f2f2; width: 125px; height: 100px;">
+				 <span style="font-size: 1.2em;">CHANGE</span><br>
+				 <md-icon class="material-icons" ng-if="lastPosition > avgPosition" style="color: #2B0B32; font-size: 1.8em; margin-bottom: 10px;">arrow_downward</md-icon>
+				  <md-icon class="material-icons" ng-if="lastPosition < avgPosition" style="color: #2B0B32; font-size: 1.8em; margin-bottom: 10px;">arrow_upward</md-icon>
+				 <span style="font-size: 2em;">{{ diffPosition | number:2 }}</span>
+
+			  </md-button>
+			</section>
+			<section layout="column" layout-align="start center">
+
+			 <md-button class="md-warn" style="background-color: #3F334D; color: #fff; width: 125px; height: 100px;" aria-label="Favorite">
+				 <span>LAST MONTH</span><br>
+				 <span style="font-size: 1.8em;">{{ lastPosition | number:2 }}</span>
+
+			  </md-button>
+			</section>
+		<section layout="column" layout-align="start center" style="margin: 0; padding: 0; margin-bottom: 20px; margin-left: 40px;">
+				<div id="position-gauge" style="width: 250px; height: 250px; margin: 0 auto">
+				</div>
+			</section>
+
+		</section>
+		<section layout="row" layout-align="center" style="margin: 0; padding: 0;">
+			<div id="position-container" style="position: relative; bottom: 0px; left: 0; top: 0px; width: 600px; height: 250px;  z-index: 0; padding: 0; margin: 0; background: none;">
+			</div>
+		</section>
+
+
+	</md-content>
+
+	<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; min-width: 600px; max-width: 600px; background-color: #fff; margin: 10px; overflow: hidden;" >
+		<div >
+			<md-subheader style="background-color: #f7f7f7; color: #3C3E3E; font-size: 24px;">Top Referrals</md-subheader>
+		</div>
+		<md-divider ></md-divider>
+		<section layout="row" style="margin-top: 20px; margin-left: 20px;">
+			<section layout="column" layout-align="start center">
+				<div id="referral-container" style="width: 500px; height: 400px; text-align: right;"></div>
+			</section>
+		</section>
+	</md-content>
+
+	<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; min-width: 600px; max-width: 600px; background-color: #fff; margin: 10px; overflow: hidden;" >
+		<div >
+			<md-subheader style="background-color: #f7f7f7; color: #3C3E3E; font-size: 24px;">Traffic Channels</md-subheader>
+		</div>
+		<md-divider ></md-divider>
+		<section layout="row" style="margin-top: 20px; margin-left: 20px;">
+			<section layout="column" layout-align="start center">
+				<div id="traffic-container"
+					 style="height: 400px; width: 500px; text-align: right;"></div>
+			</section>
+		</section>
+	</md-content>
+	<md-content class="hide-scroll" layout-align="center" layout="column" style="width: 100%; min-width: 600px; max-width: 600px; background-color: #fff; margin: 10px;" >
+		<div >
+			<md-subheader  style="background-color: #f7f7f7; color: #3C3E3E; font-size: 24px;">Page Views</md-subheader>
+		</div>
+		<md-divider ></md-divider>
+		<section layout="row" style="margin-top: 20px; margin-left: 20px; padding: 0;">
+			<section layout="column" layout-align="start center" style="margin: 0; padding: 0;">
+			<md-button class="md-warn" style="background-color: #3E3F51; color: #fff; width: 125px; height: 100px;" >
+				 <span>THIS MONTH</span><br>
+				 <span style="font-size: 1.8em;">{{ pageviews | number:0 }}</span>
+
+			  </md-button>
+				<md-button style="color: #fff; background-color: #fdb800; width: 125px; height: 100px;">
+				 <span style="font-size: 1.2em;">CHANGE</span><br>
+				  <md-icon class="material-icons" ng-if="lastpageviews > pageviews" style="color: #fff; font-size: 1.8em; margin-bottom: 10px;">arrow_downward</md-icon>
+				  <md-icon class="material-icons" ng-if="lastpageviews < pageviews" style="color: #fff; font-size: 1.8em; margin-bottom: 10px;">arrow_upward</md-icon>
+				 <span style="font-size: 2em;">{{ pageviews - lastpageviews | number:0 }}</span>
+
+			  </md-button>
+			</section>
+			<section layout="column" layout-align="start center" style="margin: 0; padding: 0;">
+
+					<md-button class="md-warn" style="background-color: #505168; color: #fff; width: 125px; height: 100px;" >
+				 <span>LAST MONTH</span><br>
+				 <span style="font-size: 1.8em;">{{ lastpageviews | number:0 }}</span>
+			  </md-button>
+			</section>
+				<section layout="column" layout-align="start center" style="margin: 0; padding: 0; margin-bottom: 20px; margin-left: 40px;">
+					<div id="pageview-container" style="width: 250px; height: 250px; margin: 0 auto">
+					</div>
+				</section>
+
+		</section>
+	</md-content>
+	<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; min-width: 600px; max-width: 600px; background-color: #fff; margin: 10px;" >
+		<div >
+			<md-subheader  style="background-color: #f7f7f7; color: #3C3E3E; font-size: 24px;">Pages per Visit</md-subheader>
+		</div>
+		<md-divider ></md-divider>
+		<section layout="row" style="margin-top: 20px; margin-left: 20px; padding: 0; ">
+			<section layout="column" layout-align="start center" style="margin: 0; padding: 0;">
+			<md-button class="md-warn" style="background-color: #3E3F51; color: #fff; width: 125px; height: 100px;" aria-label="Favorite">
+				 <span>THIS MONTH</span><br>
+				 <span style="font-size: 1.8em;">{{ ppv | number:2 }}</span>
+
+			  </md-button>
+				<md-button  aria-label="Favorite" style="color: #fff; background-color: #fdb800; width: 125px; height: 100px;">
+				 <span style="font-size: 1.2em;">CHANGE</span><br>
+				 <md-icon class="material-icons" ng-if="lastppv > ppv" style="color: #fff; font-size: 1.8em; margin-bottom: 10px;">arrow_downward</md-icon>
+				  <md-icon class="material-icons" ng-if="lastppv < ppv" style="color: #fff; font-size: 1.8em; margin-bottom: 10px;">arrow_upward</md-icon>
+				 <span style="font-size: 2em;">{{ ppv - lastppv | number:2 }}</span>
+
+				</md-button>
+			</section>
+			<section layout="column" layout-align="start center" style="margin: 0; padding: 0;">
+
+				<md-button class="md-warn" style="background-color: #505168; color: #fff; width: 125px; height: 100px;" aria-label="Favorite">
+				 <span>LAST MONTH</span><br>
+				 <span style="font-size: 1.8em;">{{ lastppv | number:2 }}</span>
+			  </md-button>
+			</section>
+				<section layout="column" layout-align="center center" style="margin: 0; padding: 0; margin-bottom: 20px; margin-left: 40px;">
+					<div id="ppv-container" style="width: 250px; height: 250px; margin: 0 auto">
+			</div>
+				</section>
+
+		</section>
+	</md-content>
+		<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; min-width: 600px; max-width: 600px; background-color: #fff; margin: 10px;" >
+		<div >
+			<md-subheader  style="background-color: #f7f7f7; color: #3C3E3E; font-size: 24px;">Sessions</md-subheader>
+		</div>
+		<md-divider ></md-divider>
+		<section layout="row" style="margin-top: 20px; margin-left: 20px; padding: 0;">
+			<section layout="column" layout-align="start center" style="margin: 0; padding: 0;">
+			<md-button class="md-warn" style="background-color: #3E3F51; color: #fff; width: 125px; height: 100px;" aria-label="Favorite">
+				 <span>THIS MONTH</span><br>
+				 <span style="font-size: 1.8em;">{{ sessions | number:0 }}</span>
+
+			  </md-button>
+				<md-button  aria-label="Favorite" style="color: #fff; background-color: #fdb800; width: 125px; height: 100px;">
+				 <span style="font-size: 1.2em;">CHANGE</span><br>
+				  <md-icon class="material-icons" ng-if="lastsessions > sessions" style="color: #fff; font-size: 1.8em; margin-bottom: 10px;">arrow_downward</md-icon>
+				  <md-icon class="material-icons" ng-if="lastsessions < sessions" style="color: #fff; font-size: 1.8em; margin-bottom: 10px;">arrow_upward</md-icon>
+				 <span style="font-size: 2em;">{{ sessions - lastsessions | number:0 }}</span>
+
+			  </md-button>
+			</section>
+			<section layout="column" layout-align="start center" style="margin: 0; padding: 0;">
+
+				<md-button class="md-warn" style="background-color: #505168; color: #fff; width: 125px; height: 100px;" aria-label="Favorite">
+				 <span>LAST MONTH</span><br>
+				 <span style="font-size: 1.8em;">{{ lastsessions | number:0 }}</span>
+			  </md-button>
+			</section>
+				<section layout="column" layout-align="center center" style="margin: 0; padding: 0; margin-bottom: 20px; margin-left: 40px;">
+						<div id="sessions-container" style="width: 250px; height: 250px; margin: 0 auto">
+			</div>
+				</section>
+
+		</section>
+	</md-content>
+<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; min-width: 600px; max-width: 600px; background-color: #fff; margin: 10px;" >
+		<div >
+			<md-subheader  style="background-color: #f7f7f7; color: #3C3E3E; font-size: 24px;">Session Duration</md-subheader>
+		</div>
+		<md-divider ></md-divider>
+		<section layout="row" style="margin-top: 20px; margin-left: 20px; padding: 0;">
+			<section layout="column" layout-align="start center" style="margin: 0; padding: 0;">
+			<md-button class="md-warn" style="background-color: #3C3E3E; color: #fff; width: 125px; height: 100px;" aria-label="Favorite">
+				 <span>THIS MONTH</span><br>
+				 <span style="font-size: 1.8em;">{{ duration*1000 | date:'mm:ss' }}</span>
+
+			  </md-button>
+				<md-button  aria-label="Favorite" style="color: #fff; background-color: #fdb800; width: 125px; height: 100px;">
+				 <span style="font-size: 1.2em;">CHANGE</span><br>
+				  <md-icon class="material-icons" ng-if="lastduration > duration" style="color: #fff; font-size: 1.8em; margin-bottom: 10px;">arrow_downward</md-icon>
+				  <md-icon class="material-icons" ng-if="lastduration < duration" style="color: #fff; font-size: 1.8em; margin-bottom: 10px;">arrow_upward</md-icon>
+				 <span style="font-size: 2em;">{{ Math.abs(duration - lastduration)*1000 | date:'mm:ss' }}</span>
+
+			  </md-button>
+			</section>
+			<section layout="column" layout-align="start center" style="margin: 0; padding: 0;">
+
+				<md-button class="md-warn" style="background-color: #505168; color: #fff; width: 125px; height: 100px;" aria-label="Favorite">
+				 <span>LAST MONTH</span><br>
+				 <span style="font-size: 1.8em;">{{ lastduration*1000 | date:'mm:ss' }}</span>
+			  </md-button>
+			</section>
+				<section layout="column" layout-align="center center" style="margin: 0; padding: 0; margin-bottom: 20px; margin-left: 40px;">
+				<div id="duration-container" style="width: 250px; height: 250px; margin: 0 auto">
+			</div>
+				</section>
+
+		</section>
+	</md-content>
+
+
+
+		<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; min-width: 600px; max-width: 600px; background-color: #fff; margin: 10px;" >
+		<div >
+			<md-subheader  style="background-color: #f7f7f7; color: #3C3E3E; font-size: 24px;">Page Load Time</md-subheader>
+		</div>
+		<md-divider ></md-divider>
+		<section layout="row" style="margin-top: 20px; margin-left: 20px; padding: 0;">
+			<section layout="column" layout-align="start center" style="margin: 0; padding: 0;">
+				<md-button class="md-warn" style="background-color: #3C3E3E; color: #fff; width: 125px; height: 100px;" aria-label="Favorite">
+				 <span>THIS MONTH</span><br>
+				 <span style="font-size: 1.8em;">{{ pageLoadTime*1000 | date:'mm:ss' }}</span>
+
+			  </md-button>
+				<md-button  aria-label="Favorite" style="color: #fff; background-color: #fdb800; width: 125px; height: 100px;">
+				 <span style="font-size: 1.2em;">CHANGE</span><br>
+				   <md-icon class="material-icons" ng-if="lastpageLoadTime > pageLoadTime" style="color: #fff; font-size: 1.8em; margin-bottom: 10px;">arrow_downward</md-icon>
+				  <md-icon class="material-icons" ng-if="lastpageLoadTime < pageLoadTime" style="color: #fff; font-size: 1.8em; margin-bottom: 10px;">arrow_upward</md-icon>
+				 <span style="font-size: 2em;">{{ Math.abs(pageLoadTime - lastpageLoadTime)*1000| date:'mm:ss' }}</span>
+
+			  </md-button>
+			</section>
+			<section layout="column" layout-align="start center" style="margin: 0; padding: 0;">
+
+				<md-button class="md-warn" style="background-color: #505168; color: #fff; width: 125px; height: 100px;" aria-label="Favorite">
+				 <span>LAST MONTH</span><br>
+				 <span style="font-size: 1.8em;">{{ lastpageLoadTime*1000 | date:'mm:ss' }}</span>
+			  </md-button>
+			</section>
+				<section layout="column" layout-align="center center" style="margin: 0; padding: 0; margin-bottom: 20px; margin-left: 40px;">
+					<div id="loadtime-container" style="width: 250px; height: 250px; margin: 0 auto">
+			</div>
+				</section>
+
+		</section>
+	</md-content>
+		<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; min-width: 600px; max-width: 600px; background-color: #fff; margin: 10px;" >
+		<div >
+			<md-subheader  style="background-color: #f7f7f7; color: #3C3E3E; font-size: 24px;">Unique Page Views</md-subheader>
+		</div>
+		<md-divider ></md-divider>
+		<section layout="row" style="margin-top: 20px; margin-left: 20px; padding: 0;">
+			<section layout="column" layout-align="start center" style="margin: 0; padding: 0;">
+			<md-button class="md-warn" style="background-color: #3C3E3E; color: #fff; width: 125px; height: 100px;" aria-label="Favorite">
+				 <span>THIS MONTH</span><br>
+				 <span style="font-size: 1.8em;">{{ uniquePageviews | number:0 }}</span>
+
+			  </md-button>
+				<md-button  aria-label="Favorite" style="color: #fff; background-color: #fdb800; width: 125px; height: 100px;">
+				 <span style="font-size: 1.2em;">CHANGE</span><br>
+				  <md-icon class="material-icons" ng-if="lastuniquePageviews > uniquePageviews" style="color: #fff; font-size: 1.8em; margin-bottom: 10px;">arrow_downward</md-icon>
+				  <md-icon class="material-icons" ng-if="lastuniquePageviews < uniquePageviews" style="color: #fff; font-size: 1.8em; margin-bottom: 10px;">arrow_upward</md-icon>
+				 <span style="font-size: 2em;">{{ uniquePageviews - lastuniquePageviews | number:0 }}</span>
+
+			  </md-button>
+			</section>
+			<section layout="column" layout-align="start center" style="margin: 0; padding: 0;">
+
+				<md-button class="md-warn" style="background-color: #505168; color: #fff; width: 125px; height: 100px;" aria-label="Favorite">
+				 <span>LAST MONTH</span><br>
+				 <span style="font-size: 1.8em;">{{ lastuniquePageviews | number:0 }}</span>
+			  </md-button>
+			</section>
+				<section layout="column" layout-align="center center" style="margin: 0; padding: 0; margin-bottom: 20px; margin-left: 40px;">
+					<div id="unique-container" style="width: 250px; height: 250px; margin: 0 auto">
+					</div>
+				</section>
+
+		</section>
+	</md-content>
+
+		<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; min-width: 600px; max-width: 600px; background-color: #fff; margin: 10px;" >
+		<div >
+			<md-subheader  style="background-color: #f7f7f7; color: #3C3E3E; font-size: 24px;">Bounces</md-subheader>
+		</div>
+		<md-divider ></md-divider>
+		<section layout="row" style="margin-top: 20px; margin-left: 20px; padding: 0; ">
+			<section layout="column" layout-align="start center" style="margin: 0; padding: 0;">
+	<md-button class="md-warn" style="background-color: #3C3E3E; color: #fff; width: 125px; height: 100px;" aria-label="Favorite">
+				 <span>THIS MONTH</span><br>
+				 <span style="font-size: 1.8em;">{{ bounces | number:0 }}</span>
+
+			  </md-button>
+				<md-button  aria-label="Favorite" style="color: #fff; background-color: #fdb800; width: 125px; height: 100px;">
+				 <span style="font-size: 1.2em;">CHANGE</span><br>
+				  <md-icon class="material-icons" ng-if="lastbounces > bounces" style="color: #fff; font-size: 1.8em; margin-bottom: 10px;">arrow_downward</md-icon>
+				  <md-icon class="material-icons" ng-if="lastbounces < bounces" style="color: #fff; font-size: 1.8em; margin-bottom: 10px;">arrow_upward</md-icon>
+				 <span style="font-size: 2em;">{{ bounces - lastbounces | number:0 }}</span>
+
+			  </md-button>
+			</section>
+			<section layout="column" layout-align="start center" style="margin: 0; padding: 0;">
+
+				<md-button class="md-warn" style="background-color: #505168; color: #fff; width: 125px; height: 100px;" aria-label="Favorite">
+				 <span>LAST MONTH</span><br>
+				 <span style="font-size: 1.8em;">{{ lastbounces | number:0 }}</span>
+			  </md-button>
+			</section>
+				<section layout="column" layout-align="center center" style="margin: 0; padding: 0; margin-bottom: 20px; margin-left: 40px;">
+						<div id="bounce-container" style="width: 250px; height: 250px; margin: 0 auto">
+			</div>
+				</section>
+
+		</section>
+	</md-content>
+<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; min-width: 600px; max-width: 600px; background-color: #fff; margin: 10px;" >
+		<div >
+			<md-subheader  style="background-color: #f7f7f7; color: #3C3E3E; font-size: 24px;">Bounce Rate</md-subheader>
+		</div>
+		<md-divider ></md-divider>
+		<section layout="row" style="margin-top: 20px; margin-left: 20px; padding: 0;">
+			<section layout="column" layout-align="start center" style="margin: 0; padding: 0;">
+			<md-button class="md-warn" style="background-color: #3E3F51; color: #fff; width: 125px; height: 100px;" aria-label="Favorite">
+				 <span>THIS MONTH</span><br>
+				 <span style="font-size: 1.8em;">{{ bounceRate | number:2 }}</span>
+
+			  </md-button>
+				<md-button  aria-label="Favorite" style="color: #fff; background-color: #fdb800; width: 125px; height: 100px;">
+				 <span style="font-size: 1.2em;">CHANGE</span><br>
+				 <md-icon class="material-icons" ng-if="lastbounceRate > bounceRate" style="color: #fff; font-size: 1.8em; margin-bottom: 10px;">arrow_downward</md-icon>
+				  <md-icon class="material-icons" ng-if="lastbounceRate < bounceRate" style="color: #fff; font-size: 1.8em; margin-bottom: 10px;">arrow_upward</md-icon>
+				 <span style="font-size: 2em;">{{ bounceRate - lastbounceRate | number:2 }}</span>
+
+			  </md-button>
+			</section>
+			<section layout="column" layout-align="start center" style="margin: 0; padding: 0;">
+
+				<md-button class="md-warn" style="background-color: #505168; color: #fff; width: 125px; height: 100px;" aria-label="Favorite">
+				 <span>LAST MONTH</span><br>
+				 <span style="font-size: 1.8em;">{{ lastbounceRate | number:2 }}</span>
+			  </md-button>
+			</section>
+				<section layout="column" layout-align="center center" style="margin: 0; padding: 0; margin-bottom: 20px; margin-left: 40px;">
+					<div id="bounce-rate-container" style="width: 250px; height: 250px; margin: 0 auto">
+			</div>
+				</section>
+
+		</section>
+	</md-content>
+<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; min-width: 600px; max-width: 600px; background-color: #fff; margin: 10px;" >
+		<div >
+			<md-subheader  style="background-color: #f7f7f7; color: #3C3E3E; font-size: 24px;">Top Keywords</md-subheader>
+		</div>
+		<md-divider ></md-divider>
+		<section layout="row" style="margin-top: 20px; margin-left: 20px; padding: 0;">
+			<section layout="column" layout-align="start start" style=" margin: 0; padding: 0;">
+				<md-list>
+					<md-list-item style="text-align: left;"  ng-repeat="newkey in newkeys track by $index">
+						<h4 style="font-family: 'Raleway'; color: #353535; font-weight: 400px; font-size: 1.2em;" >
+						{{ $index + 1 }}. {{ newkey }}</h4>
+					</md-list-item>
+				</md-list>
+
+			</section>
+
+		</section>
+	</md-content>
+	<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; min-width: 600px; max-width: 600px; background-color: #fff; margin: 10px;" >
+		<div >
+			<md-subheader  style="background-color: #f7f7f7; color: #3C3E3E; font-size: 24px;">Top Landing Pages</md-subheader>
+		</div>
+		<md-divider ></md-divider>
+		<section layout="row" style="margin-top: 20px; margin-left: 20px; padding: 0;">
+			<section layout="column" layout-align="start center" style="margin: 0; padding: 0;">
+				<section layout="row" style="margin-top: 20px; margin-left: 20px; padding: 0;">
+			<section layout="column" layout-align="start start" style=" margin: 0; padding: 0;">
+				<md-list>
+					<md-list-item style="text-align: left;"  ng-repeat="newpage in newpages track by $index">
+						<h4 style="font-family: 'Raleway'; font-weight: 400px; font-size: 1.2em;" >
+						{{ $index + 1 }}. <a href="{{ newpage  }}"  style="font-size: 1em; color: #353535; font-weight: 400;">{{ newpage }}</a></h4>
+					</md-list-item>
+				</md-list>
+
+			</section>
+
+		</section>
+
+			</section>
+
+		</section>
+	</md-content>
+
+</md-content>

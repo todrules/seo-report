@@ -63,5 +63,8 @@
     "vinyl-source-stream": "^1.1.0",
     "jshint": "^2.5.6",
     "nsp": "^2.1.0"
+  },
+  "engines": {
+    "node": "0.12.x"
   }
 }

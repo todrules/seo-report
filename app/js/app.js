@@ -114,7 +114,7 @@ angular.module('app', ['ngMaterial', 'ui.router', 'app.controllers', 'app.direct
 		$mdThemingProvider.theme('default')
 			.primaryPalette('myPrimary', {
 				'hue-3': 'A700',
-				'hue-1': '50'
+				'hue-1': '300'
 			})
 			.accentPalette('myAccent', {
 				'default': '500',

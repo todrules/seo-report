@@ -112,3 +112,13 @@ md-sidenav {
 	-webkit-font-feature-settings: 'liga';
 	-webkit-font-smoothing: antialiased;
 }
+
+.tblCls {
+	font-size: 16px;
+
+}
+
+
+.tblHeaderCls {
+	display: none;
+}

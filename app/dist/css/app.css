@@ -45,3 +45,12 @@
 
 .light-grey-color {
   color: #CBCDCD; }
+
+.tblCls {
+  font-size: 18px; }
+
+.tblHeaderCls {
+  display: none; }
+
+.tblClsSm {
+  font-size: 16px; }

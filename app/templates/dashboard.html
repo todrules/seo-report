@@ -1,28 +1,24 @@
 <md-content style="width: 100%; height: 100%; top: 0px; max-width: 1400px;" layout="row" layout-wrap class="hide-scroll" layout-align="center start">
-		<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; min-width: 600px; max-width: 600px; background-color: #fff; margin: 10px; padding: 0; overflow: hidden;" >
+
+		<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; min-width: 500px; max-width: 500px; background-color: #fff; margin: 10px; padding: 0; overflow: hidden;" >
 		<div >
 			<md-subheader style="background-color: #f7f7f7; color: #3C3E3E; font-size: 24px;">Impressions</md-subheader>
 		</div>
 		<md-divider ></md-divider>
 		<section layout="row" style="margin-top: 20px; margin-left: 20px;">
 			<section layout="column" layout-align="start center">
-
 			 <md-button class="md-warn" style="background-color: #2B0B32; color: #fff; width: 125px; height: 100px;" aria-label="Favorite">
 				 <span>THIS MONTH</span><br>
 				 <span style="font-size: 1.8em;">{{ totalImpressions | number:0 }}</span>
-
 			  </md-button>
 				 <md-button class="md-warn" aria-label="Favorite" style="color: #2B0B32; background-color: #f2f2f2; width: 125px; height: 100px;">
 				 <span style="font-size: 1.2em;">CHANGE</span><br>
 				 <md-icon class="material-icons" ng-if="lastImpressions > totalImpressions" style="color: #2B0B32; font-size: 1.8em; margin-bottom: 10px;">arrow_downward</md-icon>
 				  <md-icon class="material-icons" ng-if="lastImpressions < totalImpressions" style="color: #2B0B32; font-size: 1.8em; margin-bottom: 10px;">arrow_upward</md-icon>
 				 <span style="font-size: 2em;">{{ diffImpressions | number:0 }}</span>
-
 			  </md-button>
-
 			</section>
 			<section layout="column" layout-align="start center">
-
 			 <md-button class="md-warn" style="background-color: #3F334D; color: #fff; width: 125px; height: 100px;" aria-label="Favorite">
 				 <span>LAST MONTH</span><br>
 				 <span style="font-size: 1.8em;">{{ lastImpressions | number:0 }}</span>
@@ -30,18 +26,43 @@
 			  </md-button>
 			</section>
 			<section layout="column" layout-align="start center" style="margin: 0; padding: 0; margin-bottom: 20px; margin-left: 40px;">
-				<div id="impression-gauge" style="width: 250px; height: 250px; margin: 0 auto">
-				</div>
 			</section>
 		</section>
-		<section layout="row" layout-align="center" style="margin: 0; padding: 0;">
-			<div id="impression-container" style="position: relative; bottom: 0px; left: 0; top: 0px; width: 600px; height: 250px;  z-index: 0; padding: 0; margin: 0; background: none;">
-			</div>
+		<section layout="row" layout-align="end end" style="margin: 0; padding: 0; text-align: right;">
+			<section layout="column" layout-align="start start" style="width: 100%; margin-left: 20px;">
+			<div id="impression-gauge" style="width: 200px; height: 200px; margin: 0 auto; z-index: 10;">
+				</div>
+				</section>
+			<section layout="column" layout-align="start center">
+				 <md-card style="padding: 0; width: 200px;">
+			 <md-card-content layout="row" layout-align="start center" style="text-align: left; padding: 0; margin: 0;">
+				 <div layout="column">
+				 <md-list>
+				  <md-list-item class="md-2-line">
+					<md-icon class="material-icons"
+							 style="font-size: 42px; line-height: 42px; color: #82A352;">youtube_searched_for
+						</md-icon>
+					<div class="md-list-item-text">
+					  <h2> SEO Tip</h2>
+
+					</div>
+				  </md-list-item>
+					 </md-list>
+				 	<md-card-content style="margin-top: 0; padding-top: 0;">
+						<p style="font-size: 14px; margin-top: 0;">
+						As website content becomes more focused, overall impressions should fall as generic and
+						unrelated queries no longer target your site.</p>
+					</md-card-content>
+					 </div>
+					 </md-card-content>
+			  </md-card>
+
+				</section>
 		</section>
 
 	</md-content>
 
-	<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; min-width: 600px; max-width: 600px; background-color: #fff; margin: 10px; overflow: hidden;" >
+	<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; min-width: 500px; max-width: 500px; background-color: #fff; margin: 10px; overflow: hidden;" >
 		<div >
 			<md-subheader style="background-color: #f7f7f7; color: #3C3E3E; font-size: 24px;">Clicks</md-subheader>
 		</div>
@@ -70,19 +91,42 @@
 
 			  </md-button>
 			</section>
-		<section layout="column" layout-align="start center" style="margin: 0; padding: 0; margin-bottom: 20px; margin-left: 40px;">
-				<div id="clicks-gauge" style="width: 250px; height: 250px; margin: 0 auto">
-				</div>
-			</section>
-
 		</section>
-		<section layout="row" layout-align="center" style="margin: 0; padding: 0;">
-			<div id="clicks-container" style="position: relative; bottom: 0px; left: 0; top: 0px; width: 600px; height: 250px;  z-index: 0; padding: 0; margin: 0; background: none;">
-			</div>
+		<section layout="row" layout-align="end end" style="margin: 0; padding: 0; text-align: right;">
+			<section layout="column" layout-align="start start" style="width: 100%; margin-left: 20px;">
+			<div id="clicks-gauge" style="width: 200px; height: 200px; margin: 0 auto; z-index: 10;">
+				</div>
+				</section>
+			<section layout="column" layout-align="start center">
+				 <md-card style="padding: 0; width: 200px;">
+			 <md-card-content layout="row" layout-align="start start" style="text-align: left; padding: 0; margin: 0;">
+				  <md-card-content layout="row" layout-align="start center" style="text-align: left; padding: 0; margin: 0;">
+				 <div layout="column">
+				 <md-list>
+				  <md-list-item class="md-2-line">
+					<md-icon class="material-icons"
+							 style="font-size: 42px; line-height: 42px; color: #96B46A;">wallpaper
+						</md-icon>
+					<div class="md-list-item-text">
+					  <h2>Snippets</h2>
+
+					</div>
+				  </md-list-item>
+					 </md-list>
+				 	<md-card-content style="margin-top: 0; padding-top: 0;">
+						<p style="font-size: 14px; margin-top: 0;">
+							Snippets are the extras shown in th search results, like ratings, recipes, and events.
+						</p>
+					</md-card-content>
+					 </div>
+					 </md-card-content>
+			  </md-card>
+
+				</section>
 		</section>
 	</md-content>
 
-	<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; min-width: 600px; max-width: 600px; background-color: #fff; margin: 10px; overflow: hidden;" >
+	<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; min-width: 500px; max-width: 500px; background-color: #fff; margin: 10px; overflow: hidden;" >
 		<div >
 			<md-subheader style="background-color: #f7f7f7; color: #3C3E3E; font-size: 24px;">CTR</md-subheader>
 		</div>
@@ -111,20 +155,43 @@
 
 			  </md-button>
 			</section>
-			<section layout="column" layout-align="start center" style="margin: 0; padding: 0; margin-bottom: 20px; margin-left: 40px;">
-				<div id="ctr-gauge" style="width: 250px; height: 250px; margin: 0 auto">
+			</section>
+		<section layout="row" layout-align="end end" style="margin: 0; padding: 0; text-align: right;">
+			<section layout="column" layout-align="start start" style="width: 100%; margin-left: 20px;">
+			<div id="ctr-gauge" style="width: 200px; height: 200px; margin: 0 auto; z-index: 10;">
 				</div>
+				</section>
+			<section layout="column" layout-align="start center">
+				 <md-card style="padding: 0; width: 200px;">
+			 <md-card-content layout="row" layout-align="start start" style="text-align: left; padding: 0; margin: 0;">
+				  <md-card-content layout="row" layout-align="start center" style="text-align: left; padding: 0; margin: 0;">
+				 <div layout="column">
+				 <md-list>
+				  <md-list-item class="md-2-line">
+					<md-icon class="material-icons"
+							 style="font-size: 42px; line-height: 42px; color: #FF9F10;">text_fields
+						</md-icon>
+					<div class="md-list-item-text">
+					  <h2>Increase CTR?</h2>
+
+					</div>
+				  </md-list-item>
+					 </md-list>
+				 	<md-card-content style="margin-top: 0; padding-top: 0;">
+						<p style="font-size: 14px; margin-top: 0;">
+							Provide accurate, relevant content. &quot;Write it, and they will come.&quot;
+						</p>
+					</md-card-content>
+					 </div>
+					 </md-card-content>
+			  </md-card>
+
 			</section>
 
 		</section>
-		<section layout="row" layout-align="center" style="margin: 0; padding: 0;">
-			<div id="ctr-container" style="position: relative; bottom: 0px; left: 0; top: 0px; width: 600px; height: 250px;  z-index: 0; padding: 0; margin: 0; background: none;">
-			</div>
-		</section>
-
 	</md-content>
 
-	<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; min-width: 600px; max-width: 600px; background-color: #fff; margin: 10px; overflow: hidden;" >
+	<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; min-width: 500px; max-width: 500px; background-color: #fff; margin: 10px; overflow: hidden;" >
 		<div >
 			<md-subheader style="background-color: #f7f7f7; color: #3C3E3E; font-size: 24px;">Position</md-subheader>
 		</div>
@@ -153,33 +220,58 @@
 
 			  </md-button>
 			</section>
-		<section layout="column" layout-align="start center" style="margin: 0; padding: 0; margin-bottom: 20px; margin-left: 40px;">
-				<div id="position-gauge" style="width: 250px; height: 250px; margin: 0 auto">
+		</section>
+
+		<section layout="row" layout-align="end end" style="margin: 0; padding: 0; text-align: right;">
+			<section layout="column" layout-align="start start" style="width: 100%; margin-left: 20px;">
+			<div id="position-gauge" style="width: 200px; height: 200px; margin: 0 auto; z-index: 10;">
 				</div>
+				</section>
+			<section layout="column" layout-align="start center">
+				 <md-card style="padding: 0; width: 200px;">
+			 <md-card-content layout="row" layout-align="start start" style="text-align: left; padding: 0; margin: 0;">
+				  <md-card-content layout="row" layout-align="start center" style="text-align: left; padding: 0; margin: 0;">
+				 <div layout="column">
+				 <md-list>
+				  <md-list-item class="md-2-line">
+					<md-icon class="material-icons"
+							 style="font-size: 42px; line-height: 42px; color: #3B568C;">info_outline
+						</md-icon>
+					<div class="md-list-item-text">
+					  <h2>E-A-T</h2>
+
+					</div>
+				  </md-list-item>
+					 </md-list>
+				 	<md-card-content style="margin-top: 0; padding-top: 0;">
+						<p style="font-size: 14px; margin-top: 0;">
+							When ranking websites, Google focuses on 3 main areas: Expertise, Authority, and
+							Trustworthiness (E-A-T).
+						</p>
+					</md-card-content>
+					 </div>
+					 </md-card-content>
+			  </md-card>
+
 			</section>
 
 		</section>
-		<section layout="row" layout-align="center" style="margin: 0; padding: 0;">
-			<div id="position-container" style="position: relative; bottom: 0px; left: 0; top: 0px; width: 600px; height: 250px;  z-index: 0; padding: 0; margin: 0; background: none;">
-			</div>
-		</section>
-
 
 	</md-content>
 
-	<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; min-width: 600px; max-width: 600px; background-color: #fff; margin: 10px; overflow: hidden;" >
+	<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; min-width: 500px; max-width: 500px; background-color: #fff; margin: 10px; overflow: hidden;" >
 		<div >
 			<md-subheader style="background-color: #f7f7f7; color: #3C3E3E; font-size: 24px;">Top Referrals</md-subheader>
 		</div>
 		<md-divider ></md-divider>
 		<section layout="row" style="margin-top: 20px; margin-left: 20px;">
 			<section layout="column" layout-align="start center">
-				<div id="referral-container" style="width: 500px; height: 400px; text-align: right;"></div>
+				<div id="referral-container" style="width: 480px; height: 400px; text-align: right;"></div>
 			</section>
 		</section>
 	</md-content>
 
-	<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; min-width: 600px; max-width: 600px; background-color: #fff; margin: 10px; overflow: hidden;" >
+	<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; min-width: 500px; max-width: 500px; background-color: #fff; margin: 10px; overflow: hidden;" >
 		<div >
 			<md-subheader style="background-color: #f7f7f7; color: #3C3E3E; font-size: 24px;">Traffic Channels</md-subheader>
 		</div>
@@ -187,18 +279,26 @@
 		<section layout="row" style="margin-top: 20px; margin-left: 20px;">
 			<section layout="column" layout-align="start center">
 				<div id="traffic-container"
-					 style="height: 400px; width: 500px; text-align: right;"></div>
+					 style="height: 400px; width: 480px; text-align: right;"></div>
 			</section>
 		</section>
 	</md-content>
-	<md-content class="hide-scroll" layout-align="center" layout="column" style="width: 100%; min-width: 600px; max-width: 600px; background-color: #fff; margin: 10px;" >
-		<div >
+	<md-content class="hide-scroll" layout-align="center" layout="column" style="width: 100%; min-width: 500px; max-width: 500px; background-color: #fff; margin: 10px;" id="pageviewToast" >
+		<div layout="row">
 			<md-subheader  style="background-color: #f7f7f7; color: #3C3E3E; font-size: 24px;">Page Views</md-subheader>
+			<span flex></span>
+
+				<md-icon class="material-icons" ng-click="showCustomToast(0)" style="color: #3e3e3e;
+				font-size: 2.5em; margin-right: 20px; margin-bottom: 18px; cursor: pointer;" >info_outline
+				</md-icon>
 		</div>
 		<md-divider ></md-divider>
-		<section layout="row" style="margin-top: 20px; margin-left: 20px; padding: 0;">
+		<section layout="row" style="margin-top: 20px; margin-left: 20px; padding: 0;" >
 			<section layout="column" layout-align="start center" style="margin: 0; padding: 0;">
-			<md-button class="md-warn" style="background-color: #3E3F51; color: #fff; width: 125px; height: 100px;" >
+			<md-button class="md-warn" style="padding: 0; background-color: #3E3F51; color: #fff;
+			 width:
+			125px;
+			height: 100px;" >
 				 <span>THIS MONTH</span><br>
 				 <span style="font-size: 1.8em;">{{ pageviews | number:0 }}</span>
 
@@ -218,16 +318,20 @@
 				 <span style="font-size: 1.8em;">{{ lastpageviews | number:0 }}</span>
 			  </md-button>
 			</section>
-				<section layout="column" layout-align="start center" style="margin: 0; padding: 0; margin-bottom: 20px; margin-left: 40px;">
-					<div id="pageview-container" style="width: 250px; height: 250px; margin: 0 auto">
+				<section layout="column" layout-align="start center" style="margin: 0; padding: 0;">
+					<div id="pageview-container" style="width: 200px; height: 200px; margin: 0 auto">
 					</div>
 				</section>
 
 		</section>
 	</md-content>
-	<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; min-width: 600px; max-width: 600px; background-color: #fff; margin: 10px;" >
-		<div >
+	<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; min-width: 500px; max-width: 500px; background-color: #fff; margin: 10px;" id="ppvToast">
+		<div layout="row">
 			<md-subheader  style="background-color: #f7f7f7; color: #3C3E3E; font-size: 24px;">Pages per Visit</md-subheader>
+			<span flex></span>
+				<md-icon class="material-icons" ng-click="showCustomToast(1)" style="color: #3e3e3e;
+				font-size: 2.5em; margin-right: 20px; margin-bottom: 18px; cursor: pointer;" >info_outline
+				</md-icon>
 		</div>
 		<md-divider ></md-divider>
 		<section layout="row" style="margin-top: 20px; margin-left: 20px; padding: 0; ">
@@ -252,16 +356,20 @@
 				 <span style="font-size: 1.8em;">{{ lastppv | number:2 }}</span>
 			  </md-button>
 			</section>
-				<section layout="column" layout-align="center center" style="margin: 0; padding: 0; margin-bottom: 20px; margin-left: 40px;">
-					<div id="ppv-container" style="width: 250px; height: 250px; margin: 0 auto">
+				<section layout="column" layout-align="center center" style="margin: 0; padding: 0; ">
+					<div id="ppv-container" style="width: 200px; height: 200px; margin: 0 auto">
 			</div>
 				</section>
 
 		</section>
 	</md-content>
-		<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; min-width: 600px; max-width: 600px; background-color: #fff; margin: 10px;" >
-		<div >
+		<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; min-width: 500px; max-width: 500px; background-color: #fff; margin: 10px;" id="sessionToast">
+		<div layout="row">
 			<md-subheader  style="background-color: #f7f7f7; color: #3C3E3E; font-size: 24px;">Sessions</md-subheader>
+			<span flex></span>
+			<md-icon class="material-icons" ng-click="showCustomToast(2)" style="color: #3e3e3e;
+				font-size: 2.5em; margin-right: 20px; margin-bottom: 18px; cursor: pointer;" >info_outline
+				</md-icon>
 		</div>
 		<md-divider ></md-divider>
 		<section layout="row" style="margin-top: 20px; margin-left: 20px; padding: 0;">
@@ -286,16 +394,20 @@
 				 <span style="font-size: 1.8em;">{{ lastsessions | number:0 }}</span>
 			  </md-button>
 			</section>
-				<section layout="column" layout-align="center center" style="margin: 0; padding: 0; margin-bottom: 20px; margin-left: 40px;">
-						<div id="sessions-container" style="width: 250px; height: 250px; margin: 0 auto">
+				<section layout="column" layout-align="center center" style="margin: 0; padding: 0; ">
+						<div id="sessions-container" style="width: 200px; height: 200px; margin: 0 auto">
 			</div>
 				</section>
 
 		</section>
 	</md-content>
-<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; min-width: 600px; max-width: 600px; background-color: #fff; margin: 10px;" >
-		<div >
+<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; min-width: 500px; max-width: 500px; background-color: #fff; margin: 10px;" id="durationToast">
+		<div layout="row">
 			<md-subheader  style="background-color: #f7f7f7; color: #3C3E3E; font-size: 24px;">Session Duration</md-subheader>
+			<span flex></span>
+				<md-icon class="material-icons" ng-click="showCustomToast(3)" style="color: #3e3e3e;
+				font-size: 2.5em; margin-right: 20px; margin-bottom: 18px; cursor: pointer;" >info_outline
+				</md-icon>
 		</div>
 		<md-divider ></md-divider>
 		<section layout="row" style="margin-top: 20px; margin-left: 20px; padding: 0;">
@@ -320,19 +432,21 @@
 				 <span style="font-size: 1.8em;">{{ lastduration*1000 | date:'mm:ss' }}</span>
 			  </md-button>
 			</section>
-				<section layout="column" layout-align="center center" style="margin: 0; padding: 0; margin-bottom: 20px; margin-left: 40px;">
-				<div id="duration-container" style="width: 250px; height: 250px; margin: 0 auto">
+				<section layout="column" layout-align="center center" style="margin: 0; padding: 0; ">
+				<div id="duration-container" style="width: 200px; height: 200px; margin: 0 auto">
 			</div>
 				</section>
 
 		</section>
 	</md-content>
 
-
-
-		<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; min-width: 600px; max-width: 600px; background-color: #fff; margin: 10px;" >
-		<div >
+		<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; min-width: 500px; max-width: 500px; background-color: #fff; margin: 10px;" id="loadtimeToast">
+		<div layout="row">
 			<md-subheader  style="background-color: #f7f7f7; color: #3C3E3E; font-size: 24px;">Page Load Time</md-subheader>
+			<span flex></span>
+				<md-icon class="material-icons" ng-click="showCustomToast(4)" style="color: #3e3e3e;
+				font-size: 2.5em; margin-right: 20px; margin-bottom: 18px; cursor: pointer;" >info_outline
+				</md-icon>
 		</div>
 		<md-divider ></md-divider>
 		<section layout="row" style="margin-top: 20px; margin-left: 20px; padding: 0;">
@@ -357,16 +471,20 @@
 				 <span style="font-size: 1.8em;">{{ lastpageLoadTime*1000 | date:'mm:ss' }}</span>
 			  </md-button>
 			</section>
-				<section layout="column" layout-align="center center" style="margin: 0; padding: 0; margin-bottom: 20px; margin-left: 40px;">
-					<div id="loadtime-container" style="width: 250px; height: 250px; margin: 0 auto">
+				<section layout="column" layout-align="center center" style="margin: 0; padding: 0; ">
+					<div id="loadtime-container" style="width: 200px; height: 200px; margin: 0 auto">
 			</div>
 				</section>
 
 		</section>
 	</md-content>
-		<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; min-width: 600px; max-width: 600px; background-color: #fff; margin: 10px;" >
-		<div >
+		<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; min-width: 500px; max-width: 500px; background-color: #fff; margin: 10px;" id="uniqueToast">
+		<div layout="row">
 			<md-subheader  style="background-color: #f7f7f7; color: #3C3E3E; font-size: 24px;">Unique Page Views</md-subheader>
+			<span flex></span>
+				<md-icon class="material-icons" ng-click="showCustomToast(5)" style="color: #3e3e3e;
+				font-size: 2.5em; margin-right: 20px; margin-bottom: 18px; cursor: pointer;" >info_outline
+				</md-icon>
 		</div>
 		<md-divider ></md-divider>
 		<section layout="row" style="margin-top: 20px; margin-left: 20px; padding: 0;">
@@ -391,17 +509,21 @@
 				 <span style="font-size: 1.8em;">{{ lastuniquePageviews | number:0 }}</span>
 			  </md-button>
 			</section>
-				<section layout="column" layout-align="center center" style="margin: 0; padding: 0; margin-bottom: 20px; margin-left: 40px;">
-					<div id="unique-container" style="width: 250px; height: 250px; margin: 0 auto">
+				<section layout="column" layout-align="center center" style="margin: 0; padding: 0; ">
+					<div id="unique-container" style="width: 200px; height: 200px; margin: 0 auto">
 					</div>
 				</section>
 
 		</section>
 	</md-content>
 
-		<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; min-width: 600px; max-width: 600px; background-color: #fff; margin: 10px;" >
-		<div >
+		<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; min-width: 500px; max-width: 500px; background-color: #fff; margin: 10px;" id="bounceToast">
+		<div layout="row" >
 			<md-subheader  style="background-color: #f7f7f7; color: #3C3E3E; font-size: 24px;">Bounces</md-subheader>
+			<span flex></span>
+				<md-icon class="material-icons" ng-click="showCustomToast(6)" style="color: #3e3e3e;
+				font-size: 2.5em; margin-right: 20px; margin-bottom: 18px; cursor: pointer;" >info_outline
+				</md-icon>
 		</div>
 		<md-divider ></md-divider>
 		<section layout="row" style="margin-top: 20px; margin-left: 20px; padding: 0; ">
@@ -426,16 +548,20 @@
 				 <span style="font-size: 1.8em;">{{ lastbounces | number:0 }}</span>
 			  </md-button>
 			</section>
-				<section layout="column" layout-align="center center" style="margin: 0; padding: 0; margin-bottom: 20px; margin-left: 40px;">
-						<div id="bounce-container" style="width: 250px; height: 250px; margin: 0 auto">
+				<section layout="column" layout-align="center center" style="margin: 0; padding: 0;">
+						<div id="bounce-container" style="width: 200px; height: 200px; margin: 0 auto">
 			</div>
 				</section>
 
 		</section>
 	</md-content>
-<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; min-width: 600px; max-width: 600px; background-color: #fff; margin: 10px;" >
-		<div >
+<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; min-width: 500px; max-width: 500px; background-color: #fff; margin: 10px;" id="bouncerateToast">
+		<div layout="row">
 			<md-subheader  style="background-color: #f7f7f7; color: #3C3E3E; font-size: 24px;">Bounce Rate</md-subheader>
+			<span flex></span>
+				<md-icon class="material-icons" ng-click="showCustomToast(7)" style="color: #3e3e3e;
+				font-size: 2.5em; margin-right: 20px; margin-bottom: 18px; cursor: pointer;" >info_outline
+				</md-icon>
 		</div>
 		<md-divider ></md-divider>
 		<section layout="row" style="margin-top: 20px; margin-left: 20px; padding: 0;">
@@ -460,54 +586,139 @@
 				 <span style="font-size: 1.8em;">{{ lastbounceRate | number:2 }}</span>
 			  </md-button>
 			</section>
-				<section layout="column" layout-align="center center" style="margin: 0; padding: 0; margin-bottom: 20px; margin-left: 40px;">
-					<div id="bounce-rate-container" style="width: 250px; height: 250px; margin: 0 auto">
+				<section layout="column" layout-align="center center" style="margin: 0; padding: 0; ">
+					<div id="bounce-rate-container" style="width: 200px; height: 200px; margin: 0 auto">
 			</div>
 				</section>
 
 		</section>
 	</md-content>
-<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; min-width: 600px; max-width: 600px; background-color: #fff; margin: 10px;" >
-		<div >
-			<md-subheader  style="background-color: #f7f7f7; color: #3C3E3E; font-size: 24px;">Top Keywords</md-subheader>
+
+	<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; min-width: 500px; max-width: 500px; background-color: #fff; margin: 10px;" >
+		<div  >
+			<md-subheader  style="background-color: #463955; color: #f7f7f7; font-size: 24px;">Top Keywords
+			- by Impressions</md-subheader>
 		</div>
 		<md-divider ></md-divider>
-		<section layout="row" style="margin-top: 20px; margin-left: 20px; padding: 0;">
-			<section layout="column" layout-align="start start" style=" margin: 0; padding: 0;">
-				<md-list>
-					<md-list-item style="text-align: left;"  ng-repeat="newkey in newkeys track by $index">
-						<h4 style="font-family: 'Raleway'; color: #353535; font-weight: 400px; font-size: 1.2em;" >
-						{{ $index + 1 }}. {{ newkey }}</h4>
-					</md-list-item>
-				</md-list>
-
+		<section layout="row" style="padding: 0;" layout-align="center center">
+			<section layout="column" layout-align="start start" style=" margin: 0; padding: 0; text-align: center;">
+			<div id="keys-cont"
+				 style="width: 100%; height: 600px; font-size: 16px; margin: 0; padding: 0;"></div>
 			</section>
 
 		</section>
 	</md-content>
-	<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; min-width: 600px; max-width: 600px; background-color: #fff; margin: 10px;" >
-		<div >
-			<md-subheader  style="background-color: #f7f7f7; color: #3C3E3E; font-size: 24px;">Top Landing Pages</md-subheader>
+	<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; min-width: 500px; max-width: 500px; background-color: #fff; margin: 10px;" >
+		<div  >
+			<md-subheader  style="background-color: #463955; color: #f7f7f7; font-size: 24px;">Top Keywords
+			- by Clicks</md-subheader>
 		</div>
 		<md-divider ></md-divider>
-		<section layout="row" style="margin-top: 20px; margin-left: 20px; padding: 0;">
-			<section layout="column" layout-align="start center" style="margin: 0; padding: 0;">
-				<section layout="row" style="margin-top: 20px; margin-left: 20px; padding: 0;">
-			<section layout="column" layout-align="start start" style=" margin: 0; padding: 0;">
-				<md-list>
-					<md-list-item style="text-align: left;"  ng-repeat="newpage in newpages track by $index">
-						<h4 style="font-family: 'Raleway'; font-weight: 400px; font-size: 1.2em;" >
-						{{ $index + 1 }}. <a href="{{ newpage  }}"  style="font-size: 1em; color: #353535; font-weight: 400;">{{ newpage }}</a></h4>
-					</md-list-item>
-				</md-list>
-
-			</section>
-
-		</section>
-
+		<section layout="row" style="padding: 0;" layout-align="center center">
+			<section layout="column" layout-align="start start" style=" margin: 0; padding: 0; text-align: center;">
+			<div id="clickkeys-cont"
+				 style="width: 100%; height: 600px; font-size: 16px; margin: 0; padding: 0;"></div>
 			</section>
 
 		</section>
 	</md-content>
+	<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; min-width: 500px; max-width: 500px; background-color: #fff; margin: 10px;" >
+		<div  >
+			<md-subheader  style="background-color: #463955; color: #f7f7f7; font-size: 24px;">Top
+																							   Landing
+																							   Pages</md-subheader>
+		</div>
+		<md-divider ></md-divider>
+		<section layout="row" style="padding: 0;" layout-align="center center">
+			<section layout="column" layout-align="start start" style=" margin: 0; padding: 0; text-align: center;">
+			<div id="pages-cont"
+				 style="width: 100%; height: 600px; font-size: 16px; margin: 0; padding: 0;"></div>
+			</section>
+
+		</section>
+	</md-content>
+	<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; min-width: 500px; max-width: 500px; margin: 10px; padding: 0; overflow: hidden;" layout="row" layout-wrap>
+		<section layout="column" layout-align="start center">
+			 <md-card style="padding: 0; width: 200px; background-color: #fff; height: 100px;">
+			 <md-card-content layout="row" layout-align="start start" style="text-align: left; padding: 0; margin: 0;">
+				 <div layout="column">
+					  <md-card-title style="margin: 0; padding: 0; margin-left: 5px; margin-top: 5px;">
+					  <md-card-title-text>
+						<span class="md-headline" style="font-size: 16px;">Most Popular OS</span>
+
+					  </md-card-title-text>
+
+					</md-card-title>
+					<md-divider></md-divider>
+				 	<md-card-content style="margin-top: 0; padding-top: 4px;">
+						<span style="font-size: 32px;">{{ topOS }}</span>
+					</md-card-content>
+					 </div>
+					 </md-card-content>
+			  </md-card>
+		</section>
+		<section layout="column" layout-align="start center">
+				 <md-card style="padding: 0; width: 200px; background-color: #fff; height: 100px;">
+			 <md-card-content layout="row" layout-align="start start" style="text-align: left; padding: 0; margin: 0;">
+				 <div layout="column">
+					  <md-card-title style="margin: 0; padding: 0; margin-left: 5px; margin-top: 5px;">
+					  <md-card-title-text>
+						<span class="md-headline" style="font-size: 16px;">Top Screen Resolution</span>
+
+					  </md-card-title-text>
+
+					</md-card-title>
+					<md-divider></md-divider>
+				 	<md-card-content style="margin-top: 0; padding-top: 4px;">
+						<span style="font-size: 32px;">{{ topResolution }}</span>
+					</md-card-content>
+					 </div>
+					 </md-card-content>
+			  </md-card>
+
+			</section>
+		<section layout="column" layout-align="start center">
+				 <md-card style="padding: 0; width: 200px; height: 100px; background-color: #fff;">
+			 <md-card-content layout="row" layout-align="start start" style="text-align: left; padding: 0; margin: 0;">
+				 <div layout="column">
+					  <md-card-title style="margin: 0; padding: 0; margin-left: 5px; margin-top: 5px;">
+					  <md-card-title-text>
+						<span class="md-headline" style="font-size: 20px;">MVP
+							<span class="md-subhead">{Most Valuable Page)</span></span>
+
+					  </md-card-title-text>
+
+					</md-card-title>
+					<md-divider></md-divider>
+				 	<md-card-content style="margin-top: 0; padding-top: 4px;">
+						<span style="font-size: 16px;">{{ topPage }}</span>
+					</md-card-content>
+					 </div>
+					 </md-card-content>
+			  </md-card>
+
+			</section>
+		<section layout="column" layout-align="start center">
+				 <md-card style="padding: 0; width: 200px; height: 100px; background-color: #fff;">
+			 <md-card-content layout="row" layout-align="start start" style="text-align: left; padding: 0; margin: 0;">
+				 <div layout="column">
+					  <md-card-title style="margin: 0; padding: 0; margin-left: 5px; margin-top: 5px;">
+					  <md-card-title-text>
+						<span class="md-headline" style="font-size: 20px;">Keyword All-Star
+							</span>
+
+					  </md-card-title-text>
+
+					</md-card-title>
+					<md-divider></md-divider>
+				 	<md-card-content style="margin-top: 0; padding-top: 4px;">
+						<span style="font-size: 20px;">{{ topKeyword }}</span>
+					</md-card-content>
+					 </div>
+					 </md-card-content>
+			  </md-card>
+
+			</section>
+		</md-content>
 
 </md-content>

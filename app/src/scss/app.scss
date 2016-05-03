@@ -197,3 +197,18 @@ $favorite:   map-get($colors, favorite);
 .light-grey-color {
   color: $light-grey;
 }
+
+.tblCls {
+  font-size: 18px;
+
+}
+
+
+.tblHeaderCls {
+  display: none;
+}
+
+.tblClsSm {
+  font-size: 16px;
+
+}

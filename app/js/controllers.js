@@ -218,7 +218,17 @@ angular.module('app.controllers', [])
 
 })
 
-.controller('dashboardCtrl', function($scope, $state, $rootScope, $location) {
+	.controller('ToastCtrl', function($scope, $mdToast, $rootScope) {
+		
+		$scope.toastMsg = $rootScope.toastMsg;
+		$scope.toastTitle = $rootScope.toastTitle;
+		
+		$scope.closeToast = function() {
+			$mdToast.hide();
+		};
+	})
+
+.controller('dashboardCtrl', function($scope, $state, $rootScope, $location, $mdToast, $document) {
 	$scope.clientId = '306326458623-rno8o0ujbthci1b7v0dl7bbvk5n5913r.apps.googleusercontent.com';
 	$scope.apiKey = 'AIzaSyD8bNqJJlPwrlwQY-QgPelHCp7NTAJRESo';
 	$scope.scopes = 'https://www.googleapis.com/auth/analytics https://www.googleapis.com/auth/webmasters https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/drive.scripts';
@@ -230,17 +240,120 @@ angular.module('app.controllers', [])
 	$scope.refreshThis = function() {
 		$scope.newtraffic();
 		$scope.newreferral();
-		$scope.newimpressionChart();
-		$scope.newclicksChart();
-		$scope.newctrChart();
-		$scope.newpositionChart();
 		$scope.getData();
 		$scope.acctData();
 		$scope.getKeys();
 		$scope.getPages();
 		$scope.getOS();
 		$scope.getResolution();
+		$scope.getClickKeys();
+		//$scope.gwtData();
 
+	};
+
+	var last = {
+		bottom: false,
+		top: true,
+		left: false,
+		right: true
+	};
+	$scope.toastPosition = angular.extend({},last);
+	$scope.getToastPosition = function() {
+		sanitizePosition();
+		return Object.keys($scope.toastPosition)
+			.filter(function(pos) { return $scope.toastPosition[pos]; })
+			.join(' ');
+	};
+	function sanitizePosition() {
+		var current = $scope.toastPosition;
+		if ( current.bottom && last.top ) current.top = false;
+		if ( current.top && last.bottom ) current.bottom = false;
+		if ( current.right && last.left ) current.left = false;
+		if ( current.left && last.right ) current.right = false;
+		last = angular.extend({},current);
+	}
+	$scope.showCustomToast = function(toastLoc) {
+
+		var newMsg = '';
+		var selectedDiv = '';
+		var ttitles = '';
+
+		switch(toastLoc) {
+			case 0: {
+				//Page Views
+				newMsg = 'The total number of pageviews for the property.';
+				selectedDiv = '#pageviewToast';
+				ttitles = 'PAGE VIEWS';
+				break;
+			}
+			case 1: {
+				//ppv
+				newMsg = 'The average number of pages viewed during a session, including repeated views of a single' +
+					' page.';
+				selectedDiv = '#ppvToast';
+				ttitles = 'PAGES PER VISIT';
+				break;
+			}
+			case 2: {
+				//Sessions
+				newMsg = 'The total number of sessions.';
+				selectedDiv = '#sessionToast';
+				ttitles = 'SESSIONS';
+				break;
+			}
+			case 3: {
+				//Session Duration
+				newMsg = 'The average duration (in seconds) of user sessions.';
+				selectedDiv = '#durationToast';
+				ttitles = 'SESSION DURATION';
+				break;
+			}
+			case 4: {
+				// Page Load Time
+				newMsg = 'Total time (in milliseconds), from pageview initiation to page load completion in the browser, the pages in the sample set take to load.';
+				selectedDiv = '#loadtimeToast';
+				ttitles = 'PAGE LOAD TIME';
+				break;
+			}
+			case 5: {
+				//Unique Page Views
+				newMsg = 'Page views in different sessions are counted as unique page views. Both pagePath and pageTitle determine page view uniqueness.';
+				selectedDiv = '#uniqueToast';
+				ttitles = 'UNIQUE PAGE VIEWS';
+				break;
+			}
+			case 6: {
+				// Bounces
+				newMsg = 'The total number of single page (or single engagement hit) sessions for the property.';
+				selectedDiv = '#bounceToast';
+				ttitles = 'BOUNCES';
+				break;
+			}
+			case 7: {
+				//Bounce Rate
+				newMsg = 'The percentage of single-page session (i.e., session in which the person left the property from the first page). ';
+				selectedDiv = '#bouncerateToast';
+				ttitles = 'BOUNCE RATE';
+				break;
+			}
+			default: {
+
+			}
+
+		}
+
+		$rootScope.toastMsg = newMsg;
+		$rootScope.toastTitle = ttitles;
+
+		$mdToast.show({
+			              controller: 'ToastCtrl',
+			              templateUrl: 'templates/toast-template.html',
+			              parent : $document[0].querySelector(selectedDiv),
+			              hideDelay: 6000,
+			              position: $scope.getToastPosition(),
+							toastContent: newMsg,
+							locals: {toastTitle: ttitles}
+		              });
 	};
 
 	$scope.$on('changeModel', function(e) {
@@ -291,10 +404,6 @@ angular.module('app.controllers', [])
 		//google.setOnLoadCallback($scope.acctData);
 		google.setOnLoadCallback($scope.newtraffic);
 		google.setOnLoadCallback($scope.newreferral);
-		google.setOnLoadCallback($scope.newimpressionChart);
-		google.setOnLoadCallback($scope.newclicksChart);
-		google.setOnLoadCallback($scope.newctrChart);
-		google.setOnLoadCallback($scope.newpositionChart);
 		google.setOnLoadCallback($scope.getPages);
 		google.setOnLoadCallback($scope.getKeys);
 		google.setOnLoadCallback($scope.getResolution);
@@ -304,6 +413,8 @@ angular.module('app.controllers', [])
 		$scope.getData();
 		$scope.getResolution();
 		$scope.getOS();
+		$scope.getClickKeys();
+		//$scope.gwtData();
 		//$scope.acctData();
 
 	};
@@ -421,15 +532,15 @@ angular.module('app.controllers', [])
 	         backgroundColor: 'none',
 	         shadow: false,
 	         style: {
-	             fontSize: '16px',
+	             fontSize: '14px',
 				fontFamily: 'Roboto',
 				color: '#333'
 	         },
 	         pointFormat: '{series.name}<br><span style="font-size:2.5em; font-weight: bold">{point.y}</span>',
 	         positioner: function (labelWidth, labelHeight) {
 	             return {
-	                 x: 155 - labelWidth / 2,
-	                 y: 130
+	                 x: 100 - labelWidth / 2,
+	                 y: 65
 	             };
 	         }
 	     },
@@ -459,7 +570,7 @@ angular.module('app.controllers', [])
 
 	     plotOptions: {
 	         solidgauge: {
-	             borderWidth: '26px',
+	             borderWidth: '20px',
 	             dataLabels: {
 	                 enabled: false
 	             },
@@ -523,15 +634,15 @@ angular.module('app.controllers', [])
 					backgroundColor: 'none',
 					shadow: false,
 					style: {
-						fontSize: '16px',
+						fontSize: '14px',
 						fontFamily: 'Roboto',
 						color: '#333'
 					},
 					pointFormat: '{series.name}<br><span style="font-size:2.5em; font-weight: bold">{point.y}</span>',
 					positioner: function (labelWidth, labelHeight) {
 						return {
-							x: 155 - labelWidth / 2,
-							y: 130
+							x: 100 - labelWidth / 2,
+							y: 65
 						};
 					}
 				},
@@ -561,7 +672,7 @@ angular.module('app.controllers', [])
 
 				plotOptions: {
 					solidgauge: {
-						borderWidth: '26px',
+						borderWidth: '20px',
 						dataLabels: {
 							enabled: false
 						},
@@ -625,15 +736,15 @@ angular.module('app.controllers', [])
 					backgroundColor: 'none',
 					shadow: false,
 					style: {
-						fontSize: '16px',
+						fontSize: '14px',
 						fontFamily: 'Roboto',
 						color: '#333'
 					},
 					pointFormat: '{series.name}<br><span style="font-size:2.5em; font-weight: bold">{point.y}</span>',
 					positioner: function (labelWidth, labelHeight) {
 						return {
-							x: 155 - labelWidth / 2,
-							y: 130
+							x: 100 - labelWidth / 2,
+							y: 65
 						};
 					}
 				},
@@ -663,7 +774,7 @@ angular.module('app.controllers', [])
 
 				plotOptions: {
 					solidgauge: {
-						borderWidth: '26px',
+						borderWidth: '20px',
 						dataLabels: {
 							enabled: false
 						},
@@ -727,15 +838,15 @@ angular.module('app.controllers', [])
 					backgroundColor: 'none',
 					shadow: false,
 					style: {
-						fontSize: '16px',
+						fontSize: '14px',
 						fontFamily: 'Roboto',
 						color: '#333'
 					},
 					pointFormat: '{series.name}<br><span style="font-size:2.5em; font-weight: bold">{point.y}</span>',
 					positioner: function (labelWidth, labelHeight) {
 						return {
-							x: 155 - labelWidth / 2,
-							y: 130
+							x: 100 - labelWidth / 2,
+							y: 65
 						};
 					}
 				},
@@ -765,7 +876,7 @@ angular.module('app.controllers', [])
 
 				plotOptions: {
 					solidgauge: {
-						borderWidth: '26px',
+						borderWidth: '20px',
 						dataLabels: {
 							enabled: false
 						},
@@ -828,15 +939,15 @@ angular.module('app.controllers', [])
 					backgroundColor: 'none',
 					shadow: false,
 					style: {
-						fontSize: '16px',
+						fontSize: '14px',
 						fontFamily: 'Roboto',
 						color: '#333'
 					},
 					pointFormat: '{series.name}<br><span style="font-size:2.5em; font-weight: bold">{point.y}</span>',
 					positioner: function (labelWidth, labelHeight) {
 						return {
-							x: 155 - labelWidth / 2,
-							y: 130
+							x: 100 - labelWidth / 2,
+							y: 65
 						};
 					}
 				},
@@ -866,7 +977,7 @@ angular.module('app.controllers', [])
 
 				plotOptions: {
 					solidgauge: {
-						borderWidth: '26px',
+						borderWidth: '20px',
 						dataLabels: {
 							enabled: false
 						},
@@ -930,15 +1041,15 @@ angular.module('app.controllers', [])
 					backgroundColor: 'none',
 					shadow: false,
 					style: {
-						fontSize: '16px',
+						fontSize: '14px',
 						fontFamily: 'Roboto',
 						color: '#333'
 					},
 					pointFormat: '{series.name}<br><span style="font-size:2.5em; font-weight: bold">{point.y}</span>',
 					positioner: function (labelWidth, labelHeight) {
 						return {
-							x: 155 - labelWidth / 2,
-							y: 130
+							x: 100 - labelWidth / 2,
+							y: 65
 						};
 					}
 				},
@@ -968,7 +1079,7 @@ angular.module('app.controllers', [])
 
 				plotOptions: {
 					solidgauge: {
-						borderWidth: '26px',
+						borderWidth: '20px',
 						dataLabels: {
 							enabled: false
 						},
@@ -1032,15 +1143,15 @@ angular.module('app.controllers', [])
 					backgroundColor: 'none',
 					shadow: false,
 					style: {
-						fontSize: '16px',
+						fontSize: '14px',
 						fontFamily: 'Roboto',
 						color: '#333'
 					},
 					pointFormat: '{series.name}<br><span style="font-size:2.5em; font-weight: bold">{point.y}</span>',
 					positioner: function (labelWidth, labelHeight) {
 						return {
-							x: 155 - labelWidth / 2,
-							y: 130
+							x: 100 - labelWidth / 2,
+							y: 65
 						};
 					}
 				},
@@ -1070,7 +1181,7 @@ angular.module('app.controllers', [])
 
 				plotOptions: {
 					solidgauge: {
-						borderWidth: '26px',
+						borderWidth: '20px',
 						dataLabels: {
 							enabled: false
 						},
@@ -1134,15 +1245,15 @@ angular.module('app.controllers', [])
 					backgroundColor: 'none',
 					shadow: false,
 					style: {
-						fontSize: '16px',
+						fontSize: '14px',
 						fontFamily: 'Roboto',
 						color: '#333'
 					},
 					pointFormat: '{series.name}<br><span style="font-size:2.5em; font-weight: bold">{point.y}</span>',
 					positioner: function (labelWidth, labelHeight) {
 						return {
-							x: 155 - labelWidth / 2,
-							y: 130
+							x: 100 - labelWidth / 2,
+							y: 65
 						};
 					}
 				},
@@ -1172,7 +1283,7 @@ angular.module('app.controllers', [])
 
 				plotOptions: {
 					solidgauge: {
-						borderWidth: '26px',
+						borderWidth: '20px',
 						dataLabels: {
 							enabled: false
 						},
@@ -1236,15 +1347,15 @@ angular.module('app.controllers', [])
 					backgroundColor: 'none',
 					shadow: false,
 					style: {
-						fontSize: '16px',
+						fontSize: '14px',
 						fontFamily: 'Roboto',
 						color: '#333'
 					},
 					pointFormat: '{series.name}<br><span style="font-size:2.5em; font-weight: bold">{point.y}</span>',
 					positioner: function (labelWidth, labelHeight) {
 						return {
-							x: 155 - labelWidth / 2,
-							y: 130
+							x: 100 - labelWidth / 2,
+							y: 65
 						};
 					}
 				},
@@ -1274,7 +1385,7 @@ angular.module('app.controllers', [])
 
 				plotOptions: {
 					solidgauge: {
-						borderWidth: '26px',
+						borderWidth: '20px',
 						dataLabels: {
 							enabled: false
 						},
@@ -1338,15 +1449,15 @@ angular.module('app.controllers', [])
 					backgroundColor: 'none',
 					shadow: false,
 					style: {
-						fontSize: '16px',
+						fontSize: '14px',
 						fontFamily: 'Roboto',
 						color: '#333'
 					},
 					pointFormat: '{series.name}<br><span style="font-size:2.5em; font-weight: bold">{point.y}</span>',
 					positioner: function (labelWidth, labelHeight) {
 						return {
-							x: 155 - labelWidth / 2,
-							y: 130
+							x: 100 - labelWidth / 2,
+							y: 65
 						};
 					}
 				},
@@ -1376,7 +1487,7 @@ angular.module('app.controllers', [])
 
 				plotOptions: {
 					solidgauge: {
-						borderWidth: '26px',
+						borderWidth: '20px',
 						dataLabels: {
 							enabled: false
 						},
@@ -1447,8 +1558,8 @@ angular.module('app.controllers', [])
 					pointFormat: '{series.name}<br><span style="font-size:2.5em; font-weight: bold">{point.y}</span>',
 					positioner: function (labelWidth, labelHeight) {
 						return {
-							x: 155 - labelWidth / 2,
-							y: 130
+							x: 100 - labelWidth / 2,
+							y: 65
 						};
 					}
 				},
@@ -1478,7 +1589,7 @@ angular.module('app.controllers', [])
 
 				plotOptions: {
 					solidgauge: {
-						borderWidth: '26px',
+						borderWidth: '20px',
 						dataLabels: {
 							enabled: false
 						},
@@ -1549,8 +1660,8 @@ angular.module('app.controllers', [])
 					pointFormat: '{series.name}<br><span style="font-size:2.5em; font-weight: bold">{point.y}</span>',
 					positioner: function (labelWidth, labelHeight) {
 						return {
-							x: 155 - labelWidth / 2,
-							y: 130
+							x: 100 - labelWidth / 2,
+							y: 65
 						};
 					}
 				},
@@ -1580,7 +1691,7 @@ angular.module('app.controllers', [])
 
 				plotOptions: {
 					solidgauge: {
-						borderWidth: '26px',
+						borderWidth: '20px',
 						dataLabels: {
 							enabled: false
 						},
@@ -1617,223 +1728,7 @@ angular.module('app.controllers', [])
 			});
 	};
 
-	$scope.newimpressionChart = function() {
-//		console.log('impressions');
-//		console.log($scope.myAccounts.ssId);
-		var ssId = $scope.myAccounts.ssId;
-		var queryString = encodeURIComponent('SELECT A,B');
-		$scope.impressionChart = new google.visualization.ChartWrapper({
-			'chartType':'AreaChart',
-			'dataSourceUrl':'https://docs.google.com/spreadsheets/d/' + $scope.myAccounts.ssId + '/gviz/tq?&range=A:B&sheet=Apr-2016&headers=1&tq=' + queryString,
-			'containerId':'impression-container',
-			'options': {
-				legend: 'none',
-				colors: ['#A1BB79','#382934','#382934','#5E4557','#d6b45d','#ebd004','#b9b1a3','#314c63'],
-				width: 700,
-				height: '100%',
-				titleTextStyle: {
-					'font-size': '16px'
-				},
-				interpolateNulls: true,
-				lineWidth: 5,
-				vAxis: { gridlines: { count: 0 } },
-				areaOpacity: 0.2,
-				curveType: 'function',
-				backgroundColor: 'none',
-				chartArea: {
-					top: 0,
-					left: 0,
-					width: 700,
-					height: 250
-				},
-				animation: {
-					startup: true,
-					easing: 'inAndOut'
-				},
-				enableInteractivity: true,
-				hAxis: {
-					textPosition: 'none',
-					viewWindowMode: 'maximized',
-					gridlines: { count: 0 }
-				}
-			}
-		});
-		$scope.impressionChart.draw();
 
-		function onReady() {
-			//google.visualization.events.addListener($scope.traffic.getChart(), 'onmouseover', usefulHandler);
-		}
-
-		// Called
-		function usefulHandler() {
-
-		}
-	};
-
-
-	$scope.newclicksChart = function() {
-//		console.log('clicks');
-//		console.log($scope.myAccounts.ssId);
-		var ssId = $scope.myAccounts.ssId;
-		var queryString = encodeURIComponent('SELECT A, C');
-		$scope.clicksChart = new google.visualization.ChartWrapper({
-			'chartType':'AreaChart',
-			'dataSourceUrl':'https://docs.google.com/spreadsheets/d/' + ssId + '/gviz/tq?&range=A:D&sheet=Apr-2016&headers=1&tq=' + queryString,
-			'containerId':'clicks-container',
-			'options': {legend: 'none',
-				colors: ['#A1BB79','#382934','#382934','#5E4557','#d6b45d','#ebd004','#b9b1a3','#314c63'],
-				width: 700,
-				height: '100%',
-				titleTextStyle: {
-					'font-size': '16px'
-				},
-				interpolateNulls: true,
-				lineWidth: 5,
-				vAxis: { gridlines: {
-					baselineColor: '#f7f7f7',
-					count: 0 }
-				},
-				areaOpacity: 0.2,
-				curveType: 'function',
-				backgroundColor: 'none',
-				fontName: 'Roboto',
-				chartArea: {
-					top: 0,
-					left: 0,
-					width: 700,
-					height: 250
-				},
-				animation: {
-					startup: true,
-					easing: 'inAndOut'
-				},
-				enableInteractivity: true,
-				hAxis: {
-					textPosition: 'none',
-					viewWindowMode: 'maximized',
-					baselineColor: '#f7f7f7',
-					gridlines: {
-						color: '#f7f7f7',
-						count: 0
-					}
-				}
-			}
-		});
-		$scope.clicksChart.draw();
-
-		function onReady() {
-			//google.visualization.events.addListener($scope.traffic.getChart(), 'onmouseover', usefulHandler);
-		}
-
-		// Called
-		function usefulHandler() {
-
-		}
-	};
-
-	$scope.newctrChart = function() {
-//		console.log('ctr');
-//		console.log($scope.myAccounts.ssId);
-		var ssId = $scope.myAccounts.ssId;
-		var queryString = encodeURIComponent('SELECT A, D');
-		$scope.ctrChart = new google.visualization.ChartWrapper({
-			'chartType':'AreaChart',
-			'dataSourceUrl':'https://docs.google.com/spreadsheets/d/' + ssId + '/gviz/tq?&range=A:D&sheet=Apr-2016&headers=1&tq=' + queryString,
-			'containerId':'ctr-container',
-			'options': {legend: 'none',
-				colors: ['#A1BB79','#382934','#382934','#5E4557','#d6b45d','#ebd004','#b9b1a3','#314c63'],
-				width: 700,
-				height: '100%',
-				titleTextStyle: {
-					'font-size': '16px'
-				},
-				interpolateNulls: true,
-				lineWidth: 5,
-				vAxis: { gridlines: { count: 0 } },
-				areaOpacity: 0.2,
-				curveType: 'function',
-				backgroundColor: 'none',
-				chartArea: {
-					top: 0,
-					left: 0,
-					width: 700,
-					height: 250
-				},
-				animation: {
-					startup: true,
-					easing: 'inAndOut'
-				},
-				enableInteractivity: true,
-				hAxis: {
-					textPosition: 'none',
-					viewWindowMode: 'maximized',
-					gridlines: { count: 0 }
-				}
-			}
-		});
-		$scope.ctrChart.draw();
-
-		function onReady() {
-			//google.visualization.events.addListener($scope.traffic.getChart(), 'onmouseover', usefulHandler);
-		}
-
-		// Called
-		function usefulHandler() {
-
-		}
-	};
-
-	$scope.newpositionChart = function() {
-//		console.log('position');
-		var ssId = $scope.myAccounts.ssId;
-//		console.log($scope.myAccounts.ssId);
-		var queryString = encodeURIComponent('SELECT A,E');
-		$scope.positionChart = new google.visualization.ChartWrapper({
-			'chartType':'AreaChart',
-			'dataSourceUrl':'https://docs.google.com/spreadsheets/d/' + ssId + '/gviz/tq?&range=A:E&sheet=Apr-2016&headers=1&tq=' + queryString,
-			'containerId':'position-container',
-			'options': {legend: 'none',
-				colors: ['#A1BB79','#382934','#382934','#5E4557','#d6b45d','#ebd004','#b9b1a3','#314c63'],
-				width: 700,
-				height: '100%',
-				titleTextStyle: {
-					'font-size': '16px'
-				},
-				interpolateNulls: true,
-				lineWidth: 5,
-				vAxis: { gridlines: { count: 0 } },
-				areaOpacity: 0.2,
-				curveType: 'function',
-				backgroundColor: 'none',
-				chartArea: {
-					top: 0,
-					left: 0,
-					width: 700,
-					height: 250
-				},
-				animation: {
-					startup: true,
-					easing: 'inAndOut'
-				},
-				enableInteractivity: true,
-				hAxis: {
-					textPosition: 'none',
-					viewWindowMode: 'maximized',
-					gridlines: { count: 0 }
-				}
-			}
-		});
-		$scope.positionChart.draw();
-
-		function onReady() {
-			//google.visualization.events.addListener($scope.traffic.getChart(), 'onmouseover', usefulHandler);
-		}
-
-		// Called
-		function usefulHandler() {
-
-		}
-	};
 
 	$scope.getData = function() {
 		var ssId = $scope.myAccounts.ssId;
@@ -1869,20 +1764,129 @@ angular.module('app.controllers', [])
 
 	$scope.getKeys = function() {
 		var ssId = $scope.myAccounts.ssId;
-		var queryString = encodeURIComponent('select G,H order by H desc limit 10');
+		var queryString = encodeURIComponent('select G,H order by H desc limit 20');
 		var query = new google.visualization.Query('https://docs.google.com/spreadsheets/d/' + ssId + '/gviz/tq?&range=G:H&sheet=Apr-2016&headers=1&tq=' + queryString);
 		query.send($scope.returnKeys);
 	};
 
+	$scope.getClickKeys = function() {
+		var ssId = $scope.myAccounts.ssId;
+		var queryString = encodeURIComponent('select G,I order by I desc limit 20');
+		var query = new google.visualization.Query('https://docs.google.com/spreadsheets/d/' + ssId + '/gviz/tq?&range=G:I&sheet=Apr-2016&headers=1&tq=' + queryString);
+		query.send($scope.returnClickKeys);
+	};
+	
+
+	
+	$scope.getCombo = function(response) {
+		var datatable = response.getDataTable();
+
+		var wrapper = new google.visualization.ChartWrapper({
+			chartType: 'ScatterChart',
+			dataTable: datatable,
+			containerId: 'combo-cont',
+			options: {
+				interpolateNulls: true,
+				colors: ['#C5C65B','#382934','#382934','#5E4557','#d6b45d','#ebd004','#b9b1a3','#314c63'],
+				width: 800,
+				height: '100%',
+				titleTextStyle: {
+					'font-size': '16px'
+				},
+				interpolateNulls: true,
+				lineWidth: 5,
+				vAxis: { gridlines: { count: 0 } },
+				areaOpacity: 0.2,
+				curveType: 'function',
+				backgroundColor: 'none',
+				chartArea: {
+					top: 0,
+					right: 0,
+					width: 800,
+					height: '100%'
+				},
+				animation: {
+					startup: true,
+					easing: 'inAndOut'
+				},
+				enableInteractivity: true,
+				hAxis: {
+					textPosition: 'none',
+					viewWindowMode: 'maximized',
+					gridlines: { count: 0 }
+				},
+				series: {
+					2: {targetAxisIndex: 1 }
+
+				}
+
+			}
+
+		})
+		wrapper.draw();
+	}
+
 	$scope.newkeys = [];
 	$scope.returnKeys = function(response) {
 		var datatable = response.getDataTable();
+
+		var wrapper = new google.visualization.ChartWrapper({
+			chartType: 'Table',
+			dataTable: datatable,
+			containerId: 'keys-cont',
+			options: {
+				showRowNumber: false,
+				height: '100%',
+				width: 520,
+				cssClassNames: {
+					headerRow: 'tblHeaderCls',
+					tableRow: 'tblRowCls',
+					headerCell: 'tblHeadCellCls',
+					tableCell: 'tblCls'
+				}
+			}
+
+		})
+		wrapper.draw();
+		
 		var numrows = datatable.getNumberOfRows();
 		if(numrows > 10) {numrows = 10};
 		$scope.topKeyword = datatable.getValue(0,0);
 		console.log('topkey: ' + $scope.topKeyword);
 		for(var i = 0; i < numrows; i++) {
 			$scope.newkeys.push(datatable.getValue(i,0));
+			//console.log(typeof $scope.newkeys[i]);
+		}
+	};
+
+	$scope.newclickkeys = [];
+	$scope.returnClickKeys = function(response) {
+		var datatable = response.getDataTable();
+		
+		var wrapper = new google.visualization.ChartWrapper({
+			chartType: 'Table',
+			dataTable: datatable,
+			containerId: 'clickkeys-cont',
+			options: {
+				showRowNumber: false,
+				height: '100%',
+				width: 520,
+				cssClassNames: {
+					headerRow: 'tblHeaderCls',
+					tableRow: 'tblRowCls',
+					headerCell: 'tblHeadCellCls',
+					tableCell: 'tblCls'
+				}
+			}
+
+		})
+		wrapper.draw();
+		
+		var numrows = datatable.getNumberOfRows();
+		if(numrows > 10) {numrows = 10};
+		
+		for(var i = 0; i < numrows; i++) {
+			$scope.newclickkeys.push(datatable.getValue(i,0));
 			//console.log(typeof $scope.newkeys[i]);
 		}
 	};
@@ -1897,9 +1901,37 @@ angular.module('app.controllers', [])
 	$scope.newpages = [];
 	$scope.returnPages = function(response) {
 		var datatable = response.getDataTable();
+
+		var wrapper = new google.visualization.ChartWrapper({
+			chartType: 'Table',
+			dataTable: datatable,
+			containerId: 'pages-cont',
+			options: {
+				showRowNumber: false,
+				height: '100%',
+				width: 520,
+				cssClassNames: {
+					headerRow: 'tblHeaderCls',
+					tableRow: 'tblRowCls',
+					headerCell: 'tblHeadCellCls',
+					tableCell: 'tblClsSm'
+				}
+			}
+
+		})
+		wrapper.draw();
+		
 		var numrows = datatable.getNumberOfRows();
 		if(numrows > 10) {numrows = 10};
 		$scope.topPage = datatable.getValue(0,0);
+		if($scope.topPage.match(/http:\/\//))
+		{
+			$scope.topPage = $scope.topPage.substring(7);
+		}
+		if($scope.topPage.match(/^www\./))
+		{
+			$scope.topPage = $scope.topPage.substring(4);
+		}
 		for(var i = 0; i < numrows; i++) {
 			$scope.newpages.push(datatable.getValue(i,0));
 		}
@@ -1955,14 +1987,14 @@ angular.module('app.controllers', [])
 		$scope.diffClicks = $scope.totalClicks - $scope.lastClicks;
 		$scope.diffCTR = $scope.totalCTR - $scope.lastCTR;
 		$scope.diffPosition = $scope.avgPosition - $scope.lastPosition;
-		$scope.pageviewChart();
-		$scope.bounceRateChart() ;
-		$scope.sessionsChart() ;
-		$scope.ppvChart();
 		$scope.durationChart();
 		$scope.loadtimeChart();
 		$scope.uniqueChart();
 		$scope.bounceChart();
+		$scope.pageviewChart();
+		$scope.ppvChart();
+		$scope.sessionsChart();
+		$scope.bounceRateChart();
 		$scope.positionGauge();
 		$scope.ctrGauge();
 		$scope.clicksGauge();
@@ -1979,6 +2011,83 @@ angular.module('app.controllers', [])
 
 		}
 	];
+
+	$scope.lineChartOptions = {
+		title:'',
+		colors: ['#4c3b4d','#382934','#382934','#5E4557','#d6b45d','#ebd004','#b9b1a3','#314c63'],
+		chartArea: {top: 0, left: 0, width: 800, height: 200 },
+		titleTextStyle: {
+			'font-size': '16px'
+		},
+		vAxis: { },
+		hAxis: {
+			viewWindow: {
+				max: 100,
+				min: 24
+			},
+		},
+		interpolateNulls: true,
+		lineWidth: 5,
+		areaOpacity: 0,
+		curveType: 'function',
+		backgroundColor: '#f2f2f2',
+		animation: {
+			startup: true,
+			easing: 'inAndOut'
+		},
+		legend: { position: 'bottom' },
+		width: 800,
+		height: 200
+	};
+
+	$scope.gwtData = function() {
+		var ssId = $scope.myAccounts.ssId;
+		var queryString = encodeURIComponent('select A,B,C,D,E limit 120');
+		var query = new google.visualization.Query('https://docs.google.com/spreadsheets/d/' + ssId + '/gviz/tq?&range=A:E&sheet=Yearly&headers=1&tq=' + queryString);
+		query.send($scope.processData);
+	}
+
+	$scope.processData = function(response) {
+		//var datatable = response.getDataTable();
+		var options = $scope.lineChartOptions;
+		var ssId = $scope.myAccounts.ssId;
+		var query = 'https://docs.google.com/spreadsheets/d/' + ssId + '/gviz/tq?range=A:M&sheet=Summary&headers=1';
+
+		$scope.impressionWrapper = new google.visualization.ChartWrapper();
+		$scope.impressionWrapper.setChartType('LineChart');
+		$scope.impressionWrapper.setDataSourceUrl(query);
+		$scope.impressionWrapper.setQuery('SELECT A,B limit 120');
+		$scope.impressionWrapper.setContainerId('impression-chart');
+		$scope.impressionWrapper.setOptions(options);
+		$scope.impressionWrapper.draw();
+
+		$scope.clicksWrapper = new google.visualization.ChartWrapper();
+		$scope.clicksWrapper.setChartType('LineChart');
+		$scope.clicksWrapper.setDataSourceUrl(query);
+		$scope.clicksWrapper.setQuery('SELECT A,C');
+		$scope.clicksWrapper.setContainerId('clicks-chart');
+		$scope.clicksWrapper.setOptions(options);
+		$scope.clicksWrapper.draw();
+
+		$scope.ctrWrapper = new google.visualization.ChartWrapper();
+		$scope.ctrWrapper.setChartType('LineChart');
+		$scope.ctrWrapper.setDataSourceUrl(query);
+		$scope.ctrWrapper.setQuery('SELECT A,D LIMIT');
+		$scope.ctrWrapper.setContainerId('ctr-chart');
+		$scope.ctrWrapper.setOptions(options);
+		$scope.ctrWrapper.draw();
+
+		$scope.positionWrapper = new google.visualization.ChartWrapper();
+		$scope.positionWrapper.setChartType('LineChart');
+		$scope.positionWrapper.setDataSourceUrl(query);
+		$scope.positionWrapper.setQuery('SELECT A,E');
+		$scope.positionWrapper.setContainerId('position-chart');
+		$scope.positionWrapper.setOptions(options);
+		$scope.positionWrapper.draw();
+
+
+
+	};
 
 	
 })

@@ -1,6 +1,8 @@
 angular.module('app', ['ngMaterial', 'ui.router', 'app.controllers', 'app.directives', 'app.services', 'ngAnimate', 'ngAria', 'ngMessages'])
 
-	.run(function() {
+	.run(function($rootScope) {
+
+		$rootScope.monthList = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 
 	})
 
@@ -26,85 +28,80 @@ angular.module('app', ['ngMaterial', 'ui.router', 'app.controllers', 'app.direct
 
 	.config(function($mdThemingProvider) {
 		$mdThemingProvider.definePalette('myPrimary', {
-			'50': 'CFDDBB',
-			'100': 'C6D6AE',
-			'200': 'BCCFA0',
-			'300': 'B3C892',
-			'400': 'A9C185',
-			'500': 'A0BB77',
-			'600': '96B46A',
-			'700': '8DAD5C',
-			'800': '82A352',
-			'900': '78954B',
-			'A100': 'CCEE97',
-			'A200': 'A7C37C',
-			'A400': '8AA167',
-			'A700': '697B4E',
-			'contrastDefaultColor': 'dark',    // whether, by default, text (contrast)
+			'50': '0072D0',
+			'100': '0072D0',
+			'200': '0072D0',
+			'300': '0072D0',
+			'400': '004884',
+			'500': '004884',
+			'600': '004884',
+			'700': '003A6A',
+			'800': '003A6A',
+			'900': '003A6A',
+			'A100': '002544',
+			'A200': '002544',
+			'A400': '002544',
+			'A700': '002544',
+			'contrastDefaultColor': 'light',    // whether, by default, text (contrast)
 			// on this palette should be dark or light
-			'contrastDarkColors': ['50', '100', //hues which contrast should be 'dark' by default
-				'200', '300', '400', '500', '600'],
-			'contrastLightColors': ['700', '800',
-				'900', 'A100', 'A400', 'A700']    // could also specify this if default was 'dark'
+			'contrastDarkColors': ['50', '100'],
+			'contrastLightColors': []    // could also specify this if default was 'dark'
 		});
 		$mdThemingProvider.definePalette('myAccent', {
-			'50': '80819D',
-			'100': '757695',
-			'200': '6A6C8A',
-			'300': '62637F',
-			'400': '595A73',
-			'500': '505168',
-			'600': '47485C',
-			'700': '3E3F51',
-			'800': '353645',
-			'900': '2C2D3A',
-			'A100': '77799B',
-			'A200': '575870',
-			'A400': '3C3D4E',
-			'A700': '1F1F28',
-			'contrastDefaultColor': 'dark',    // whether, by default, text (contrast)
+			'50': 'A0A7D2',
+			'100': 'A0A7D2',
+			'200': 'c2e0a8',
+			'300': 'c2e0a8',
+			'400': '707493',
+			'500': '666A86',
+			'600': '666A86',
+			'700': '53566C',
+			'800': '393E36',
+			'900': '393E36',
+			'A100': 'F18F01',
+			'A200': '2F195F',
+			'A400': '1D3461',
+			'A700': '1D3461',
+			'contrastDefaultColor': 'light',    // whether, by default, text (contrast)
 			// on this palette should be dark or light
-			'contrastDarkColors': ['50', '100', //hues which contrast should be 'dark' by default
-				'200', '300', '400', '500', '600', 'A100'],
-			'contrastLightColors': ['700', '800',
-				'900', 'A400', 'A700']    // could also specify this if default was 'dark'
+			'contrastDarkColors': [],
+			'contrastLightColors': []    // could also specify this if default was 'dark'
 		});
 		$mdThemingProvider.definePalette('myWarn', {
-			'50': '6F5A87',
-			'100': '65527A',
-			'200': '5B496E',
-			'300': '514162',
-			'400': '463956',
-			'500': '3F334D',
-			'600': '32293D',
-			'700': '2B0B32',
-			'800': '282131',
-			'900': '1E1825',
-			'A100': '695580',
-			'A200': '463955',
-			'A400': '2A2233',
-			'A700': '0B090D',
+			'50': '2494E8',
+			'100': '2494E8',
+			'200': '2494E8',
+			'300': '2494E8',
+			'400': '228CDB',
+			'500': '228CDB',
+			'600': '228CDB',
+			'700': '18639B',
+			'800': '18639B',
+			'900': '18639B',
+			'A100': '0E3A5B',
+			'A200': '0E3A5B',
+			'A400': '0E3A5B',
+			'A700': '0E3A5B',
 			'contrastDefaultColor': 'light',    // whether, by default, text (contrast)
 		                                        // on this palette should be dark or light
-			'contrastDarkColors': ['50', '100', //hues which contrast should be 'dark' by default
-				'200', '300', '400'],
-			'contrastLightColors': ['A100', 'A200', 'A400', 'A700']    // could also specify this if default was 'dark'
+			'contrastDarkColors': [],
+			'contrastLightColors': []    // could also specify this if default was 'dark'
 		});
 		$mdThemingProvider.definePalette('myBackground', {
-			'50': '8D9190',
-			'100': '8D9190',
-			'200': '828786',
-			'300': '787D7C',
-			'400': '6E7271',
-			'500': '5E6261',
-			'600': '5A5E5D',
-			'700': '505352',
-			'800': '464948',
-			'900': '3C3E3E',
-			'A100': 'EAEBEB',
-			'A200': 'E0E1E1',
-			'A400': 'CBCDCD',
-			'A700': 'ACAFAE',
+			'50': 'FCF7F8',
+			'100': 'FCF7F8',
+			'200': 'FCF7F8',
+			'300': 'FCF7F8',
+			'400': 'E2DEDF',
+			'500': 'E2DEDF',
+			'600': 'E2DEDF',
+			'700': 'BCB9B9',
+			'800': 'BCB9B9',
+			'900': 'BCB9B9',
+			'A100': 'E2DEDF',
+			'A200': 'E2DEDF',
+			'A400': 'BCB9B9',
+			'A700': '7C7A7B',
 			'contrastDefaultColor': 'light',    // whether, by default, text (contrast)
 		                                        // on this palette should be dark or light
 			'contrastDarkColors': ['50', '100', //hues which contrast should be 'dark' by default
@@ -113,19 +110,20 @@ angular.module('app', ['ngMaterial', 'ui.router', 'app.controllers', 'app.direct
 		});
 		$mdThemingProvider.theme('default')
 			.primaryPalette('myPrimary', {
-				'hue-3': 'A700',
-				'hue-1': '300'
+
 			})
 			.accentPalette('myAccent', {
-				'default': '500',
-				'hue-1': '300',
-				'hue-2': '800',
-				'hue-3': 'A100'
+
 			})
 			.warnPalette('myWarn', {
-				'hue-3': 'A700'
+
 			})
-			.backgroundPalette('myBackground');
+			.backgroundPalette('myBackground', {
+				'default': 'A100',
+				'hue-1': '200',
+				'hue-2': '500',
+				'hue-3': '800'
+			});
 
 		$mdThemingProvider.setDefaultTheme('default');
 	})
@@ -453,6 +451,7 @@ angular.module('app.controllers', [])
 	$scope.apiKey = 'AIzaSyD8bNqJJlPwrlwQY-QgPelHCp7NTAJRESo';
 	$scope.scopes = 'https://www.googleapis.com/auth/analytics https://www.googleapis.com/auth/webmasters https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/drive.scripts';
 
+
 	$rootScope.title = 'Summary Report';
 
 	$scope.Math = window.Math;
@@ -464,11 +463,423 @@ angular.module('app.controllers', [])
 		$scope.acctData();
 		$scope.getKeys();
 		$scope.getPages();
+		$scope.getTopKeys();
+		$scope.getTopPages();
 		$scope.getOS();
 		$scope.getResolution();
 		$scope.getClickKeys();
+		$scope.newimpressionChart();
+		$scope.getImpressionBar();
+		$scope.newclicksChart();
+		$scope.getClicksBar();
+		$scope.newctrChart();
+		$scope.getCtrBar();
+		$scope.newpositionChart();
+		$scope.getPositionBar();
+
+		$scope.newpageviewsChart();
+		$scope.getPageviewsBar();
+		$scope.newppvChart();
+		$scope.getPpvBar();
+		$scope.newsessionsChart();
+		$scope.getSessionsBar();
+		$scope.newdurationsChart();
+		$scope.getDurationsBar();
+		$scope.newloadtimeChart();
+		$scope.getLoadtimeBar();
+		$scope.newuniqueChart();
+		$scope.getUniqueBar();
+		$scope.newbouncesChart();
+		$scope.getBouncesBar();
+		$scope.newbouncerateChart();
+		$scope.getBouncerateBar();
+
 		//$scope.gwtData();
 
+	};
+
+	$scope.myLineOptions = {
+		legend: 'none',
+		axisTitlesPosition: 'none',
+		colors: ['#FE9701','#382934','#382934','#5E4557','#d6b45d','#ebd004','#b9b1a3','#314c63'],
+		width: 850,
+		height: '100%',
+		interpolateNulls: true,
+		lineWidth: 10,
+		curveType: 'function',
+		backgroundColor: 'none',
+		chartArea: {
+			top: 20,
+			left: 0,
+			width: 850,
+			height: 300
+		},
+		animation: {
+			startup: true,
+			easing: 'inAndOut'
+		},
+		enableInteractivity: true,
+		hAxis: {
+			textPosition: 'none',
+			baselineColor: '#fff',
+			gridlines: {color: 'transparent'}
+		},
+		vAxis: {
+			baselineColor: '#fff',
+			gridlines: {
+				color: '#333',
+				count: 0}
+		}
+	};
+
+	$scope.myBarOptions = {
+		legend: 'none',
+		axisTitlesPosition: 'none',
+		width: 850,
+		height: '100%',
+		backgroundColor: 'none',
+		annotations: {
+			alwaysOutside: false
+		},
+		chartArea: {
+			top: 20,
+			left: 0,
+			width: 850,
+			height: 300
+		},
+		animation: {
+			startup: true,
+			easing: 'inAndOut'
+		},
+		enableInteractivity: true,
+		series: {
+			0: {
+				color: '#2494E8'
+			}
+		},
+		hAxis: {
+			textPosition: 'none',
+			baselineColor: '#fff',
+			gridlines: {color: 'transparent'}
+		},
+		vAxis: {
+			baselineColor: '#fff',
+			gridlines: {
+				color: '#333',
+				count: 0}
+		}
+	};
+
+	$scope.newimpressionChart = function() {
+		var ssId = $scope.myAccounts.ssId;
+		var options = $scope.myLineOptions;
+		var queryString = encodeURIComponent('SELECT A,B');
+		$scope.impressionChart = new google.visualization.ChartWrapper({
+			'chartType':'LineChart',
+			'dataSourceUrl':'https://docs.google.com/spreadsheets/d/' + $scope.myAccounts.ssId + '/gviz/tq?&range=A:B&sheet=Summary&headers=1&tq=' + queryString,
+			'containerId':'impression-container',
+			'options': options
+		});
+		$scope.impressionChart.draw();
+	};
+
+	$scope.getImpressionBar = function() {
+		var ssId = $scope.myAccounts.ssId;
+		var options = $scope.myBarOptions;
+		var queryString = encodeURIComponent('SELECT A,B');
+		$scope.impressionBar = new google.visualization.ChartWrapper({
+			'chartType':'ColumnChart',
+			'dataSourceUrl':'https://docs.google.com/spreadsheets/d/' + $scope.myAccounts.ssId + '/gviz/tq?&range=A:B&sheet=Summary&headers=1&tq=' + queryString,
+			'containerId':'impression-bar',
+			'options': options
+		});
+		$scope.impressionBar.draw();
+	};
+
+	$scope.newclicksChart = function() {
+		var ssId = $scope.myAccounts.ssId;
+		var options = $scope.myLineOptions;
+		var queryString = encodeURIComponent('SELECT A,C');
+		$scope.clicksChart = new google.visualization.ChartWrapper({
+			'chartType':'LineChart',
+			'dataSourceUrl':'https://docs.google.com/spreadsheets/d/' + $scope.myAccounts.ssId + '/gviz/tq?&range=A:C&sheet=Summary&headers=1&tq=' + queryString,
+			'containerId':'clicks-container',
+			'options': options
+		});
+		$scope.clicksChart.draw();
+	};
+
+	$scope.getClicksBar = function() {
+		var ssId = $scope.myAccounts.ssId;
+		var options = $scope.myBarOptions;
+		var queryString = encodeURIComponent('SELECT A,C');
+		$scope.clicksBar = new google.visualization.ChartWrapper({
+			'chartType':'ColumnChart',
+			'dataSourceUrl':'https://docs.google.com/spreadsheets/d/' + $scope.myAccounts.ssId + '/gviz/tq?&range=A:C&sheet=Summary&headers=1&tq=' + queryString,
+			'containerId':'clicks-bar',
+			'options': options
+		});
+		$scope.clicksBar.draw();
+	};
+
+	$scope.newctrChart = function() {
+		var ssId = $scope.myAccounts.ssId;
+		var options = $scope.myLineOptions;
+		var queryString = encodeURIComponent('SELECT A,D');
+		$scope.ctrChart = new google.visualization.ChartWrapper({
+			'chartType':'LineChart',
+			'dataSourceUrl':'https://docs.google.com/spreadsheets/d/' + $scope.myAccounts.ssId + '/gviz/tq?&range=A:D&sheet=Summary&headers=1&tq=' + queryString,
+			'containerId':'ctr-container',
+			'options': options
+		});
+		$scope.ctrChart.draw();
+	};
+
+	$scope.getCtrBar = function() {
+		var ssId = $scope.myAccounts.ssId;
+		var options = $scope.myBarOptions;
+		var queryString = encodeURIComponent('SELECT A,D');
+		$scope.ctrBar = new google.visualization.ChartWrapper({
+			'chartType':'ColumnChart',
+			'dataSourceUrl':'https://docs.google.com/spreadsheets/d/' + $scope.myAccounts.ssId + '/gviz/tq?&range=A:D&sheet=Summary&headers=1&tq=' + queryString,
+			'containerId':'ctr-bar',
+			'options': options
+		});
+		$scope.ctrBar.draw();
+	};
+
+	$scope.newpositionChart = function() {
+		var ssId = $scope.myAccounts.ssId;
+		var options = $scope.myLineOptions;
+		var queryString = encodeURIComponent('SELECT A,E');
+		$scope.positionChart = new google.visualization.ChartWrapper({
+			'chartType':'LineChart',
+			'dataSourceUrl':'https://docs.google.com/spreadsheets/d/' + $scope.myAccounts.ssId + '/gviz/tq?&range=A:E&sheet=Summary&headers=1&tq=' + queryString,
+			'containerId':'position-container',
+			'options': options
+		});
+		$scope.positionChart.draw();
+	};
+
+	$scope.getPositionBar = function() {
+		var ssId = $scope.myAccounts.ssId;
+		var options = $scope.myBarOptions;
+		var queryString = encodeURIComponent('SELECT A,E');
+		$scope.positionBar = new google.visualization.ChartWrapper({
+			'chartType':'ColumnChart',
+			'dataSourceUrl':'https://docs.google.com/spreadsheets/d/' + $scope.myAccounts.ssId + '/gviz/tq?&range=A:E&sheet=Summary&headers=1&tq=' + queryString,
+			'containerId':'position-bar',
+			'options': options
+		});
+		$scope.positionBar.draw();
+	};
+
+	$scope.newpageviewsChart = function() {
+		var ssId = $scope.myAccounts.ssId;
+		var options = $scope.myLineOptions;
+		var queryString = encodeURIComponent('SELECT A,F');
+		$scope.pageviewsChart = new google.visualization.ChartWrapper({
+			'chartType':'LineChart',
+			'dataSourceUrl':'https://docs.google.com/spreadsheets/d/' + $scope.myAccounts.ssId + '/gviz/tq?&range=A:F&sheet=Summary&headers=1&tq=' + queryString,
+			'containerId':'pageviews-container',
+			'options': options
+		});
+		$scope.pageviewsChart.draw();
+	};
+
+	$scope.getPageviewsBar = function() {
+		var ssId = $scope.myAccounts.ssId;
+		var options = $scope.myBarOptions;
+		var queryString = encodeURIComponent('SELECT A,F');
+		$scope.pageviewsBar = new google.visualization.ChartWrapper({
+			'chartType':'ColumnChart',
+			'dataSourceUrl':'https://docs.google.com/spreadsheets/d/' + $scope.myAccounts.ssId + '/gviz/tq?&range=A:F&sheet=Summary&headers=1&tq=' + queryString,
+			'containerId':'pageviews-bar',
+			'options': options
+		});
+		$scope.pageviewsBar.draw();
+	};
+
+	$scope.newppvChart = function() {
+		var ssId = $scope.myAccounts.ssId;
+		var options = $scope.myLineOptions;
+		var queryString = encodeURIComponent('SELECT A,H');
+		$scope.ppvChart = new google.visualization.ChartWrapper({
+			'chartType':'LineChart',
+			'dataSourceUrl':'https://docs.google.com/spreadsheets/d/' + $scope.myAccounts.ssId + '/gviz/tq?&range=A:H&sheet=Summary&headers=1&tq=' + queryString,
+			'containerId':'ppv-container',
+			'options': options
+		});
+		$scope.ppvChart.draw();
+	};
+
+	$scope.getPpvBar = function() {
+		var ssId = $scope.myAccounts.ssId;
+		var options = $scope.myBarOptions;
+		var queryString = encodeURIComponent('SELECT A,H');
+		$scope.ppvBar = new google.visualization.ChartWrapper({
+			'chartType':'ColumnChart',
+			'dataSourceUrl':'https://docs.google.com/spreadsheets/d/' + $scope.myAccounts.ssId + '/gviz/tq?&range=A:H&sheet=Summary&headers=1&tq=' + queryString,
+			'containerId':'ppv-bar',
+			'options': options
+		});
+		$scope.ppvBar.draw();
+	};
+
+	$scope.newsessionsChart = function() {
+		var ssId = $scope.myAccounts.ssId;
+		var options = $scope.myLineOptions;
+		var queryString = encodeURIComponent('SELECT A,G');
+		$scope.sessionsChart = new google.visualization.ChartWrapper({
+			'chartType':'LineChart',
+			'dataSourceUrl':'https://docs.google.com/spreadsheets/d/' + $scope.myAccounts.ssId + '/gviz/tq?&range=A:G&sheet=Summary&headers=1&tq=' + queryString,
+			'containerId':'sessions-container',
+			'options': options
+		});
+		$scope.sessionsChart.draw();
+	};
+
+	$scope.getSessionsBar = function() {
+		var ssId = $scope.myAccounts.ssId;
+		var options = $scope.myBarOptions;
+		var queryString = encodeURIComponent('SELECT A,G');
+		$scope.sessionsBar = new google.visualization.ChartWrapper({
+			'chartType':'ColumnChart',
+			'dataSourceUrl':'https://docs.google.com/spreadsheets/d/' + $scope.myAccounts.ssId + '/gviz/tq?&range=A:G&sheet=Summary&headers=1&tq=' + queryString,
+			'containerId':'sessions-bar',
+			'options': options
+		});
+		$scope.sessionsBar.draw();
+	};
+
+	$scope.newdurationsChart = function() {
+		var ssId = $scope.myAccounts.ssId;
+		var options = $scope.myLineOptions;
+		var queryString = encodeURIComponent('SELECT A,J');
+		$scope.durationsChart = new google.visualization.ChartWrapper({
+			'chartType':'LineChart',
+			'dataSourceUrl':'https://docs.google.com/spreadsheets/d/' + $scope.myAccounts.ssId + '/gviz/tq?&range=A:J&sheet=Summary&headers=1&tq=' + queryString,
+			'containerId':'duration-container',
+			'options': options
+		});
+		$scope.durationsChart.draw();
+	};
+
+	$scope.getDurationsBar = function() {
+		var ssId = $scope.myAccounts.ssId;
+		var options = $scope.myBarOptions;
+		var queryString = encodeURIComponent('SELECT A,J');
+		$scope.durationsBar = new google.visualization.ChartWrapper({
+			'chartType':'ColumnChart',
+			'dataSourceUrl':'https://docs.google.com/spreadsheets/d/' + $scope.myAccounts.ssId + '/gviz/tq?&range=A:J&sheet=Summary&headers=1&tq=' + queryString,
+			'containerId':'duration-bar',
+			'options': options
+		});
+		$scope.durationsBar.draw();
+	};
+
+	$scope.newloadtimeChart = function() {
+		var ssId = $scope.myAccounts.ssId;
+		var options = $scope.myLineOptions;
+		var queryString = encodeURIComponent('SELECT A,K');
+		$scope.loadtimeChart = new google.visualization.ChartWrapper({
+			'chartType':'LineChart',
+			'dataSourceUrl':'https://docs.google.com/spreadsheets/d/' + $scope.myAccounts.ssId + '/gviz/tq?&range=A:K&sheet=Summary&headers=1&tq=' + queryString,
+			'containerId':'loadtime-container',
+			'options': options
+		});
+		$scope.loadtimeChart.draw();
+	};
+
+	$scope.getLoadtimeBar = function() {
+		var ssId = $scope.myAccounts.ssId;
+		var options = $scope.myBarOptions;
+		var queryString = encodeURIComponent('SELECT A,K');
+		$scope.loadtimeBar = new google.visualization.ChartWrapper({
+			'chartType':'ColumnChart',
+			'dataSourceUrl':'https://docs.google.com/spreadsheets/d/' + $scope.myAccounts.ssId + '/gviz/tq?&range=A:K&sheet=Summary&headers=1&tq=' + queryString,
+			'containerId':'loadtime-bar',
+			'options': options
+		});
+		$scope.loadtimeBar.draw();
+	};
+
+	$scope.newuniqueChart = function() {
+		var ssId = $scope.myAccounts.ssId;
+		var options = $scope.myLineOptions;
+		var queryString = encodeURIComponent('SELECT A,L');
+		$scope.uniqueChart = new google.visualization.ChartWrapper({
+			'chartType':'LineChart',
+			'dataSourceUrl':'https://docs.google.com/spreadsheets/d/' + $scope.myAccounts.ssId + '/gviz/tq?&range=A:L&sheet=Summary&headers=1&tq=' + queryString,
+			'containerId':'unique-container',
+			'options': options
+		});
+		$scope.uniqueChart.draw();
+	};
+
+	$scope.getUniqueBar = function() {
+		var ssId = $scope.myAccounts.ssId;
+		var options = $scope.myBarOptions;
+		var queryString = encodeURIComponent('SELECT A,L');
+		$scope.uniqueBar = new google.visualization.ChartWrapper({
+			'chartType':'ColumnChart',
+			'dataSourceUrl':'https://docs.google.com/spreadsheets/d/' + $scope.myAccounts.ssId + '/gviz/tq?&range=A:L&sheet=Summary&headers=1&tq=' + queryString,
+			'containerId':'unique-bar',
+			'options': options
+		});
+		$scope.uniqueBar.draw();
+	};
+
+	$scope.newbouncesChart = function() {
+		var ssId = $scope.myAccounts.ssId;
+		var options = $scope.myLineOptions;
+		var queryString = encodeURIComponent('SELECT A,M');
+		$scope.bouncesChart = new google.visualization.ChartWrapper({
+			'chartType':'LineChart',
+			'dataSourceUrl':'https://docs.google.com/spreadsheets/d/' + $scope.myAccounts.ssId + '/gviz/tq?&range=A:M&sheet=Summary&headers=1&tq=' + queryString,
+			'containerId':'bounces-container',
+			'options': options
+		});
+		$scope.bouncesChart.draw();
+	};
+
+	$scope.getBouncesBar = function() {
+		var ssId = $scope.myAccounts.ssId;
+		var options = $scope.myBarOptions;
+		var queryString = encodeURIComponent('SELECT A,M');
+		$scope.bouncesBar = new google.visualization.ChartWrapper({
+			'chartType':'ColumnChart',
+			'dataSourceUrl':'https://docs.google.com/spreadsheets/d/' + $scope.myAccounts.ssId + '/gviz/tq?&range=A:M&sheet=Summary&headers=1&tq=' + queryString,
+			'containerId':'bounces-bar',
+			'options': options
+		});
+		$scope.bouncesBar.draw();
+	};
+
+	$scope.newbouncerateChart = function() {
+		var ssId = $scope.myAccounts.ssId;
+		var options = $scope.myLineOptions;
+		var queryString = encodeURIComponent('SELECT A,I');
+		$scope.bouncerateChart = new google.visualization.ChartWrapper({
+			'chartType':'LineChart',
+			'dataSourceUrl':'https://docs.google.com/spreadsheets/d/' + $scope.myAccounts.ssId + '/gviz/tq?&range=A:I&sheet=Summary&headers=1&tq=' + queryString,
+			'containerId':'bouncerate-container',
+			'options': options
+		});
+		$scope.bouncerateChart.draw();
+	};
+
+	$scope.getBouncerateBar = function() {
+		var ssId = $scope.myAccounts.ssId;
+		var options = $scope.myBarOptions;
+		var queryString = encodeURIComponent('SELECT A,I');
+		$scope.bouncerateBar = new google.visualization.ChartWrapper({
+			'chartType':'ColumnChart',
+			'dataSourceUrl':'https://docs.google.com/spreadsheets/d/' + $scope.myAccounts.ssId + '/gviz/tq?&range=A:I&sheet=Summary&headers=1&tq=' + queryString,
+			'containerId':'bouncerate-bar',
+			'options': options
+		});
+		$scope.bouncerateBar.draw();
 	};
 
 	var last = {
@@ -630,6 +1041,8 @@ angular.module('app.controllers', [])
 		google.setOnLoadCallback($scope.getOS);
 		$scope.getKeys();
 		$scope.getPages();
+		$scope.getTopKeys();
+		$scope.getTopPages();
 		$scope.getData();
 		$scope.getResolution();
 		$scope.getOS();
@@ -653,7 +1066,7 @@ angular.module('app.controllers', [])
 				legend:'none',
 				pieHole: 4/9,
 				legend: 'Top Referrals',
-				colors: ['#3C3E3E','#fdb800','#3F334D','#A0BB77','#505168','#A1BB79','#6D7B51'],
+				colors: ['#002544','#04674D','#F18F01','#18639B','#2494E8','#09F3B6','#004884','#18639B','#D78001','#0072D0'],
 				sliceVisibilityThreshold: 0.01,
 				width: '100%',
 				chartArea: { left: 20,top:10,width:'100%',height:'100%'},
@@ -673,7 +1086,7 @@ angular.module('app.controllers', [])
 
 		// Called
 		function usefulHandler() {
-			alert("Mouseover event!");
+			
 		}
 	};
 	//$scope.referral.draw();
@@ -696,7 +1109,7 @@ angular.module('app.controllers', [])
 				legend:'none',
 				pieHole: 4/9,
 				legend: 'Traffic Channels',
-				colors: ['#3C3E3E','#fdb800','#3F334D','#A0BB77','#505168','#A1BB79','#6D7B51'],
+				colors: ['#002544','#04674D','#F18F01','#18639B','#2494E8','#09F3B6','#004884','#18639B','#D78001','#0072D0'],
 				sliceVisibilityThreshold: 0.01,
 				width: '100%',
 				slices: {  3: {offset: 0.2},
@@ -725,1241 +1138,16 @@ angular.module('app.controllers', [])
 		}
 	};
 
-	$scope.pageviewChart = function() {
-
-		var max = 0;
-		var current = $scope.pageviews;
-		var lastmonth = $scope.lastpageviews;
-
-		if(current >= lastmonth) {
-			max = current + (current * (0.10 + Math.random() * 0.2));
-		} else {
-			max = lastmonth + (lastmonth * (0.10 + Math.random() * 0.2));
-		}
-		max = Math.round(max * 100) / 100;
-		var newChart = new Highcharts.chart('pageview-container', {
-	     chart: {
-	         type: 'solidgauge',
-	         marginTop: 0
-	     },
-
-	     title: {
-			text: null
-	     },
-
-	     tooltip: {
-	         borderWidth: 0,
-	         backgroundColor: 'none',
-	         shadow: false,
-	         style: {
-	             fontSize: '14px',
-				fontFamily: 'Roboto',
-				color: '#333'
-	         },
-	         pointFormat: '{series.name}<br><span style="font-size:2.5em; font-weight: bold">{point.y}</span>',
-	         positioner: function (labelWidth, labelHeight) {
-	             return {
-	                 x: 100 - labelWidth / 2,
-	                 y: 65
-	             };
-	         }
-	     },
-
-	     pane: {
-	         startAngle: 0,
-	         endAngle: 360,
-	         background: [{ // Track for Move
-	             outerRadius: '112%',
-	             innerRadius: '88%',
-	             backgroundColor: Highcharts.Color('#3C3D4E').setOpacity(0.3).get(),
-	             borderWidth: 0
-	         }, { // Track for Exercise
-	             outerRadius: '87%',
-	             innerRadius: '63%',
-	             backgroundColor: Highcharts.Color('#77799B').setOpacity(0.3).get(),
-	             borderWidth: 0
-	         }]
-	     },
-
-	     yAxis: {
-	         min: 0,
-	         max: max,
-	         lineWidth: 0,
-	         tickPositions: []
-	     },
-
-	     plotOptions: {
-	         solidgauge: {
-	             borderWidth: '20px',
-	             dataLabels: {
-	                 enabled: false
-	             },
-	             linecap: 'square',
-	             stickyTracking: false
-	         }
-	     },
-
-	     series: [{
-	         name: 'This Month',
-	         borderColor: '#3C3D4E',
-	         data: [{
-	             color: '#3C3D4E',
-	             radius: '100%',
-	             innerRadius: '100%',
-	             y: current
-	         }]
-	     }, {
-	         name: 'Last Month',
-	         borderColor: '#77799B',
-	         data: [{
-	             color: '#77799B',
-	             radius: '75%',
-	             innerRadius: '75%',
-	             y: lastmonth
-	         }]
-	     }, {
-
-
-	     }]
-	 },
-	 function callback() {
-
-	 });
-	};
-
-	$scope.sessionsChart = function() {
-
-		var max = 0;
-		var current = $scope.sessions;
-		var lastmonth = $scope.lastsessions;
-
-		if(current >= lastmonth) {
-			max = current + (current * (0.10 + Math.random() * 0.2));
-		} else {
-			max = lastmonth + (lastmonth * (0.10 + Math.random() * 0.2));
-		}
-		max = Math.round(max * 100) / 100;
-		var newChart = new Highcharts.chart('sessions-container', {
-				chart: {
-					type: 'solidgauge',
-					marginTop: 0
-				},
-
-				title: {
-					text: null
-				},
-
-				tooltip: {
-					borderWidth: 0,
-					backgroundColor: 'none',
-					shadow: false,
-					style: {
-						fontSize: '14px',
-						fontFamily: 'Roboto',
-						color: '#333'
-					},
-					pointFormat: '{series.name}<br><span style="font-size:2.5em; font-weight: bold">{point.y}</span>',
-					positioner: function (labelWidth, labelHeight) {
-						return {
-							x: 100 - labelWidth / 2,
-							y: 65
-						};
-					}
-				},
-
-				pane: {
-					startAngle: 0,
-					endAngle: 360,
-					background: [{ // Track for Move
-						outerRadius: '112%',
-						innerRadius: '88%',
-						backgroundColor: Highcharts.Color('#3C3D4E').setOpacity(0.3).get(),
-						borderWidth: 0
-					}, { // Track for Exercise
-						outerRadius: '87%',
-						innerRadius: '63%',
-						backgroundColor: Highcharts.Color('#77799B').setOpacity(0.3).get(),
-						borderWidth: 0
-					}]
-				},
-
-				yAxis: {
-					min: 0,
-					max: max,
-					lineWidth: 0,
-					tickPositions: []
-				},
-
-				plotOptions: {
-					solidgauge: {
-						borderWidth: '20px',
-						dataLabels: {
-							enabled: false
-						},
-						linecap: 'square',
-						stickyTracking: false
-					}
-				},
-
-				series: [{
-					name: 'This Month',
-					borderColor: '#3C3D4E',
-					data: [{
-						color: '#3C3D4E',
-						radius: '100%',
-						innerRadius: '100%',
-						y: current
-					}]
-				}, {
-					name: 'Last Month',
-					borderColor: '#77799B',
-					data: [{
-						color: '#77799B',
-						radius: '75%',
-						innerRadius: '75%',
-						y: lastmonth
-					}]
-				}, {
-
-
-				}]
-			},
-			function callback() {
-
-			});
-	};
-
-	$scope.ppvChart = function() {
-
-		var max = 0;
-		var current = $scope.ppv;
-		var lastmonth = $scope.lastppv;
-
-		if(current >= lastmonth) {
-			max = current + (current * (0.10 + Math.random() * 0.2));
-		} else {
-			max = lastmonth + (lastmonth * (0.10 + Math.random() * 0.2));
-		}
-		max = Math.round(max * 100) / 100;
-		var newChart = new Highcharts.chart('ppv-container', {
-				chart: {
-					type: 'solidgauge',
-					marginTop: 0
-				},
-
-				title: {
-					text: null
-				},
-
-				tooltip: {
-					borderWidth: 0,
-					backgroundColor: 'none',
-					shadow: false,
-					style: {
-						fontSize: '14px',
-						fontFamily: 'Roboto',
-						color: '#333'
-					},
-					pointFormat: '{series.name}<br><span style="font-size:2.5em; font-weight: bold">{point.y}</span>',
-					positioner: function (labelWidth, labelHeight) {
-						return {
-							x: 100 - labelWidth / 2,
-							y: 65
-						};
-					}
-				},
-
-				pane: {
-					startAngle: 0,
-					endAngle: 360,
-					background: [{ // Track for Move
-						outerRadius: '112%',
-						innerRadius: '88%',
-						backgroundColor: Highcharts.Color('#3C3D4E').setOpacity(0.3).get(),
-						borderWidth: 0
-					}, { // Track for Exercise
-						outerRadius: '87%',
-						innerRadius: '63%',
-						backgroundColor: Highcharts.Color('#77799B').setOpacity(0.3).get(),
-						borderWidth: 0
-					}]
-				},
-
-				yAxis: {
-					min: 0,
-					max: max,
-					lineWidth: 0,
-					tickPositions: []
-				},
-
-				plotOptions: {
-					solidgauge: {
-						borderWidth: '20px',
-						dataLabels: {
-							enabled: false
-						},
-						linecap: 'square',
-						stickyTracking: false
-					}
-				},
-
-				series: [{
-					name: 'This Month',
-					borderColor: '#3C3D4E',
-					data: [{
-						color: '#3C3D4E',
-						radius: '100%',
-						innerRadius: '100%',
-						y: current
-					}]
-				}, {
-					name: 'Last Month',
-					borderColor: '#77799B',
-					data: [{
-						color: '#77799B',
-						radius: '75%',
-						innerRadius: '75%',
-						y: lastmonth
-					}]
-				}, {
-
-
-				}]
-			},
-			function callback() {
-
-			});
-	};
-
-	$scope.bounceRateChart = function() {
-
-		var max = 0;
-		var current = $scope.bounceRate;
-		var lastmonth = $scope.lastbounceRate;
-
-		if(current >= lastmonth) {
-			max = current + (current * (0.10 + Math.random() * 0.2));
-		} else {
-			max = lastmonth + (lastmonth * (0.10 + Math.random() * 0.2));
-		}
-		max = Math.round(max * 100) / 100;
-		var newChart = new Highcharts.chart('bounce-rate-container', {
-				chart: {
-					type: 'solidgauge',
-					marginTop: 0
-				},
-
-				title: {
-					text: null
-				},
-
-				tooltip: {
-					borderWidth: 0,
-					backgroundColor: 'none',
-					shadow: false,
-					style: {
-						fontSize: '14px',
-						fontFamily: 'Roboto',
-						color: '#333'
-					},
-					pointFormat: '{series.name}<br><span style="font-size:2.5em; font-weight: bold">{point.y}</span>',
-					positioner: function (labelWidth, labelHeight) {
-						return {
-							x: 100 - labelWidth / 2,
-							y: 65
-						};
-					}
-				},
-
-				pane: {
-					startAngle: 0,
-					endAngle: 360,
-					background: [{ // Track for Move
-						outerRadius: '112%',
-						innerRadius: '88%',
-						backgroundColor: Highcharts.Color('#3C3D4E').setOpacity(0.3).get(),
-						borderWidth: 0
-					}, { // Track for Exercise
-						outerRadius: '87%',
-						innerRadius: '63%',
-						backgroundColor: Highcharts.Color('#77799B').setOpacity(0.3).get(),
-						borderWidth: 0
-					}]
-				},
-
-				yAxis: {
-					min: 0,
-					max: max,
-					lineWidth: 0,
-					tickPositions: []
-				},
-
-				plotOptions: {
-					solidgauge: {
-						borderWidth: '20px',
-						dataLabels: {
-							enabled: false
-						},
-						linecap: 'square',
-						stickyTracking: false
-					}
-				},
-
-				series: [{
-					name: 'This Month',
-					borderColor: '#3C3D4E',
-					data: [{
-						color: '#3C3D4E',
-						radius: '100%',
-						innerRadius: '100%',
-						y: current
-					}]
-				}, {
-					name: 'Last Month',
-					borderColor: '#77799B',
-					data: [{
-						color: '#77799B',
-						radius: '75%',
-						innerRadius: '75%',
-						y: lastmonth
-					}]
-				}, {
-
-
-				}]
-			},
-			function callback() {
-
-			});
-	};
-
-	$scope.durationChart = function() {
-
-		var max = 0;
-		var current = $scope.duration;
-		var lastmonth = $scope.lastduration;
-		if(current >= lastmonth) {
-			max = current + (current * (0.10 + Math.random() * 0.2));
-		} else {
-			max = lastmonth + (lastmonth * (0.10 + Math.random() * 0.2));
-		}
-		max = Math.round(max * 100) / 100;
-		var newChart = new Highcharts.chart('duration-container', {
-				chart: {
-					type: 'solidgauge',
-					marginTop: 0
-				},
-
-				title: {
-					text: null
-				},
-
-				tooltip: {
-					borderWidth: 0,
-					backgroundColor: 'none',
-					shadow: false,
-					style: {
-						fontSize: '14px',
-						fontFamily: 'Roboto',
-						color: '#333'
-					},
-					pointFormat: '{series.name}<br><span style="font-size:2.5em; font-weight: bold">{point.y}</span>',
-					positioner: function (labelWidth, labelHeight) {
-						return {
-							x: 100 - labelWidth / 2,
-							y: 65
-						};
-					}
-				},
-
-				pane: {
-					startAngle: 0,
-					endAngle: 360,
-					background: [{ // Track for Move
-						outerRadius: '112%',
-						innerRadius: '88%',
-						backgroundColor: Highcharts.Color('#3C3D4E').setOpacity(0.3).get(),
-						borderWidth: 0
-					}, { // Track for Exercise
-						outerRadius: '87%',
-						innerRadius: '63%',
-						backgroundColor: Highcharts.Color('#77799B').setOpacity(0.3).get(),
-						borderWidth: 0
-					}]
-				},
-
-				yAxis: {
-					min: 0,
-					max: max,
-					lineWidth: 0,
-					tickPositions: []
-				},
-
-				plotOptions: {
-					solidgauge: {
-						borderWidth: '20px',
-						dataLabels: {
-							enabled: false
-						},
-						linecap: 'square',
-						stickyTracking: false
-					}
-				},
-
-				series: [{
-					name: 'This Month',
-					borderColor: '#3C3D4E',
-					data: [{
-						color: '#3C3D4E',
-						radius: '100%',
-						innerRadius: '100%',
-						y: current
-					}]
-				}, {
-					name: 'Last Month',
-					borderColor: '#77799B',
-					data: [{
-						color: '#77799B',
-						radius: '75%',
-						innerRadius: '75%',
-						y: lastmonth
-					}]
-				}, {
-
-
-				}]
-			},
-			function callback() {
-
-			});
-	};
-
-	$scope.loadtimeChart = function() {
-
-		var max = 0;
-		var current = $scope.pageLoadTime;
-		var lastmonth = $scope.lastpageLoadTime;
-
-		if(current >= lastmonth) {
-			max = current + (current * (0.10 + Math.random() * 0.2));
-		} else {
-			max = lastmonth + (lastmonth * (0.10 + Math.random() * 0.2));
-		}
-		max = Math.round(max * 100) / 100;
-		var newChart = new Highcharts.chart('loadtime-container', {
-				chart: {
-					type: 'solidgauge',
-					marginTop: 0
-				},
-
-				title: {
-					text: null
-				},
-
-				tooltip: {
-					borderWidth: 0,
-					backgroundColor: 'none',
-					shadow: false,
-					style: {
-						fontSize: '14px',
-						fontFamily: 'Roboto',
-						color: '#333'
-					},
-					pointFormat: '{series.name}<br><span style="font-size:2.5em; font-weight: bold">{point.y}</span>',
-					positioner: function (labelWidth, labelHeight) {
-						return {
-							x: 100 - labelWidth / 2,
-							y: 65
-						};
-					}
-				},
-
-				pane: {
-					startAngle: 0,
-					endAngle: 360,
-					background: [{ // Track for Move
-						outerRadius: '112%',
-						innerRadius: '88%',
-						backgroundColor: Highcharts.Color('#3C3D4E').setOpacity(0.3).get(),
-						borderWidth: 0
-					}, { // Track for Exercise
-						outerRadius: '87%',
-						innerRadius: '63%',
-						backgroundColor: Highcharts.Color('#77799B').setOpacity(0.3).get(),
-						borderWidth: 0
-					}]
-				},
-
-				yAxis: {
-					min: 0,
-					max: max,
-					lineWidth: 0,
-					tickPositions: []
-				},
-
-				plotOptions: {
-					solidgauge: {
-						borderWidth: '20px',
-						dataLabels: {
-							enabled: false
-						},
-						linecap: 'square',
-						stickyTracking: false
-					}
-				},
-
-				series: [{
-					name: 'This Month',
-					borderColor: '#3C3D4E',
-					data: [{
-						color: '#3C3D4E',
-						radius: '100%',
-						innerRadius: '100%',
-						y: current
-					}]
-				}, {
-					name: 'Last Month',
-					borderColor: '#77799B',
-					data: [{
-						color: '#77799B',
-						radius: '75%',
-						innerRadius: '75%',
-						y: lastmonth
-					}]
-				}, {
-
-
-				}]
-			},
-			function callback() {
-
-			});
-	};
-
-	$scope.uniqueChart = function() {
-
-		var max = 0;
-		var current = $scope.uniquePageviews;
-		var lastmonth = $scope.lastuniquePageviews;
-
-		if(current >= lastmonth) {
-			max = current + (current * (0.10 + Math.random() * 0.2));
-		} else {
-			max = lastmonth + (lastmonth * (0.10 + Math.random() * 0.2));
-		}
-		max = Math.round(max * 100) / 100;
-		var newChart = new Highcharts.chart('unique-container', {
-				chart: {
-					type: 'solidgauge',
-					marginTop: 0
-				},
-
-				title: {
-					text: null
-				},
-
-				tooltip: {
-					borderWidth: 0,
-					backgroundColor: 'none',
-					shadow: false,
-					style: {
-						fontSize: '14px',
-						fontFamily: 'Roboto',
-						color: '#333'
-					},
-					pointFormat: '{series.name}<br><span style="font-size:2.5em; font-weight: bold">{point.y}</span>',
-					positioner: function (labelWidth, labelHeight) {
-						return {
-							x: 100 - labelWidth / 2,
-							y: 65
-						};
-					}
-				},
-
-				pane: {
-					startAngle: 0,
-					endAngle: 360,
-					background: [{ // Track for Move
-						outerRadius: '112%',
-						innerRadius: '88%',
-						backgroundColor: Highcharts.Color('#3C3D4E').setOpacity(0.3).get(),
-						borderWidth: 0
-					}, { // Track for Exercise
-						outerRadius: '87%',
-						innerRadius: '63%',
-						backgroundColor: Highcharts.Color('#77799B').setOpacity(0.3).get(),
-						borderWidth: 0
-					}]
-				},
-
-				yAxis: {
-					min: 0,
-					max: max,
-					lineWidth: 0,
-					tickPositions: []
-				},
-
-				plotOptions: {
-					solidgauge: {
-						borderWidth: '20px',
-						dataLabels: {
-							enabled: false
-						},
-						linecap: 'square',
-						stickyTracking: false
-					}
-				},
-
-				series: [{
-					name: 'This Month',
-					borderColor: '#3C3D4E',
-					data: [{
-						color: '#3C3D4E',
-						radius: '100%',
-						innerRadius: '100%',
-						y: current
-					}]
-				}, {
-					name: 'Last Month',
-					borderColor: '#77799B',
-					data: [{
-						color: '#77799B',
-						radius: '75%',
-						innerRadius: '75%',
-						y: lastmonth
-					}]
-				}, {
-
-
-				}]
-			},
-			function callback() {
-
-			});
-	};
-
-	$scope.bounceChart = function() {
-
-		var max = 0;
-		var current = $scope.bounces;
-		var lastmonth = $scope.lastbounces;
-
-		if(current >= lastmonth) {
-			max = current + (current * (0.10 + Math.random() * 0.2));
-		} else {
-			max = lastmonth + (lastmonth * (0.10 + Math.random() * 0.2));
-		}
-		max = Math.round(max * 100) / 100;
-		var newChart = new Highcharts.chart('bounce-container', {
-				chart: {
-					type: 'solidgauge',
-					marginTop: 0
-				},
-
-				title: {
-					text: null
-				},
-
-				tooltip: {
-					borderWidth: 0,
-					backgroundColor: 'none',
-					shadow: false,
-					style: {
-						fontSize: '14px',
-						fontFamily: 'Roboto',
-						color: '#333'
-					},
-					pointFormat: '{series.name}<br><span style="font-size:2.5em; font-weight: bold">{point.y}</span>',
-					positioner: function (labelWidth, labelHeight) {
-						return {
-							x: 100 - labelWidth / 2,
-							y: 65
-						};
-					}
-				},
-
-				pane: {
-					startAngle: 0,
-					endAngle: 360,
-					background: [{ // Track for Move
-						outerRadius: '112%',
-						innerRadius: '88%',
-						backgroundColor: Highcharts.Color('#3C3D4E').setOpacity(0.3).get(),
-						borderWidth: 0
-					}, { // Track for Exercise
-						outerRadius: '87%',
-						innerRadius: '63%',
-						backgroundColor: Highcharts.Color('#77799B').setOpacity(0.3).get(),
-						borderWidth: 0
-					}]
-				},
-
-				yAxis: {
-					min: 0,
-					max: max,
-					lineWidth: 0,
-					tickPositions: []
-				},
-
-				plotOptions: {
-					solidgauge: {
-						borderWidth: '20px',
-						dataLabels: {
-							enabled: false
-						},
-						linecap: 'square',
-						stickyTracking: false
-					}
-				},
-
-				series: [{
-					name: 'This Month',
-					borderColor: '#3C3D4E',
-					data: [{
-						color: '#3C3D4E',
-						radius: '100%',
-						innerRadius: '100%',
-						y: current
-					}]
-				}, {
-					name: 'Last Month',
-					borderColor: '#77799B',
-					data: [{
-						color: '#77799B',
-						radius: '75%',
-						innerRadius: '75%',
-						y: lastmonth
-					}]
-				}, {
-
-
-				}]
-			},
-			function callback() {
-
-			});
-	};
-
-	$scope.impressionGauge = function() {
-
-		var max = 0;
-		var current = $scope.impressions;
-		var lastmonth = $scope.lastImpressions;
-
-		if(current >= lastmonth) {
-			max = current + (current * (0.10 + Math.random() * 0.2));
-		} else {
-			max = lastmonth + (lastmonth * (0.10 + Math.random() * 0.2));
-		}
-		max = Math.round(max * 100) / 100;
-		var newChart = new Highcharts.chart('impression-gauge', {
-				chart: {
-					type: 'solidgauge',
-					marginTop: 0
-				},
-
-				title: {
-					text: null
-				},
-
-				tooltip: {
-					borderWidth: 0,
-					backgroundColor: 'none',
-					shadow: false,
-					style: {
-						fontSize: '14px',
-						fontFamily: 'Roboto',
-						color: '#333'
-					},
-					pointFormat: '{series.name}<br><span style="font-size:2.5em; font-weight: bold">{point.y}</span>',
-					positioner: function (labelWidth, labelHeight) {
-						return {
-							x: 100 - labelWidth / 2,
-							y: 65
-						};
-					}
-				},
-
-				pane: {
-					startAngle: 0,
-					endAngle: 360,
-					background: [{ // Track for Move
-						outerRadius: '112%',
-						innerRadius: '88%',
-						backgroundColor: Highcharts.Color('#2B0B32').setOpacity(0.3).get(),
-						borderWidth: 0
-					}, { // Track for Exercise
-						outerRadius: '87%',
-						innerRadius: '63%',
-						backgroundColor: Highcharts.Color('#3F334D').setOpacity(0.3).get(),
-						borderWidth: 0
-					}]
-				},
-
-				yAxis: {
-					min: 0,
-					max: max,
-					lineWidth: 0,
-					tickPositions: []
-				},
-
-				plotOptions: {
-					solidgauge: {
-						borderWidth: '20px',
-						dataLabels: {
-							enabled: false
-						},
-						linecap: 'square',
-						stickyTracking: false
-					}
-				},
-
-				series: [{
-					name: 'This Month',
-					borderColor: '#2B0B32',
-					data: [{
-						color: '#2B0B32',
-						radius: '100%',
-						innerRadius: '100%',
-						y: current
-					}]
-				}, {
-					name: 'Last Month',
-					borderColor: '#3F334D',
-					data: [{
-						color: '#3F334D',
-						radius: '75%',
-						innerRadius: '75%',
-						y: lastmonth
-					}]
-				}, {
-
-
-				}]
-			},
-			function callback() {
-
-			});
-	};
-
-	$scope.clicksGauge = function() {
-
-		var max = 0;
-		var current = $scope.clicks;
-		var lastmonth = $scope.clicks;
-
-		if(current >= lastmonth) {
-			max = current + (current * (0.10 + Math.random() * 0.2));
-		} else {
-			max = lastmonth + (lastmonth * (0.10 + Math.random() * 0.2));
-		}
-		max = Math.round(max * 100) / 100;
-		var newChart = new Highcharts.chart('clicks-gauge', {
-				chart: {
-					type: 'solidgauge',
-					marginTop: 0
-				},
-
-				title: {
-					text: null
-				},
-
-				tooltip: {
-					borderWidth: 0,
-					backgroundColor: 'none',
-					shadow: false,
-					style: {
-						fontSize: '14px',
-						fontFamily: 'Roboto',
-						color: '#333'
-					},
-					pointFormat: '{series.name}<br><span style="font-size:2.5em; font-weight: bold">{point.y}</span>',
-					positioner: function (labelWidth, labelHeight) {
-						return {
-							x: 100 - labelWidth / 2,
-							y: 65
-						};
-					}
-				},
-
-				pane: {
-					startAngle: 0,
-					endAngle: 360,
-					background: [{ // Track for Move
-						outerRadius: '112%',
-						innerRadius: '88%',
-						backgroundColor: Highcharts.Color('#2B0B32').setOpacity(0.3).get(),
-						borderWidth: 0
-					}, { // Track for Exercise
-						outerRadius: '87%',
-						innerRadius: '63%',
-						backgroundColor: Highcharts.Color('#3F334D').setOpacity(0.3).get(),
-						borderWidth: 0
-					}]
-				},
-
-				yAxis: {
-					min: 0,
-					max: max,
-					lineWidth: 0,
-					tickPositions: []
-				},
-
-				plotOptions: {
-					solidgauge: {
-						borderWidth: '20px',
-						dataLabels: {
-							enabled: false
-						},
-						linecap: 'square',
-						stickyTracking: false
-					}
-				},
-
-				series: [{
-					name: 'This Month',
-					borderColor: '#2B0B32',
-					data: [{
-						color: '#2B0B32',
-						radius: '100%',
-						innerRadius: '100%',
-						y: current
-					}]
-				}, {
-					name: 'Last Month',
-					borderColor: '#3F334D',
-					data: [{
-						color: '#3F334D',
-						radius: '75%',
-						innerRadius: '75%',
-						y: lastmonth
-					}]
-				}, {
-
-
-				}]
-			},
-			function callback() {
-
-			});
-	};
-
-	$scope.ctrGauge = function() {
-
-		var max = 0;
-		var current = $scope.CTR;
-		var lastmonth = $scope.lastCTR;
-
-		if(current >= lastmonth) {
-			max = current + (current * (0.10 + Math.random() * 0.2));
-		} else {
-			max = lastmonth + (lastmonth * (0.10 + Math.random() * 0.2));
-		}
-		max = Math.round(max * 100) / 100;
-		var newChart = new Highcharts.chart('ctr-gauge', {
-				chart: {
-					type: 'solidgauge',
-					marginTop: 0
-				},
-
-				title: {
-					text: null
-				},
-
-				tooltip: {
-					borderWidth: 0,
-					backgroundColor: 'none',
-					shadow: false,
-					style: {
-						fontSize: '16px',
-						fontFamily: 'Roboto',
-						color: '#333'
-					},
-					pointFormat: '{series.name}<br><span style="font-size:2.5em; font-weight: bold">{point.y}</span>',
-					positioner: function (labelWidth, labelHeight) {
-						return {
-							x: 100 - labelWidth / 2,
-							y: 65
-						};
-					}
-				},
-
-				pane: {
-					startAngle: 0,
-					endAngle: 360,
-					background: [{ // Track for Move
-						outerRadius: '112%',
-						innerRadius: '88%',
-						backgroundColor: Highcharts.Color('#2B0B32').setOpacity(0.3).get(),
-						borderWidth: 0
-					}, { // Track for Exercise
-						outerRadius: '87%',
-						innerRadius: '63%',
-						backgroundColor: Highcharts.Color('#3F334D').setOpacity(0.3).get(),
-						borderWidth: 0
-					}]
-				},
-
-				yAxis: {
-					min: 0,
-					max: max,
-					lineWidth: 0,
-					tickPositions: []
-				},
-
-				plotOptions: {
-					solidgauge: {
-						borderWidth: '20px',
-						dataLabels: {
-							enabled: false
-						},
-						linecap: 'square',
-						stickyTracking: false
-					}
-				},
-
-				series: [{
-					name: 'This Month',
-					borderColor: '#2B0B32',
-					data: [{
-						color: '#2B0B32',
-						radius: '100%',
-						innerRadius: '100%',
-						y: current
-					}]
-				}, {
-					name: 'Last Month',
-					borderColor: '#3F334D',
-					data: [{
-						color: '#3F334D',
-						radius: '75%',
-						innerRadius: '75%',
-						y: lastmonth
-					}]
-				}, {
-
-
-				}]
-			},
-			function callback() {
-
-			});
-	};
-
-	$scope.positionGauge = function() {
-
-		var max = 0;
-		var current = $scope.position;
-		var lastmonth = $scope.lastPosition;
-
-		if(current >= lastmonth) {
-			max = current + (current * (0.10 + Math.random() * 0.2));
-		} else {
-			max = lastmonth + (lastmonth * (0.10 + Math.random() * 0.2));
-		}
-		max = Math.round(max * 100) / 100;
-		var newChart = new Highcharts.chart('position-gauge', {
-				chart: {
-					type: 'solidgauge',
-					marginTop: 0
-				},
-
-				title: {
-					text: null
-				},
-
-				tooltip: {
-					borderWidth: 0,
-					backgroundColor: 'none',
-					shadow: false,
-					style: {
-						fontSize: '16px',
-						fontFamily: 'Roboto',
-						color: '#333'
-					},
-					pointFormat: '{series.name}<br><span style="font-size:2.5em; font-weight: bold">{point.y}</span>',
-					positioner: function (labelWidth, labelHeight) {
-						return {
-							x: 100 - labelWidth / 2,
-							y: 65
-						};
-					}
-				},
-
-				pane: {
-					startAngle: 0,
-					endAngle: 360,
-					background: [{ // Track for Move
-						outerRadius: '112%',
-						innerRadius: '88%',
-						backgroundColor: Highcharts.Color('#2B0B32').setOpacity(0.3).get(),
-						borderWidth: 0
-					}, { // Track for Exercise
-						outerRadius: '87%',
-						innerRadius: '63%',
-						backgroundColor: Highcharts.Color('#3F334D').setOpacity(0.3).get(),
-						borderWidth: 0
-					}]
-				},
-
-				yAxis: {
-					min: 0,
-					max: max,
-					lineWidth: 0,
-					tickPositions: []
-				},
-
-				plotOptions: {
-					solidgauge: {
-						borderWidth: '20px',
-						dataLabels: {
-							enabled: false
-						},
-						linecap: 'square',
-						stickyTracking: false
-					}
-				},
-
-				series: [{
-					name: 'This Month',
-					borderColor: '#2B0B32',
-					data: [{
-						color: '#2B0B32',
-						radius: '100%',
-						innerRadius: '100%',
-						y: current
-					}]
-				}, {
-					name: 'Last Month',
-					borderColor: '#3F334D',
-					data: [{
-						color: '#3F334D',
-						radius: '75%',
-						innerRadius: '75%',
-						y: lastmonth
-					}]
-				}, {
-
-
-				}]
-			},
-			function callback() {
-
-			});
-	};
-
-
-
 	$scope.getData = function() {
 		var ssId = $scope.myAccounts.ssId;
 		var queryString = encodeURIComponent('select *');
-		var query = new google.visualization.Query('https://docs.google.com/spreadsheets/d/' + ssId + '/gviz/tq?&range=A1:M5&sheet=Summary&headers=1&tq=' + queryString);
+		var query = new google.visualization.Query('https://docs.google.com/spreadsheets/d/' + ssId + '/gviz/tq?&range=A:M&sheet=Summary&headers=1&tq=' + queryString);
 		query.send($scope.getDataResponse);
 	};
 
 	$scope.getOS = function() {
 		var ssId = $scope.myAccounts.ssId;
-		var queryString = encodeURIComponent('select max(AC)');
+		var queryString = encodeURIComponent('select * order by AD desc');
 		var query = new google.visualization.Query('https://docs.google.com/spreadsheets/d/' + ssId + '/gviz/tq?&range=AC:AD&sheet=Apr-2016&headers=1&tq=' + queryString);
 		query.send($scope.popOS);
 	};
@@ -1971,7 +1159,7 @@ angular.module('app.controllers', [])
 
 	$scope.getResolution = function() {
 		var ssId = $scope.myAccounts.ssId;
-		var queryString = encodeURIComponent('select max(AF)');
+		var queryString = encodeURIComponent('select * order by AG desc');
 		var query = new google.visualization.Query('https://docs.google.com/spreadsheets/d/' + ssId + '/gviz/tq?&range=AF:AG&sheet=Apr-2016&headers=1&tq=' + queryString);
 		query.send($scope.popResolution);
 	};
@@ -1995,7 +1183,13 @@ angular.module('app.controllers', [])
 		var query = new google.visualization.Query('https://docs.google.com/spreadsheets/d/' + ssId + '/gviz/tq?&range=G:I&sheet=Apr-2016&headers=1&tq=' + queryString);
 		query.send($scope.returnClickKeys);
 	};
-	
+
+	$scope.getTopKeys = function() {
+		var ssId = $scope.myAccounts.ssId;
+		var queryString = encodeURIComponent('select G,H order by H desc limit 5');
+		var query = new google.visualization.Query('https://docs.google.com/spreadsheets/d/' + ssId + '/gviz/tq?&range=G:H&sheet=Apr-2016&headers=1&tq=' + queryString);
+		query.send($scope.returnTopKeys);
+	};
 
 	
 	$scope.getCombo = function(response) {
@@ -2079,6 +1273,30 @@ angular.module('app.controllers', [])
 		}
 	};
 
+	$scope.returnTopKeys = function(response) {
+		var datatable = response.getDataTable();
+
+		var wrapper = new google.visualization.ChartWrapper({
+			chartType: 'Table',
+			dataTable: datatable,
+			containerId: 'keys-topfive',
+			options: {
+				showRowNumber: false,
+				height: '100%',
+				width: 520,
+				cssClassNames: {
+					headerRow: 'tblHeaderCls',
+					tableRow: 'tblRowCls',
+					headerCell: 'tblHeadCellCls',
+					tableCell: 'tblCls'
+				}
+			}
+
+		})
+		wrapper.draw();
+
+	};
+
 	$scope.newclickkeys = [];
 	$scope.returnClickKeys = function(response) {
 		var datatable = response.getDataTable();
@@ -2116,6 +1334,13 @@ angular.module('app.controllers', [])
 		var queryString = encodeURIComponent('select T,U order by U desc limit 10');
 		var query = new google.visualization.Query('https://docs.google.com/spreadsheets/d/' + ssId + '/gviz/tq?&range=T:U&sheet=Apr-2016&headers=1&tq=' + queryString);
 		query.send($scope.returnPages);
+	};
+
+	$scope.getTopPages = function() {
+		var ssId = $scope.myAccounts.ssId;
+		var queryString = encodeURIComponent('select T,U order by U desc limit 5');
+		var query = new google.visualization.Query('https://docs.google.com/spreadsheets/d/' + ssId + '/gviz/tq?&range=T:U&sheet=Apr-2016&headers=1&tq=' + queryString);
+		query.send($scope.returnTopPages);
 	};
 
 	$scope.newpages = [];
@@ -2157,6 +1382,29 @@ angular.module('app.controllers', [])
 		}
 	};
 
+	$scope.returnTopPages = function(response) {
+		var datatable = response.getDataTable();
+
+		var wrapper = new google.visualization.ChartWrapper({
+			chartType: 'Table',
+			dataTable: datatable,
+			containerId: 'pages-topfive',
+			options: {
+				showRowNumber: false,
+				height: '100%',
+				width: 520,
+				cssClassNames: {
+					headerRow: 'tblHeaderCls',
+					tableRow: 'tblRowCls',
+					headerCell: 'tblHeadCellCls',
+					tableCell: 'tblClsSm'
+				}
+			}
+
+		})
+		wrapper.draw();
+	};
+
 
 	$scope.getDataResponse = function(response) {
 //		console.log('getDataRes');
@@ -2168,11 +1416,20 @@ angular.module('app.controllers', [])
 		//	console.log(data.getValue(2,1));
 		//	console.log(data.getNumberOfColumns());
 		var d = new Date();
-		var m = d.getMonth();
-		var curr = m - 1;
-		var last = curr - 1;
+		var m = d.getMonth() - 1;
+		var y = d.getFullYear();
+		var newdate = new Date(y, m);
+		console.log(newdate);
+		//var monthName = $rootScope.monthList[m];
+		//var curr = monthName + '-' + y;
+		//var last = curr - 1;
 
+		var newrows = data.getFilteredRows([{column: 0, value: newdate}]);
+		var curr = newrows[0];
+		console.log('row month: ' + curr);
+		var last = curr - 1;
 		var numcol = data.getNumberOfColumns();
+		console.log(typeof curr);
 		$scope.bounceRate = data.getValue(curr,8);
 		$scope.pageviews = data.getValue(curr,5);
 		$scope.sessions = data.getValue(curr,6);
@@ -2207,18 +1464,18 @@ angular.module('app.controllers', [])
 		$scope.diffClicks = $scope.totalClicks - $scope.lastClicks;
 		$scope.diffCTR = $scope.totalCTR - $scope.lastCTR;
 		$scope.diffPosition = $scope.avgPosition - $scope.lastPosition;
-		$scope.durationChart();
-		$scope.loadtimeChart();
-		$scope.uniqueChart();
-		$scope.bounceChart();
-		$scope.pageviewChart();
-		$scope.ppvChart();
-		$scope.sessionsChart();
-		$scope.bounceRateChart();
-		$scope.positionGauge();
-		$scope.ctrGauge();
-		$scope.clicksGauge();
-		$scope.impressionGauge();
+		//$scope.durationChart();
+		//$scope.loadtimeChart();
+		//$scope.uniqueChart();
+		//$scope.bounceChart();
+		//$scope.pageviewChart();
+		//$scope.ppvChart();
+	//	$scope.sessionsChart();
+		//$scope.bounceRateChart();
+		//$scope.positionGauge();
+		//$scope.ctrGauge();
+		//$scope.clicksGauge();
+		//$scope.impressionGauge();
 		$scope.$apply();
 	}
 

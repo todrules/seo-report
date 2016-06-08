@@ -392,7 +392,7 @@ angular.module('app', ['ngMaterial', 'ui.router', 'app.controllers', 'app.direct
 								name: 'zingchart-angularjs',
 								files: [
 									'lib/ZingChart-AngularJS/src/zingchart-angularjs.js',
-									'http://cdn.zingchart.com/zingchart.min.js'
+									'https://cdn.zingchart.com/zingchart.min.js'
 								]
 							}
 						]);

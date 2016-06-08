@@ -189,7 +189,7 @@ angular.module('app.controllers', [])
 					console.log(result[i]);
 					$scope.ss = result[i].public_id;
 					var img = document.getElementById('ssImg');
-					img.src = 'http://res.cloudinary.com/grooveio88/image/upload/bo_1px_solid_rgb:ccc,c_fit,h_300,o_100,r_0,w_300/' + $scope.ss + '.jpg';
+					img.src = 'https://res.cloudinary.com/grooveio88/image/upload/bo_1px_solid_rgb:ccc,c_fit,h_300,o_100,r_0,w_300/' + $scope.ss + '.jpg';
 					$scope.$apply;
 
 					//$scope.logo = result[i].public_id;
@@ -207,7 +207,7 @@ angular.module('app.controllers', [])
 					console.log(result[i]);
 					$scope.logo = result[i].public_id;
 					var img = document.getElementById('logoImg');
-					img.src = 'http://res.cloudinary.com/grooveio88/image/upload/bo_1px_solid_rgb:ccc,c_fit,h_150,o_100,r_0,w_300/' + $scope.logo + '.jpg';
+					img.src = 'https://res.cloudinary.com/grooveio88/image/upload/bo_1px_solid_rgb:ccc,c_fit,h_150,o_100,r_0,w_300/' + $scope.logo + '.jpg';
 						$scope.$apply;
 
 					//$scope.logo = result[i].public_id;
@@ -576,7 +576,7 @@ angular.module('app.controllers', [])
 	console.log($scope.compId);
 
 	$scope.img = document.getElementById('headerImg');
-	$scope.img.src = 'http://res.cloudinary.com/grooveio88/image/upload/bo_1px_solid_rgb:ccc,c_fill,g_north,o_90,r_0/cosm85z0higtfkzp0atx.jpg';
+	$scope.img.src = 'https://res.cloudinary.com/grooveio88/image/upload/bo_1px_solid_rgb:ccc,c_fill,g_north,o_90,r_0/cosm85z0higtfkzp0atx.jpg';
 
 	$scope.sheet = document.getElementById('sheetHref');
 	$scope.sheet.href = 'https://docs.google.com/spreadsheets/d/1cCUw9z2tNi7cpQuMHIOOcV7ARNpvS0mkbFe6_qVWgBE';
@@ -590,14 +590,14 @@ angular.module('app.controllers', [])
 			}
 		}
 		console.log($scope.selCo);
-		$scope.img.src = 'http://res.cloudinary.com/grooveio88/image/upload/bo_1px_solid_rgb:ccc,c_scale,g_north,o_90,r_0/' + $scope.selCo.screenshotUrl + '.jpg';
+		$scope.img.src = 'https://res.cloudinary.com/grooveio88/image/upload/bo_1px_solid_rgb:ccc,c_scale,g_north,o_90,r_0/' + $scope.selCo.screenshotUrl + '.jpg';
 		console.log('ss: ' + $scope.selCo.screenshotUrl);
 		$scope.sheet.href = 'https://docs.google.com/spreadsheets/d/' + $scope.selCo.sheetId;
 	})
 
 	$scope.changeCo = function(company) {
 		$scope.selCo = company;
-		$scope.img.src = 'http://res.cloudinary.com/grooveio88/image/upload/bo_1px_solid_rgb:ccc,c_scale,g_north,o_90,r_0/' + $scope.selCo.screenshotUrl + '.jpg';
+		$scope.img.src = 'https://res.cloudinary.com/grooveio88/image/upload/bo_1px_solid_rgb:ccc,c_scale,g_north,o_90,r_0/' + $scope.selCo.screenshotUrl + '.jpg';
 		console.log('ss: ' + $scope.selCo.screenshotUrl);
 		$scope.sheet.href = 'https://docs.google.com/spreadsheets/d/' + $scope.selCo.sheetId;
 	};
@@ -1377,7 +1377,7 @@ angular.module('app.controllers', [])
 
 
 		$scope.initPage = function() {
-			
+
 		}
 
 

@@ -1,0 +1,874 @@
+<md-content style="width: 100%; height: 100%; top: 20px; max-width: 1400px;" layout="row" layout-wrap class="hide-scroll" layout-align="center stretch">
+
+	<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; min-width: 1020px; max-width: 1020px; background-color: #fff; margin: 10px; padding: 0; overflow: hidden;" >
+		<div >
+			<md-subheader class="primary-bg" style="color: #fff; font-size: 24px;">Overview</md-subheader>
+		</div>
+		<md-divider ></md-divider>
+		<section layout="row" layout-align="center start">
+			<section layout="column" layout-align="center center">
+			 <md-button class="md-primary md-hue-2" style="width: 125px; height: 100px; background-color: #f7f7f7;">
+				 <span  class="primary-dark-color">IMPRESSIONS</span><br>
+				 <span style="font-size: 20px; color: #F18F01;" ng-if="lastImpressions > totalImpressions">
+					 <i class="icon ion-arrow-down-a"></i>
+				</span>
+				 <span style="font-size: 20px; color: #F18F01;" ng-if="lastImpressions < totalImpressions">
+					 <i class="icon ion-arrow-up-a"></i>
+				</span>
+				  <span class="primary-dark-color" style="font-size: 1.8em;">{{ totalImpressions | number:0 }}</span>
+			  </md-button>
+ 			</section>
+			<section layout="column" layout-align="center center">
+				<md-button class="md-primary md-hue-2" style="width: 125px; height: 100px; background-color: #f7f7f7;" >
+					<span class="primary-dark-color">CLICKS</span><br>
+					<span style="font-size: 20px; color: #D7263D;" ng-if="lastClicks > totalClicks">
+						<i class="icon ion-arrow-down-a"></i>
+					</span>
+					<span style="font-size: 20px; color: #06A77D;" ng-if="lastClicks < totalClicks">
+						<i class="icon ion-arrow-up-a"></i>
+					</span>
+					<span class="primary-dark-color" style="font-size: 1.8em;">{{ totalClicks | number:0 }}</span>
+				</md-button>
+ 			</section>
+			<section layout="column" layout-align="center center">
+				<md-button class="md-primary md-hue-2" style="width: 125px; height: 100px; background-color: #f7f7f7;" >
+					<span class="primary-dark-color">CTR</span><br>
+					<span style="font-size: 20px; color: #D7263D;" ng-if="lastCTR > totalCTR">
+						<i class="icon ion-arrow-down-a"></i>
+					</span>
+					<span style="font-size: 20px; color: #06A77D;" ng-if="lastCTR < totalCTR">
+						<i class="icon ion-arrow-up-a"></i>
+					</span>
+					<span class="primary-dark-color" style="font-size: 1.8em;">{{ (totalCTR*100) | number:2 }}</span>
+				</md-button>
+ 			</section>
+			<section layout="column" layout-align="center center">
+				<md-button class="md-primary md-hue-2" style="width: 125px; height: 100px; background-color: #f7f7f7;" >
+					<span class="primary-dark-color">POSITION</span><br>
+					<span style="font-size: 20px; color: #06A77D;" ng-if="lastPosition > avgPosition">
+						<i class="icon ion-arrow-down-a"></i>
+					</span>
+					<span style="font-size: 20px; color: #D7263D;" ng-if="lastPosition < avgPosition">
+						<i class="icon ion-arrow-up-a"></i>
+					</span>
+					<span class="primary-dark-color" style="font-size: 1.8em;">{{ avgPosition | number:2 }}</span>
+				</md-button>
+			</section>
+			<section layout="column" layout-align="center center">
+				<md-button class="md-primary md-hue-2"  style="width: 125px; height: 100px; background-color: #f7f7f7;" >
+					<span class="primary-dark-color">PAGE VIEWS</span><br>
+					<span style="font-size: 20px; color: #D7263D;" ng-if="lastpageviews > pageviews">
+						<i class="icon ion-arrow-down-a"></i>
+					</span>
+					<span style="font-size: 20px; color: #06A77D;" ng-if="lastpageviews < pageviews">
+						<i class="icon ion-arrow-up-a"></i>
+					</span>
+					<span class="primary-dark-color" style="font-size: 1.8em;">{{ pageviews | number:0 }}</span>
+				</md-button>
+			</section>
+			<section layout="column" layout-align="center center">
+				<md-button class="md-primary md-hue-2" style="width: 125px; height: 100px; background-color: #f7f7f7;" >
+					<span class="primary-dark-color">PAGES PER VIEW</span><br>
+					<span style="font-size: 20px; color: #F18F01;" ng-if="lastppv > ppv">
+						<i class="icon ion-arrow-down-a"></i>
+					</span>
+					<span style="font-size: 20px; color: #F18F01;" ng-if="lastppv < ppv">
+						<i class="icon ion-arrow-up-a"></i>
+					</span>
+					<span class="primary-dark-color" style="font-size: 1.8em;">{{ ppv | number:2 }}</span>
+				</md-button>
+ 			</section>
+
+		</section>
+		<section layout="row" layout-align="center start" style="margin-top: 10px;">
+			<section layout="column" layout-align="center center">
+				<md-button class="md-primary md-hue-2" style="width: 125px; height: 100px; background-color: #f7f7f7;" >
+					<span class="primary-dark-color">SESSIONS</span><br>
+					<span style="font-size: 20px; color: #D7263D;" ng-if="lastsessions > sessions">
+						<i class="icon ion-arrow-down-a"></i>
+					</span>
+					<span style="font-size: 20px; color: #06A77D;" ng-if="lastsessions < sessions">
+						<i class="icon ion-arrow-up-a"></i>
+					</span>
+					<span class="primary-dark-color" style="font-size: 1.8em;">{{ sessions | number:0 }}</span>
+				</md-button>
+			</section>
+			<section layout="column" layout-align="center center">
+				<md-button class="md-primary md-hue-2" style="width: 125px; height: 100px; background-color: #f7f7f7;" >
+					<span class="primary-dark-color">DURATION</span><br>
+					<span style="font-size: 20px; color: #D7263D;" ng-if="lastduration > duration">
+						<i class="icon ion-arrow-down-a"></i>
+					</span>
+					<span style="font-size: 20px; color: #06A77D;" ng-if="lastduration < duration">
+						<i class="icon ion-arrow-up-a"></i>
+					</span>
+					<span class="primary-dark-color" style="font-size: 1.8em;">{{ duration*1000 | date:'mm:ss' }}</span>
+				</md-button>
+			 </section>
+			<section layout="column" layout-align="center center">
+				<md-button class="md-primary md-hue-2" style="width: 125px; height: 100px; background-color: #f7f7f7;" >
+					<span class="primary-dark-color">PAGE SPEED</span><br>
+					<span style="font-size: 20px; color: #06A77D;" ng-if="lastpageLoadTime > pageLoadTime">
+						<i class="icon ion-arrow-down-a"></i>
+					</span>
+					<span style="font-size: 20px; color: #D7263D;" ng-if="lastpageLoadTime < pageLoadTime">
+						<i class="icon ion-arrow-up-a"></i>
+					</span>
+					<span class="primary-dark-color" style="font-size: 1.8em;">{{ pageLoadTime*1000 | date:'mm:ss' }}</span>
+				</md-button>
+ 			</section>
+			<section layout="column" layout-align="center center">
+				<md-button class="md-primary md-hue-2" style="width: 125px; height: 100px; background-color: #f7f7f7;" >
+					<span class="primary-dark-color">UNIQUE VIEWS</span><br>
+					<span style="font-size: 20px; color: #D7263D;" ng-if="lastuniquePageviews > uniquePageviews">
+						<i class="icon ion-arrow-down-a"></i>
+					</span>
+					<span style="font-size: 20px; color: #06A77D;" ng-if="lastuniquePageviews < uniquePageviews">
+						<i class="icon ion-arrow-up-a"></i>
+					</span>
+					<span class="primary-dark-color" style="font-size: 1.8em;">{{ uniquePageviews | number:0 }}</span>
+				</md-button>
+ 			</section>
+			<section layout="column" layout-align="center center">
+				<md-button class="md-primary md-hue-2" style="width: 125px; height: 100px; background-color: #f7f7f7;" >
+					<span class="primary-dark-color">BOUNCES</span><br>
+					<span style="font-size: 20px; color: #06A77D;" ng-if="lastbounces > bounces">
+						<i class="icon ion-arrow-down-a"></i>
+					</span>
+					<span style="font-size: 20px; color: #D7263D;" ng-if="lastbounces < bounces">
+						<i class="icon ion-arrow-up-a"></i>
+					</span>
+					<span class="primary-dark-color" style="font-size: 1.8em;">{{ bounces | number:0 }}</span>
+				</md-button>
+ 			</section>
+			<section layout="column" layout-align="center center">
+				<md-button class="md-primary md-hue-2" style="width: 125px; height: 100px; background-color: #f7f7f7;" >
+					<span class="primary-dark-color">BOUNCE RATE</span><br>
+					<span style="font-size: 20px; color: #06A77D;" ng-if="lastbounceRate > bounceRate">
+						<i class="icon ion-arrow-down-a"></i>
+					</span>
+					<span style="font-size: 20px; color: #D7263D;" ng-if="lastbounceRate < bounceRate">
+						<i class="icon ion-arrow-up-a"></i>
+					</span>
+					<span class="primary-dark-color" style="font-size: 1.8em;">{{ bounceRate | number:2 }}</span>
+				</md-button>
+ 			</section>
+
+		</section>
+		<section layout="row" layout-align="center start" style="margin-top: 30px;">
+			<section layout="column" layout-align="center center">
+				<md-button class="md-primary md-hue-2" style="width: 195px; height: 100px; background-color: #fff;" >
+					<span class="primary-dark-color">MOST POPULAR OS</span><br>
+					<span class="secondary-dark-color" style="font-size: 1.2em;">{{ topOS }}</span>
+				</md-button>
+			</section>
+			<section layout="column" layout-align="center center">
+				<md-button class="md-primary md-hue-2" style="width: 195px; height: 100px; background-color: #fff;" >
+					<span class="primary-dark-color">TOP RESOLUTION</span><br>
+					<span class="secondary-dark-color" style="font-size: 1.2em;">{{ topResolution }}</span>
+				</md-button>
+			 </section>
+			<section layout="column" layout-align="center center">
+				<md-button class="md-primary md-hue-2" style="width: 195px; height: 100px; background-color: #fff;" >
+					<span class="primary-dark-color">KEYWORD ALL-STAR</span><br>
+					<span class="secondary-dark-color" style="font-size: 1.2em; text-transform: lowercase;">{{ topKeyword }}</span>
+				</md-button>
+ 			</section>
+			<section layout="column" layout-align="center center">
+				<md-button class="md-primary md-hue-2" style="width: 195px; height: 100px; background-color: #fff;" >
+					<span class="primary-dark-color">MOST VALUABLE PAGE</span><br>
+					<span class="secondary-dark-color" style="font-size: 1.2em; text-transform: lowercase;">{{ topPage }}</span>
+				</md-button>
+ 			</section>
+		</section>
+
+	</md-content>
+
+	<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; min-width: 500px; max-width: 500px; background-color: #fff; margin: 10px; overflow: hidden;" >
+		<div >
+			<md-subheader class="primary-dark-bg" style="color: #fff; font-size: 24px;">Top Referrals</md-subheader>
+		</div>
+		<md-divider ></md-divider>
+		<section layout="row" style="margin-top: 20px; margin-left: 20px;">
+			<section layout="column" layout-align="start center">
+				<div id="referral-container" style="width: 480px; height: 400px; text-align: right;"></div>
+			</section>
+		</section>
+	</md-content>
+
+	<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; min-width: 500px; max-width: 500px; background-color: #fff; margin: 10px; overflow: hidden;" >
+		<div >
+			<md-subheader class="primary-dark-bg" style="color: #fff; font-size: 24px;">Traffic Channels</md-subheader>
+		</div>
+		<md-divider ></md-divider>
+		<section layout="row" style="margin-top: 20px; margin-left: 20px;">
+			<section layout="column" layout-align="start center">
+				<div id="traffic-container"
+					 style="height: 400px; width: 480px; text-align: right;"></div>
+			</section>
+		</section>
+	</md-content>
+	<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; min-width: 500px; max-width: 500px; background-color: #fff; margin: 10px;" >
+		<div>
+			<md-subheader class="primary-light-bg"  style="color: #f7f7f7; font-size: 24px;">Top Keywords</md-subheader>
+		</div>
+		<md-divider ></md-divider>
+		<section layout="row" style="padding: 0;" layout-align="center center">
+			<section layout="column" layout-align="start start" style=" margin: 0; padding: 0; text-align: center;">
+			<div id="keys-topfive"
+				 style="width: 100%; height: 300px; font-size: 16px; margin: 0; padding: 0;"></div>
+			</section>
+
+		</section>
+	</md-content>
+	<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; min-width: 500px; max-width: 500px; background-color: #fff; margin: 10px;" >
+		<div  >
+			<md-subheader class="primary-light-bg"  style=" color: #f7f7f7; font-size: 24px;">Top Landing Pages</md-subheader>
+		</div>
+		<md-divider ></md-divider>
+		<section layout="row" style="padding: 0;" layout-align="center center">
+			<section layout="column" layout-align="start start" style=" margin: 0; padding: 0; text-align: center;">
+			<div id="pages-topfive"
+				 style="width: 100%; height: 300px; font-size: 16px; margin: 0; padding: 0;"></div>
+			</section>
+
+		</section>
+	</md-content>
+		<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; min-width: 1020px; max-width: 1020px; background-color: #fff; margin: 10px; padding: 0; overflow: hidden; height: 400px;" >
+		<div >
+			<md-subheader class="primary-dark-bg" style="color: #fff; font-size: 24px;">Impressions</md-subheader>
+		</div>
+		<md-divider ></md-divider>
+		<section layout="row">
+			<section layout="column" layout-align="center center">
+			 <md-button class="md-primary md-hue-2" style="width: 125px; height: 100px;">
+				 <span>THIS MONTH</span><br>
+				 <span style="font-size: 1.8em;">{{ totalImpressions | number:0 }}</span>
+			  </md-button>
+ 			<md-button class="md-primary md-hue-2" style="width: 125px; height: 100px;">
+				 <span>LAST MONTH</span><br>
+				 <span style="font-size: 1.8em;">{{ lastImpressions | number:0 }}</span>
+
+			  </md-button>
+			 <md-button class="md-primary md-hue-2"  style="width: 125px; height: 100px;">
+				 <span style="font-size: 1.2em;">CHANGE</span><br>
+
+				 <span style="font-size: 1.8em;">{{ diffImpressions | number:0 }}</span>
+			  </md-button>
+			</section>
+			<section layout="column" layout-align="center center" style="width: 100%; margin-left: 20px;">
+				<div id="impression-container" style="position: absolute; bottom: 20px; left: 150px; width: 850px; height: 300px;  z-index: 0; padding: 0; margin: 0; background: none; ">
+				</div>
+				<div id="impression-bar" style="position: absolute; bottom: 0; left: 150px; width: 850px; height: 300px;  z-index: 1; padding: 0; margin: 0; background: none; opacity: 0.9;">
+				</div>
+			</section>
+		</section>
+		<!--<section layout="row" layout-align="end end" style="margin: 0; padding: 0; text-align: right;">
+
+			<section layout="column" layout-align="start center">
+				<md-card style="padding: 0; width: 200px;">
+			 		<md-card-content layout="row" layout-align="start center" style="text-align: left; padding: 0; margin: 0;">
+						 <div layout="column">
+						 	<md-list>
+							  <md-list-item class="md-2-line">
+								<md-icon class="material-icons"
+										 style="font-size: 42px; line-height: 42px; color: #82A352;">youtube_searched_for
+								</md-icon>
+								<div class="md-list-item-text">
+								  <h2> SEO Tip</h2>
+								</div>
+							  </md-list-item>
+							</md-list>
+							<md-card-content style="margin-top: 0; padding-top: 0;">
+								<p style="font-size: 14px; margin-top: 0;">
+								As website content becomes more focused, overall impressions should fall as generic and
+								unrelated queries no longer target your site.</p>
+							</md-card-content>
+						 </div>
+					 </md-card-content>
+			  </md-card>
+
+			</section>
+		</section>-->
+
+	</md-content>
+
+	<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; min-width: 1020px; max-width: 1020px; background-color: #fff; margin: 10px; padding: 0; overflow: hidden; height: 400px;" >
+		<div >
+			<md-subheader class="primary-dark-bg" style="color: #fff; font-size: 24px;">Clicks</md-subheader>
+		</div>
+		<md-divider ></md-divider>
+		<section layout="row">
+			<section layout="column" layout-align="center center">
+
+			 <md-button class="md-primary md-hue-2" style="width: 125px; height: 100px;" >
+				 <span>THIS MONTH</span><br>
+				 <span style="font-size: 1.8em;">{{ totalClicks | number:0 }}</span>
+
+			  </md-button>
+<md-button class="md-primary md-hue-2" style="width: 125px; height: 100px;" >
+				 <span>LAST MONTH</span><br>
+				 <span style="font-size: 1.8em;">{{ lastClicks | number:0 }}</span>
+
+			  </md-button>
+				<md-button class="md-primary md-hue-2"  style="width: 125px; height: 100px;">
+				 <span style="font-size: 1.2em;">CHANGE</span><br>
+
+				 <span style="font-size: 1.8em;">{{ diffClicks | number:0 }}</span>
+
+			  </md-button>
+			</section>
+
+			<section layout="column" layout-align="center center" style="width: 100%;">
+				<div id="clicks-container" style="position: absolute; bottom: 20px; left: 150px; width: 850px; height: 300px;  z-index: 0; padding: 0; margin: 0; background: none;">
+				</div>
+				<div id="clicks-bar" style="position: absolute; bottom: 0; left: 150px; width: 850px; height: 300px;  z-index: 1; padding: 0; margin: 0; background: none; opacity: 0.9;">
+				</div>
+			</section>
+		</section>
+		<!--<section layout="row" layout-align="end end" style="margin: 0; padding: 0; text-align: right;">
+
+			<section layout="column" layout-align="start center">
+				 <md-card style="padding: 0; width: 200px;">
+				 <md-card-content layout="row" layout-align="start start" style="text-align: left; padding: 0; margin: 0;">
+					  <md-card-content layout="row" layout-align="start center" style="text-align: left; padding: 0; margin: 0;">
+						 <div layout="column">
+						 <md-list>
+						  <md-list-item class="md-2-line">
+							<md-icon class="material-icons"
+									 style="font-size: 42px; line-height: 42px; color: #96B46A;">wallpaper
+								</md-icon>
+							<div class="md-list-item-text">
+							  <h2>Snippets</h2>
+
+							</div>
+						  </md-list-item>
+							 </md-list>
+							<md-card-content style="margin-top: 0; padding-top: 0;">
+								<p style="font-size: 14px; margin-top: 0;">
+									Snippets are the extras shown in th search results, like ratings, recipes, and events.
+								</p>
+							</md-card-content>
+							 </div>
+					 </md-card-content>
+			  	</md-card>
+
+				</section>
+		</section>-->
+	</md-content>
+
+	<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; min-width: 1020px; max-width: 1020px; background-color: #fff; margin: 10px; overflow: hidden; height: 400px;" >
+		<div >
+			<md-subheader class="primary-dark-bg" style="color: #fff; font-size: 24px;">CTR</md-subheader>
+		</div>
+		<md-divider ></md-divider>
+		<section layout="row">
+			<section layout="column" layout-align="center center">
+
+			 <md-button class="md-primary md-hue-2" style="width: 125px; height: 100px;" >
+				 <span>THIS MONTH</span><br>
+				 <span style="font-size: 1.8em;">{{ (totalCTR*100) | number:2 }}%</span>
+
+			  </md-button>
+				<md-button class="md-primary md-hue-2" style="width: 125px; height: 100px;" >
+				 <span>LAST MONTH</span><br>
+				 <span style="font-size: 1.8em;">{{ lastCTR*100 | number:2 }}%</span>
+
+			  </md-button>
+
+			 <md-button class="md-primary md-hue-2"  style="width: 125px; height: 100px;">
+				 <span style="font-size: 1.2em;">CHANGE</span><br>
+				 <span style="font-size: 1.8em;">{{ diffCTR*100 | number:2 }}%</span>
+
+			  </md-button>
+			</section>
+			<section layout="column" layout-align="center center" style="width: 100%;">
+				<div id="ctr-container" style="position: absolute; bottom: 20px; left: 150px; width: 850px; height: 300px;  z-index: 0; padding: 0; margin: 0; background: none;">
+				</div>
+				<div id="ctr-bar" style="position: absolute; bottom: 0; left: 150px; width: 850px; height: 300px;  z-index: 1; padding: 0; margin: 0; background: none;">
+				</div>
+
+			</section>
+			</section>
+		<!--	<section layout="row" layout-align="end end" style="margin: 0; padding: 0; text-align: right;">
+				<section layout="column" layout-align="start center">
+					 <md-card style="padding: 0; width: 200px;">
+						 <md-card-content layout="row" layout-align="start start" style="text-align: left; padding: 0; margin: 0;">
+							  <md-card-content layout="row" layout-align="start center" style="text-align: left; padding: 0; margin: 0;">
+							 <div layout="column">
+							 <md-list>
+							  <md-list-item class="md-2-line">
+								<md-icon class="material-icons"
+										 style="font-size: 42px; line-height: 42px; color: #FF9F10;">text_fields
+									</md-icon>
+								<div class="md-list-item-text">
+								  <h2>Increase CTR?</h2>
+
+								</div>
+							  </md-list-item>
+								 </md-list>
+								<md-card-content style="margin-top: 0; padding-top: 0;">
+									<p style="font-size: 14px; margin-top: 0;">
+										Provide accurate, relevant content. &quot;Write it, and they will come.&quot;
+									</p>
+								</md-card-content>
+								 </div>
+						 </md-card-content>
+				  </md-card>
+
+			</section>
+
+		</section>-->
+	</md-content>
+
+
+	<md-content class="hide-scroll" layout-align="center" layout="column" style="width: 100%; min-width: 1020px; max-width: 1020px; background-color: #fff; margin: 10px; height: 410px;" id="pageviewToast" >
+		<div layout="row">
+			<md-subheader class="primary-bg"  style="color: #fff; font-size: 24px;">Page Views</md-subheader>
+			<span class="primary-bg" flex></span>
+			<span class="primary-bg">
+				<md-icon class="material-icons" ng-click="showCustomToast(0)" style="color: #fff;
+				font-size: 2.5em; margin: 7px 30px 0px 0px; cursor: pointer;" >info_outline
+				</md-icon>
+			</span>
+
+		</div>
+		<md-divider ></md-divider>
+		<section layout="row" style="margin-top: 20px; margin-left: 20px; padding: 0; ">
+			<section layout="column" layout-align="start center" style="margin: 0; padding: 0;">
+			<md-button class="md-accent md-hue-2" style="padding: 0; width: 125px; height: 100px;" >
+				 <span>THIS MONTH</span><br>
+				 <span style="font-size: 1.8em;">{{ pageviews | number:0 }}</span>
+
+			  </md-button>
+				<md-button class="md-accent md-hue-2" style=" width: 125px; height: 100px;" >
+					 <span>LAST MONTH</span><br>
+					 <span style="font-size: 1.8em;">{{ lastpageviews | number:0 }}</span>
+			  	</md-button>
+				<md-button class="md-accent md-hue-2" style=" width: 125px; height: 100px;">
+					<span style="font-size: 1.2em;">CHANGE</span><br>
+					<span style="font-size: 1.8em;">{{ pageviews - lastpageviews | number:0 }}</span>
+			  </md-button>
+
+			</section>
+			<section layout="column" layout-align="center center" style="margin: 0; padding: 0;">
+				<div id="pageviews-container" style="position: absolute; bottom: 20px; left: 150px; width: 850px; height: 300px;  z-index: 0; padding: 0; margin: 0; background: none;">
+				</div>
+				<div id="pageviews-bar" style="position: absolute; bottom: 0; left: 150px; width: 850px; height: 300px;  z-index: 1; padding: 0; margin: 0; background: none;">
+				</div>
+			</section>
+
+		</section>
+	</md-content>
+	<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; min-width: 1020px; max-width: 1020px; background-color: #fff; margin: 10px; height: 400px;" id="ppvToast">
+		<div layout="row">
+			<md-subheader class="primary-bg" style="color: #fff; font-size: 24px;">Pages per Visit</md-subheader>
+			<span class="primary-bg" flex></span>
+			<span class="primary-bg">
+				<md-icon class="material-icons" ng-click="showCustomToast(1)" style="color: #fff;
+				font-size: 2.5em; margin: 7px 30px 0px 0px; cursor: pointer;" >info_outline
+				</md-icon>
+			</span>
+
+		</div>
+		<md-divider ></md-divider>
+		<section layout="row" style="margin-top: 20px; margin-left: 20px; padding: 0; ">
+			<section layout="column" layout-align="start center" style="margin: 0; padding: 0;">
+			<md-button class="md-accent md-hue-2" style="width: 125px; height: 100px;">
+				 <span>THIS MONTH</span><br>
+				 <span style="font-size: 1.8em;">{{ ppv | number:2 }}</span>
+
+			  </md-button>
+					<md-button class="md-accent md-hue-2" style="width: 125px; height: 100px;">
+				 <span>LAST MONTH</span><br>
+				 <span style="font-size: 1.8em;">{{ lastppv | number:2 }}</span>
+			  </md-button>
+				<md-button class="md-accent md-hue-2" style="width: 125px; height: 100px;">
+				 <span style="font-size: 1.2em;">CHANGE</span><br>
+				 <span style="font-size: 1.8em;">{{ ppv - lastppv | number:2 }}</span>
+
+				</md-button>
+			</section>
+				<section layout="column" layout-align="center center" style="margin: 0; padding: 0; ">
+					<div id="ppv-container" style="position: absolute; bottom: 20px; left: 150px; width: 300px; height: 350px;  z-index: 0; padding: 0; margin: 0; background: none;">
+					</div>
+					<div id="ppv-bar" style="position: absolute; bottom: 0; left: 150px; width: 850px; height: 300px;  z-index: 1; padding: 0; margin: 0; background: none;">
+					</div>
+				</section>
+
+		</section>
+	</md-content>
+
+		<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; min-width: 1020px; max-width: 1020px; background-color: #fff; margin: 10px; height: 400px;" id="sessionToast">
+		<div layout="row">
+			<md-subheader class="primary-bg"  style=" color: #fff; font-size: 24px;">Sessions</md-subheader>
+			<span class="primary-bg" flex></span>
+			<span class="primary-bg">
+				<md-icon class="material-icons" ng-click="showCustomToast(2)" style="color: #fff;
+				font-size: 2.5em; margin: 7px 30px 0px 0px; cursor: pointer;" >info_outline
+				</md-icon>
+			</span>
+
+		</div>
+		<md-divider ></md-divider>
+		<section layout="row" style="margin-top: 20px; margin-left: 20px; padding: 0;">
+			<section layout="column" layout-align="start center" style="margin: 0; padding: 0;">
+			<md-button class="md-accent md-hue-2" style="width: 125px; height: 100px;">
+				 <span>THIS MONTH</span><br>
+				 <span style="font-size: 1.8em;">{{ sessions | number:0 }}</span>
+
+			  </md-button>
+				<md-button class="md-accent md-hue-2" style="width: 125px; height: 100px;">
+				 <span>LAST MONTH</span><br>
+				 <span style="font-size: 1.8em;">{{ lastsessions | number:0 }}</span>
+		  		</md-button>
+				<md-button class="md-accent md-hue-2"  style="width: 125px; height: 100px;">
+				 <span style="font-size: 1.2em;">CHANGE</span><br>
+
+				 <span style="font-size: 1.8em;">{{ sessions - lastsessions | number:0 }}</span>
+
+			  </md-button>
+			</section>
+
+				<section layout="column" layout-align="center center" style="margin: 0; padding: 0; ">
+					<div id="sessions-container" style="position: absolute; bottom: 20px; left: 150px; width: 850px; height: 300px;  z-index: 0; padding: 0; margin: 0; background: none;">
+					</div>
+					<div id="sessions-bar" style="position: absolute; bottom: 0; left: 150px; width: 850px; height: 300px;  z-index: 1; padding: 0; margin: 0; background: none;">
+					</div>
+				</section>
+
+		</section>
+	</md-content>
+
+	<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; min-width: 1020px; max-width: 1020px; background-color: #fff; margin: 10px; overflow: hidden; height: 400px;" >
+		<div >
+			<md-subheader class="primary-dark-bg" style="color: #fff; font-size: 24px;">Position</md-subheader>
+		</div>
+		<md-divider ></md-divider>
+		<section layout="row">
+			<section layout="column" layout-align="center center">
+
+			 <md-button class="md-primary md-hue-2" style="width: 125px; height: 100px;">
+				 <span>THIS MONTH</span><br>
+				 <span style="font-size: 1.8em;">{{ avgPosition | number:2 }}</span>
+
+			  </md-button>
+	 		<md-button class="md-primary md-hue-2" style="width: 125px; height: 100px;">
+				 <span>LAST MONTH</span><br>
+				 <span style="font-size: 1.8em;">{{ lastPosition | number:2 }}</span>
+
+			  </md-button>
+
+			 <md-button class="md-primary md-hue-2"  style="width: 125px; height: 100px;">
+				 <span style="font-size: 1.2em;">CHANGE</span><br>
+				 <span style="font-size: 1.8em;">{{ diffPosition | number:2 }}</span>
+
+			  </md-button>
+			</section>
+			<section layout="column" layout-align="center center" style="width: 100%;">
+				<div id="position-container" style="position: absolute; bottom: 20px; left: 150px; width: 850px; height: 300px;  z-index: 0; padding: 0; margin: 0; background: none;">
+				</div>
+				<div id="position-bar" style="position: absolute; bottom: 0; left: 150px; width: 850px; height: 300px;  z-index: 1; padding: 0; margin: 0; background: none;">
+				</div>
+
+			</section>
+		</section>
+
+		<!--	<section layout="row" layout-align="end end" style="margin: 0; padding: 0; text-align: right;">
+				<section layout="column" layout-align="start center">
+					 <md-card style="padding: 0; width: 200px;">
+						 <md-card-content layout="row" layout-align="start start" style="text-align: left; padding: 0; margin: 0;">
+							  <md-card-content layout="row" layout-align="start center" style="text-align: left; padding: 0; margin: 0;">
+							 <div layout="column">
+							 <md-list>
+							  <md-list-item class="md-2-line">
+								<md-icon class="material-icons"
+										 style="font-size: 42px; line-height: 42px; color: #3B568C;">info_outline
+									</md-icon>
+								<div class="md-list-item-text">
+								  <h2>E-A-T</h2>
+
+								</div>
+							  </md-list-item>
+								 </md-list>
+								<md-card-content style="margin-top: 0; padding-top: 0;">
+									<p style="font-size: 14px; margin-top: 0;">
+										When ranking websites, Google focuses on 3 main areas: Expertise, Authority, and
+										Trustworthiness (E-A-T).
+									</p>
+								</md-card-content>
+								 </div>
+							 </md-card-content>
+				  </md-card>
+
+			</section>
+
+		</section>-->
+
+	</md-content>
+
+<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; min-width: 1020px; max-width: 1020px; background-color: #fff; margin: 10px; height: 400px;" id="durationToast">
+		<div layout="row">
+			<md-subheader class="primary-bg"  style="color: #fff; font-size: 24px;">Session Duration</md-subheader>
+			<span class="primary-bg" flex></span>
+			<span class="primary-bg">
+				<md-icon class="material-icons" ng-click="showCustomToast(3)" style="color: #fff;
+				font-size: 2.5em; margin: 7px 30px 0px 0px; cursor: pointer;" >info_outline
+				</md-icon>
+			</span>
+		</div>
+		<md-divider ></md-divider>
+		<section layout="row" style="margin-top: 20px; margin-left: 20px; padding: 0;">
+			<section layout="column" layout-align="start center" style="margin: 0; padding: 0;">
+			<md-button class="md-accent md-hue-2" style="width: 125px; height: 100px;" >
+				 <span>THIS MONTH</span><br>
+				 <span style="font-size: 1.8em;">{{ duration*1000 | date:'mm:ss' }}</span>
+
+			  </md-button>
+				
+				<md-button class="md-accent md-hue-2" style="width: 125px; height: 100px;" >
+				 <span>LAST MONTH</span><br>
+				 <span style="font-size: 1.8em;">{{ lastduration*1000 | date:'mm:ss' }}</span>
+			  </md-button>
+				<md-button class="md-accent md-hue-2"  style="width: 125px; height: 100px;">
+				 <span style="font-size: 1.2em;">CHANGE</span><br>
+				 
+				 <span style="font-size: 1.8em;">{{ Math.abs(duration - lastduration)*1000 | date:'mm:ss' }}</span>
+
+			  </md-button>
+			</section>
+			<section layout="column" layout-align="start center" style="margin: 0; padding: 0;">
+
+			</section>
+				<section layout="column" layout-align="center center" style="margin: 0; padding: 0; ">
+					<div id="duration-container" style="position: absolute; bottom: 20px; left: 150px; width: 850px; height: 300px;  z-index: 0; padding: 0; margin: 0; background: none;">
+					</div>
+					<div id="duration-bar" style="position: absolute; bottom: 0; left: 150px; width: 850px; height: 300px;  z-index: 1; padding: 0; margin: 0; background: none;">
+					</div>
+				</section>
+
+		</section>
+	</md-content>
+
+		<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; min-width: 1020px; max-width: 1020px; background-color: #fff; margin: 10px; height: 400px;" id="loadtimeToast">
+		<div layout="row">
+			<md-subheader class="primary-bg" style=" color: #fff; font-size: 24px;">Page Load Time</md-subheader>
+			<span class="primary-bg" flex></span>
+			<span class="primary-bg">
+				<md-icon class="material-icons" ng-click="showCustomToast(4)" style="color: #fff;
+				font-size: 2.5em; margin: 7px 30px 0px 0px; cursor: pointer;" >info_outline
+				</md-icon>
+			</span>
+
+		</div>
+		<md-divider ></md-divider>
+		<section layout="row" style="margin-top: 20px; margin-left: 20px; padding: 0;">
+			<section layout="column" layout-align="start center" style="margin: 0; padding: 0;">
+				<md-button class="md-accent md-hue-2" style="width: 125px; height: 100px;" >
+				 <span>THIS MONTH</span><br>
+				 <span style="font-size: 1.8em;">{{ pageLoadTime*1000 | date:'mm:ss' }}</span>
+
+			  </md-button>
+				<md-button class="md-accent md-hue-2" style="width: 125px; height: 100px;" >
+					 <span>LAST MONTH</span><br>
+					 <span style="font-size: 1.8em;">{{ lastpageLoadTime*1000 | date:'mm:ss' }}</span>
+			  	</md-button>
+				<md-button class="md-accent md-hue-2"  style="width: 125px; height: 100px;">
+				 <span style="font-size: 1.2em;">CHANGE</span><br>
+				 <span style="font-size: 1.8em;">{{ Math.abs(pageLoadTime - lastpageLoadTime)*1000| date:'mm:ss' }}</span>
+
+			  </md-button>
+			</section>
+			<section layout="column" layout-align="start center" style="margin: 0; padding: 0;">
+
+
+			</section>
+				<section layout="column" layout-align="center center" style="margin: 0; padding: 0; ">
+					<div id="loadtime-container" style="position: absolute; bottom: 20px; left: 150px; width: 850px; height: 300px;  z-index: 0; padding: 0; margin: 0; background: none;">
+					</div>
+					<div id="loadtime-bar" style="position: absolute; bottom: 0; left: 150px; width: 850px; height: 300px;  z-index: 1; padding: 0; margin: 0; background: none;">
+					</div>
+				</section>
+
+		</section>
+	</md-content>
+		<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; min-width: 1020px; max-width: 1020px; background-color: #fff; margin: 10px; height: 400px;" id="uniqueToast">
+		<div layout="row">
+			<md-subheader class="primary-bg" style="color: #fff; font-size: 24px;">Unique Page Views</md-subheader>
+			<span class="primary-bg" flex></span>
+			<span class="primary-bg">
+				<md-icon class="material-icons" ng-click="showCustomToast(5)" style="color: #fff;
+				font-size: 2.5em; margin: 7px 30px 0px 0px; cursor: pointer;" >info_outline
+				</md-icon>
+			</span>
+
+		</div>
+		<md-divider ></md-divider>
+		<section layout="row" style="margin-top: 20px; margin-left: 20px; padding: 0;">
+			<section layout="column" layout-align="start center" style="margin: 0; padding: 0;">
+			<md-button class="md-accent md-hue-2" style="width: 125px; height: 100px;" >
+				 <span>THIS MONTH</span><br>
+				 <span style="font-size: 1.8em;">{{ uniquePageviews | number:0 }}</span>
+
+			  </md-button>
+				<md-button class="md-accent md-hue-2" style="width: 125px; height: 100px;" >
+				 	<span>LAST MONTH</span><br>
+				 	<span style="font-size: 1.8em;">{{ lastuniquePageviews | number:0 }}</span>
+			  	</md-button>
+				<md-button class="md-accent md-hue-2"  style="width: 125px; height: 100px;">
+				 <span style="font-size: 1.2em;">CHANGE</span><br>
+
+				 <span style="font-size: 1.8em;">{{ uniquePageviews - lastuniquePageviews | number:0 }}</span>
+
+			  </md-button>
+			</section>
+				<section layout="column" layout-align="center center" style="margin: 0; padding: 0; ">
+					<div id="unique-container" style="position: absolute; bottom: 20px; left: 150px; width: 850px; height: 300px;  z-index: 0; padding: 0; margin: 0; background: none;">
+					</div>
+					<div id="unique-bar" style="position: absolute; bottom: 0; left: 150px; width: 850px; height: 300px;  z-index: 1; padding: 0; margin: 0; background: none;">
+					</div>
+				</section>
+
+		</section>
+	</md-content>
+
+		<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; min-width: 1020px; max-width: 1020px; background-color: #fff; margin: 10px; height: 400px;" id="bounceToast">
+		<div layout="row" >
+			<md-subheader class="primary-bg" style="color: #fff; font-size: 24px;">Bounces</md-subheader>
+			<span class="primary-bg" flex></span>
+			<span class="primary-bg">
+				<md-icon class="material-icons" ng-click="showCustomToast(6)" style="color: #fff;
+				font-size: 2.5em; margin: 7px 30px 0px 0px; cursor: pointer;" >info_outline
+				</md-icon>
+			</span>
+
+		</div>
+		<md-divider ></md-divider>
+		<section layout="row" style="margin-top: 20px; margin-left: 20px; padding: 0; ">
+			<section layout="column" layout-align="start center" style="margin: 0; padding: 0;">
+				<md-button class="md-accent md-hue-2" style="width: 125px; height: 100px;" >
+				 <span>THIS MONTH</span><br>
+				 <span style="font-size: 1.8em;">{{ bounces | number:0 }}</span>
+
+			  </md-button>
+				<md-button class="md-accent md-hue-2" style="width: 125px; height: 100px;" >
+				 	<span>LAST MONTH</span><br>
+				 	<span style="font-size: 1.8em;">{{ lastbounces | number:0 }}</span>
+			  	</md-button>
+				<md-button class="md-accent md-hue-2"  style="width: 125px; height: 100px;">
+				 <span style="font-size: 1.2em;">CHANGE</span><br>
+
+				 <span style="font-size: 1.8em;">{{ bounces - lastbounces | number:0 }}</span>
+
+			  </md-button>
+			</section>
+				<section layout="column" layout-align="center center" style="margin: 0; padding: 0;">
+					<div id="bounces-container" style="position: absolute; bottom: 20px; left: 150px; width: 850px; height: 300px;  z-index: 0; padding: 0; margin: 0; background: none;">
+					</div>
+					<div id="bounces-bar" style="position: absolute; bottom: 0; left: 150px; width: 850px; height: 300px;  z-index: 1; padding: 0; margin: 0; background: none;">
+					</div>
+				</section>
+
+		</section>
+	</md-content>
+<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; min-width: 1020px; max-width: 1020px; background-color: #fff; margin: 10px; height: 400px;" id="bouncerateToast">
+		<div layout="row">
+			<md-subheader class="primary-bg" style=" color: #fff; font-size: 24px;">Bounce Rate</md-subheader>
+			<span class="primary-bg" flex></span>
+			<span class="primary-bg">
+				<md-icon class="material-icons" ng-click="showCustomToast(7)" style="color: #fff;
+				font-size: 2.5em; margin: 7px 30px 0px 0px; cursor: pointer;" >info_outline
+				</md-icon>
+			</span>
+
+		</div>
+		<md-divider ></md-divider>
+		<section layout="row" style="margin-top: 20px; margin-left: 20px; padding: 0;">
+			<section layout="column" layout-align="start center" style="margin: 0; padding: 0;">
+			<md-button class="md-accent md-hue-2" style="width: 125px; height: 100px;" >
+				 <span>THIS MONTH</span><br>
+				 <span style="font-size: 1.8em;">{{ bounceRate | number:2 }}</span>
+
+			  </md-button>
+				<md-button class="md-accent md-hue-2" style="width: 125px; height: 100px;" >
+				 	<span>LAST MONTH</span><br>
+				 	<span style="font-size: 1.8em;">{{ lastbounceRate | number:2 }}</span>
+			  	</md-button>
+				<md-button class="md-accent md-hue-2"  style="width: 125px; height: 100px;">
+				 <span style="font-size: 1.2em;">CHANGE</span><br>
+
+				 <span style="font-size: 1.8em;">{{ bounceRate - lastbounceRate | number:2 }}</span>
+
+			  </md-button>
+			</section>
+				<section layout="column" layout-align="center center" style="margin: 0; padding: 0; ">
+					<div id="bouncerate-container" style="position: absolute; bottom: 20px; left: 150px; width: 850px; height: 300px;  z-index: 0; padding: 0; margin: 0; background: none;">
+					</div>
+					<div id="bouncerate-bar" style="position: absolute; bottom: 0; left: 150px; width: 850px; height: 300px;  z-index: 1; padding: 0; margin: 0; background: none;">
+					</div>
+				</section>
+
+		</section>
+	</md-content>
+
+	<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; min-width: 500px; max-width: 500px; background-color: #fff; margin: 10px;" >
+		<div>
+			<md-subheader class="primary-light-bg"  style="color: #f7f7f7; font-size: 24px;">Top Keywords
+			- by Impressions</md-subheader>
+		</div>
+		<md-divider ></md-divider>
+		<section layout="row" style="padding: 0;" layout-align="center center">
+			<section layout="column" layout-align="start start" style=" margin: 0; padding: 0; text-align: center;">
+			<div id="keys-cont"
+				 style="width: 100%; height: 600px; font-size: 16px; margin: 0; padding: 0;"></div>
+			</section>
+
+		</section>
+	</md-content>
+	<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; min-width: 500px; max-width: 500px; background-color: #fff; margin: 10px;" >
+		<div  >
+			<md-subheader class="primary-light-bg"  style=" color: #f7f7f7; font-size: 24px;">Top Keywords
+			- by Clicks</md-subheader>
+		</div>
+		<md-divider ></md-divider>
+		<section layout="row" style="padding: 0;" layout-align="center center">
+			<section layout="column" layout-align="start start" style=" margin: 0; padding: 0; text-align: center;">
+			<div id="clickkeys-cont"
+				 style="width: 100%; height: 600px; font-size: 16px; margin: 0; padding: 0;"></div>
+			</section>
+
+		</section>
+	</md-content>
+	<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; min-width: 500px; max-width: 500px; background-color: #fff; margin: 10px;" >
+		<div  >
+			<md-subheader class="primary-light-bg"  style=" color: #f7f7f7; font-size: 24px;">Top
+																							   Landing
+																							   Pages</md-subheader>
+		</div>
+		<md-divider ></md-divider>
+		<section layout="row" style="padding: 0;" layout-align="center center">
+			<section layout="column" layout-align="start start" style=" margin: 0; padding: 0; text-align: center;">
+			<div id="pages-cont"
+				 style="width: 100%; height: 600px; font-size: 16px; margin: 0; padding: 0;"></div>
+			</section>
+
+		</section>
+	</md-content>
+	<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; min-width: 500px; max-width: 500px; margin: 10px; padding: 0; overflow: hidden;" layout="row" layout-wrap>
+		<section layout="column" layout-align="start center">
+
+		</section>
+		<section layout="column" layout-align="start center">
+
+
+			</section>
+		<section layout="column" layout-align="start center">
+
+
+			</section>
+		<section layout="column" layout-align="start center">
+
+			</section>
+		</md-content>
+
+</md-content>

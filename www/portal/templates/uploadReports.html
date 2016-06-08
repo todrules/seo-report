@@ -1,0 +1,105 @@
+<md-content style="width: 100%; top: 20px; padding: 10px;" layout="row" class="hide-scroll" flex layout-align="center">
+	<md-content class="hide-scroll md-whiteframe-1dp md-hue-1" flex layout-align="center" style=" width: 100%;  margin-left: 150px; margin-right: 150px;" >
+	<md-toolbar class="md-primary" style="font-size: 20px;">
+		<div class="md-toolbar-tools">
+			<h2><span>Upload Reports & Data</span></h2>
+		</div>
+	</md-toolbar>
+	<md-tabs md-dynamic-height md-border-bottom class="md-hue-1 md-whiteframe-1dp">
+		<md-tab class="md-accent md-hue-1" label="Moz Reporting">
+			<section style="padding: 40px; text-align: left;">
+				<form ng-app="fileUpload" name="myForm">
+					<div layout="row" layout-align="end center">
+
+						<div><span class="md-subheader md-accent ">{{ uploadErr }}</span></div>
+						<div ng-if="fileparsed == true"><span class="md-subheader md-warn">File uploaded successfully.</span></div>
+						<md-progress-circular ng-hide="completed == true" md-mode="determinate" value="{{ percentLoaded }}"></md-progress-circular>
+						<div class="md-button " ngf-select="uploadKeywords($file)" ng-model="file" name="keyfile">
+							Keyword Report
+						</div>
+						<div class="md-button" ngf-select="upload($file)" ng-model="file" name="file">
+						Comp Report
+					</div>
+				</div>
+					<md-input-container class="md-block"  style="padding: 10px 0;">
+						<label>Company</label>
+						<md-select ng-model="mydata" name="company" required>
+							<md-option ng-repeat="company in companies" value="{{company.id}}">
+								{{company.name}}
+							</md-option>
+						</md-select>
+						<div ng-messages="myForm.company.$error">
+							<div ng-message="required">This is required.</div>
+						</div>
+					</md-input-container>
+
+					<div layout-gt-sm="row" layout-align="end center">
+						<div ng-if="saveFile == true"><span class="md-subheader md-warn">File saved successfully.</span></div>
+						<md-button ng-click="saveData()" class="md-button md-raised md-warn" ng-disabled="myForm.$invalid">Save Comp Data</md-button>
+						<md-button ng-click="saveKeys(myForm)" class="md-button md-raised md-warn" ng-disabled="myForm.$invalid">Save Keywords</md-button>
+					</div>
+				</form>
+			</section>
+			</md-tab>
+		<md-tab class="md-accent md-hue-1" label="Add Keywords">
+			<section style="padding: 40px; text-align: left;">
+				<form name="keyForm" >
+
+						<md-input-container class="md-block">
+							<label>Keywords</label>
+							<textarea ng-model="keywords.list" name="list" rows="20" md-select-on-focus required></textarea>
+						</md-input-container>
+
+					<md-input-container class="md-block"  style="padding: 10px 0;">
+						<label>Company</label>
+						<md-select ng-model="keywords.companyId" name="company" required>
+							<md-option ng-repeat="myCompany in myCompanies" value="{{myCompany.id}}">
+								{{myCompany.name}}
+							</md-option>
+						</md-select>
+						<div ng-messages="keyForm.company.$error">
+							<div ng-message="required">This is required.</div>
+						</div>
+					</md-input-container>
+					<div layout-gt-sm="row" layout-align="end center">
+						<div class="md-button md-raised md-warn" ng-click="keywords(keywords.list)" ng-disabled="keyForm.$invalid" ng-model="keywords">
+							Upload Keywords
+						</div>
+
+					</div>
+				</form>
+			</section>
+		</md-tab>
+		<md-tab class="md-accent md-hue-1" label="Upload Data">
+			<section style="padding: 40px; text-align: left;">
+				<form name="keyForm" >
+					<div id="view-selector-container"></div>
+
+					<md-input-container class="md-block">
+						<label>Keywords</label>
+						<textarea ng-model="keywords.list" name="list" rows="20" md-select-on-focus required></textarea>
+					</md-input-container>
+
+					<md-input-container class="md-block"  style="padding: 10px 0;">
+						<label>Company</label>
+						<md-select ng-model="keywords.companyId" name="company" required>
+							<md-option ng-repeat="myCompany in myCompanies" value="{{myCompany.id}}">
+								{{myCompany.name}}
+							</md-option>
+						</md-select>
+						<div ng-messages="keyForm.company.$error">
+							<div ng-message="required">This is required.</div>
+						</div>
+					</md-input-container>
+					<div layout-gt-sm="row" layout-align="end center">
+						<div class="md-button md-raised md-warn" ng-click="keywords(keywords.list)" ng-disabled="keyForm.$invalid" ng-model="keywords">
+							Upload Keywords
+						</div>
+
+					</div>
+				</form>
+			</section>
+		</md-tab>
+		</md-tabs>
+	</md-content>
+</md-content>

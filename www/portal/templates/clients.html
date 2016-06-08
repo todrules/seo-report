@@ -1,0 +1,83 @@
+<md-content style="width: 100%; height: 100%; top: 20px;" layout="row" class="hide-scroll" flex layout-align="center">
+	<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; min-width: 900px; max-width: 900px;" >
+		<md-card style="background-color: #fff;">
+			<md-toolbar >
+				<div class="md-toolbar-tools">
+					<span flex="75"><h2><span>{{ selCo.name }}</span></h2></span>
+
+				<span flex="25" style="text-align: right;">
+					<md-menu md-position-mode="target-right target" >
+						<md-button aria-label="Open demo menu" class="md-button" ng-click="$mdOpenMenu($event)">
+							Select Client
+							<md-icon class="material icons">contacts</md-icon>
+						</md-button>
+						<md-menu-content width="4" >
+							<md-menu-item ng-repeat="company in companies">
+								<md-button ng-click="changeCo(company)">
+									<div layout="row" flex>
+										<p flex>{{company.name}}</p>
+									</div>
+								</md-button>
+							</md-menu-item>
+						</md-menu-content>
+					</md-menu>
+				</span>
+				</div>
+				</md-toolbar>
+			<div  layout="row" layout-align="start start">
+				<div layout="col" style="height: 300px; padding: 15px;">
+					<img class="md-media-md card-media" id="headerImg" class="md-card-image" ng-src='' style=" width: 360px; border: 1px solid #ccc;"/>
+				</div>
+				<div layout="column" flex="25" style="text-align: left;" layout-align="start center">
+					<md-list>
+						<md-list-item class="md-2-line">
+							<!--<img ng-src="{{todos[0].face}}?20" class="md-avatar" alt="{{todos[0].who}}" />-->
+							<div class="md-list-item-text">
+								<p>Point of Contact</p>
+								<h3>{{ selCo.poc }}</h3>
+							</div>
+						</md-list-item>
+						<md-list-item class="md-2-line">
+							<!--<img ng-src="{{todos[0].face}}?20" class="md-avatar" alt="{{todos[0].who}}" />-->
+							<div class="md-list-item-text">
+								<p>Website</p>
+								<h3>{{ selCo.url }}</h3>
+							</div>
+						</md-list-item>
+						<md-list-item class="md-2-line">
+							<!--<img ng-src="{{todos[0].face}}?20" class="md-avatar" alt="{{todos[0].who}}" />-->
+							<div class="md-list-item-text">
+								<p>Google Analytics ID</p>
+								<h3>{{ selCo.profileId }}</h3>
+							</div>
+						</md-list-item>
+
+					</md-list>
+				</div>
+				<div layout="column" flex="25" style="text-align: left;" layout-align="start center">
+					<md-list>
+						<md-list-item class="md-2-line">
+							<!--<img ng-src="{{todos[0].face}}?20" class="md-avatar" alt="{{todos[0].who}}" />-->
+							<div class="md-list-item-text">
+								<p>Historical Data</p>
+
+								<h3><a style="color: #004884;" id="sheetHref" target="_blank" href="https://docs.google.com/spreadsheets/d/1cCUw9z2tNi7cpQuMHIOOcV7ARNpvS0mkbFe6_qVWgBE">Spreadsheet Link</a> </h3>
+							</div>
+						</md-list-item>
+						<md-list-item class="md-2-line">
+							<!--<img ng-src="{{todos[0].face}}?20" class="md-avatar" alt="{{todos[0].who}}" />-->
+							<div class="md-list-item-text">
+								<p>Member Since</p>
+
+								<h3>January 1, 2014</h3>
+							</div>
+						</md-list-item>
+					</md-list>
+				</div>
+			</div>
+			<md-card-actions layout="row" layout-align="end center">
+				<md-button class="md-accent" ui-sref="viewReports">View Reports</md-button>
+			</md-card-actions>
+		</md-card>
+	</md-content>
+</md-content>

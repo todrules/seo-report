@@ -1,0 +1,59 @@
+<md-content style="width: 100%; top: 20px;" layout="row" class="hide-scroll" flex layout-align="center">
+
+	<md-content class="md-whiteframe-2dp" flex layout-align="center" style=" width: 100%; min-width: 620px; max-width: 620px; background-color: #fff; margin: 2px;" >
+		<md-subheader class="md-primary" style="background-color: #f7f7f7; font-size: 24px;">Signup</md-subheader>
+		<md-divider ></md-divider>
+		<section style="padding: 20px;">
+        <form name="myForm" novalidate>
+			<div class="md-headline" ng-show="successMsg == true">Success!</div>
+	        <div layout-gt-sm="row">
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>First Name</label>
+                    <input type="text" ng-model="op.firstName" name="firstName" ng-required="true">
+	                <div ng-messages="myForm.firstName.$error">
+			          <div ng-message="required">This is required.</div>
+		            </div>
+                </md-input-container>
+            </div>
+	        <div layout-gt-sm="row">
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Last Name</label>
+                    <input type="text" ng-model="op.lastName" name="lastName" ng-required="true">
+	                <div ng-messages="myForm.lastName.$error">
+			          <div ng-message="required">This is required.</div>
+		            </div>
+                </md-input-container>
+            </div>
+	        <div layout-gt-sm="row">
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Phone Number</label>
+                    <input type="tel" ng-model="op.phone" name="phone">
+                </md-input-container>
+            </div>
+            <div layout-gt-sm="row">
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Email</label>
+                    <input type="email" ng-model="op.email" name="email" ng-required="true" minlength="9" maxlength="100" ng-pattern="/^.+@.+\..+$/">
+	                <div ng-messages="myForm.email.$error" role="alert">
+			           <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+			            Your email must be between 10 and 100 characters long and look like an e-mail address.
+			          </div>
+		            </div>
+                </md-input-container>
+            </div>
+	        <div layout-gt-sm="row">
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Password</label>
+                    <input type="password" ng-model="op.password" name="password" ng-required="true">
+	                <div ng-messages="myForm.password.$error">
+			          <div ng-message="required">This is required.</div>
+		            </div>
+                </md-input-container>
+            </div>
+	        <div layout-gt-sm="row" layout-align="end center">
+		      <md-button name="signup" ng-click="signup(myForm)" class="md-raised md-primary">Signup</md-button>
+	        </div>
+        </form>
+	</section>
+  </md-content>
+</md-content>

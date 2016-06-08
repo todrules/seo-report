@@ -1,0 +1,71 @@
+
+	<md-content style="width: 100%; top: 0px; padding: 0px;" layout="row" class="hide-scroll" flex layout-align="center" ng-init="initPage()">
+		<md-content class="md-hue-1" flex layout-align="center" style="border: 1px solid #d8d8d8; width: 100%; margin-left: 80px; margin-right: 80px;" >
+			<md-toolbar class="md-primary" style="font-size: 20px; border-top-left-radius: 4px; border-top-right-radius: 4px;">
+				<div class="md-toolbar-tools">
+
+					<span flex="25"><h2><span>View Reports</span></h2></span>
+					<span flex="50" style="text-align: center;">{{ selected }}</span>
+				<span flex="25" style="text-align: right;">
+					<md-menu md-position-mode="target-right target" >
+					<md-button aria-label="Open demo menu" class="md-button" ng-click="$mdOpenMenu($event)">
+						Select Client
+						<md-icon class="material icons">contacts</md-icon>
+					</md-button>
+					<md-menu-content width="4" >
+						<md-menu-item ng-repeat="company in companies">
+							<md-button ng-click="viewReports(company)">
+								<div layout="row" flex>
+									<p flex>{{company.name}}</p>
+
+								</div>
+							</md-button>
+						</md-menu-item>
+					</md-menu-content>
+				</md-menu></span>
+				</div>
+			</md-toolbar>
+			<md-tabs md-dynamic-height md-border-bottom class="md-hue-1 md-whiteframe-1dp">
+				<md-tab class="md-accent md-hue-1" label="Analytics" style="width: 100%; height: 100%;">
+					<md-tab-body style="width: 100%; height: 100%; min-height: 600px;">
+						<div layout="row" style="width: 100%;">
+							<div layout="column" style="width: 100%; height: 800px;">
+							<div layout="row" style="width: 100%;" layout-align="top center" layout-nowrap>
+								<div style="width: 100%; background-color: #f7f7f7;" layout-nowrap layout="row">
+									<div flex="50" style="width: 50%;">View Data</div>
+									<div flex></div>
+									<span flex layout="column" layout-align="center center">
+											<md-button class="md-warn md-raised" ng-click="getSites()">Get Sites</md-button>
+									</span>
+
+								</div>
+
+							</div>
+								<md-divider></md-divider>
+								<div layout="row" layout-align="center space-between" style="width: 100%;" layout-nowrap>
+									<div layout="column">
+
+									</div>
+									<div layout="column">
+										<div id="view-selector-container" layout="row" layout-align="center center" layout-nowrap style=" width: 100%; text-align: center;"></div>
+									</div>
+									<div layout="column">
+
+									</div>
+								</div>
+								<div layout="row" layout-align="center center" style="width: 100%; margin-top: 20px;" layout-nowrap>
+									<div layout="column" style="width: 100%; text-align: center;">
+										<div id="bubble-chart" style="width: 100%; height: 500px;"></div>
+									</div>
+
+								</div>
+
+							</div>
+						</div>
+
+						</select>
+					</md-tab-body>
+				</md-tab>
+			</md-tabs>
+		</md-content>
+	</md-content>

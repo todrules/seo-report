@@ -1,0 +1,226 @@
+.hide-scroll::-webkit-scrollbar { width: 0 !important }
+
+md-sidenav {
+	overflow: visible;
+
+}
+.side-menu, .side-menu ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	background-color: #fff;
+	border-bottom: 1px solid #ccc;
+}
+
+.side-menu .md-button.active {
+	color: #004884;
+	font-weight: 500;
+	right: 0;
+	text-align: right;
+	padding-right: 40px;
+	font-size: 0.9em;
+	background-color: #f2f2f2;
+}
+
+.side-menu .menu-toggle-list a.md-button {
+	display: block;
+	padding: 5px 16px 0 2px;
+	text-transform: none;
+	text-rendering: optimizeLegibility;
+	font-weight: 500;
+}
+
+.side-menu .menu-toggle-list .md-button {
+	display: block;
+	padding: 5px 16px 5px 72px;
+	text-transform: none;
+}
+
+.side-menu > li {
+
+	border-bottom: 1px solid rgba(0, 0, 0, 0.0);
+}
+
+.md-button-toggle .md-toggle-icon.toggled {
+	transform: rotateZ(180deg);
+	-webkit-transform: rotateZ(180deg);
+}
+
+.md-button-toggle.toggled {
+	background-color: #0E3A5B;
+}
+
+.side-menu .md-button-toggle .md-toggle-icon {
+	margin: auto 0 auto auto;
+	width: 15px;
+	float: right;
+	transition: transform .3s ease-in-out;
+	-webkit-transition: -webkit-transform .3s ease-in-out;
+}
+
+.menu-toggle-list.ng-hide {
+	max-height: 0;
+}
+
+.side-menu .md-button {
+	border-radius: 0;
+	color: #18639B;
+	cursor: pointer;
+	font-weight: 400;
+	margin: 0;
+	padding: 5px;
+	padding-left: 20px;
+	font-family: 'Raleway';
+	font-size: 14px;
+	max-height: 60px;
+	overflow: hidden;
+
+	text-align: left;
+	text-decoration: none;
+	white-space: normal;
+	width: 100%;
+}
+
+.menu-toggle-list {
+	background: #f7f7f7;
+	max-height: 1300px;
+	overflow: hidden;
+	position: relative;
+	z-index: 1;
+	-webkit-transition: 0.75s cubic-bezier(0.35, 0, 0.25, 1);
+	-webkit-transition-property: max-height;
+	-moz-transition: 0.75s cubic-bezier(0.35, 0, 0.25, 1);
+	-moz-transition-property: max-height;
+	transition: 0.75s cubic-bezier(0.35, 0, 0.25, 1);
+	transition-property: max-height;
+}
+
+.side-menu menu-toggle span{
+	padding-top: 0px;
+	padding-bottom: 12px;
+}
+
+/* fallback */
+@font-face {
+	font-family: 'Material Icons';
+	font-style: normal;
+	font-weight: 400;
+	src: local('Material Icons'), local('MaterialIcons-Regular'), url(https://fonts.gstatic.com/s/materialicons/v16/2fcrYFNaTjcS6g4U3t-Y5UEw0lE80llgEseQY3FEmqw.woff2) format('woff2');
+}
+
+.material-icons {
+	font-family: 'Material Icons';
+	font-weight: normal;
+	font-style: normal;
+	font-size: 24px;
+	line-height: 1;
+	letter-spacing: normal;
+	text-transform: none;
+	display: inline-block;
+	white-space: nowrap;
+	word-wrap: normal;
+	direction: ltr;
+	-webkit-font-feature-settings: 'liga';
+	-webkit-font-smoothing: antialiased;
+}
+
+
+.tblCls {
+	font-size: 16px;
+
+}
+
+
+.tblHeaderCls {
+	display: none;
+}
+
+.file-upload {
+	position: relative;
+	overflow: hidden;
+	margin: 10px; }
+
+.file-upload input.file-input {
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 0;
+	padding: 0;
+	font-size: 20px;
+	cursor: pointer;
+	opacity: 0;
+	filter: alpha(opacity=0); }
+
+.toggle-filter-show {
+	height: 100px;
+	animation-name: example;
+	animation-duration: 0.6s;
+}
+
+@keyframes example {
+	0%   {opacity: 0; height:0px;}
+	100% {opacity: 1; height:100px;}
+}
+
+.toggle-filter-hide {
+	height: 0;
+	opacity: 0;
+	animation-name: reverse;
+	animation-duration: 0.6s;
+}
+
+@keyframes reverse {
+	0%   {opacity: 1; height:100px;}
+	100% {opacity: 0; height:0px;}
+}
+
+.myGrid {
+	width: 100%;
+	height: 800px;
+	font-size: 1em;
+}
+
+.impt {
+	background-color: #228CDB;
+	color: #fff;
+}
+
+.plain {
+	background-color: #fff;
+	color: #333333;
+}
+
+.colorsdemoThemePicker .section {
+	font-size: 12px;
+	padding: 16px;
+	font-weight: bold; }
+.colorsdemoThemePicker .line {
+	padding: 16px; }
+.colorsdemoThemePicker .primary, .colorsdemoThemePicker .accent {
+	margin: 4px 0;
+	height: 120px; }
+.colorsdemoThemePicker [md-colors] {
+	transition: all 0.3s cubic-bezier(0.35, 0, 0.25, 1); }
+.colorsdemoThemePicker p.footnote {
+	font-size: 0.85em;
+	margin: 30px;
+	padding: 5px;
+	background-color: rgba(205, 205, 205, 0.45); }
+.colorsdemoThemePicker .componentTag {
+	font-weight: bolder;
+	font-size: 1.2em;
+	padding-left: 10px; }
+
+body {
+	font-family: 'Roboto' !important;
+}
+
+.ViewSelector2 {
+	padding: 10px;
+	background-color: #f7f7f7;
+}
+
+.ViewSelector2 .FormField {
+	background-color: #fff;
+	margin: 20px;
+}

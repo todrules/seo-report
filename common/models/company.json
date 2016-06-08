@@ -1,0 +1,151 @@
+{
+  "name": "Company",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "poc": {
+      "type": "string"
+    },
+    "url": {
+      "type": "string"
+    },
+    "profileId": {
+      "type": "string"
+    },
+    "sheetId": {
+      "type": "string"
+    },
+    "webmasterAcct": {
+      "type": "string"
+    },
+    "screenshotUrl": {
+      "type": "string"
+    },
+    "logoUrl": {
+      "type": "string"
+    },
+    "startDate": {
+      "type": "date"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "members": {
+      "type": "hasMany",
+      "model": "Operator",
+      "foreignKey": ""
+    },
+    "competitors": {
+      "type": "hasMany",
+      "model": "Competitor",
+      "foreignKey": ""
+    },
+    "keywords": {
+      "type": "hasMany",
+      "model": "Keyword",
+      "foreignKey": ""
+    },
+    "landingPages": {
+      "type": "hasMany",
+      "model": "LandingPage",
+      "foreignKey": ""
+    },
+    "referrers": {
+      "type": "hasMany",
+      "model": "Referrer",
+      "foreignKey": ""
+    },
+    "metrics": {
+      "type": "hasMany",
+      "model": "CompanyMetric",
+      "foreignKey": ""
+    },
+    "keywordMetrics": {
+      "type": "hasMany",
+      "model": "KeywordMetric"
+    },
+    "competitorMetrics": {
+      "type": "hasMany",
+      "model": "CompetitorMetric"
+    }
+  },
+  "acls": [
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$everyone, $authenticated, $owner",
+      "permission": "ALLOW",
+      "property": "*"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone, $authenticated, $owner",
+      "permission": "ALLOW",
+      "property": "*"
+    },
+    {
+      "accessType": "WRITE",
+      "principalType": "ROLE",
+      "principalId": "$everyone, $authenticated, $owner",
+      "permission": "ALLOW",
+      "property": "*"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "WRITE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW"
+    }
+  ],
+  "methods": {}
+}

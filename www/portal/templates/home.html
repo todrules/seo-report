@@ -1,0 +1,24 @@
+<md-content style="width: 100%; height: 100%; top: 20px;" layout="row" class="hide-scroll" flex layout-align="center">
+	<md-content class="hide-scroll" flex layout-align="center" style="width: 100%; margin-left: 100px; margin-right: 100px;" ng-init="initPage()">
+
+			<div  layout="row" layout-align="start start" style="width: 100%;" layout-wrap>
+			<md-card style="margin: 20px; background-color: #fff; width: 375px; height: 200px;" ng-repeat="company in companies">
+				<md-card-title>
+					<md-card-title-text>
+						<span class="md-headline">{{ company.name }}</span>
+						<span class="md-subhead">{{ company.url }}</span>
+					</md-card-title-text>
+					<md-card-title-media>
+						<div class="md-media-lg card-media" style="margin-top: 10px;">
+							<img src="http://res.cloudinary.com/grooveio88/image/upload/c_fit,h_250,o_75,r_0,w_400/{{ company.logoUrl  }}.jpg">
+						</div>
+					</md-card-title-media>
+				</md-card-title>
+				<md-card-actions layout="row" layout-align="end center">
+					<md-button class="md-primary md-hue-1" ui-sref="clients({id:{{ company.id}}})">View Profile</md-button>
+				</md-card-actions>
+			</md-card>
+			</div>
+
+	</md-content>
+</md-content>

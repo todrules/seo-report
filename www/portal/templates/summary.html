@@ -1,0 +1,77 @@
+<md-tab-body>
+	<section layout="row" layout-align="center start">
+		<section layout="column" layout-align="center center">
+			<md-button class="md-primary md-hue-2" style="width: 125px; height: 100px; background-color: #f7f7f7;">
+				<span  class="primary-dark-color">IMPRESSIONS</span><br>
+				 <span style="font-size: 20px; color: #F18F01;" ng-if="lastImpressions > totalImpressions">
+					 <i class="icon ion-arrow-down-a"></i>
+				</span>
+				 <span style="font-size: 20px; color: #F18F01;" ng-if="lastImpressions < totalImpressions">
+					 <i class="icon ion-arrow-up-a"></i>
+				</span>
+				<span class="primary-dark-color" style="font-size: 1.8em;">{{ totalImpressions | number:0 }}</span>
+			</md-button>
+		</section>
+		<section layout="column" layout-align="center center">
+			<md-button class="md-primary md-hue-2" style="width: 125px; height: 100px; background-color: #f7f7f7;" >
+				<span class="primary-dark-color">CLICKS</span><br>
+					<span style="font-size: 20px; color: #D7263D;" ng-if="lastClicks > totalClicks">
+						<i class="icon ion-arrow-down-a"></i>
+					</span>
+					<span style="font-size: 20px; color: #06A77D;" ng-if="lastClicks < totalClicks">
+						<i class="icon ion-arrow-up-a"></i>
+					</span>
+				<span class="primary-dark-color" style="font-size: 1.8em;">{{ totalClicks | number:0 }}</span>
+			</md-button>
+		</section>
+		<section layout="column" layout-align="center center">
+			<md-button class="md-primary md-hue-2" style="width: 125px; height: 100px; background-color: #f7f7f7;" >
+				<span class="primary-dark-color">CTR</span><br>
+					<span style="font-size: 20px; color: #D7263D;" ng-if="lastCTR > totalCTR">
+						<i class="icon ion-arrow-down-a"></i>
+					</span>
+					<span style="font-size: 20px; color: #06A77D;" ng-if="lastCTR < totalCTR">
+						<i class="icon ion-arrow-up-a"></i>
+					</span>
+				<span class="primary-dark-color" style="font-size: 1.8em;">{{ (totalCTR*100) | number:2 }}</span>
+			</md-button>
+		</section>
+		<section layout="column" layout-align="center center">
+			<md-button class="md-primary md-hue-2" style="width: 125px; height: 100px; background-color: #f7f7f7;" >
+				<span class="primary-dark-color">POSITION</span><br>
+					<span style="font-size: 20px; color: #06A77D;" ng-if="lastPosition > avgPosition">
+						<i class="icon ion-arrow-down-a"></i>
+					</span>
+					<span style="font-size: 20px; color: #D7263D;" ng-if="lastPosition < avgPosition">
+						<i class="icon ion-arrow-up-a"></i>
+					</span>
+				<span class="primary-dark-color" style="font-size: 1.8em;">{{ avgPosition | number:2 }}</span>
+			</md-button>
+		</section>
+		<section layout="column" layout-align="center center">
+			<md-button class="md-primary md-hue-2"  style="width: 125px; height: 100px; background-color: #f7f7f7;" >
+				<span class="primary-dark-color">PAGE VIEWS</span><br>
+					<span style="font-size: 20px; color: #D7263D;" ng-if="lastpageviews > pageviews">
+						<i class="icon ion-arrow-down-a"></i>
+					</span>
+					<span style="font-size: 20px; color: #06A77D;" ng-if="lastpageviews < pageviews">
+						<i class="icon ion-arrow-up-a"></i>
+					</span>
+				<span class="primary-dark-color" style="font-size: 1.8em;">{{ pageviews | number:0 }}</span>
+			</md-button>
+		</section>
+		<section layout="column" layout-align="center center">
+			<md-button class="md-primary md-hue-2" style="width: 125px; height: 100px; background-color: #f7f7f7;" >
+				<span class="primary-dark-color">PAGES PER VIEW</span><br>
+					<span style="font-size: 20px; color: #F18F01;" ng-if="lastppv > ppv">
+						<i class="icon ion-arrow-down-a"></i>
+					</span>
+					<span style="font-size: 20px; color: #F18F01;" ng-if="lastppv < ppv">
+						<i class="icon ion-arrow-up-a"></i>
+					</span>
+				<span class="primary-dark-color" style="font-size: 1.8em;">{{ ppv | number:2 }}</span>
+			</md-button>
+		</section>
+
+	</section>
+</md-tab-body>

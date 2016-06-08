@@ -1,0 +1,36 @@
+<md-content style="width: 100%;" layout="row" class="hide-scroll" flex layout-align="center" >
+
+	<md-content class="md-whiteframe-2dp" flex layout-align="center" style=" width: 100%; min-width: 620px; max-width: 620px; background-color: #fff; margin: 2px;" >
+		<md-subheader class="md-primary" style="background-color: #f7f7f7; font-size: 24px;">Login</md-subheader>
+		<md-divider ></md-divider>
+		<section style="padding: 20px;">
+        <form name="myForm" novalidate>
+	        <div class="md-headline" ng-show="successMsg == true">Success!</div>
+            <div layout-gt-sm="row">
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Email</label>
+                    <input type="email" ng-model="login.email" name="email" required>
+	                <div ng-messages="myForm.email.$error">
+		                <div ng-message="required">This is required.</div>
+	                </div>
+                </md-input-container>
+
+            </div>
+	        <div layout-gt-sm="row">
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Password</label>
+                    <input type="password" ng-model="login.password" name="password" required>
+	                <div ng-messages="myForm.password.$error">
+		                <div ng-message="required">This is required.</div>
+	                </div>
+                </md-input-container>
+
+            </div>
+	        <div layout-gt-sm="row" layout-align="end center">
+		      <md-button name="login" ng-click="login(myForm)" class="md-raised md-primary" ng-disabled="myForm.$invalid">Login</md-button>
+	        </div>
+        </form>
+	</section>
+
+  </md-content>
+</md-content>

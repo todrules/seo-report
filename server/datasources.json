@@ -2,5 +2,10 @@
   "db": {
     "name": "db",
     "connector": "memory"
+  },
+  "mysqlConn": {
+    "url": "postgres://fcatuwuwhzmtza:FvlGi46RkwSouIKQCxyE9ES0yw@ec2-54-225-90-198.compute-1.amazonaws.com:5432/ddddp0dqtushn8?ssl=true",
+    "name": "mysqlConn",
+    "connector": "postgresql"
   }
 }

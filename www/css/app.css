@@ -1,0 +1,158 @@
+.primary-bg {
+  background-color: #004884; }
+
+.primary-dark-bg {
+  background-color: #003A6A; }
+
+.primary-light-bg {
+  background-color: #0072D0; }
+
+.primary-accent-bg {
+  background-color: #002544; }
+
+.secondary-bg {
+  background-color: #228CDB; }
+
+.secondary-dark-bg {
+  background-color: #18639B; }
+
+.secondary-light-bg {
+  background-color: #2494E8; }
+
+.secondary-accent-bg {
+  background-color: #0E3A5B; }
+
+.favorite-bg {
+  background-color: #06A77D; }
+
+.favorite-dark-bg {
+  background-color: #058D6A; }
+
+.favorite-light-bg {
+  background-color: #09F3B6; }
+
+.favorite-accent-bg {
+  background-color: #04674D; }
+
+.danger-bg {
+  background-color: #F18F01; }
+
+.danger-dark-bg {
+  background-color: #D78001; }
+
+.danger-light-bg {
+  background-color: #FE9701; }
+
+.danger-accent-bg {
+  background-color: #714300; }
+
+.neutral-bg {
+  background-color: #E2DEDF; }
+
+.neutral-dark-bg {
+  background-color: #BCB9B9; }
+
+.neutral-light-bg {
+  background-color: #FCF7F8; }
+
+.neutral-accent-bg {
+  background-color: #7C7A7B; }
+
+.dark-bg-bg {
+  background-color: #3E3C40; }
+
+.primary-color {
+  color: #004884; }
+
+.primary-dark-color {
+  color: #003A6A; }
+
+.primary-light-color {
+  color: #0072D0; }
+
+.primary-accent-color {
+  color: #002544; }
+
+.secondary-color {
+  color: #228CDB; }
+
+.secondary-dark-color {
+  color: #18639B; }
+
+.secondary-light-color {
+  color: #2494E8; }
+
+.secondary-accent-color {
+  color: #0E3A5B; }
+
+.favorite-color {
+  color: #06A77D; }
+
+.favorite-dark-color {
+  color: #058D6A; }
+
+.favorite-light-color {
+  color: #09F3B6; }
+
+.favorite-accent-color {
+  color: #04674D; }
+
+.danger-color {
+  color: #F18F01; }
+
+.danger-dark-color {
+  color: #D78001; }
+
+.danger-light-color {
+  color: #FE9701; }
+
+.danger-accent-color {
+  color: #714300; }
+
+.neutral-color {
+  color: #E2DEDF; }
+
+.neutral-dark-color {
+  color: #BCB9B9; }
+
+.neutral-light-color {
+  color: #FCF7F8; }
+
+.neutral-accent-color {
+  color: #7C7A7B; }
+
+.dark-color-color {
+  color: #3E3C40; }
+
+.tblCls {
+  font-size: 18px; }
+
+.tblHeaderCls {
+  display: none; }
+
+.tblClsSm {
+  font-size: 16px; }
+/** Decorating only modified inputs as valid */
+input.ng-valid.ng-modified {
+	border-color: green;
+}
+
+.cropArea {
+	background: #E4E4E4;
+	overflow: hidden;
+	width:500px;
+	height:350px;
+}
+form .progress {
+	line-height: 15px;
+}
+.progress {
+	display: inline-block;
+	width: 100px;
+	border: 3px groove #CCC;
+}
+.progress div {
+	font-size: smaller;
+	background: orange;
+	width: 0;
+}

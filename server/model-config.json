@@ -14,7 +14,7 @@
     ]
   },
   "User": {
-    "dataSource": "db"
+    "dataSource": "mysqlConn"
   },
   "AccessToken": {
     "dataSource": "db",
@@ -31,5 +31,49 @@
   "Role": {
     "dataSource": "db",
     "public": false
+  },
+  "Operator": {
+    "dataSource": "mysqlConn",
+    "public": true
+  },
+  "Company": {
+    "dataSource": "mysqlConn",
+    "public": true
+  },
+  "CompanyMetric": {
+    "dataSource": "mysqlConn",
+    "public": true
+  },
+  "CompetitorMetric": {
+    "dataSource": "mysqlConn",
+    "public": true
+  },
+  "Competitor": {
+    "dataSource": "mysqlConn",
+    "public": true
+  },
+  "KeywordMetric": {
+    "dataSource": "mysqlConn",
+    "public": true
+  },
+  "Keyword": {
+    "dataSource": "mysqlConn",
+    "public": true
+  },
+  "LandingPage": {
+    "dataSource": "mysqlConn",
+    "public": true
+  },
+  "LandingPageMetric": {
+    "dataSource": "mysqlConn",
+    "public": true
+  },
+  "Referrer": {
+    "dataSource": "mysqlConn",
+    "public": true
+  },
+  "ReferrerMetric": {
+    "dataSource": "mysqlConn",
+    "public": true
   }
 }

@@ -1,0 +1,37 @@
+{
+  "name": "seo-reports",
+  "description": "SEO Portal",
+  "main": "server/server.js",
+  "authors": [
+    "Todd Goodwin"
+  ],
+  "license": "MIT",
+  "homepage": "http://grooveio.com",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "www/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-animate": "^1.5.5",
+    "angular-aria": "^1.5.5",
+    "angular-input-modified": "^2.3.2",
+    "angular-material": "^1.0.8",
+    "angular-resource": "^1.5.5",
+    "angular-ui-router": "^0.2.18",
+    "angularfire": "^1.2.0",
+    "angularjs-crypto": "^1.4.0",
+    "highcharts": "^4.2.4",
+    "Ionicons": "ionicons#^2.0.1",
+    "cloudinary_ng": "^1.0.0",
+    "ng-file-upload": "^12.0.4"
+  },
+  "resolutions": {
+    "angular": "1.5.5",
+    "angular-cookies": "^1.5.6"
+  }
+}

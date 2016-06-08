@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Angular Material - Starter App</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no"/>
+	  <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+	  <link rel="icon" type="image/png" href="/favicon-194x194.png" sizes="194x194">
+	  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+	  <link rel="icon" type="image/png" href="/android-chrome-192x192.png" sizes="192x192">
+	  <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+	  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#90b061">
+    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic'>
+   	<link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,600' rel='stylesheet' type='text/css'>
+  	<link href='https://fonts.googleapis.com/css?family=Raleway:400,500,600,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="lib/angular-material/angular-material.css"/>
+    <link rel="stylesheet" href="css/styles.css"/>
+	  <link rel="stylesheet" href="css/app.css"/>
+	  <link rel="stylesheet" href="lib/Ionicons/css/ionicons.min.css" />
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	  <script src="lib/highcharts/highcharts.js"></script>
+	<script src="lib/highcharts/highcharts-more.js"></script>
+	<script src="lib/highcharts/modules/solid-gauge.js"></script>
+    <style type="text/css">
+        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+			display: none !important;
+		}
+    </style>
+
+	  <script type="text/javascript"
+			  src='https://www.google.com/jsapi?autoload={
+        "modules":[{
+        "name":"visualization",
+        "version":"1"
+        }]
+      }'></script>
+
+  </head>
+
+  <body ng-app="app" layout="column" ng-controller="AppCtrl as app" style="margin: 0; padding: 0; width: 100%; height: 100%;" class="ng-cloak"  ng-init="initMenu()">
+
+  	<md-toolbar layout="row" layout-align="space-between center" style="z-index: 10; height: 40px; min-height: 40px; background-color: #01172F;">
+		<md-button class="menu" ng-click="toggleLeft()" style="position: absolute; left: 20px; ">
+			<md-icon class="material-icons">menu</md-icon>
+		</md-button>
+	    <span flex>&nbsp;</span>
+		<span class="md-display-4" style="font-size:16px; margin-left: 260px; color: #fff;">
+			    {{ title }}
+		    </span>
+	    <span flex>&nbsp;</span>
+	    <div style="text-align: right; margin-right: 60px; margin-bottom: 0px; padding-top: 23px; font-size: 0.9em;">
+
+		    <i class="icon ion-social-twitter" style="font-size: 1.2em;" ></i>
+		    <i style="margin-left: 20px; font-size: 1.2em;" class="icon ion-social-googleplus"></i>
+		    <i style="margin-left: 20px; font-size: 1.2em;" class="icon ion-social-linkedin"></i>
+		    <i style="margin-left: 20px; font-size: 1.2em;" class="icon ion-social-facebook"></i>
+		    <span style="margin-right: 40px;" flex></span>
+		    <span style="margin-right: 10px; font-size: 1.2em;" flex></span>
+	    </div>
+
+	</md-toolbar>
+  	<div flex layout="row" style="top: 50px;">
+		<md-sidenav md-component-id="left" class="md-sidenav-left md-whiteframe-z2" style="background-color: #3C3E3E;">
+			<md-toolbar layout="row" class="md-whiteframe-1dp md-accent md-hue-2" style="background-color: #3C3E3E;">
+				 <div class="md-toolbar-tools">
+					<h2>
+					  <span>Menu</span>
+					</h2>
+					 <span flex></span>
+					<md-button class="menu" ng-click="close()" aria-label="Show User List">
+						<md-icon md-svg-icon="menu"></md-icon>
+					</md-button>
+				  </div>
+			</md-toolbar>
+			<md-content role="navigation" style="background-color: #E0E1E1;">
+				<ul class="side-menu">
+					<li ng-repeat="section in app.menu.sections" class="parent-list-item"					ng-class="{'parentActive' : app.isSectionSelected(section)}">
+						<h2 class="menu-heading" ng-if="section.type === 'heading'"	id="heading_{{ section.name | nospace }}">
+						  {{section}}
+						</h2>
+						<menu-link section="section" ng-if="section.type === 'link'"></menu-link>
+						<menu-toggle section="section" ng-if="section.type === 'toggle'"></menu-toggle>
+					</li>
+				</ul>
+			</md-content>
+		</md-sidenav>
+		<md-content style="width: 100%;" class="hide-scroll " >
+			<md-content style="width: 100%;" class="hide-scroll md-whiteframe-1dp" >
+				<md-toolbar class="md-whiteframe-1dp" style="background-color: #fff; height: 80px; width: 100%; position: fixed; top: 40px;" layout="row" layout-align="center center">
+					<h1 class="md-display-4"  style="font-size: 24px; top: -35px; font-family: 'Raleway'; opacity: 0.8; font-weight: 300; color: #0E3A5B; position: absolute; left: 100px;">
+						Mobile<span style="color: #3C7C36;">Associates</span>
+					</h1>
+					<span flex>&nbsp;</span>
+					<h1 class="md-display-4" style="color: #313a43; font-size: 28px; margin-left: 20px; margin-top: 30px;">{{ myAccounts.accountName }}</h1>
+					<span style="width: 100px;">&nbsp;</span>
+					<md-input-container>
+						<label>Customers</label>
+						<md-select ng-model="myAccounts" name="myAccounts" id="myAccounts" placeholder="Please Select a Property"
+							ng-change="updateModel()" >
+							<md-option ng-value="site" ng-repeat="site in sites">{{site.accountName}}</md-option>
+						</md-select>
+					</md-input-container>
+					<span flex></span>
+				</md-toolbar>
+			</md-content>
+			<div ui-view="menu" class="hide-scroll" layout="row" layout-align="center start" style="width: 100%; height: 100%; top: 60px; position: absolute; "></div>
+		</md-content>
+	</div>
+
+	<script src="lib/angular/angular.js"></script>
+	<script src="lib/angular-ui-router/release/angular-ui-router.js"></script>
+	<script src="lib/angular-animate/angular-animate.js"></script>
+	<script src="lib/angular-aria/angular-aria.js"></script>
+	<script src="lib/angular-messages/angular-messages.js"></script>
+	<script src="lib/angular-material/angular-material.js"></script>
+	<script src="reports/js/app.js"></script>
+	<script src="reports/js/controllers.js"></script>
+  	<script src="reports/js/directives.js"></script>
+   	<script src="reports/js/services.js"></script>
+   <script>
+	    (function(w,d,s,g,js,fjs){
+			g=w.gapi||(w.gapi={});g.analytics={q:[],ready:function(cb){this.q.push(cb)}};
+			js=d.createElement(s);fjs=d.getElementsByTagName(s)[0];
+			js.src='https://apis.google.com/js/platform.js';
+			fjs.parentNode.insertBefore(js,fjs);js.onload=function(){g.load('analytics')};
+		}(window,document,'script'));
+    </script>
+  </body>
+</html>

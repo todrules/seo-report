@@ -305,6 +305,19 @@ angular.module('app.controllers', [])
 			});
 		}
 
+		$scope.uploadNewKeys = function(keywords, id) {
+			var data = keywords;
+			var keywords = data.split('\n');
+			console.log(keywords);
+			var id = id;
+
+			for(var i = 0; i < keywords.length; i++) {
+				Company.keywords.create({id: id}, {name: keywords[i]}).$promise.then(function(res) {
+					console.log(res);
+				})
+			}
+		}
+
 		$scope.upload = function (file) {
 			$scope.compReport = [];
 			$scope.uploadErr = '';
@@ -519,6 +532,7 @@ angular.module('app.controllers', [])
 			})
 
 		}
+
 		$scope.keyData = [];
 		$scope.saveKeys = function(myForm) {
 			//var companyId = $scope.data.companyId;
@@ -527,7 +541,7 @@ angular.module('app.controllers', [])
 			$scope.saveFile = false;
 			var	report = $scope.keyReport;
 
-			var companyId = 0;
+			var companyId = myForm.company.value;
 			companyId = Number($scope.mydata);
 			var keywords = [];
 			Company.keywords({id: companyId}).$promise.then(function(resp) {
@@ -543,7 +557,8 @@ angular.module('app.controllers', [])
 						maxVolume: Number(report[i].maxVolume),
 						difficulty: Number(report[i].difficulty),
 						opportunity: Number(report[i].opportunity),
-						potential: Number(report[i].potential)
+						potential: Number(report[i].potential),
+						companyId: companyId
 
 					};
 					for(var n = 0; n < keywords.length; n++) {
@@ -1011,14 +1026,8 @@ angular.module('app.controllers', [])
 		$scope.mozTrust = [];
 		$scope.totalExternalLinks = [];
 		$scope.compName = [];
-		var compInfo = [handler.url, handler.metrics[0].domainAuthority, "#228CDB"];
-		var compRank = [handler.url, handler.metrics[0].mozRank, "#228CDB"];
-		var compTrust = [handler.url, handler.metrics[0].mozTrust, "#228CDB"];
-		var compLinks = [handler.url, handler.metrics[0].totalExternalLinks, "#228CDB"];
-		$scope.domainAuthority.push(compInfo);
-		$scope.mozRank.push(compRank);
-		$scope.mozTrust.push(compTrust);
-		$scope.totalExternalLinks.push(compLinks);
+
+
 		var sortedHandler = handler;
 		sortedHandler.metrics.sort(function(a,b) {
 			var dateA = new Date(a.month), dateB = new Date(b.month);
@@ -1036,6 +1045,10 @@ angular.module('app.controllers', [])
 			var month = t.getMonth();
 			var year = t.getFullYear();
 			if(lastmonth == month && thisyear == year) {
+				var compInfo = [handler.url, handler.metrics[m].domainAuthority, "#228CDB"];
+				var compRank = [handler.url, handler.metrics[m].mozRank, "#228CDB"];
+				var compTrust = [handler.url, handler.metrics[m].mozTrust, "#228CDB"];
+				var compLinks = [handler.url, handler.metrics[m].totalExternalLinks, "#228CDB"];
 				$scope.totalImpressions = handler.metrics[m].impressions;
 				$scope.totalClicks = handler.metrics[m].clicks;
 				$scope.totalctr = Number(handler.metrics[m].ctr * 100);
@@ -1063,7 +1076,10 @@ angular.module('app.controllers', [])
 				$scope.lastBounceRate = Number(handler.metrics[m].bounceRate);
 			}
 		}
-		
+		$scope.domainAuthority.push(compInfo);
+		$scope.mozRank.push(compRank);
+		$scope.mozTrust.push(compTrust);
+		$scope.totalExternalLinks.push(compLinks);
 
 
 		var styles = ["#7CC900", "#401A7F", "#004884", "#65A300", "#003A6A", "#228CDB", "#1D0B39", "#999"];
@@ -1101,15 +1117,24 @@ angular.module('app.controllers', [])
 		$scope.selected = handler.name;
 		var obj = {
 		}
-		var compObj = {
-			competitor: handler.url,
-			domainAuthority: handler.metrics[0].domainAuthority,
-			mozRank: handler.metrics[0].mozRank,
-			mozTrust: handler.metrics[0].mozTrust,
-			followedLinks: handler.metrics[0].followedLinks,
-			totalExternalLinks: handler.metrics[0].totalExternalLinks,
-			linkingRootDomains: handler.metrics[0].linkingRootDomains
+		for(var ii = 0; ii < handler.metrics.length; ii++) {
+			var d = Date.parse(handler.metrics[ii].month);
+			var t = new Date(d);
+			var month = t.getMonth();
+			var year = t.getFullYear();
+			if(lastmonth == month && thisyear == year) {
+				var compObj = {
+					competitor: handler.url,
+					domainAuthority: handler.metrics[ii].domainAuthority,
+					mozRank: handler.metrics[ii].mozRank,
+					mozTrust: handler.metrics[ii].mozTrust,
+					followedLinks: handler.metrics[ii].followedLinks,
+					totalExternalLinks: handler.metrics[ii].totalExternalLinks,
+					linkingRootDomains: handler.metrics[ii].linkingRootDomains
+				}
+			}
 		}
+
 
 		$scope.compData.push(compObj);
 

@@ -53,8 +53,8 @@
 					<md-input-container class="md-block"  style="padding: 10px 0;">
 						<label>Company</label>
 						<md-select ng-model="keywords.companyId" name="company" required>
-							<md-option ng-repeat="myCompany in myCompanies" value="{{myCompany.id}}">
-								{{myCompany.name}}
+							<md-option ng-repeat="company in companies" value="{{company.id}}">
+								{{company.name}}
 							</md-option>
 						</md-select>
 						<div ng-messages="keyForm.company.$error">
@@ -62,7 +62,7 @@
 						</div>
 					</md-input-container>
 					<div layout-gt-sm="row" layout-align="end center">
-						<div class="md-button md-raised md-warn" ng-click="keywords(keywords.list)" ng-disabled="keyForm.$invalid" ng-model="keywords">
+						<div class="md-button md-raised md-warn" ng-click="uploadNewKeys(keywords.list, keywords.companyId)" ng-disabled="keyForm.$invalid" ng-model="keywords">
 							Upload Keywords
 						</div>
 

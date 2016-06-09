@@ -67,8 +67,8 @@
 			</md-tab>
 			<md-tab class="md-accent" label="Dashboard" >
 				<md-tab-body >
-					<section layout="row" layout-align="start start" style="background-color: #f7f7f7; padding-left: 40px; padding-right: 40px;" layout-wrap>
-						<div layout="column" layout-align="start center" style="color: #fff; box-shadow: 1px 1px #e0e0e0; background-color: #fff; border-radius: 6px; width: 300px; height: 160px; margin: 20px;">
+					<section layout="row" layout-align="start start" style="background-color: #f7f7f7; padding-left: 20px; padding-right: 20px;" layout-wrap>
+						<div layout="column" layout-align="start center" style="color: #fff; box-shadow: 1px 1px #e0e0e0; background-color: #fff; border-radius: 6px; width: 280px; height: 150px; margin: 20px;">
 							<div layout="row" layout-align="start start" style="width: 100%; height: 100%;">
 								<div layout="column" layout-align="center center" ng-style="(lastPosition > totalPosition) ? {'background-color': '#65A300'} : {'background-color': '#77013C'}" flex="30" style="background-color: #228CDB; border-top-left-radius: 6px; border-bottom-left-radius: 6px; font-size: 1.2em; width: 100%; height: 100%;">
 									<span style="font-size: 1em; color: #fff;"><span ng-if="(totalPosition - lastPosition) > 0">+</span>{{ totalPosition - lastPosition | number:2 }}</span>
@@ -89,7 +89,7 @@
 								</div>
 							</div>
 						</div>
-						<div layout="column" layout-align="start center" style="color: #fff; box-shadow: 1px 1px #e0e0e0; background-color: #fff; border-radius: 6px; width: 300px; height: 160px; margin: 20px;">
+						<div layout="column" layout-align="start center" style="color: #fff; box-shadow: 1px 1px #e0e0e0; background-color: #fff; border-radius: 6px; width: 280px; height: 150px; margin: 20px;">
 							<div layout="row" layout-align="start start" style="width: 100%; height: 100%;">
 								<div layout="column" layout-align="center center" ng-style="(lastImpressions > totalImpressions) ? {'background-color': '#77013C'} : {'background-color': '#65A300'}" flex="30" style="background-color: #228CDB; border-top-left-radius: 6px; border-bottom-left-radius: 6px; font-size: 1.2em; width: 100%; height: 100%;">
 									<span style="font-size: 1em; color: #fff;"><span ng-if="(totalImpressions - lastImpressions) > 0">+</span>{{ totalImpressions - lastImpressions | number:0 }}</span>
@@ -110,7 +110,7 @@
 								</div>
 							</div>
 						</div>
-						<div layout="column" layout-align="start center" style="color: #fff; box-shadow: 1px 1px #e0e0e0; background-color: #fff; border-radius: 6px; width: 300px; height: 160px; margin: 20px;">
+						<div layout="column" layout-align="start center" style="color: #fff; box-shadow: 1px 1px #e0e0e0; background-color: #fff; border-radius: 6px; width: 280px; height: 150px; margin: 20px;">
 							<div layout="row" layout-align="start start" style="width: 100%; height: 100%;">
 								<div layout="column" layout-align="center center" ng-style="(lastClicks > totalClicks) ? {'background-color': '#77013C'} : {'background-color': '#65A300'}" flex="30" style="background-color: #228CDB; border-top-left-radius: 6px; border-bottom-left-radius: 6px; font-size: 1.2em; width: 100%; height: 100%;">
 									<span style="font-size: 1em; color: #fff;"><span ng-if="(totalClicks - lastClicks) > 0">+</span>{{ totalClicks - lastClicks | number:0 }}</span>
@@ -131,7 +131,7 @@
 								</div>
 							</div>
 						</div>
-						<div layout="column" layout-align="start center" style="color: #fff; box-shadow: 1px 1px #e0e0e0; background-color: #fff; border-radius: 6px; width: 300px; height: 160px; margin: 20px;">
+						<div layout="column" layout-align="start center" style="color: #fff; box-shadow: 1px 1px #e0e0e0; background-color: #fff; border-radius: 6px; width: 280px; height: 150px; margin: 20px;">
 							<div layout="row" layout-align="start start" style="width: 100%; height: 100%;">
 								<div layout="column" layout-align="center center" ng-style="(lastctr > totalctr) ? {'background-color': '#77013C'} : {'background-color': '#65A300'}" flex="30" style="background-color: #228CDB; border-top-left-radius: 6px; border-bottom-left-radius: 6px; font-size: 1.2em; width: 100%; height: 100%;">
 									<span style="font-size: 1em; color: #fff;"><span ng-if="(totalctr - lastctr) > 0">+</span>{{ totalctr - lastctr | number:2 }}%</span>
@@ -152,7 +152,7 @@
 								</div>
 							</div>
 						</div>
-						<div layout="column" layout-align="start center" style="color: #fff; box-shadow: 1px 1px #e0e0e0; background-color: #fff; border-radius: 6px; width: 300px; height: 160px; margin: 20px;">
+						<div layout="column" layout-align="start center" style="color: #fff; box-shadow: 1px 1px #e0e0e0; background-color: #fff; border-radius: 6px; width: 280px; height: 150px; margin: 20px;">
 							<div layout="row" layout-align="start start" style="width: 100%; height: 100%;">
 								<div layout="column" layout-align="center center" ng-style="(lastPageLoadtime > totalPageLoadtime) ? {'background-color': '#65A300'} : {'background-color': '#77013C'}" flex="30" style="background-color: #228CDB; border-top-left-radius: 6px; border-bottom-left-radius: 6px; font-size: 1.2em; width: 100%; height: 100%;">
 									<span style="font-size: 1em; color: #fff;"><span ng-if="(totalPageLoadtime - lastPageLoadtime) > 0">+</span>{{(totalPageLoadtime - lastPageLoadtime)*1000 | date:'mm:ss' }}</span>
@@ -173,7 +173,7 @@
 								</div>
 							</div>
 						</div>
-						<div layout="column" layout-align="start center" style="color: #fff; box-shadow: 1px 1px #e0e0e0; background-color: #fff; border-radius: 6px; width: 300px; height: 160px; margin: 20px;">
+						<div layout="column" layout-align="start center" style="color: #fff; box-shadow: 1px 1px #e0e0e0; background-color: #fff; border-radius: 6px; width: 280px; height: 150px; margin: 20px;">
 							<div layout="row" layout-align="start start" style="width: 100%; height: 100%;">
 								<div layout="column" layout-align="center center" ng-style="(lastSessions > totalSessions) ? {'background-color': '#77013C'} : {'background-color': '#65A300'}" flex="30" style="background-color: #228CDB; border-top-left-radius: 6px; border-bottom-left-radius: 6px; font-size: 1.2em; width: 100%; height: 100%;">
 									<span style="font-size: 1em; color: #fff;"><span ng-if="(totalSessions - lastSessions) > 0">+</span>{{ totalSessions - lastSessions | number:0 }}</span>
@@ -194,7 +194,7 @@
 								</div>
 							</div>
 						</div>
-						<div layout="column" layout-align="start center" style="color: #fff; box-shadow: 1px 1px #e0e0e0; background-color: #fff; border-radius: 6px; width: 300px; height: 160px; margin: 20px;">
+						<div layout="column" layout-align="start center" style="color: #fff; box-shadow: 1px 1px #e0e0e0; background-color: #fff; border-radius: 6px; width: 280px; height: 150px; margin: 20px;">
 							<div layout="row" layout-align="start start" style="width: 100%; height: 100%;">
 								<div layout="column" layout-align="center center" ng-style="(lastBounces > totalBounces) ? {'background-color': '#65A300'} : {'background-color': '#77013C'}" flex="30" style="background-color: #228CDB; border-top-left-radius: 6px; border-bottom-left-radius: 6px; font-size: 1.2em; width: 100%; height: 100%;">
 									<span style="font-size: 1em; color: #fff;"><span ng-if="(totalBounces - lastBounces) > 0">+</span>{{ totalBounces - lastBounces | number:0 }}</span>
@@ -215,7 +215,7 @@
 								</div>
 							</div>
 						</div>
-						<div layout="column" layout-align="start center" style="color: #fff; box-shadow: 1px 1px #e0e0e0; background-color: #fff; border-radius: 6px; width: 300px; height: 160px; margin: 20px;">
+						<div layout="column" layout-align="start center" style="color: #fff; box-shadow: 1px 1px #e0e0e0; background-color: #fff; border-radius: 6px; width: 280px; height: 150px; margin: 20px;">
 							<div layout="row" layout-align="start start" style="width: 100%; height: 100%;">
 								<div layout="column" layout-align="center center" ng-style="(lastBounceRate > totalBounceRate) ? {'background-color': '#65A300'} : {'background-color': '#77013C'}" flex="30" style="background-color: #228CDB; border-top-left-radius: 6px; border-bottom-left-radius: 6px; font-size: 1.2em; width: 100%; height: 100%;">
 									<span style="font-size: 1em; color: #fff;"><span ng-if="(totalBounceRate - lastBounceRate) > 0">+</span>{{ totalBounceRate - lastBounceRate | number:2 }}%</span>
@@ -236,7 +236,7 @@
 								</div>
 							</div>
 						</div>
-						<div layout="column" layout-align="start center" style="color: #fff; box-shadow: 1px 1px #e0e0e0; background-color: #fff; border-radius: 6px; width: 300px; height: 160px; margin: 20px;">
+						<div layout="column" layout-align="start center" style="color: #fff; box-shadow: 1px 1px #e0e0e0; background-color: #fff; border-radius: 6px; width: 280px; height: 150px; margin: 20px;">
 							<div layout="row" layout-align="start start" style="width: 100%; height: 100%;">
 								<div layout="column" layout-align="center center" ng-style="(lastPageviews > totalPageviews) ? {'background-color': '#77013C'} : {'background-color': '#65A300'}" flex="30" style="background-color: #228CDB; border-top-left-radius: 6px; border-bottom-left-radius: 6px; font-size: 1.2em; width: 100%; height: 100%;">
 									<span style="font-size: 1em; color: #fff;"><span ng-if="(totalPageviews - lastPageviews) > 0">+</span>{{ totalPageviews - lastPageviews | number:0 }}</span>
@@ -257,7 +257,7 @@
 								</div>
 							</div>
 						</div>
-						<div layout="column" layout-align="start center" style="color: #fff; box-shadow: 1px 1px #e0e0e0; background-color: #fff; border-radius: 6px; width: 300px; height: 160px; margin: 20px;">
+						<div layout="column" layout-align="start center" style="color: #fff; box-shadow: 1px 1px #e0e0e0; background-color: #fff; border-radius: 6px; width: 280px; height: 150px; margin: 20px;">
 							<div layout="row" layout-align="start start" style="width: 100%; height: 100%;">
 								<div layout="column" layout-align="center center" ng-style="(lastUnique > totalUnique) ? {'background-color': '#77013C'} : {'background-color': '#65A300'}" flex="30" style="background-color: #228CDB; border-top-left-radius: 6px; border-bottom-left-radius: 6px; font-size: 1.2em; width: 100%; height: 100%;">
 									<span style="font-size: 1em; color: #fff;"><span ng-if="(totalUnique - lastUnique) > 0">+</span>{{ totalUnique - lastUnique | number:0 }}</span>
@@ -278,7 +278,7 @@
 								</div>
 							</div>
 						</div>
-						<div layout="column" layout-align="start center" style="color: #fff; box-shadow: 1px 1px #e0e0e0; background-color: #fff; border-radius: 6px; width: 300px; height: 160px; margin: 20px;">
+						<div layout="column" layout-align="start center" style="color: #fff; box-shadow: 1px 1px #e0e0e0; background-color: #fff; border-radius: 6px; width: 280px; height: 150px; margin: 20px;">
 							<div layout="row" layout-align="start start" style="width: 100%; height: 100%;">
 								<div layout="column" layout-align="center center" ng-style="(lastppv > totalppv) ? {'background-color': '#77013C'} : {'background-color': '#65A300'}" flex="30" style="background-color: #228CDB; border-top-left-radius: 6px; border-bottom-left-radius: 6px; font-size: 1.2em; width: 100%; height: 100%;">
 									<span style="font-size: 1em; color: #fff;"><span ng-if="(totalppv - lastppv) > 0">+</span>{{ totalppv - lastppv | number:2 }}</span>
@@ -300,7 +300,7 @@
 							</div>
 						</div>
 
-						<div layout="column" layout-align="start center" style="color: #fff; box-shadow: 1px 1px #e0e0e0; background-color: #fff; border-radius: 6px; width: 300px; height: 160px; margin: 20px;">
+						<div layout="column" layout-align="start center" style="color: #fff; box-shadow: 1px 1px #e0e0e0; background-color: #fff; border-radius: 6px; width: 280px; height: 150px; margin: 20px;">
 							<div layout="row" layout-align="start start" style="width: 100%; height: 100%;">
 								<div layout="column" layout-align="center center" ng-style="(lastDuration < totalDuration) ? {'background-color': '#65A300'} : {'background-color': '#77013C'}" flex="30" style="background-color: #228CDB; border-top-left-radius: 6px; border-bottom-left-radius: 6px; font-size: 1.2em; width: 100%; height: 100%;">
 									<span style="font-size: 1em; color: #fff;"><span ng-if="(totalDuration - lastDuration) > 0">+</span>{{ Math.abs(totalDuration - lastDuration)*1000 | date:'mm:ss' }}</span>

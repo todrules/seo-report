@@ -677,6 +677,8 @@ angular.module('app.controllers', [])
 				}
 			});
 			zingchart.exec('myChart', 'update');
+			zingchart.exec('myChart', 'hidemenu');
+
 		});
 	};
 
@@ -1208,24 +1210,28 @@ angular.module('app.controllers', [])
 				width: '100%',
 				height: '100%'
 			});
+			zingchart.exec('myChart', 'hidemenu');
 			var comp = DashConfig.getCompConfig($scope.mozRank, '0:10:5');
 			zingchart.render({ // Render Method[3]
 				id:'rankChart',
 				data: comp,
 				width: '300'
 			});
+			zingchart.exec('rankChart', 'hidemenu');
 			var trust = DashConfig.getCompConfig($scope.mozTrust, '0:10:5');
 			zingchart.render({ // Render Method[3]
 				id:'trustChart',
 				data: trust,
 				width: '300'
 			});
+			zingchart.exec('trustChart', 'hidemenu');
 			var auth = DashConfig.getCompConfig($scope.domainAuthority, '0:100:50');
 			zingchart.render({ // Render Method[3]
 				id:'authChart',
 				data: auth,
 				width: '300'
 			});
+			zingchart.exec('authChart', 'hidemenu');
 		},500);
 
 	}

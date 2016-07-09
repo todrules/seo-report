@@ -100,6 +100,65 @@
 				</form>
 			</section>
 		</md-tab>
+		<md-tab class="md-accent md-hue-1" label="Monthly Report" ng-init="initPage()">
+			<section style="padding: 40px; text-align: left;">
+				<div layout="row">
+					<div layout="column">
+						<div id="view-selector-container2"></div>
+						<md-list flex>
+							<md-list-item class="md-3-line" ng-repeat="companySite in companySites" ng-click="null">
+								<div class="md-list-item-text" layout="column">
+									<h3>{{ companySite.name }}</h3>
+									<h4>{{ companySite.websiteUrl }}</h4>
+									<p>{{ companySite.id }}</p>
+								</div>
+							</md-list-item>
+							<md-divider ></md-divider>
+						</md-list>
+					</div>
+					<div layout="column">
+						<md-card md-theme="{{ showDarkTheme ? 'dark-blue' : 'default' }}" md-theme-watch>
+							<md-card-title>
+								<md-card-title-text>
+									<span class="md-headline">{{ selectedCompany.name }}</span>
+									<span class="md-subhead">{{ selectedCompany.url }}</span>
+									<span class="md-subhead">{{ selectedCompany.webmasterAcct }}</span>
+								</md-card-title-text>
+
+							</md-card-title>
+							<md-card-actions layout="row" layout-align="end center">
+								<md-button>Action 1</md-button>
+								<md-button>Action 2</md-button>
+							</md-card-actions>
+						</md-card>
+						<md-card md-theme="{{ showDarkTheme ? 'dark-blue' : 'default' }}" md-theme-watch>
+							<md-card-title>
+								<md-card-title-text>
+
+									<span class="md-subhead">Clicks: {{ clicks }}</span>
+									<span class="md-subhead">Impressions: {{ impressions }}</span>
+									<span class="md-subhead">CTR: {{ ctr }}</span>
+									<span class="md-subhead">Position: {{ position }}</span>
+								</md-card-title-text>
+
+							</md-card-title>
+							<md-card-actions layout="row" layout-align="end center">
+								<md-button>Action 1</md-button>
+								<md-button>Action 2</md-button>
+							</md-card-actions>
+						</md-card>
+					</div>
+				</div>
+					<div layout-gt-sm="row" layout-align="end center">
+						<div class="md-button md-raised md-warn" ng-click="runReport(selectedCompany, selectedAcct, companySite.id)" ng-disabled="reportForm.$invalid" ng-model="keywords">
+							Run Report
+						</div>
+
+					</div>
+
+
+			</section>
+		</md-tab>
 		</md-tabs>
 	</md-content>
 </md-content>

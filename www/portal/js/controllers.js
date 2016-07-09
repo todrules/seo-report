@@ -110,9 +110,6 @@ angular.module('app.controllers', [])
 		});
 	};
 
-
-
-
 }])
 
 .controller('loginCtrl', function($scope, Operator, $rootScope, $mdDialog, $state) {
@@ -278,8 +275,93 @@ angular.module('app.controllers', [])
 	}
 })
 
-	.controller('uploadCtrl', function($scope, $timeout, Company, CompanyMetric, CompetitorMetric, KeywordMetric) {
+	.controller('uploadCtrl', ['$scope', '$timeout', 'Company', 'CompanyMetric', 'CompetitorMetric', 'KeywordMetric', 'GApi', function($scope, $timeout, Company, CompanyMetric, CompetitorMetric, KeywordMetric, GApi) {
 
+		$scope.initPage = function() {
+
+		}
+
+		$scope.getDates = function() {
+			var today = new Date();
+			var lastMonth = today.getMonth() - 1;
+			var year = today.getFullYear();
+			if(lastMonth == -1) {
+				lastMonth = 12;
+				year = year - 1;
+			}
+			var lastDay = new Date(today.getFullYear(), today.getMonth(), 0).getDate();
+
+			var filler = '-';
+			var dayfiller = '-';
+			var startDate = '';
+			if((lastMonth + 1) < 10) {
+				filler = '-0';
+			}
+			startDate = year + filler + (lastMonth + 1) + '-' + '01';
+			var endDate = year + filler + (lastMonth + 1) + '-' + lastDay;
+
+			return [startDate, endDate];
+		}
+
+		$scope.runReport = function(company, account, gaAccount) {
+			var gaAccount = gaAccount;
+			var company = company;
+			var account = account;
+			var dates = [];
+			dates = $scope.getDates();
+			var params = {
+				startDate: dates[0],
+				endDate: dates[1],
+				dimensions: ["date"]
+			}
+			var url = company.url;
+			GApi.executeAuth('webmasters', 'searchanalytics.query', {
+				siteUrl: url,
+				resource: params}).then(function(resp) {
+				console.log(resp);
+				var reply = resp.rows;
+				$scope.gwtResults = reply;
+				var clicks = null;
+				var impressions = null;
+				var ctr = null;
+				var position = null;
+				for(var i = 0; i < reply.length; i++) {
+					clicks = reply[i].clicks + clicks;
+					impressions = reply[i].impressions + impressions;
+					ctr = reply[i].ctr + ctr;
+					position = reply[i].position + position;
+				}
+				var avgPosition = position / reply.length;
+				var avgCTR = ctr / reply.length;
+				$scope.clicks = clicks;
+				$scope.impressions = impressions;
+				$scope.ctr = avgCTR;
+				$scope.position = avgPosition;
+
+			}, function(err) {
+				console.log(err);
+			});
+			var dates = [];
+			dates = $scope.getDates();
+			gapi.client.analytics.data.ga.get({
+				ids: 'ga:105337401',
+				metrics: ['ga:sessions','ga:bounces', 'ga:bounceRate', 'ga:avgSessionDuration', 'ga:pageviews', 'ga:pageviewsPerSession', 'ga:uniquePageviews', 'ga:avgPageLoadTime'],
+				dimensions: [],
+				'start-date': dates[0],
+				'end-date': dates[1],
+				'max-results': 10,
+				sort: '-ga:sessions',
+				segment: 'gaid::-8',
+				output: 'dataTable'
+			}).execute(processResponse);
+
+			var processResponse = function(res) {
+				 var reply = res;
+			}
+
+		}
+
+		
 		$scope.percentLoaded = 0;
 		$scope.completed = false;
 		$scope.fileparsed = false;
@@ -301,6 +383,34 @@ angular.module('app.controllers', [])
 			}).execute();
 
 			$scope.view2.on('viewChange', function(data) {
+
+			});
+			$scope.reportView = new gapi.analytics.ext.ViewSelector2({
+				container: 'view-selector-container2',
+			}).execute();
+			$scope.reportView.on('viewChange', function(data) {
+				console.log(data);
+				var reply = data;
+				$scope.companySites = [];
+				for(var i = 0; i < reply.account.webProperties.length; i++) {
+					$scope.companySites.push(reply.account.webProperties[i]);
+				}
+					for(var j = 0; j < $scope.companies.length; j++) {
+						for(k = 0; k < $scope.companySites.length; k++) {
+							var url = 'http://' + $scope.companies[j].url;
+							console.log(url);
+							var siteUrl = $scope.companySites[k].websiteUrl.replace(/\/$/, "");
+							if(siteUrl === url) {
+									$scope.selectedAcct = $scope.companySites[k];
+									$scope.selectedCompany = $scope.companies[j];
+									console.log($scope.selectedCompany);
+									return;
+
+							}
+						}
+
+					}
+					
 
 			});
 		}
@@ -550,7 +660,7 @@ angular.module('app.controllers', [])
 					var d = Date.parse(report[i].month);
 					var parsed = new Date(d);
 					now = new Date();
-					timestamp = new Date(now.getFullYear(), parsed.getMonth(), 1, 0, 0, 0, 0);
+					timestamp = new Date(now.getFullYear(), 6, 1, 0, 0, 0, 0);
 					var myObj = {
 						month: timestamp,
 						minVolume: Number(report[i].minVolume),
@@ -583,7 +693,7 @@ angular.module('app.controllers', [])
 
 
 		}
-	})
+	}])
 
 .controller('clientCtrl', function ($scope, Company, $stateParams) {
 
@@ -1412,4 +1522,16 @@ angular.module('app.controllers', [])
 		}
 
 
-	});
+	})
+
+.controller('mozCtrl', function($scope, $timeout) {
+
+	var accessId = 'mozscape-9ba53c0ae1';
+	var secretKey = 'e4758ef220a48871b78d1c03d1a5f712';
+
+
+	$scope.initPage = function() {
+
+	}
+
+});

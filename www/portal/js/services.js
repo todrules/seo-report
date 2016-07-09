@@ -361,6 +361,11 @@ angular.module('app.services', [])
 		state: 'uploadReports',
 		type: 'link'
 	});
+	sections.push({
+		name: 'Moz',
+		state: 'moz',
+		type: 'link'
+	});
 
 
 

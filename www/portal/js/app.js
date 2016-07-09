@@ -1,9 +1,8 @@
 angular.module('app', ['ngMaterial', 'ui.router', 'app.controllers', 'app.directives', 'app.services', 'ngAnimate', 'ngMessages', 'lbServices', 'ngResource', 'ngInputModified', 'angular.filter', 'ngFileUpload', 'ui.grid', 'ui.grid.selection', 'oc.lazyLoad', 'angular-google-gapi', 'ngCookies' ])
 
-	.run([ 'GAuth', 'GApi', 'GData', '$rootScope', '$state', '$stateParams', '$location', '$cookies', function(GAuth, GApi, GData, $rootScope, $state, $stateParams, $location, $cookies) {
+	.run([ 'GAuth', 'GApi', 'GData', '$rootScope', '$state', '$stateParams', '$location', function(GAuth, GApi, GData, $rootScope, $state, $stateParams, $location) {
 
 		$rootScope.monthList = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-
 		$rootScope.gdata = GData;
 		root = $rootScope;
 
@@ -44,9 +43,9 @@ angular.module('app', ['ngMaterial', 'ui.router', 'app.controllers', 'app.direct
 				$rootScope.authenticated = true;
 				$rootScope.$broadcast('authenticated');
 			} else {
-				gapi.analytics.auth.signOut();
-				$rootScope.authenticated = false;
-				$state.go('logout');
+			//	gapi.analytics.auth.signOut();
+			//	$rootScope.authenticated = false;
+			//	$state.go('logout');
 
 			}
 
@@ -60,21 +59,21 @@ angular.module('app', ['ngMaterial', 'ui.router', 'app.controllers', 'app.direct
 						$rootScope.authenticated = true;
 						$rootScope.$broadcast('authenticated');
 					} else {
-						$rootScope.authenticated = false;
-						$state.go('logout');
+					//	$rootScope.authenticated = false;
+					//	$state.go('logout');
 					}
 
 				});
 			});
 
 			gapi.analytics.auth.on('needsAuthorization', function() {
-				$rootScope.authenticated = false;
-				$state.go('logout');
+			//	$rootScope.authenticated = false;
+			//	$state.go('logout');
 			});
 
 			gapi.analytics.auth.on('error', function() {
-				$rootScope.authenticated = false;
-				$state.go('logout');
+			//	$rootScope.authenticated = false;
+			//	$state.go('logout');
 			});
 		});
 	
@@ -83,8 +82,8 @@ angular.module('app', ['ngMaterial', 'ui.router', 'app.controllers', 'app.direct
 			var requireLogin = toState.data.requireLogin;
 
 			if (requireLogin && !($rootScope.authenticated)) {
-				event.preventDefault();
-				$state.go('logout');
+		//		event.preventDefault();
+			//	$state.go('logout');
 			}
 		});
 
@@ -110,6 +109,11 @@ angular.module('app', ['ngMaterial', 'ui.router', 'app.controllers', 'app.direct
 		delete $httpProvider.defaults.headers.common['X-Requested-With'];
 		$httpProvider.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 	}])
+
+	.config(function(LoopBackResourceProvider) {
+		LoopBackResourceProvider
+			.setUrlBase('http://localhost:5000/api')
+	})
 
 	.config(function($mdIconProvider){
 
@@ -352,6 +356,20 @@ angular.module('app', ['ngMaterial', 'ui.router', 'app.controllers', 'app.direct
 					requireLogin: true
 				}
 			})
+
+			.state('moz', {
+				url: '/moz',
+				views: {
+					'menu': {
+						templateUrl: 'portal/templates/moz.html',
+						controller: 'mozCtrl'
+					}
+				},
+				data: {
+					requireLogin: false
+				}
+			})
+			
 			.state('analytics', {
 				url: '/analytics',
 				views: {

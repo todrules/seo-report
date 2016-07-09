@@ -1419,82 +1419,6 @@ paths:
           schema:
             $ref: '#/definitions/CompetitorMetric'
       deprecated: false
-  '/Companies/{id}/competitorMetrics/rel/{fk}':
-    put:
-      tags:
-        - Company
-      summary: Add a related item by id for competitorMetrics.
-      operationId: Company.prototype.__link__competitorMetrics
-      parameters:
-        - name: fk
-          in: path
-          description: Foreign key for competitorMetrics
-          required: true
-          type: string
-          format: JSON
-        - name: data
-          in: body
-          required: false
-          schema:
-            $ref: '#/definitions/CompetitorMetric'
-        - name: id
-          in: path
-          description: PersistedModel id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/CompetitorMetric'
-      deprecated: false
-    delete:
-      tags:
-        - Company
-      summary: Remove the competitorMetrics relation to an item by id.
-      operationId: Company.prototype.__unlink__competitorMetrics
-      parameters:
-        - name: fk
-          in: path
-          description: Foreign key for competitorMetrics
-          required: true
-          type: string
-          format: JSON
-        - name: id
-          in: path
-          description: PersistedModel id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '204':
-          description: Request was successful
-      deprecated: false
-    head:
-      tags:
-        - Company
-      summary: Check the existence of competitorMetrics relation to an item by id.
-      operationId: Company.prototype.__exists__competitorMetrics
-      parameters:
-        - name: fk
-          in: path
-          description: Foreign key for competitorMetrics
-          required: true
-          type: string
-          format: JSON
-        - name: id
-          in: path
-          description: PersistedModel id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            type: boolean
-      deprecated: false
   '/Companies/{id}/competitors/{fk}':
     get:
       tags:
@@ -1570,82 +1494,6 @@ paths:
           description: Request was successful
           schema:
             $ref: '#/definitions/Competitor'
-      deprecated: false
-  '/Companies/{id}/keywords/{fk}':
-    get:
-      tags:
-        - Company
-      summary: Find a related item by id for keywords.
-      operationId: Company.prototype.__findById__keywords
-      parameters:
-        - name: fk
-          in: path
-          description: Foreign key for keywords
-          required: true
-          type: string
-          format: JSON
-        - name: id
-          in: path
-          description: PersistedModel id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Keyword'
-      deprecated: false
-    delete:
-      tags:
-        - Company
-      summary: Delete a related item by id for keywords.
-      operationId: Company.prototype.__destroyById__keywords
-      parameters:
-        - name: fk
-          in: path
-          description: Foreign key for keywords
-          required: true
-          type: string
-          format: JSON
-        - name: id
-          in: path
-          description: PersistedModel id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '204':
-          description: Request was successful
-      deprecated: false
-    put:
-      tags:
-        - Company
-      summary: Update a related item by id for keywords.
-      operationId: Company.prototype.__updateById__keywords
-      parameters:
-        - name: fk
-          in: path
-          description: Foreign key for keywords
-          required: true
-          type: string
-          format: JSON
-        - name: data
-          in: body
-          required: false
-          schema:
-            $ref: '#/definitions/Keyword'
-        - name: id
-          in: path
-          description: PersistedModel id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Keyword'
       deprecated: false
   '/Companies/{id}/keywordMetrics/{fk}':
     get:
@@ -1723,16 +1571,62 @@ paths:
           schema:
             $ref: '#/definitions/KeywordMetric'
       deprecated: false
-  '/Companies/{id}/keywordMetrics/rel/{fk}':
-    put:
+  '/Companies/{id}/keywords/{fk}':
+    get:
       tags:
         - Company
-      summary: Add a related item by id for keywordMetrics.
-      operationId: Company.prototype.__link__keywordMetrics
+      summary: Find a related item by id for keywords.
+      operationId: Company.prototype.__findById__keywords
       parameters:
         - name: fk
           in: path
-          description: Foreign key for keywordMetrics
+          description: Foreign key for keywords
+          required: true
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: PersistedModel id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Keyword'
+      deprecated: false
+    delete:
+      tags:
+        - Company
+      summary: Delete a related item by id for keywords.
+      operationId: Company.prototype.__destroyById__keywords
+      parameters:
+        - name: fk
+          in: path
+          description: Foreign key for keywords
+          required: true
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: PersistedModel id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '204':
+          description: Request was successful
+      deprecated: false
+    put:
+      tags:
+        - Company
+      summary: Update a related item by id for keywords.
+      operationId: Company.prototype.__updateById__keywords
+      parameters:
+        - name: fk
+          in: path
+          description: Foreign key for keywords
           required: true
           type: string
           format: JSON
@@ -1752,52 +1646,6 @@ paths:
           description: Request was successful
           schema:
             $ref: '#/definitions/Keyword'
-      deprecated: false
-    delete:
-      tags:
-        - Company
-      summary: Remove the keywordMetrics relation to an item by id.
-      operationId: Company.prototype.__unlink__keywordMetrics
-      parameters:
-        - name: fk
-          in: path
-          description: Foreign key for keywordMetrics
-          required: true
-          type: string
-          format: JSON
-        - name: id
-          in: path
-          description: PersistedModel id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '204':
-          description: Request was successful
-      deprecated: false
-    head:
-      tags:
-        - Company
-      summary: Check the existence of keywordMetrics relation to an item by id.
-      operationId: Company.prototype.__exists__keywordMetrics
-      parameters:
-        - name: fk
-          in: path
-          description: Foreign key for keywordMetrics
-          required: true
-          type: string
-          format: JSON
-        - name: id
-          in: path
-          description: PersistedModel id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            type: boolean
       deprecated: false
   '/Companies/{id}/landingPages/{fk}':
     get:
@@ -2311,96 +2159,6 @@ paths:
           schema:
             type: object
       deprecated: false
-  '/Companies/{id}/keywords':
-    get:
-      tags:
-        - Company
-      summary: Queries keywords of Company.
-      operationId: Company.prototype.__get__keywords
-      parameters:
-        - name: filter
-          in: query
-          required: false
-          type: string
-          format: JSON
-        - name: id
-          in: path
-          description: PersistedModel id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/Keyword'
-      deprecated: false
-    post:
-      tags:
-        - Company
-      summary: Creates a new instance in keywords of this model.
-      operationId: Company.prototype.__create__keywords
-      parameters:
-        - name: data
-          in: body
-          required: false
-          schema:
-            $ref: '#/definitions/Keyword'
-        - name: id
-          in: path
-          description: PersistedModel id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Keyword'
-      deprecated: false
-    delete:
-      tags:
-        - Company
-      summary: Deletes all keywords of this model.
-      operationId: Company.prototype.__delete__keywords
-      parameters:
-        - name: id
-          in: path
-          description: PersistedModel id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '204':
-          description: Request was successful
-      deprecated: false
-  '/Companies/{id}/keywords/count':
-    get:
-      tags:
-        - Company
-      summary: Counts keywords of Company.
-      operationId: Company.prototype.__count__keywords
-      parameters:
-        - name: where
-          in: query
-          description: Criteria to match model instances
-          required: false
-          type: string
-          format: JSON
-        - name: id
-          in: path
-          description: PersistedModel id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            type: object
-      deprecated: false
   '/Companies/{id}/keywordMetrics':
     get:
       tags:
@@ -2472,6 +2230,96 @@ paths:
         - Company
       summary: Counts keywordMetrics of Company.
       operationId: Company.prototype.__count__keywordMetrics
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: PersistedModel id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+  '/Companies/{id}/keywords':
+    get:
+      tags:
+        - Company
+      summary: Queries keywords of Company.
+      operationId: Company.prototype.__get__keywords
+      parameters:
+        - name: filter
+          in: query
+          required: false
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: PersistedModel id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Keyword'
+      deprecated: false
+    post:
+      tags:
+        - Company
+      summary: Creates a new instance in keywords of this model.
+      operationId: Company.prototype.__create__keywords
+      parameters:
+        - name: data
+          in: body
+          required: false
+          schema:
+            $ref: '#/definitions/Keyword'
+        - name: id
+          in: path
+          description: PersistedModel id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Keyword'
+      deprecated: false
+    delete:
+      tags:
+        - Company
+      summary: Deletes all keywords of this model.
+      operationId: Company.prototype.__delete__keywords
+      parameters:
+        - name: id
+          in: path
+          description: PersistedModel id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '204':
+          description: Request was successful
+      deprecated: false
+  '/Companies/{id}/keywords/count':
+    get:
+      tags:
+        - Company
+      summary: Counts keywords of Company.
+      operationId: Company.prototype.__count__keywords
       parameters:
         - name: where
           in: query
@@ -3214,6 +3062,29 @@ paths:
           schema:
             type: object
       deprecated: false
+  '/CompetitorMetrics/{id}/company':
+    get:
+      tags:
+        - CompetitorMetric
+      summary: Fetches belongsTo relation company.
+      operationId: CompetitorMetric.prototype.__get__company
+      parameters:
+        - name: refresh
+          in: query
+          required: false
+          type: boolean
+        - name: id
+          in: path
+          description: PersistedModel id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Company'
+      deprecated: false
   '/CompetitorMetrics/{id}/competitor':
     get:
       tags:
@@ -3946,6 +3817,29 @@ paths:
           schema:
             type: object
       deprecated: false
+  '/KeywordMetrics/{id}/company':
+    get:
+      tags:
+        - KeywordMetric
+      summary: Fetches belongsTo relation company.
+      operationId: KeywordMetric.prototype.__get__company
+      parameters:
+        - name: refresh
+          in: query
+          required: false
+          type: boolean
+        - name: id
+          in: path
+          description: PersistedModel id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Company'
+      deprecated: false
   '/KeywordMetrics/{id}/keyword':
     get:
       tags:
@@ -3968,248 +3862,6 @@ paths:
           description: Request was successful
           schema:
             $ref: '#/definitions/Keyword'
-      deprecated: false
-  '/KeywordMetrics/{id}/companies/{fk}':
-    get:
-      tags:
-        - KeywordMetric
-      summary: Find a related item by id for companies.
-      operationId: KeywordMetric.prototype.__findById__companies
-      parameters:
-        - name: fk
-          in: path
-          description: Foreign key for companies
-          required: true
-          type: string
-          format: JSON
-        - name: id
-          in: path
-          description: PersistedModel id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Company'
-      deprecated: false
-    delete:
-      tags:
-        - KeywordMetric
-      summary: Delete a related item by id for companies.
-      operationId: KeywordMetric.prototype.__destroyById__companies
-      parameters:
-        - name: fk
-          in: path
-          description: Foreign key for companies
-          required: true
-          type: string
-          format: JSON
-        - name: id
-          in: path
-          description: PersistedModel id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '204':
-          description: Request was successful
-      deprecated: false
-    put:
-      tags:
-        - KeywordMetric
-      summary: Update a related item by id for companies.
-      operationId: KeywordMetric.prototype.__updateById__companies
-      parameters:
-        - name: fk
-          in: path
-          description: Foreign key for companies
-          required: true
-          type: string
-          format: JSON
-        - name: data
-          in: body
-          required: false
-          schema:
-            $ref: '#/definitions/Company'
-        - name: id
-          in: path
-          description: PersistedModel id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Company'
-      deprecated: false
-  '/KeywordMetrics/{id}/companies/rel/{fk}':
-    put:
-      tags:
-        - KeywordMetric
-      summary: Add a related item by id for companies.
-      operationId: KeywordMetric.prototype.__link__companies
-      parameters:
-        - name: fk
-          in: path
-          description: Foreign key for companies
-          required: true
-          type: string
-          format: JSON
-        - name: data
-          in: body
-          required: false
-          schema:
-            $ref: '#/definitions/Keyword'
-        - name: id
-          in: path
-          description: PersistedModel id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Keyword'
-      deprecated: false
-    delete:
-      tags:
-        - KeywordMetric
-      summary: Remove the companies relation to an item by id.
-      operationId: KeywordMetric.prototype.__unlink__companies
-      parameters:
-        - name: fk
-          in: path
-          description: Foreign key for companies
-          required: true
-          type: string
-          format: JSON
-        - name: id
-          in: path
-          description: PersistedModel id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '204':
-          description: Request was successful
-      deprecated: false
-    head:
-      tags:
-        - KeywordMetric
-      summary: Check the existence of companies relation to an item by id.
-      operationId: KeywordMetric.prototype.__exists__companies
-      parameters:
-        - name: fk
-          in: path
-          description: Foreign key for companies
-          required: true
-          type: string
-          format: JSON
-        - name: id
-          in: path
-          description: PersistedModel id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            type: boolean
-      deprecated: false
-  '/KeywordMetrics/{id}/companies':
-    get:
-      tags:
-        - KeywordMetric
-      summary: Queries companies of KeywordMetric.
-      operationId: KeywordMetric.prototype.__get__companies
-      parameters:
-        - name: filter
-          in: query
-          required: false
-          type: string
-          format: JSON
-        - name: id
-          in: path
-          description: PersistedModel id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/Company'
-      deprecated: false
-    post:
-      tags:
-        - KeywordMetric
-      summary: Creates a new instance in companies of this model.
-      operationId: KeywordMetric.prototype.__create__companies
-      parameters:
-        - name: data
-          in: body
-          required: false
-          schema:
-            $ref: '#/definitions/Company'
-        - name: id
-          in: path
-          description: PersistedModel id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Company'
-      deprecated: false
-    delete:
-      tags:
-        - KeywordMetric
-      summary: Deletes all companies of this model.
-      operationId: KeywordMetric.prototype.__delete__companies
-      parameters:
-        - name: id
-          in: path
-          description: PersistedModel id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '204':
-          description: Request was successful
-      deprecated: false
-  '/KeywordMetrics/{id}/companies/count':
-    get:
-      tags:
-        - KeywordMetric
-      summary: Counts companies of KeywordMetric.
-      operationId: KeywordMetric.prototype.__count__companies
-      parameters:
-        - name: where
-          in: query
-          description: Criteria to match model instances
-          required: false
-          type: string
-          format: JSON
-        - name: id
-          in: path
-          description: PersistedModel id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            type: object
       deprecated: false
   /KeywordMetrics:
     post:
@@ -6596,6 +6248,9 @@ definitions:
       id:
         type: number
         format: double
+      companyId:
+        type: number
+        format: double
       competitorId:
         type: number
         format: double
@@ -6617,19 +6272,6 @@ definitions:
     required:
       - name
       - url
-    additionalProperties: false
-  Keyword:
-    properties:
-      name:
-        type: string
-      id:
-        type: number
-        format: double
-      companyId:
-        type: number
-        format: double
-    required:
-      - name
     additionalProperties: false
   KeywordMetric:
     properties:
@@ -6674,11 +6316,27 @@ definitions:
       id:
         type: number
         format: double
+      companyId:
+        type: number
+        format: double
       keywordId:
         type: number
         format: double
     required:
       - month
+    additionalProperties: false
+  Keyword:
+    properties:
+      name:
+        type: string
+      id:
+        type: number
+        format: double
+      companyId:
+        type: number
+        format: double
+    required:
+      - name
     additionalProperties: false
   LandingPage:
     properties:

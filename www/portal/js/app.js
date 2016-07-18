@@ -1,19 +1,11 @@
-angular.module('app', ['ngMaterial', 'ui.router', 'app.controllers', 'app.directives', 'app.services', 'ngAnimate', 'ngMessages', 'lbServices', 'ngResource', 'ngInputModified', 'angular.filter', 'ngFileUpload', 'ui.grid', 'ui.grid.selection', 'oc.lazyLoad', 'angular-google-gapi', 'ngCookies' ])
+angular.module('app', ['ngMaterial', 'ui.router', 'app.controllers', 'app.directives', 'app.services', 'ngAnimate', 'ngMessages', 'lbServices', 'ngResource', 'ngInputModified', 'angular.filter', 'ngFileUpload', 'ui.grid', 'ui.grid.selection', 'oc.lazyLoad', 'ngCookies', 'angular-google-gapi' ])
 
-	.run([ 'GAuth', 'GApi', 'GData', '$rootScope', '$state', '$stateParams', '$location', function(GAuth, GApi, GData, $rootScope, $state, $stateParams, $location) {
+	.run([ 'GAuth', 'GApi', 'GData', 'CLIENTID', 'SCOPES', '$rootScope', '$state', '$stateParams', '$location', '$timeout', 'SCOPE', 'APIKEY', function(GAuth, GApi, GData, CLIENTID, SCOPES, $rootScope, $state, $stateParams, $location, $timeout, SCOPE, APIKEY) {
 
-		$rootScope.monthList = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-		$rootScope.gdata = GData;
+
+		
+		
 		root = $rootScope;
-
-		var APIKEY = 'AIzaSyD2cHJ-K8BStHf6axFi13_cvhX3BzqValE';
-		var CLIENTID = '598123322729-91cbmds83g0uh0u9elf7ji3cqbtljbjm.apps.googleusercontent.com';
-		var SCOPES = 'https://www.googleapis.com/auth/analytics https://www.googleapis.com/auth/webmasters' +
-			' https://www.googleapis.com/auth/analytics.edit';
-
-		var scopes = ['https://www.googleapis.com/auth/analytics', 
-			'https://www.googleapis.com/auth/webmasters',
-			'https://www.googleapis.com/auth/analytics.edit'];
 
 		GApi.load('webmasters','v3');
 		GApi.load('analytics','v3');
@@ -22,35 +14,33 @@ angular.module('app', ['ngMaterial', 'ui.router', 'app.controllers', 'app.direct
 
 		GAuth.setClient(CLIENTID);
 		GAuth.setScope(SCOPES);
-	//	var user = $cookies.get('userId');
-		//console.log(user);
-	//	if(user === '109792126873673599082' || user === '103294612803329153998')
+		//var auth = AuthService.authorize();
 		$rootScope.authenticated = false;
 		gapi.analytics.ready(function() {
-
+			
 			gapi.analytics.auth.signOut();
-
+			
 			gapi.analytics.auth.authorize({
 				container: 'auth-button',
 				clientid: CLIENTID,
-				scopes: scopes,
+				scopes: SCOPES,
 				userInfoLabel: ''
 			});
-
+			
 			auth = gapi.analytics.auth.isAuthorized();
-
+			
 			if((auth == true && $rootScope.user.id === '109792126873673599082') || (auth == true && $rootScope.user.id === '103294612803329153998')) {
 				$rootScope.authenticated = true;
 				$rootScope.$broadcast('authenticated');
 			} else {
-			//	gapi.analytics.auth.signOut();
+				gapi.analytics.auth.signOut();
 			//	$rootScope.authenticated = false;
 			//	$state.go('logout');
-
+				
 			}
-
+			
 			gapi.analytics.auth.on('signIn', function() {
-				gapi.client.setApiKey('APIKEY');
+				gapi.client.setApiKey(APIKEY);
 				gapi.client.plus.people.get({userId: 'me'}).execute(function(resp) {
 					$rootScope.user = resp;
 					if($rootScope.user.id === '109792126873673599082' || $rootScope.user.id === '103294612803329153998') {
@@ -59,47 +49,33 @@ angular.module('app', ['ngMaterial', 'ui.router', 'app.controllers', 'app.direct
 						$rootScope.authenticated = true;
 						$rootScope.$broadcast('authenticated');
 					} else {
-					//	$rootScope.authenticated = false;
+				//		$rootScope.authenticated = false;
 					//	$state.go('logout');
 					}
-
+					
 				});
 			});
-
+			
 			gapi.analytics.auth.on('needsAuthorization', function() {
-			//	$rootScope.authenticated = false;
+		//		$rootScope.authenticated = false;
 			//	$state.go('logout');
 			});
-
+			
 			gapi.analytics.auth.on('error', function() {
 			//	$rootScope.authenticated = false;
 			//	$state.go('logout');
 			});
 		});
-	
 
+		
+		
 		$rootScope.$on('$stateChangeStart', function (event, toState) {
-			var requireLogin = toState.data.requireLogin;
+			//var requireLogin = toState.data.requireLogin;
 
-			if (requireLogin && !($rootScope.authenticated)) {
-		//		event.preventDefault();
-			//	$state.go('logout');
-			}
+		//	if (requireLogin && !($rootScope.authenticated)) {
+
+		//	}
 		});
-
-
-
-
-		$rootScope.$state = $state;
-		$rootScope.$stateParams = $stateParams;
-		$rootScope.logo = null;
-		$rootScope.ss = null;
-		
-		$rootScope.companies = [];
-
-		$rootScope.loc = $location.url();
-		console.log($rootScope.loc);
-		
 
 	}])
 
@@ -128,6 +104,18 @@ angular.module('app', ['ngMaterial', 'ui.router', 'app.controllers', 'app.direct
 
 
 	})
+	
+   .constant('monthList', ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'])
+
+   .constant('APIKEY', 'AIzaSyD2cHJ-K8BStHf6axFi13_cvhX3BzqValE')
+
+   .constant('CLIENTID', '598123322729-91cbmds83g0uh0u9elf7ji3cqbtljbjm.apps.googleusercontent.com')
+
+   .constant('SCOPES', ['https://www.googleapis.com/auth/analytics',
+						'https://www.googleapis.com/auth/webmasters',
+						'https://www.googleapis.com/auth/analytics.edit'])
+
+   .constant('SCOPE', "https://www.googleapis.com/auth/analytics https://www.googleapis.com/auth/webmasters https://www.googleapis.com/auth/analytics.edit")
 
 	.config(function($mdThemingProvider) {
 		$mdThemingProvider.definePalette('myPrimary', {
@@ -232,191 +220,204 @@ angular.module('app', ['ngMaterial', 'ui.router', 'app.controllers', 'app.direct
 
 
 
-	.config(['$stateProvider', '$urlRouterProvider', '$logProvider', function($stateProvider, $urlRouterProvider) {
-		$stateProvider
+.config(['$stateProvider', '$urlRouterProvider', '$logProvider', function($stateProvider, $urlRouterProvider) {
+	$stateProvider
 
-			.state('app', {
-				url: '/app',
-				templateUrl: 'portal/templates/menu.html',
-				controller: 'AppCtrl',
-				data: {
-					requireLogin: false
+		.state('app', {
+			url: '/app',
+			templateUrl: 'portal/templates/menu.html',
+			controller: 'AppCtrl',
+			data: {
+				requireLogin: false
+			}
+		})
+		.state('logout', {
+			url: '/logout',
+			views: {
+				'menu': {
+					templateUrl: 'portal/templates/logout.html',
+					controller: 'logoutCtrl'
 				}
-			})
-			.state('logout', {
-				url: '/logout',
-				views: {
-					'menu': {
-						templateUrl: 'portal/templates/logout.html',
-						controller: 'logoutCtrl'
-					}
-				},
-				data: {
-					requireLogin: false
-				}
-			})
+			},
+			data: {
+				requireLogin: false
+			}
+		})
 
-			.state('login', {
-				url: '/login',
-				views: {
-					'menu': {
-						templateUrl: 'portal/templates/login.html',
-						controller: 'loginCtrl'
-					}
-				},
-				data: {
-					requireLogin: true
+		.state('login', {
+			url: '/login',
+			views: {
+				'menu': {
+					templateUrl: 'portal/templates/login.html',
+					controller: 'loginCtrl'
 				}
-			})
+			},
+			data: {
+				requireLogin: true
+			}
+		})
 
-			.state('clients', {
-				url: '/clients',
-				views: {
-					'menu': {
-						templateUrl: 'portal/templates/clients.html',
-						controller: 'clientCtrl'
-					}
-				},
-				data: {
-					requireLogin: true
-				},
-				params: {
-					id: 1
+		.state('clients', {
+			url: '/clients',
+			views: {
+				'menu': {
+					templateUrl: 'portal/templates/clients.html',
+					controller: 'clientCtrl'
 				}
-			})
-			.state('home', {
-				url: '/home',
-				views: {
-					'menu': {
-						templateUrl: 'portal/templates/home.html',
-						controller: 'homeCtrl'
-					}
-				},
-				data: {
-					requireLogin: true
+			},
+			data: {
+				requireLogin: true
+			},
+			params: {
+				id: 1
+			}
+		})
+		.state('home', {
+			url: '/home',
+			views: {
+				'menu': {
+					templateUrl: 'portal/templates/home.html',
+					controller: 'homeCtrl'
 				}
-			})
-			.state('management', {
-				url: '/management',
-				views: {
-					'menu': {
-						templateUrl: 'portal/templates/management.html',
-						controller: 'mgmtCtrl'
-					}
-				},
-				data: {
-					requireLogin: true
+			},
+			data: {
+				requireLogin: true
+			}
+		})
+		.state('management', {
+			url: '/management',
+			views: {
+				'menu': {
+					templateUrl: 'portal/templates/management.html',
+					controller: 'mgmtCtrl'
 				}
-			})
-			.state('uploadReports', {
-				url: '/uploadReports',
-				views: {
-					'menu': {
-						templateUrl: 'portal/templates/uploadReports.html',
-						controller: 'uploadCtrl'
-					}
-				},
-				data: {
-					requireLogin: true
+			},
+			data: {
+				requireLogin: true
+			}
+		})
+		.state('uploadReports', {
+			url: '/uploadReports',
+			views: {
+				'menu': {
+					templateUrl: 'portal/templates/uploadReports.html',
+					controller: 'uploadCtrl'
 				}
-			})
-			.state('pageSpeed', {
-				url: '/pageSpeed',
-				views: {
-					'menu': {
-						templateUrl: 'portal/templates/pageSpeed.html',
-						controller: 'speedCtrl'
-					}
-				},
-				data: {
-					requireLogin: true
+			},
+			data: {
+				requireLogin: true
+			}
+		})
+		.state('pageSpeed', {
+			url: '/pageSpeed',
+			views: {
+				'menu': {
+					templateUrl: 'portal/templates/pageSpeed.html',
+					controller: 'speedCtrl'
 				}
-			})
-			.state('signup', {
-				url: '/signup',
-				views: {
-					'menu': {
-						templateUrl: 'portal/templates/signup.html',
-						controller: 'signupCtrl'
-					}
-				},
-				data: {
-					requireLogin: true
+			},
+			data: {
+				requireLogin: true
+			}
+		})
+		.state('signup', {
+			url: '/signup',
+			views: {
+				'menu': {
+					templateUrl: 'portal/templates/signup.html',
+					controller: 'signupCtrl'
 				}
-			})
-			.state('editClient', {
-				url: '/editClient',
-				views: {
-					'menu': {
-						templateUrl: 'portal/templates/editClient.html',
-						controller: 'editClientCtrl'
-					}
-				},
-				data: {
-					requireLogin: true
+			},
+			data: {
+				requireLogin: true
+			}
+		})
+		.state('editClient', {
+			url: '/editClient',
+			views: {
+				'menu': {
+					templateUrl: 'portal/templates/editClient.html',
+					controller: 'editClientCtrl'
 				}
-			})
+			},
+			data: {
+				requireLogin: true
+			}
+		})
 
-			.state('moz', {
-				url: '/moz',
-				views: {
-					'menu': {
-						templateUrl: 'portal/templates/moz.html',
-						controller: 'mozCtrl'
-					}
-				},
-				data: {
-					requireLogin: false
+		.state('moz', {
+			url: '/moz',
+			views: {
+				'menu': {
+					templateUrl: 'portal/templates/moz.html',
+					controller: 'mozCtrl'
 				}
-			})
-			
-			.state('analytics', {
-				url: '/analytics',
-				views: {
-					'menu': {
-						templateUrl: 'portal/templates/analytics.html',
-						controller: 'analyticsCtrl'
-					}
-				},
-				data: {
-					requireLogin: true
-				},
-				resolve: {
-					loadMyService: ['$ocLazyLoad', '$injector', function($ocLazyLoad, $injector) {
-						return $ocLazyLoad.load('https://apis.google.com/js/platform.js').then(function() {
-							//var $serviceTest = $injector.get("gapi");
-						//	$serviceTest.load('analytics');
-						});
-					}]
+			},
+			data: {
+				requireLogin: false
+			}
+		})
+		
+		.state('newreport', {
+			url: '/newreport',
+			views: {
+				'menu': {
+					templateUrl: 'portal/templates/newreport.html',
+					controller: 'newreportCtrl'
 				}
-			})
-			
-			
-			.state('viewReports', {
-				url: '/viewReports',
-				views: {
-					'menu': {
-						templateUrl: 'portal/templates/viewReports.html',
-						controller: 'reportCtrl'
-					}
-				},
-				data: {
-					requireLogin: true
-				},
-				resolve: {
-					deps: ['$ocLazyLoad', function($ocLazyLoad) {
-						return $ocLazyLoad.load([
-							{
-								name: 'zingchart-angularjs',
-								files: [
-									'lib/ZingChart-AngularJS/src/zingchart-angularjs.js',
-									'https://cdn.zingchart.com/zingchart.min.js'
-								]
-							}
-						]);
-					}]
+			},
+			data: {
+				requireLogin: false
+			}
+		})
+
+		.state('analytics', {
+			url: '/analytics',
+			views: {
+				'menu': {
+					templateUrl: 'portal/templates/analytics.html',
+					controller: 'analyticsCtrl'
 				}
-			})
+			},
+			data: {
+				requireLogin: true
+			},
+			resolve: {
+				loadMyService: ['$ocLazyLoad', '$injector', function($ocLazyLoad, $injector) {
+					return $ocLazyLoad.load('https://apis.google.com/js/platform.js').then(function() {
+						//var $serviceTest = $injector.get("gapi");
+					//	$serviceTest.load('analytics');
+					});
+				}]
+			}
+		})
+
+
+		.state('viewReports', {
+			url: '/viewReports',
+			views: {
+				'menu': {
+					templateUrl: 'portal/templates/viewReports.html',
+					controller: 'reportCtrl'
+				}
+			},
+			data: {
+				requireLogin: true
+			},
+			resolve: {
+				deps: ['$ocLazyLoad', function($ocLazyLoad) {
+					return $ocLazyLoad.load([
+						{
+							name: 'zingchart-angularjs',
+							files: [
+								'lib/ZingChart-AngularJS/src/zingchart-angularjs.js',
+								'https://cdn.zingchart.com/zingchart.min.js'
+							]
+						}
+					]);
+				}]
+			}
+		})
 
 
 		// if none of the above states are matched, use this as the fallback

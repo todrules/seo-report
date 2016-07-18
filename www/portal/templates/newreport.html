@@ -1,0 +1,115 @@
+<md-content style="width: 100%; top: 20px; padding: 10px;" layout="row" class="hide-scroll" flex layout-align="center">
+	<md-content class="hide-scroll md-whiteframe-1dp md-hue-1" flex layout-align="center" style=" width: 100%;  margin-left: 150px; margin-right: 150px;" ng-init="initPage()">
+		<md-toolbar class="md-primary" style="font-size: 20px;">
+			<div class="md-toolbar-tools">
+				<img src="../img/star.png" style="width: 50px; height: 50px; margin-bottom: 3px;"></img>
+				<h1 style="font-size: 1.4em; margin-left: 10px; margin-top: 3px;">Star System of SEO</h1>
+			</div>
+		</md-toolbar>
+		<md-tabs md-dynamic-height md-border-bottom class="md-hue-1 md-whiteframe-1dp">
+			<md-tab class="md-accent md-hue-1" label="1 - Visibility">
+				<section style="padding: 20px; text-align: left;">
+						<div layout="row" layout-align="start top">
+							<div layout="column" layout-align="start top" style="color: #fff; box-shadow: 1px 1px #e0e0e0; background-color: #fff; border-radius: 6px; width: 280px; height: 150px; margin: 20px; margin-left: 50px;">
+								<div layout="row" layout-align="start start" style="width: 100%; height: 100%;">
+									<div layout="column" layout-align="center center" flex="30" style="background-color: #7CC900; border-top-left-radius: 6px; border-bottom-left-radius: 6px; font-size: 1.2em; width: 100%; height: 100%;">
+							
+										<span style="font-size: 2em; color: #fff;" >
+										 <i class="icon ion-arrow-up-a"></i>
+									</span>
+									</div>
+									<div layout="column" flex="70" layout-align="start center" style="padding-top: 10px; margin-bottom: 15px;">
+										<span  style="color: #666; font-size: 1.2em; color: #7CC900;">Visibility</span>
+										<span  style="color: #444; font-size: 4.5em; padding-bottom: 10px; color: #7CC900;" >89</span>
+										<span flex>&nbsp;</span>
+									</div>
+								</div>
+								
+							</div>
+							<div layout="column" layout-align="start top" style="color: #fff; box-shadow: 1px 1px #e0e0e0; background-color: #fff; border-radius: 6px; width: 280px; height: 150px; margin: 20px; margin-left: 50px;">
+								<div layout="row" layout-align="start start" style="width: 100%; height: 100%;">
+									<div layout="column" layout-align="center center" flex="20" style="background-color: #004884; border-top-left-radius: 6px; border-bottom-left-radius: 6px; font-size: 1.2em; width: 100%; height: 100%;">
+									</div>
+									<div layout="column" flex="70" layout-align="start center" style="padding-top: 10px; margin-bottom: 15px;">
+										<span  style="color: #666; font-size: 1.2em; color: #004884;">Top Keywords</span>
+										<span  style="color: #666; font-size: 1em; ">toy robots</span>
+										<span  style="color: #666; font-size: 1em; ">robots Atlanta</span>
+										<span  style="color: #666; font-size: 1em; ">DIY robots</span>
+										<span  style="color: #666; font-size: 1em; ">remote control robots</span>
+										<span  style="color: #666; font-size: 1em; ">killer robots</span>
+										
+										<span flex>&nbsp;</span>
+									</div>
+								</div>
+							
+							</div>
+							<div layout="column" layout-align="start top" style="color: #fff; box-shadow: 1px 1px #e0e0e0; background-color: #fff; border-radius: 6px; width: 280px; height: 150px; margin: 20px; margin-left: 50px;">
+								<div layout="row" layout-align="start start" style="width: 100%; height: 100%;">
+									<div layout="column" layout-align="center center" flex="20" style="background-color: #004884; border-top-left-radius: 6px; border-bottom-left-radius: 6px; font-size: 1.2em; width: 100%; height: 100%;">
+									</div>
+									<div layout="column" flex="70" layout-align="start center" style="padding-top: 10px; margin-bottom: 15px;">
+										<span  style="color: #666; font-size: 1.2em; color: #004884;">Top Landing Pages</span>
+										<span  style="color: #666; font-size: 1em; ">robots.html</span>
+										<span  style="color: #666; font-size: 1em; ">morerobots.html</span>
+										<span  style="color: #666; font-size: 1em; ">diy-robots.html</span>
+										<span  style="color: #666; font-size: 1em; ">remotecontrol.html</span>
+										<span  style="color: #666; font-size: 1em; ">killerrobots.html</span>
+										
+										<span flex>&nbsp;</span>
+									</div>
+								</div>
+							
+							</div>
+						
+						</div>
+						<div layout="row">
+							<div layout="column">
+								<md-toolbar class="md-primary md-hue-1" style="font-size: 20px; height: 50px; width: 450px; margin-left: 50px;">
+									<div class="md-toolbar-tools">
+										<h2 style="font-size: 1.4em; margin-left: 10px; margin-top: 3px;">Monthly Trend</h2>
+									</div>
+								</md-toolbar>
+								<div id="curve_chart" style="width: 500px; height: 300px;"></div>
+							</div>
+							<div layout="column">
+								<md-toolbar class="md-primary md-hue-1" style="font-size: 20px; height: 50px; width: 450px; margin-left: 50px;">
+									<div class="md-toolbar-tools">
+										<h2 style="font-size: 1.4em; margin-left: 10px; margin-top: 3px;">Measured Metrics</h2>
+									</div>
+								</md-toolbar>
+								<div style="width: 450px; height: 300px; margin-left: 50px;" id="table_div"></div>
+								
+							</div>
+							
+						</div>
+
+						<div layout-gt-sm="row" layout-align="end center">
+							
+						</div>
+				</section>
+			</md-tab>
+			<md-tab class="md-accent md-hue-1" label="2 - Efficiency">
+				<section style="padding: 40px; text-align: left;">
+					
+				</section>
+			</md-tab>
+			<md-tab class="md-accent md-hue-1" label="3 - Usability">
+				<section style="padding: 40px; text-align: left;">
+					
+				</section>
+			</md-tab>
+			<md-tab class="md-accent md-hue-1" label="4 - Content">
+				<section style="padding: 40px; text-align: left;">
+								
+				
+				</section>
+			</md-tab>
+			<md-tab class="md-accent md-hue-1" label="5 - Conversions">
+				<section style="padding: 40px; text-align: left;">
+				
+				
+				</section>
+			</md-tab>
+		</md-tabs>
+	</md-content>
+</md-content>

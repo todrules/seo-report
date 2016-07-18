@@ -1,5 +1,5 @@
 <md-content style="width: 100%; top: 20px; padding: 10px;" layout="row" class="hide-scroll" flex layout-align="center">
-	<md-content class="hide-scroll md-whiteframe-1dp md-hue-1" flex layout-align="center" style=" width: 100%;  margin-left: 150px; margin-right: 150px;" >
+	<md-content class="hide-scroll md-whiteframe-1dp md-hue-1" flex layout-align="center" style=" width: 100%;  margin-left: 150px; margin-right: 150px;" ng-init="initPage()">
 	<md-toolbar class="md-primary" style="font-size: 20px;">
 		<div class="md-toolbar-tools">
 			<h2><span>Upload Reports & Data</span></h2>
@@ -100,11 +100,27 @@
 				</form>
 			</section>
 		</md-tab>
-		<md-tab class="md-accent md-hue-1" label="Monthly Report" ng-init="initPage()">
+		<md-tab class="md-accent md-hue-1" label="Monthly Report">
 			<section style="padding: 40px; text-align: left;">
 				<div layout="row">
+					<div layout="column" layout-align="start stretch" style="height: 100%;">
+						<div id="view-selector-container2" style="width: 500px; height: 240px;"></div>
+						<md-card md-theme="{{ showDarkTheme ? 'dark-blue' : 'default' }}" md-theme-watch>
+							<md-card-title>
+								<md-card-title-text>
+									<span class="md-headline">{{ selectedCompany.name }}</span>
+									<span class="md-subhead">{{ selectedCompany.url }}</span>
+									<span class="md-subhead">{{ selectedCompany.webmasterAcct }}</span>
+								</md-card-title-text>
+							
+							</md-card-title>
+							<md-card-actions layout="row" layout-align="end center">
+								<md-button>Action 1</md-button>
+								<md-button>Action 2</md-button>
+							</md-card-actions>
+						</md-card>
+					</div>
 					<div layout="column">
-						<div id="view-selector-container2"></div>
 						<md-list flex>
 							<md-list-item class="md-3-line" ng-repeat="companySite in companySites" ng-click="null">
 								<div class="md-list-item-text" layout="column">
@@ -117,42 +133,53 @@
 						</md-list>
 					</div>
 					<div layout="column">
+						
 						<md-card md-theme="{{ showDarkTheme ? 'dark-blue' : 'default' }}" md-theme-watch>
 							<md-card-title>
 								<md-card-title-text>
-									<span class="md-headline">{{ selectedCompany.name }}</span>
-									<span class="md-subhead">{{ selectedCompany.url }}</span>
-									<span class="md-subhead">{{ selectedCompany.webmasterAcct }}</span>
+
+									<span class="md-subhead">Clicks: {{ stats.clicks }}</span>
+									<span class="md-subhead">Impressions: {{ stats.impressions }}</span>
+									<span class="md-subhead">CTR: {{ stats.ctr }}</span>
+									<span class="md-subhead">Position: {{ stats.position }}</span>
+								
 								</md-card-title-text>
 
 							</md-card-title>
 							<md-card-actions layout="row" layout-align="end center">
-								<md-button>Action 1</md-button>
-								<md-button>Action 2</md-button>
+								<md-button class="md-button md-warn" ng-click="webmasterData(selectedCompany)" ng-disabled="reportForm.$invalid" ng-model="keywords">
+									Webmaster Data
+								</md-button>
 							</md-card-actions>
 						</md-card>
+						</div>
+						<div layout="column">
 						<md-card md-theme="{{ showDarkTheme ? 'dark-blue' : 'default' }}" md-theme-watch>
 							<md-card-title>
 								<md-card-title-text>
-
-									<span class="md-subhead">Clicks: {{ clicks }}</span>
-									<span class="md-subhead">Impressions: {{ impressions }}</span>
-									<span class="md-subhead">CTR: {{ ctr }}</span>
-									<span class="md-subhead">Position: {{ position }}</span>
+									
+									<span class="md-subhead">sessions: {{ stats.sessions }}</span>
+									<span class="md-subhead">bounces: {{ stats.bounces }}</span>
+									<span class="md-subhead">duration: {{ duration }}</span>
+									<span class="md-subhead">pageviews: {{ stats.pageviews }}</span>
+									<span class="md-subhead">ppv: {{ stats.ppv }}</span>
+									<span class="md-subhead">uniqueviews: {{ stats.uniqueviews }}</span>
+									<span class="md-subhead">pageload: {{ stats.pageload }}</span>
+									<span class="md-subhead">bouncerate: {{ stats.bouncerate }}</span>
 								</md-card-title-text>
-
+							
 							</md-card-title>
 							<md-card-actions layout="row" layout-align="end center">
-								<md-button>Action 1</md-button>
-								<md-button>Action 2</md-button>
+								<md-button class="md-button md-warn" ng-click="analyticsData(selectedAcct)" ng-disabled="reportForm.$invalid" ng-model="keywords">
+									Analytics Data
+								</md-button>
 							</md-card-actions>
 						</md-card>
 					</div>
 				</div>
-					<div layout-gt-sm="row" layout-align="end center">
-						<div class="md-button md-raised md-warn" ng-click="runReport(selectedCompany, selectedAcct, companySite.id)" ng-disabled="reportForm.$invalid" ng-model="keywords">
-							Run Report
-						</div>
+					<div layout-gt-sm="row" layout-align="start center">
+						<div id="grid1" ui-grid="gridOptions" ui-grid-edit style="width: 600px; height: 400px;"></div>
+						
 
 					</div>
 

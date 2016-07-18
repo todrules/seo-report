@@ -224,3 +224,33 @@ body {
 	background-color: #fff;
 	margin: 20px;
 }
+
+.tblHeader {
+	background-color: #e0e0e0;
+	font-size: 1em;
+	color: #444;
+	height: 40px;
+}
+.oddTableRow {
+	background-color: #fff;
+	font-size: 1em;
+	color: #444;
+	height: 40px;
+
+}
+.evenTableRow {
+	background-color: #f2f2f2;
+	font-size: 1em;
+	color: #444;
+	height: 40px;
+}
+
+.tableCell {
+	font-size: 2em;
+	color: #228CDB;
+}
+.headerCell {
+	font-size: 2em;
+	color: #666;
+
+}

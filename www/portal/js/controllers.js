@@ -1,6 +1,6 @@
 angular.module('app.controllers', [])
 
-.controller('AppCtrl', ['$scope', '$mdSidenav', '$timeout', '$rootScope', '$state', '$location', 'menu', function($scope, $mdSidenav, $timeout, $rootScope, $state, $location, menu) {
+.controller('AppCtrl', ['$scope', '$mdSidenav', '$timeout', '$rootScope', '$state', '$location', 'menu', 'AuthService', function($scope, $mdSidenav, $timeout, $rootScope, $state, $location, menu, AuthService) {
 
 	$scope.user = $rootScope.user;
 	
@@ -8,10 +8,7 @@ angular.module('app.controllers', [])
 	$scope = $rootScope;
 	
 	$scope.logout = function() {
-		gapi.analytics.auth.signOut();
-		$rootScope.authenticated = false;
-		$rootScope.user = null;
-		$state.go('logout');
+		AuthService.logout();
 	}
 
 	$scope.close = function() {
@@ -48,13 +45,16 @@ angular.module('app.controllers', [])
 
 }])
 
-.controller('mgmtCtrl', ['$scope', '$timeout', 'Company', 'Keyword', 'Competitor', '$rootScope', '$state', function($scope, $timeout, Company, Keyword, Competitor, $rootScope, $state) {
-
+.controller('mgmtCtrl', ['$scope', '$timeout', 'Company', 'Keyword', 'Competitor', '$rootScope', '$state', 'AuthService', 'ErrorService', function($scope, $timeout, Company, Keyword, Competitor, $rootScope, $state, AuthService, ErrorService) {
+	
+	var keywordlist = {
+		name: '',
+		companyId: null
+	};
+	
+	
 	$scope.logout = function() {
-		gapi.analytics.auth.signOut();
-		$rootScope.authenticated = false;
-		$rootScope.user = null;
-		$state.go('logout');
+		AuthService.logout();
 	}
 
 	$scope.myDate = new Date();
@@ -71,42 +71,41 @@ angular.module('app.controllers', [])
 
 	$scope.keyList = [];
 	$scope.keywords = function (list) {
-		$scope.keyList = [];
+		var keyList = [];
+		var keywordlist = {
+			name: '',
+			companyId: null
+		};
 		var list = list;
-	//	console.log(list);
 		var lines;
+		var data;
 		lines = list.match(/[^\r\n]+/g);
-	//	console.log(lines);
 		for(var i = 0; i < lines.length; i++) {
-			var keywordlist = {
-				name: '',
+			keywordlist = {
+				name: lines[i],
 				companyId: $scope.keywords.companyId
 			};
-			keywordlist.name = lines[i];
-			$scope.keyList.push(keywordlist);
+			keyList.push(keywordlist);
 		}
-		for(var k = 0; k < $scope.keyList.length; k++) {
-
-			data = $scope.keyList[k];
+		for(var k = 0; k < keyList.length; k++) {
+			data = keyList[k];
 			Keyword.create(data).$promise.then(function(res) {
 				console.log(res);
+			}, function(err) {
+				return ErrorService.handleError(err);
 			});
 		}
-
-		//console.log($scope.keyList);
-		//$scope.$apply();
 	}
 
 	$scope.newComp = {};
 
 	$scope.addCompetitor = function(complexForm) {
-
 		var data = $scope.newComp;
-
-		console.log(data);
 		Competitor.create(data).$promise.then(function(res) {
 			console.log(res);
 			
+		}, function(err) {
+			return ErrorService.handleError(err);
 		});
 	};
 
@@ -275,90 +274,195 @@ angular.module('app.controllers', [])
 	}
 })
 
-	.controller('uploadCtrl', ['$scope', '$timeout', 'Company', 'CompanyMetric', 'CompetitorMetric', 'KeywordMetric', 'GApi', function($scope, $timeout, Company, CompanyMetric, CompetitorMetric, KeywordMetric, GApi) {
-
-		$scope.initPage = function() {
-
+	.controller('uploadCtrl', ['$scope', '$timeout', 'Company', 'CompanyMetric', 'CompetitorMetric', 'KeywordMetric', 'StatService', '$mdDialog', function($scope, $timeout, Company, CompanyMetric, CompetitorMetric, KeywordMetric, StatService, $mdDialog ) {
+		
+		$scope.msg = {};
+		$scope.gridOptions = {};
+		$scope.gridOptions.columnDefs = [];
+		$scope.gridOptions.data = [];
+		
+		var chartObj = StatService.getChartObj();
+		var d = new Date();
+		var curMonth = d.getMonth();
+		
+		var getMetrics = function(companies) {
+			var companies = companies;
+			for(var i = 0; i < companies.length; i++) {
+				Company.metrics({id: companies[i].id}).$promise.then(function(res) {
+					var reply = res;
+					populateData(reply);
+				})
+			}
+			
 		}
 
-		$scope.getDates = function() {
-			var today = new Date();
-			var lastMonth = today.getMonth() - 1;
-			var year = today.getFullYear();
-			if(lastMonth == -1) {
-				lastMonth = 12;
-				year = year - 1;
-			}
-			var lastDay = new Date(today.getFullYear(), today.getMonth(), 0).getDate();
-
-			var filler = '-';
-			var dayfiller = '-';
-			var startDate = '';
-			if((lastMonth + 1) < 10) {
-				filler = '-0';
-			}
-			startDate = year + filler + (lastMonth + 1) + '-' + '01';
-			var endDate = year + filler + (lastMonth + 1) + '-' + lastDay;
-
-			return [startDate, endDate];
-		}
-
-		$scope.runReport = function(company, account, gaAccount) {
-			var gaAccount = gaAccount;
-			var company = company;
-			var account = account;
-			var dates = [];
-			dates = $scope.getDates();
-			var params = {
-				startDate: dates[0],
-				endDate: dates[1],
-				dimensions: ["date"]
-			}
-			var url = company.url;
-			GApi.executeAuth('webmasters', 'searchanalytics.query', {
-				siteUrl: url,
-				resource: params}).then(function(resp) {
-				console.log(resp);
-				var reply = resp.rows;
-				$scope.gwtResults = reply;
-				var clicks = null;
-				var impressions = null;
-				var ctr = null;
-				var position = null;
-				for(var i = 0; i < reply.length; i++) {
-					clicks = reply[i].clicks + clicks;
-					impressions = reply[i].impressions + impressions;
-					ctr = reply[i].ctr + ctr;
-					position = reply[i].position + position;
+		var populateData = function(data) {
+			var data = data;
+			var compMonth = null;
+			var obj = {};
+			for(var i = 0; i < data.length; i++) {
+				metricMonth = new Date(data[i].month);
+				compMonth = metricMonth.getMonth();
+				if(compMonth === (curMonth - 1)) {
+					obj = data[i];
+					populateTable(obj);
 				}
-				var avgPosition = position / reply.length;
-				var avgCTR = ctr / reply.length;
-				$scope.clicks = clicks;
-				$scope.impressions = impressions;
-				$scope.ctr = avgCTR;
-				$scope.position = avgPosition;
-
-			}, function(err) {
-				console.log(err);
-			});
-			var dates = [];
-			dates = $scope.getDates();
-			gapi.client.analytics.data.ga.get({
-				ids: 'ga:105337401',
-				metrics: ['ga:sessions','ga:bounces', 'ga:bounceRate', 'ga:avgSessionDuration', 'ga:pageviews', 'ga:pageviewsPerSession', 'ga:uniquePageviews', 'ga:avgPageLoadTime'],
-				dimensions: [],
-				'start-date': dates[0],
-				'end-date': dates[1],
-				'max-results': 10,
-				sort: '-ga:sessions',
-				segment: 'gaid::-8',
-				output: 'dataTable'
-			}).execute(processResponse);
-
-			var processResponse = function(res) {
-				 var reply = res;
+				var obj = data[i];
+				
 			}
+			
+		}
+		
+		var populateTable = function(data) {
+			var data = data;
+			var obj = {};
+			var keys = Object.keys(data);
+			for(var i = 0; i < data.length; i++) {
+				
+				for(var j = 0; j < data[i].length; j++) {
+				//	$scope.gridOptions.push(data[j]);
+					if(keys[j] === chartObj[i][0].fieldName) {
+						
+					}
+					var obj1 = data[j];
+					
+				}
+				obj = CompanyMetric[i];
+				
+			}
+			
+		}
+		
+		$scope.initPage = function() {
+			var headers = {
+				name: '',
+				displayName: '',
+				type: 'number'
+			};
+			var stats = {};
+			var chartData = {};
+			var thisid = { name: 'id', enableCellEdit: false, width: '10%' };
+			var comp = { name: 'company', displayName: 'Company'};
+			$scope.showConfirm = function(ev) {
+				// Appending dialog to document.body to cover sidenav in docs app
+				var confirm = $mdDialog.confirm()
+									   .title('Would you like to delete your debt?')
+									   .textContent('All of the banks have agreed to forgive you your debts.')
+									   .ariaLabel('Lucky day')
+									   .targetEvent(ev)
+									   .ok('Please do it!')
+									   .cancel('Sounds like a scam');
+				$mdDialog.show(confirm).then(function() {
+					$scope.status = 'You decided to get rid of your debt.';
+				}, function() {
+					$scope.status = 'You decided to keep your debt.';
+				});
+			};
+			//$scope.showConfirm();
+			//$scope.gridOptions.columnDefs.push(thisid);
+		//	$scope.gridOptions.columnDefs.push(comp);
+			
+			CompanyMetric.find(null, {filter: {where: {month: '2016-05-01TT00:00:00.000Z'}}}).$promise.then(function(resp) {
+				var reply = resp;
+				$scope.gridOptions.data = reply;
+				
+			}, function(err) {
+				return err;
+			});
+			
+			stats = StatService.getDataObj();
+			chartData =  StatService.getChartObj();
+			console.log(StatService.getChartObj());
+			console.log(chartData);
+			for(var i = 0; i < chartData.length; i++) {
+				headers.name = chartData[i][0].fieldName;
+				console.log(headers.name);
+				headers.displayName = chartData[i][0].displayName;
+			//	$scope.gridOptions.columnDefs.push(headers);
+			}
+			Company.find().$promise.then(function(res) {
+				$scope.companies = res;
+				$scope.gridOptions
+				getMetrics($scope.companies);
+				
+			});
+			
+		};
+			
+		
+		$scope.gridOptions.onRegisterApi = function(gridApi){
+			//set gridApi on scope
+			$scope.gridApi = gridApi;
+		//	gridApi.edit.on.afterCellEdit($scope,function(rowEntity, colDef, newValue, oldValue){
+		//		$scope.msg.lastCellEdited = 'edited row id:' + rowEntity.id + ' Column:' + colDef.name + ' newValue:' + newValue + ' oldValue:' + oldValue ;
+		//		$scope.$apply();
+		//	});
+		};
 
+	$scope.webmasterData = function(company) {
+			var company = company;
+			var url = company.url;
+			var clicks = null;
+			var impressions = null;
+			var ctr = null;
+			var position = null;
+			var avgPosition = null;
+			var avgCTR = null;
+			StatService.getWebmasterData(url)
+			
+				.then(function(resp) {
+					var reply = resp.rows;
+					console.log(resp);
+					$scope.gwtResults = reply;
+					
+					for(var i = 0; i < reply.length; i++) {
+						clicks = reply[i].clicks + clicks;
+						impressions = reply[i].impressions + impressions;
+						ctr = reply[i].ctr + ctr;
+						position = reply[i].position + position;
+					}
+					avgPosition = position / reply.length;
+					avgCTR = ctr / reply.length;
+					$scope.stats.clicks = clicks;
+					$scope.stats.impressions = impressions;
+					$scope.stats.ctr = avgCTR;
+					$scope.stats.position = avgPosition;
+	
+				}, function(err) {
+					console.log(err);
+				});
+		}
+		
+		
+		$scope.analyticsData = function(account) {
+			console.log(account);
+			var profileId = account;
+			var clicks = null;
+			var impressions = null;
+			var ctr = null;
+			var position = null;
+			var avgPosition = null;
+			var avgCTR = null;
+			StatService.getAnalyticsData(profileId)
+			
+				.then(function(resp) {
+				   var handler = resp;
+				   console.log(resp);
+					$scope.stats = {
+						
+						sessions: Number(handler.totalsForAllResults['ga:sessions']),
+						bounces: Number(handler.totalsForAllResults['ga:bounces']),
+						bouncerate: Number(handler.totalsForAllResults['ga:bounceRate']),
+						duration: Number(handler.totalsForAllResults['ga:avgSessionDuration']),
+						pageviews: Number(handler.totalsForAllResults['ga:pageviews']),
+						ppv: Number(handler.totalsForAllResults['ga:pageviewsPerSession']),
+						uniqueviews: Number(handler.totalsForAllResults['ga:uniquePageviews']),
+						pageload: Number(handler.totalsForAllResults['ga:avgPageLoadTime'])
+					}
+					return $scope.stats;
+				}, function(err) {
+				   console.log(err);
+				});
 		}
 
 		
@@ -367,52 +471,46 @@ angular.module('app.controllers', [])
 		$scope.fileparsed = false;
 		$scope.uploadErr;
 
-		Company.find().$promise.then(function(res) {
-			$scope.companies = res;
-		});
+		
 		$scope.mydata = {};
 
 		$timeout(function() {
-			$scope.createView();
-		},2000);
-
-		$scope.createView = function() {
-
-			$scope.view2 = new gapi.analytics.ext.ViewSelector2({
-				container: 'view-selector-container',
-			}).execute();
-
-			$scope.view2.on('viewChange', function(data) {
-
-			});
+			//$scope.createView();
 			$scope.reportView = new gapi.analytics.ext.ViewSelector2({
 				container: 'view-selector-container2',
-			}).execute();
-			$scope.reportView.on('viewChange', function(data) {
-				console.log(data);
-				var reply = data;
-				$scope.companySites = [];
-				for(var i = 0; i < reply.account.webProperties.length; i++) {
-					$scope.companySites.push(reply.account.webProperties[i]);
-				}
-					for(var j = 0; j < $scope.companies.length; j++) {
-						for(k = 0; k < $scope.companySites.length; k++) {
-							var url = 'http://' + $scope.companies[j].url;
-							console.log(url);
-							var siteUrl = $scope.companySites[k].websiteUrl.replace(/\/$/, "");
-							if(siteUrl === url) {
-									$scope.selectedAcct = $scope.companySites[k];
-									$scope.selectedCompany = $scope.companies[j];
-									console.log($scope.selectedCompany);
-									return;
+			}).execute()
+			.on('viewChange', function(data) {
+				$scope.changeView(data);
+			});
+		},2000);
 
-							}
-						}
+		$scope.changeView = function(data) {
+			var reply = data;
+			console.log(reply);
+			var properties = [];
+			var url = '';
+			var siteUrl = '';
+			$scope.selectedAcct = null;
+			for(var i = 0; i < reply.account.webProperties.length; i++) {
+				properties.push(reply.account.webProperties[i]);
+			}
+			for(var j = 0; j < $scope.companies.length; j++) {
+				for(k = 0; k < properties.length; k++) {
+					url = 'http://' + $scope.companies[j].url;
+					siteUrl = properties[k].websiteUrl.replace(/\/$/, "");
+					if(siteUrl === url) {
+							$scope.selectedAcct = reply.ids;
+							$scope.selectedCompany = $scope.companies[j];
+							console.log($scope.selectedAcct);
+							return;
 
 					}
-					
+				}
 
-			});
+			}
+			if($scope.selectedAcct == null) {
+				return error;
+			}
 		}
 
 		$scope.uploadNewKeys = function(keywords, id) {
@@ -521,22 +619,22 @@ angular.module('app.controllers', [])
 
 					var lines, data, headers;
 					lines = $scope.result.match(/[^\r\n]+/g);
-					for(var m = 0; m < lines.length - 13; m++) {
-						l = lines[m + 13];
+					for(var m = 0; m < lines.length - 12; m++) {
+						l = lines[m + 12];
 						data = l.split(',');
 						//data[j] == 'n/a' ? null : data[j];
 						var obj = {
 							keyword: data[0],
-							minVolume: data[1],
-							maxVolume: data[2],
-							difficulty: data[3],
-							opportunity: data[4],
-							potential: data[6],
-							month: data[7],
+							minVolume: data[2],
+							maxVolume: data[3],
+							difficulty: data[4],
+							opportunity: data[5],
+							potential: data[7],
+							month: data[8],
 
 						};
 						$scope.keyReport.push(obj);
-						if(m == lines.length - 14) {
+						if(m == lines.length - 13) {
 							$timeout(function() {
 								$scope.fileparsed = true;
 							},1000);
@@ -585,7 +683,7 @@ angular.module('app.controllers', [])
 				}
 			}
 			for(var k = 0; k < $scope.compReport.length; k++) {
-				if(companyUrl == $scope.compReport[k].competitor) {
+				if(companyUrl === $scope.compReport[k].competitor) {
 					console.log(companyUrl);
 					var dd = Date.parse($scope.compReport[k].month);
 					var parsed = new Date(dd);
@@ -654,13 +752,11 @@ angular.module('app.controllers', [])
 			var companyId = myForm.company.value;
 			companyId = Number($scope.mydata);
 			var keywords = [];
-			Company.keywords({id: companyId}).$promise.then(function(resp) {
+			Company.keywords({id: companyId, filter: {include: 'keywordMetrics'}}).$promise.then(function(resp) {
 				keywords = resp;
 				for(var i = 0; i < report.length; i++) {
-					var d = Date.parse(report[i].month);
-					var parsed = new Date(d);
 					now = new Date();
-					timestamp = new Date(now.getFullYear(), 6, 1, 0, 0, 0, 0);
+					timestamp = new Date(now.getFullYear(), now.getMonth(), 1, 0, 0, 0, 0);
 					var myObj = {
 						month: timestamp,
 						minVolume: Number(report[i].minVolume),
@@ -671,13 +767,18 @@ angular.module('app.controllers', [])
 						companyId: companyId
 
 					};
+					var id = null;
 					for(var n = 0; n < keywords.length; n++) {
-						if(report[i].keyword == keywords[n].name) {
+						if(report[i].keyword == keywords[n].name && keywords[n].keywordMetrics.length > 0) {
 							myObj.keywordId = keywords[n].id;
+							id = keywords[n].keywordMetrics[0].id;
 							$scope.keyData.push(myObj);
-
-							KeywordMetric.create($scope.keyData[i]).$promise.then(function(res) {
-								if(!res.error) {
+							
+							KeywordMetric.prototype$updateAttributes({id: id}, myObj).$promise.then(function(res) {
+								
+							}, function(err) {
+								if(err) {
+									return err;
 									//console.log('success');
 								}
 							});
@@ -746,10 +847,7 @@ angular.module('app.controllers', [])
 		}, function(err) {
 			return err;
 		})
-
-
-
-	}
+	};
 
 	$scope.gridOptions = DashConfig.getKeyGridConfig();
 	$scope.compOptions = DashConfig.getCompGridConfig();
@@ -799,11 +897,12 @@ angular.module('app.controllers', [])
 	
 	$scope.drawChart = function() {
 		var myData = [];
+		console.log($scope.domainAuthority);
 		myData.push(['Competitor', 'Domain Authority', { role: 'style' }]);
 		for(var i = 0; i < $scope.domainAuthority.length; i++) {
 			myData.push($scope.domainAuthority[i]);
 		}
-
+		console.log(myData);
 		var data = google.visualization.arrayToDataTable(myData);
 
 		var options = {
@@ -1139,7 +1238,6 @@ angular.module('app.controllers', [])
 		$scope.totalExternalLinks = [];
 		$scope.compName = [];
 
-
 		var sortedHandler = handler;
 		sortedHandler.metrics.sort(function(a,b) {
 			var dateA = new Date(a.month), dateB = new Date(b.month);
@@ -1151,12 +1249,19 @@ angular.module('app.controllers', [])
 		var thismonth = now.getMonth();
 		var lastmonth = thismonth - 1;
 		var thisyear = now.getFullYear();
+		var month = null;
+		var year = null;
+		var d;
+		var t;
 		for(var m = 0; m < handler.metrics.length; m++) {
-			var d = Date.parse(handler.metrics[m].month);
-			var t = new Date(d);
-			var month = t.getMonth();
-			var year = t.getFullYear();
-			if(lastmonth == month && thisyear == year) {
+			d = Date.parse(handler.metrics[m].month);
+			t = new Date(d);
+			month = t.getMonth() + 1;
+			year = t.getFullYear();
+			console.log('lastmonth ' + lastmonth);
+			console.log('month ' + handler.metrics[m].month);
+			console.log('month ' + month);
+			if(lastmonth === month && thisyear === year) {
 				var compInfo = [handler.url, handler.metrics[m].domainAuthority, "#228CDB"];
 				var compRank = [handler.url, handler.metrics[m].mozRank, "#228CDB"];
 				var compTrust = [handler.url, handler.metrics[m].mozTrust, "#228CDB"];
@@ -1188,11 +1293,26 @@ angular.module('app.controllers', [])
 				$scope.lastBounceRate = Number(handler.metrics[m].bounceRate);
 			}
 		}
-		$scope.domainAuthority.push(compInfo);
-		$scope.mozRank.push(compRank);
-		$scope.mozTrust.push(compTrust);
-		$scope.totalExternalLinks.push(compLinks);
-
+		if(typeof compInfo === 'undefined') {
+			console.log('undefined');
+		} else {
+			$scope.domainAuthority.push(compInfo);
+		}
+		if(typeof compInfo === 'undefined') {
+			console.log('undefined');
+		} else {
+			$scope.mozRank.push(compRank);
+		}
+		if(typeof compInfo === 'undefined') {
+			console.log('undefined');
+		} else {
+			$scope.mozTrust.push(compTrust);
+		}
+		if(typeof compInfo === 'undefined') {
+			console.log('undefined');
+		} else {
+			$scope.totalExternalLinks.push(compLinks);
+		}
 
 		var styles = ["#7CC900", "#401A7F", "#004884", "#65A300", "#003A6A", "#228CDB", "#1D0B39", "#999"];
 		for(var p = 0; p < handler.competitors.length; p++) {
@@ -1232,9 +1352,9 @@ angular.module('app.controllers', [])
 		for(var ii = 0; ii < handler.metrics.length; ii++) {
 			var d = Date.parse(handler.metrics[ii].month);
 			var t = new Date(d);
-			var month = t.getMonth();
-			var year = t.getFullYear();
-			if(lastmonth == month && thisyear == year) {
+			var mymonth = t.getMonth() + 1;
+			var myyear = t.getFullYear();
+			if(lastmonth === mymonth && thisyear === myyear) {
 				var compObj = {
 					competitor: handler.url,
 					domainAuthority: handler.metrics[ii].domainAuthority,
@@ -1492,37 +1612,118 @@ angular.module('app.controllers', [])
 	
 })
 
-	.controller('homeCtrl', function($scope, Company) {
+.controller('homeCtrl', function($scope, Company) {
 
-		var API_KEY = 'AIzaSyD2cHJ-K8BStHf6axFi13_cvhX3BzqValE';
-		var CLIENT_ID = '598123322729-91cbmds83g0uh0u9elf7ji3cqbtljbjm.apps.googleusercontent.com';
-		var SCOPES = 'https://www.googleapis.com/auth/analytics https://www.googleapis.com/auth/webmasters' +
-			' https://www.googleapis.com/auth/analytics.edit';
-
-
-		Company.find().$promise.then(function(res) {
-			var handler = res;
-			$scope.companies = handler;
-		})
-
-		$scope.initPage = function() {
+	var API_KEY = 'AIzaSyD2cHJ-K8BStHf6axFi13_cvhX3BzqValE';
+	var CLIENT_ID = '598123322729-91cbmds83g0uh0u9elf7ji3cqbtljbjm.apps.googleusercontent.com';
+	var SCOPES = 'https://www.googleapis.com/auth/analytics https://www.googleapis.com/auth/webmasters' +
+		' https://www.googleapis.com/auth/analytics.edit';
 
 
-		}
-
-
+	Company.find().$promise.then(function(res) {
+		var handler = res;
+		$scope.companies = handler;
 	})
 
-	.controller('logoutCtrl', function($scope, $timeout) {
+	$scope.initPage = function() {
+
+	}
 
 
+})
 
-		$scope.initPage = function() {
+.controller('logoutCtrl', function($scope, $timeout) {
 
-		}
+	$scope.initPage = function() {
+
+	}
 
 
-	})
+})
+	
+.controller('newreportCtrl', function($scope, $timeout) {
+
+	$scope.initPage = function() {
+		$timeout(function() {
+			drawChart();
+			drawTable();
+		},1000);
+		
+	};
+	
+	function drawChart() {
+		var data = google.visualization.arrayToDataTable([
+			['Month', 'Visibility'],
+			['March',  78],
+			['April',  82],
+			['May',  83],
+			['June',  89]
+		]);
+		
+		var options = {
+			curveType: 'function',
+			legend: 'none',
+			colors: ['#8CE300','#382934','#382934','#5E4557','#d6b45d','#ebd004','#b9b1a3','#314c63'],
+			width: 500,
+			height: '100%',
+			interpolateNulls: true,
+			lineWidth: 10,
+			backgroundColor: 'none',
+			chartArea: {
+				top: 30,
+				left: 100,
+				width: 500,
+				height: 250
+			},
+			animation: {
+				startup: true,
+				easing: 'inAndOut'
+			},
+			enableInteractivity: true,
+			hAxis: {
+				baselineColor: '#fff',
+				color: '#f1f1f1',
+				gridlines: {color: 'transparent'}
+			},
+			vAxis: {
+				baselineColor: '#fff',
+				gridlines: {
+					color: '#e0e0e0'}
+			}
+			
+		};
+		
+		var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+		
+		chart.draw(data, options);
+	};
+	
+	function drawTable() {
+		var data = new google.visualization.DataTable();
+		data.addColumn('string', 'Metric');
+		data.addColumn('number', 'Value');
+		data.addRows([
+			['Avg. Position',  {v: 23, f: '23'}],
+			['Impressions',   {v:2013,   f: '2,013'}]
+		]);
+		
+		var table = new google.visualization.Table(document.getElementById('table_div'));
+		
+		table.draw(data, {
+			showRowNumber: false,
+			width: '100%',
+			cssClassNames: {
+				headerRow: 'tblHeader',
+				oddTableRow: 'oddTableRow',
+				evenTableRow: 'evenTableRow',
+				tableCell: 'tableCell',
+				headerCell: 'headerCell'
+			}
+		});
+	}
+
+
+})
 
 .controller('mozCtrl', function($scope, $timeout) {
 

@@ -88,7 +88,7 @@ angular.module('app', ['ngMaterial', 'ui.router', 'app.controllers', 'app.direct
 
 	.config(function(LoopBackResourceProvider) {
 		LoopBackResourceProvider
-			.setUrlBase('http://localhost:5000/api')
+			.setUrlBase('https://mobile-associates-seo.herokuapp.com/api')
 	})
 
 	.config(function($mdIconProvider){

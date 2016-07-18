@@ -79,13 +79,5 @@
   "ReferrerMetric": {
     "dataSource": "mysqlConn",
     "public": true
-  },
-  "Query": {
-    "dataSource": "mysqlConn",
-    "public": true
-  },
-  "QueryMetric": {
-    "dataSource": "mysqlConn",
-    "public": true
   }
 }

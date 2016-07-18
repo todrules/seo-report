@@ -7,20 +7,20 @@ var app = module.exports = loopback();
 //var id =  2;
 //app.models.Gapi.searchAnalytics(id);
 
-var Mozscape = require('mozscape').Mozscape;
-var accessId = 'mozscape-9ba53c0ae1';
-var secretKey = 'e4758ef220a48871b78d1c03d1a5f712';
+//var Mozscape = require('mozscape').Mozscape;
+//var accessId = 'mozscape-9ba53c0ae1';
+//var secretKey = 'e4758ef220a48871b78d1c03d1a5f712';
 
-var moz = new Mozscape(accessId, secretKey);
-moz.urlMetrics('moz.com', ['page_authority', 'domain_authority', 'mozRank', 'links', 'external_links', 'title', 'url'], function(err, res) {
-	if (err) {
-		console.log('error');
-		console.log(err);
-		return;
-	}
-	console.log('success');
-	console.log(res);
-});
+//var moz = new Mozscape(accessId, secretKey);
+//moz.urlMetrics('moz.com', ['page_authority', 'domain_authority', 'mozRank', 'links', 'external_links', 'title', 'url'], function(err, res) {
+//	if (err) {
+//		console.log('error');
+//		console.log(err);
+//		return;
+//	}
+//	console.log('success');
+//	console.log(res);
+//});
 
 app.start = function() {
   // start the web server

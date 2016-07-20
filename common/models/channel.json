@@ -1,24 +1,17 @@
 {
-  "name": "ComplexMetric",
+  "name": "Channel",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "name": {
+    "channel": {
       "type": "string",
       "required": true
     },
-    "url": {
-      "type": "string"
-    },
-    "description": {
-      "type": "string"
-    },
-    "referenceType": {
-      "type": "string",
-      "required": true
+    "sessions": {
+      "type": "number"
     }
   },
   "validations": [],
@@ -26,11 +19,6 @@
     "company": {
       "type": "belongsTo",
       "model": "Company",
-      "foreignKey": ""
-    },
-    "measuredData": {
-      "type": "hasMany",
-      "model": "MeasuredData",
       "foreignKey": ""
     }
   },

@@ -57,9 +57,19 @@
       "model": "LandingPage",
       "foreignKey": ""
     },
+    "queries": {
+      "type": "hasMany",
+      "model": "Query",
+      "foreignKey": ""
+    },
     "referrers": {
       "type": "hasMany",
       "model": "Referrer",
+      "foreignKey": ""
+    },
+    "channels": {
+      "type": "hasMany",
+      "model": "Channel",
       "foreignKey": ""
     },
     "metrics": {

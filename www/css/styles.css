@@ -225,32 +225,63 @@ body {
 	margin: 20px;
 }
 
-.tblHeader {
-	background-color: #e0e0e0;
-	font-size: 1em;
-	color: #444;
-	height: 40px;
-}
-.oddTableRow {
-	background-color: #fff;
-	font-size: 1em;
-	color: #444;
-	height: 40px;
+
+
+.evenTblRow {
 
 }
-.evenTableRow {
-	background-color: #f2f2f2;
-	font-size: 1em;
-	color: #444;
-	height: 40px;
+
+.oddTblRow {
+
 }
 
-.tableCell {
-	font-size: 2em;
+.tblCell {
+	font-size: 1em;
 	color: #228CDB;
 }
-.headerCell {
-	font-size: 2em;
-	color: #666;
+
+
+.selectedTblRow {
+	background-color: #7CC900;
+	color: #ffffff;
+}
+
+.hoverTblRow {
+	background-color: #228CDB;
+	color: #ffffff;
+}
+
+.tblHeader {
+	background-color: #004884;
+	color: #fff;
 
 }
+
+.headerCell {
+	font-size: 1.8em;
+	color: #fff;
+
+}
+
+.tblRow {
+	font-size: 1.8em;
+	color: #fff;
+	height: 20px;
+
+}
+
+.myGrid .ui-grid-header-cell {
+	height: 35px;
+	background-color: #228CDB;
+	font-size: 1.3em;
+	color: #fff;
+	text-align: center;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 400;
+}
+
+.openText {
+	font-family: 'Palanquin', sans-serif;
+	font-weight: 700;
+}
+

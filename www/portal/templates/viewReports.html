@@ -1,14 +1,16 @@
-<md-content style="width: 100%; top: 0px; padding: 0px;" layout="row" class="hide-scroll" flex layout-align="center" ng-init="initPage()">
-	<md-content class="md-hue-1" flex layout-align="center" style="border: 1px solid #d8d8d8; width: 100%; margin-left: 80px; margin-right: 80px;" >
-		<md-toolbar class="md-primary" style="font-size: 20px; border-top-left-radius: 4px; border-top-right-radius: 4px;">
+<md-content style="width: 100%; top: 0px; padding: 0px; margin: 0; margin-top: -2px; border: none;" layout="row" class="hide-scroll" flex layout-align="start center" ng-init="initPage()">
+	<md-content class="md-hue-1" flex layout-align="start center" style="border: none; width: 100%; margin: 0; padding: 0;" >
+		<md-toolbar  style="font-size: 20px; border: none; margin: 0; background-color: #0072D0;">
 			<div class="md-toolbar-tools">
-				<span flex="25"><h2><span>View Reports</span></h2></span>
-				<span flex="50" style="text-align: center;">{{ selected }}</span>
+				<span flex="25">
+					
+				</span>
+				<span flex="50" class="openText" style="text-align: center; text-shadow: 1px 1px #666; font-size: 1.9em; color: #ffffff;">{{ selected }}</span>
 				<span flex="25" style="text-align: right;">
-					<md-menu md-position-mode="target-right target" >
-						<md-button aria-label="Open demo menu" class="md-button" ng-click="$mdOpenMenu($event)">
+					<md-menu md-position-mode="target-right target" style="margin-right: 80px;">
+						<md-button aria-label="iii" class="md-button" style="opacity: 1; padding: 2px 5px 2px 5px; background-color: #74BF0E;" ng-click="$mdOpenMenu($event)">
 							Select Client
-							<md-icon class="material icons">contacts</md-icon>
+							<md-icon class="material icons" style="margin-bottom: 2px;">person_outline</md-icon>
 						</md-button>
 						<md-menu-content width="4" >
 							<md-menu-item ng-repeat="company in companies">
@@ -23,14 +25,14 @@
 				</span>
 			</div>
 		</md-toolbar>
-		<md-tabs md-dynamic-height md-border-bottom class="md-hue-1 md-whiteframe-1dp">
-			<md-tab class="md-accent md-hue-1" label="Keyword Report" style="width: 100%; height: 100%;">
-				<md-tab-body style="width: 100%; height: 100%">
+		<md-tabs md-dynamic-height md-border-bottom class="md-hue-1 " style="padding-left: 100px; padding-right: 100px;">
+			<md-tab class="md-accent md-hue-1 " label="Keyword Report" style="width: 100%; height: 100%;  border-right: 1px solid #ccc;">
+				<md-tab-body style="width: 100%; height: 100%;">
 					<div layout="row" layout-align="start center" style="background-color: #f7f7f7; padding-bottom: 10px;">
 						<div layout="column" style="width: 100%; margin: 10px;" id='myChart'></div>
 					</div>
 
-					<div ui-grid="gridOptions" ui-grid-selection style="margin-top: 0px; font-size: 0.8em;" class="myGrid"></div>
+					<div ui-grid="gridOptions" ui-grid-selection style="margin-top: 0px; font-size: 0.8em; border: none;" class="myGrid"></div>
 				</md-tab-body>
 			</md-tab>
 			<md-tab class="md-accent" label="Competitor Report" >
@@ -67,10 +69,10 @@
 			</md-tab>
 			<md-tab class="md-accent" label="Dashboard" >
 				<md-tab-body >
-					<section layout="row" layout-align="start start" style="background-color: #f7f7f7; padding-left: 20px; padding-right: 20px;" layout-wrap>
+					<section layout="row" layout-align="start start" style="background-color: #fff; padding-left: 20px; padding-right: 20px;" layout-wrap>
 						<div layout="column" layout-align="start center" style="color: #fff; box-shadow: 1px 1px #e0e0e0; background-color: #fff; border-radius: 6px; width: 280px; height: 150px; margin: 20px;">
 							<div layout="row" layout-align="start start" style="width: 100%; height: 100%;">
-								<div layout="column" layout-align="center center" ng-style="(lastPosition > totalPosition) ? {'background-color': '#65A300'} : {'background-color': '#77013C'}" flex="30" style="background-color: #228CDB; border-top-left-radius: 6px; border-bottom-left-radius: 6px; font-size: 1.2em; width: 100%; height: 100%;">
+								<div layout="column" layout-align="center center" ng-style="(lastPosition > totalPosition) ? {'background-color': '#7CC900'} : {'background-color': '#A4163A'}" flex="30" style="background-color: #228CDB; border-top-left-radius: 6px; border-bottom-left-radius: 6px; font-size: 1.2em; width: 100%; height: 100%;">
 									<span style="font-size: 1em; color: #fff;"><span ng-if="(totalPosition - lastPosition) > 0">+</span>{{ totalPosition - lastPosition | number:2 }}</span>
 									 <span style="font-size: 2em; color: #fff;" ng-if="lastPosition > totalPosition">
 										 <i class="icon ion-arrow-down-a"></i>
@@ -80,9 +82,9 @@
 									</span>
 								</div>
 								<div layout="column" flex="70" layout-align="start center" style="padding-top: 10px; margin-bottom: 15px;">
-									<span  style="color: #666; font-size: 1.2em;" ng-style="(lastPosition > totalPosition) ? {'color': '#65A300'} : {'color': '#6A0136'}">POSITION</span>
+									<span  style="color: #666; font-size: 1.2em;" ng-style="(lastPosition > totalPosition) ? {'color': '#7CC900'} : {'color': '#A4163A'}">POSITION</span>
 									<span flex>&nbsp;</span>
-									<span  style="color: #444; font-size: 2em; padding-bottom: 10px;" ng-style="(lastPosition > totalPosition) ? {'color': '#65A300'} : {'color': '#6A0136'}">{{ totalPosition | number:2 }}</span>
+									<span  style="color: #444; font-size: 2em; padding-bottom: 10px;" ng-style="(lastPosition > totalPosition) ? {'color': '#65A300'} : {'color': '#A4163A'}">{{ totalPosition | number:2 }}</span>
 									<span  style="color: #999; font-size: 0.8em;">Last Month:</span>
 									<span  style="color: #666; font-size: 1.2em; ">{{ lastPosition | number:2 }}</span>
 									<span flex>&nbsp;</span>
@@ -91,7 +93,7 @@
 						</div>
 						<div layout="column" layout-align="start center" style="color: #fff; box-shadow: 1px 1px #e0e0e0; background-color: #fff; border-radius: 6px; width: 280px; height: 150px; margin: 20px;">
 							<div layout="row" layout-align="start start" style="width: 100%; height: 100%;">
-								<div layout="column" layout-align="center center" ng-style="(lastImpressions > totalImpressions) ? {'background-color': '#77013C'} : {'background-color': '#65A300'}" flex="30" style="background-color: #228CDB; border-top-left-radius: 6px; border-bottom-left-radius: 6px; font-size: 1.2em; width: 100%; height: 100%;">
+								<div layout="column" layout-align="center center" ng-style="(lastImpressions > totalImpressions) ? {'background-color': '#A4163A'} : {'background-color': '#7CC900'}" flex="30" style="background-color: #228CDB; border-top-left-radius: 6px; border-bottom-left-radius: 6px; font-size: 1.2em; width: 100%; height: 100%;">
 									<span style="font-size: 1em; color: #fff;"><span ng-if="(totalImpressions - lastImpressions) > 0">+</span>{{ totalImpressions - lastImpressions | number:0 }}</span>
 									 <span style="font-size: 2em; color: #fff;" ng-if="lastImpressions > totalImpressions">
 										 <i class="icon ion-arrow-down-a"></i>
@@ -101,9 +103,9 @@
 									</span>
 								</div>
 								<div layout="column" flex="70" layout-align="start center" style="padding-top: 10px; margin-bottom: 15px;">
-									<span  style="color: #003A6A; font-size: 1.2em;" ng-style="(lastImpressions > totalImpressions) ? {'color': '#6A0136'} : {'color': '#65A300'}">IMPRESSIONS</span>
+									<span  style="color: #003A6A; font-size: 1.2em;" ng-style="(lastImpressions > totalImpressions) ? {'color': '#A4163A'} : {'color': '#7CC900'}">IMPRESSIONS</span>
 									<span flex>&nbsp;</span>
-									<span  style="color: #444; font-size: 2em; padding-bottom: 10px;" ng-style="(lastImpressions > totalImpressions) ? {'color': '#6A0136'} : {'color': '#65A300'}">{{ totalImpressions | number:0 }}</span>
+									<span  style="color: #444; font-size: 2em; padding-bottom: 10px;" ng-style="(lastImpressions > totalImpressions) ? {'color': '#A4163A'} : {'color': '#65A300'}">{{ totalImpressions | number:0 }}</span>
 									<span  style="color: #999; font-size: 0.8em;">Last Month:</span>
 									<span  style="color: #666; font-size: 1.2em; ">{{ lastImpressions | number:0 }}</span>
 									<span flex>&nbsp;</span>
@@ -112,7 +114,7 @@
 						</div>
 						<div layout="column" layout-align="start center" style="color: #fff; box-shadow: 1px 1px #e0e0e0; background-color: #fff; border-radius: 6px; width: 280px; height: 150px; margin: 20px;">
 							<div layout="row" layout-align="start start" style="width: 100%; height: 100%;">
-								<div layout="column" layout-align="center center" ng-style="(lastClicks > totalClicks) ? {'background-color': '#77013C'} : {'background-color': '#65A300'}" flex="30" style="background-color: #228CDB; border-top-left-radius: 6px; border-bottom-left-radius: 6px; font-size: 1.2em; width: 100%; height: 100%;">
+								<div layout="column" layout-align="center center" ng-style="(lastClicks > totalClicks) ? {'background-color': '#A4163A'} : {'background-color': '#7CC900'}" flex="30" style="background-color: #228CDB; border-top-left-radius: 6px; border-bottom-left-radius: 6px; font-size: 1.2em; width: 100%; height: 100%;">
 									<span style="font-size: 1em; color: #fff;"><span ng-if="(totalClicks - lastClicks) > 0">+</span>{{ totalClicks - lastClicks | number:0 }}</span>
 									 <span style="font-size: 2em; color: #fff;" ng-if="lastClicks > totalClicks">
 										 <i class="icon ion-arrow-down-a"></i>
@@ -122,9 +124,9 @@
 									</span>
 								</div>
 								<div layout="column" flex="70" layout-align="start center" style="padding-top: 10px; margin-bottom: 15px;">
-									<span  style="color: #666; font-size: 1.2em;" ng-style="(lastClicks > totalClicks) ? {'color': '#6A0136'} : {'color': '#65A300'}">CLICKS</span>
+									<span  style="color: #666; font-size: 1.2em;" ng-style="(lastClicks > totalClicks) ? {'color': '#A4163A'} : {'color': '#65A300'}">CLICKS</span>
 									<span flex>&nbsp;</span>
-									<span  style="color: #444; font-size: 2em; padding-bottom: 10px;" ng-style="(lastClicks > totalClicks) ? {'color': '#6A0136'} : {'color': '#65A300'}">{{ totalClicks | number:0 }}</span>
+									<span  style="color: #444; font-size: 2em; padding-bottom: 10px;" ng-style="(lastClicks > totalClicks) ? {'color': '#A4163A'} : {'color': '#65A300'}">{{ totalClicks | number:0 }}</span>
 									<span  style="color: #999; font-size: 0.8em;">Last Month:</span>
 									<span  style="color: #666; font-size: 1.2em; ">{{ lastClicks | number:0 }}</span>
 									<span flex>&nbsp;</span>
@@ -133,7 +135,7 @@
 						</div>
 						<div layout="column" layout-align="start center" style="color: #fff; box-shadow: 1px 1px #e0e0e0; background-color: #fff; border-radius: 6px; width: 280px; height: 150px; margin: 20px;">
 							<div layout="row" layout-align="start start" style="width: 100%; height: 100%;">
-								<div layout="column" layout-align="center center" ng-style="(lastctr > totalctr) ? {'background-color': '#77013C'} : {'background-color': '#65A300'}" flex="30" style="background-color: #228CDB; border-top-left-radius: 6px; border-bottom-left-radius: 6px; font-size: 1.2em; width: 100%; height: 100%;">
+								<div layout="column" layout-align="center center" ng-style="(lastctr > totalctr) ? {'background-color': '#A4163A'} : {'background-color': '#7CC900'}" flex="30" style="background-color: #228CDB; border-top-left-radius: 6px; border-bottom-left-radius: 6px; font-size: 1.2em; width: 100%; height: 100%;">
 									<span style="font-size: 1em; color: #fff;"><span ng-if="(totalctr - lastctr) > 0">+</span>{{ totalctr - lastctr | number:2 }}%</span>
 									 <span style="font-size: 2em; color: #fff;" ng-if="lastctr > totalctr">
 										 <i class="icon ion-arrow-down-a"></i>
@@ -143,9 +145,9 @@
 									</span>
 								</div>
 								<div layout="column" flex="70" layout-align="start center" style="padding-top: 10px; margin-bottom: 15px;">
-									<span  style="color: #666; font-size: 1.2em;" ng-style="(lastctr > totalctr) ? {'color': '#6A0136'} : {'color': '#65A300'}">CTR</span>
+									<span  style="color: #666; font-size: 1.2em;" ng-style="(lastctr > totalctr) ? {'color': '#A4163A'} : {'color': '#65A300'}">CTR</span>
 									<span flex>&nbsp;</span>
-									<span  style="color: #444; font-size: 2em; padding-bottom: 10px;" ng-style="(lastctr > totalctr) ? {'color': '#6A0136'} : {'color': '#65A300'}">{{ totalctr | number:2 }}%</span>
+									<span  style="color: #444; font-size: 2em; padding-bottom: 10px;" ng-style="(lastctr > totalctr) ? {'color': '#A4163A'} : {'color': '#65A300'}">{{ totalctr | number:2 }}%</span>
 									<span  style="color: #999; font-size: 0.8em;">Last Month:</span>
 									<span  style="color: #666; font-size: 1.2em; ">{{ lastctr | number:2 }}%</span>
 									<span flex>&nbsp;</span>
@@ -154,7 +156,7 @@
 						</div>
 						<div layout="column" layout-align="start center" style="color: #fff; box-shadow: 1px 1px #e0e0e0; background-color: #fff; border-radius: 6px; width: 280px; height: 150px; margin: 20px;">
 							<div layout="row" layout-align="start start" style="width: 100%; height: 100%;">
-								<div layout="column" layout-align="center center" ng-style="(lastPageLoadtime > totalPageLoadtime) ? {'background-color': '#65A300'} : {'background-color': '#77013C'}" flex="30" style="background-color: #228CDB; border-top-left-radius: 6px; border-bottom-left-radius: 6px; font-size: 1.2em; width: 100%; height: 100%;">
+								<div layout="column" layout-align="center center" ng-style="(lastPageLoadtime > totalPageLoadtime) ? {'background-color': '#7CC900'} : {'background-color': '#A4163A'}" flex="30" style="background-color: #228CDB; border-top-left-radius: 6px; border-bottom-left-radius: 6px; font-size: 1.2em; width: 100%; height: 100%;">
 									<span style="font-size: 1em; color: #fff;"><span ng-if="(totalPageLoadtime - lastPageLoadtime) > 0">+</span>{{(totalPageLoadtime - lastPageLoadtime)*1000 | date:'mm:ss' }}</span>
 									 <span style="font-size: 2em; color: #fff;" ng-if="lastPageLoadtime > totalPageLoadtime">
 										 <i class="icon ion-arrow-down-a"></i>
@@ -164,9 +166,9 @@
 									</span>
 								</div>
 								<div layout="column" flex="70" layout-align="start center" style="padding-top: 10px; margin-bottom: 15px;">
-									<span  style="color: #666; font-size: 1.2em;" ng-style="(lastPageLoadtime > totalPageLoadtime) ? {'color': '#65A300'} : {'color': '#6A0136'}">PAGE LOAD</span>
+									<span  style="color: #666; font-size: 1.2em;" ng-style="(lastPageLoadtime > totalPageLoadtime) ? {'color': '#7CC900'} : {'color': '#A4163A'}">PAGE LOAD</span>
 									<span flex>&nbsp;</span>
-									<span  style="color: #444; font-size: 2em; padding-bottom: 10px;" ng-style="(lastPageLoadtime > totalPageLoadtime) ? {'color': '#65A300'} : {'color': '#6A0136'}">{{ totalPageLoadtime*1000 | date:'mm:ss' }}</span>
+									<span  style="color: #444; font-size: 2em; padding-bottom: 10px;" ng-style="(lastPageLoadtime > totalPageLoadtime) ? {'color': '#65A300'} : {'color': '#A4163A'}">{{ totalPageLoadtime*1000 | date:'mm:ss' }}</span>
 									<span  style="color: #999; font-size: 0.8em;">Last Month:</span>
 									<span  style="color: #666; font-size: 1.2em; ">{{ lastPageLoadtime*1000 | date:'mm:ss' }}</span>
 									<span flex>&nbsp;</span>
@@ -175,7 +177,7 @@
 						</div>
 						<div layout="column" layout-align="start center" style="color: #fff; box-shadow: 1px 1px #e0e0e0; background-color: #fff; border-radius: 6px; width: 280px; height: 150px; margin: 20px;">
 							<div layout="row" layout-align="start start" style="width: 100%; height: 100%;">
-								<div layout="column" layout-align="center center" ng-style="(lastSessions > totalSessions) ? {'background-color': '#77013C'} : {'background-color': '#65A300'}" flex="30" style="background-color: #228CDB; border-top-left-radius: 6px; border-bottom-left-radius: 6px; font-size: 1.2em; width: 100%; height: 100%;">
+								<div layout="column" layout-align="center center" ng-style="(lastSessions > totalSessions) ? {'background-color': '#A4163A'} : {'background-color': '#7CC900'}" flex="30" style="background-color: #228CDB; border-top-left-radius: 6px; border-bottom-left-radius: 6px; font-size: 1.2em; width: 100%; height: 100%;">
 									<span style="font-size: 1em; color: #fff;"><span ng-if="(totalSessions - lastSessions) > 0">+</span>{{ totalSessions - lastSessions | number:0 }}</span>
 									 <span style="font-size: 2em; color: #fff;" ng-if="lastSessions > totalSessions">
 										 <i class="icon ion-arrow-down-a"></i>
@@ -185,9 +187,9 @@
 									</span>
 								</div>
 								<div layout="column" flex="70" layout-align="start center" style="padding-top: 10px; margin-bottom: 15px;">
-									<span  style="color: #666; font-size: 1.2em;" ng-style="(lastSessions > totalSessions) ? {'color': '#6A0136'} : {'color': '#65A300'}">SESSIONS</span>
+									<span  style="color: #666; font-size: 1.2em;" ng-style="(lastSessions > totalSessions) ? {'color': '#A4163A'} : {'color': '#7CC900'}">SESSIONS</span>
 									<span flex>&nbsp;</span>
-									<span  style="color: #444; font-size: 2em; padding-bottom: 10px;" ng-style="(lastSessions > totalSessions) ? {'color': '#6A0136'} : {'color': '#65A300'}">{{ totalSessions | number:0 }}</span>
+									<span  style="color: #444; font-size: 2em; padding-bottom: 10px;" ng-style="(lastSessions > totalSessions) ? {'color': '#A4163A'} : {'color': '#65A300'}">{{ totalSessions | number:0 }}</span>
 									<span  style="color: #999; font-size: 0.8em;">Last Month:</span>
 									<span  style="color: #666; font-size: 1.2em; ">{{ lastSessions | number:0 }}</span>
 									<span flex>&nbsp;</span>
@@ -196,7 +198,7 @@
 						</div>
 						<div layout="column" layout-align="start center" style="color: #fff; box-shadow: 1px 1px #e0e0e0; background-color: #fff; border-radius: 6px; width: 280px; height: 150px; margin: 20px;">
 							<div layout="row" layout-align="start start" style="width: 100%; height: 100%;">
-								<div layout="column" layout-align="center center" ng-style="(lastBounces > totalBounces) ? {'background-color': '#65A300'} : {'background-color': '#77013C'}" flex="30" style="background-color: #228CDB; border-top-left-radius: 6px; border-bottom-left-radius: 6px; font-size: 1.2em; width: 100%; height: 100%;">
+								<div layout="column" layout-align="center center" ng-style="(lastBounces > totalBounces) ? {'background-color': '#7CC900'} : {'background-color': '#A4163A'}" flex="30" style="background-color: #228CDB; border-top-left-radius: 6px; border-bottom-left-radius: 6px; font-size: 1.2em; width: 100%; height: 100%;">
 									<span style="font-size: 1em; color: #fff;"><span ng-if="(totalBounces - lastBounces) > 0">+</span>{{ totalBounces - lastBounces | number:0 }}</span>
 									 <span style="font-size: 2em; color: #fff;" ng-if="lastBounces > totalBounces">
 										 <i class="icon ion-arrow-down-a"></i>
@@ -206,9 +208,9 @@
 									</span>
 								</div>
 								<div layout="column" flex="70" layout-align="start center" style="padding-top: 10px; margin-bottom: 15px;">
-									<span  style="color: #666; font-size: 1.2em;" ng-style="(lastBounces > totalBounces) ? {'color': '#65A300'} : {'color': '#6A0136'}">BOUNCES</span>
+									<span  style="color: #666; font-size: 1.2em;" ng-style="(lastBounces > totalBounces) ? {'color': '#7CC900'} : {'color': '#A4163A'}">BOUNCES</span>
 									<span flex>&nbsp;</span>
-									<span  style="color: #444; font-size: 2em; padding-bottom: 10px;" ng-style="(lastBounces > totalBounces) ? {'color': '#65A300'} : {'color': '#6A0136'}">{{ totalBounces | number:0 }}</span>
+									<span  style="color: #444; font-size: 2em; padding-bottom: 10px;" ng-style="(lastBounces > totalBounces) ? {'color': '#65A300'} : {'color': '#A4163A'}">{{ totalBounces | number:0 }}</span>
 									<span  style="color: #999; font-size: 0.8em;">Last Month:</span>
 									<span  style="color: #666; font-size: 1.2em; ">{{ lastBounces | number:0 }}</span>
 									<span flex>&nbsp;</span>
@@ -217,7 +219,7 @@
 						</div>
 						<div layout="column" layout-align="start center" style="color: #fff; box-shadow: 1px 1px #e0e0e0; background-color: #fff; border-radius: 6px; width: 280px; height: 150px; margin: 20px;">
 							<div layout="row" layout-align="start start" style="width: 100%; height: 100%;">
-								<div layout="column" layout-align="center center" ng-style="(lastBounceRate > totalBounceRate) ? {'background-color': '#65A300'} : {'background-color': '#77013C'}" flex="30" style="background-color: #228CDB; border-top-left-radius: 6px; border-bottom-left-radius: 6px; font-size: 1.2em; width: 100%; height: 100%;">
+								<div layout="column" layout-align="center center" ng-style="(lastBounceRate > totalBounceRate) ? {'background-color': '#7CC900'} : {'background-color': '#A4163A'}" flex="30" style="background-color: #228CDB; border-top-left-radius: 6px; border-bottom-left-radius: 6px; font-size: 1.2em; width: 100%; height: 100%;">
 									<span style="font-size: 1em; color: #fff;"><span ng-if="(totalBounceRate - lastBounceRate) > 0">+</span>{{ totalBounceRate - lastBounceRate | number:2 }}%</span>
 									 <span style="font-size: 2em; color: #fff;" ng-if="lastBounceRate > totalBounceRate">
 										 <i class="icon ion-arrow-down-a"></i>
@@ -227,9 +229,9 @@
 									</span>
 								</div>
 								<div layout="column" flex="70" layout-align="start center" style="padding-top: 10px; margin-bottom: 15px;">
-									<span  style="color: #666; font-size: 1.2em;" ng-style="(lastBounceRate < totalBounceRate) ? {'color': '#6A0136'} : {'color': '#65A300'}">BOUNCE RATE</span>
+									<span  style="color: #666; font-size: 1.2em;" ng-style="(lastBounceRate < totalBounceRate) ? {'color': '#A4163A'} : {'color': '#7CC900'}">BOUNCE RATE</span>
 									<span flex>&nbsp;</span>
-									<span  style="color: #444; font-size: 1.8em; padding-bottom: 10px;" ng-style="(lastBounceRate < totalBounceRate) ? {'color': '#6A0136'} : {'color': '#65A300'}">{{ totalBounceRate | number:2 }}%</span>
+									<span  style="color: #444; font-size: 1.8em; padding-bottom: 10px;" ng-style="(lastBounceRate < totalBounceRate) ? {'color': '#A4163A'} : {'color': '#65A300'}">{{ totalBounceRate | number:2 }}%</span>
 									<span  style="color: #999; font-size: 0.8em;">Last Month:</span>
 									<span  style="color: #666; font-size: 1.2em; ">{{ lastBounceRate | number:2 }}%</span>
 									<span flex>&nbsp;</span>
@@ -238,7 +240,7 @@
 						</div>
 						<div layout="column" layout-align="start center" style="color: #fff; box-shadow: 1px 1px #e0e0e0; background-color: #fff; border-radius: 6px; width: 280px; height: 150px; margin: 20px;">
 							<div layout="row" layout-align="start start" style="width: 100%; height: 100%;">
-								<div layout="column" layout-align="center center" ng-style="(lastPageviews > totalPageviews) ? {'background-color': '#77013C'} : {'background-color': '#65A300'}" flex="30" style="background-color: #228CDB; border-top-left-radius: 6px; border-bottom-left-radius: 6px; font-size: 1.2em; width: 100%; height: 100%;">
+								<div layout="column" layout-align="center center" ng-style="(lastPageviews > totalPageviews) ? {'background-color': '#A4163A'} : {'background-color': '#7CC900'}" flex="30" style="background-color: #228CDB; border-top-left-radius: 6px; border-bottom-left-radius: 6px; font-size: 1.2em; width: 100%; height: 100%;">
 									<span style="font-size: 1em; color: #fff;"><span ng-if="(totalPageviews - lastPageviews) > 0">+</span>{{ totalPageviews - lastPageviews | number:0 }}</span>
 									 <span style="font-size: 2em; color: #fff;" ng-if="lastPageviews > totalPageviews">
 										 <i class="icon ion-arrow-down-a"></i>
@@ -248,9 +250,9 @@
 									</span>
 								</div>
 								<div layout="column" flex="70" layout-align="start center" style="padding-top: 10px; margin-bottom: 15px;">
-									<span  style="color: #666; font-size: 1.2em;" ng-style="(lastPageviews > totalPageviews) ? {'color': '#6A0136'} : {'color': '#65A300'}">PAGE VIEWS</span>
+									<span  style="color: #666; font-size: 1.2em;" ng-style="(lastPageviews > totalPageviews) ? {'color': '#A4163A'} : {'color': '#7CC900'}">PAGE VIEWS</span>
 									<span flex>&nbsp;</span>
-									<span  style="color: #444; font-size: 2em; padding-bottom: 10px;" ng-style="(lastPageviews > totalPageviews) ? {'color': '#6A0136'} : {'color': '#65A300'}">{{ totalPageviews | number:0 }}</span>
+									<span  style="color: #444; font-size: 2em; padding-bottom: 10px;" ng-style="(lastPageviews > totalPageviews) ? {'color': '#A4163A'} : {'color': '#65A300'}">{{ totalPageviews | number:0 }}</span>
 									<span  style="color: #999; font-size: 0.8em;">Last Month:</span>
 									<span  style="color: #666; font-size: 1.2em; ">{{ lastPageviews | number:0 }}</span>
 									<span flex>&nbsp;</span>
@@ -259,7 +261,7 @@
 						</div>
 						<div layout="column" layout-align="start center" style="color: #fff; box-shadow: 1px 1px #e0e0e0; background-color: #fff; border-radius: 6px; width: 280px; height: 150px; margin: 20px;">
 							<div layout="row" layout-align="start start" style="width: 100%; height: 100%;">
-								<div layout="column" layout-align="center center" ng-style="(lastUnique > totalUnique) ? {'background-color': '#77013C'} : {'background-color': '#65A300'}" flex="30" style="background-color: #228CDB; border-top-left-radius: 6px; border-bottom-left-radius: 6px; font-size: 1.2em; width: 100%; height: 100%;">
+								<div layout="column" layout-align="center center" ng-style="(lastUnique > totalUnique) ? {'background-color': '#A4163A'} : {'background-color': '#7CC900'}" flex="30" style="background-color: #228CDB; border-top-left-radius: 6px; border-bottom-left-radius: 6px; font-size: 1.2em; width: 100%; height: 100%;">
 									<span style="font-size: 1em; color: #fff;"><span ng-if="(totalUnique - lastUnique) > 0">+</span>{{ totalUnique - lastUnique | number:0 }}</span>
 									 <span style="font-size: 2em; color: #fff;" ng-if="lastUnique > totalUnique">
 										 <i class="icon ion-arrow-down-a"></i>
@@ -269,9 +271,9 @@
 									</span>
 								</div>
 								<div layout="column" flex="70" layout-align="start center" style="padding-top: 10px; margin-bottom: 15px;">
-									<span  style="color: #666; font-size: 1.2em;" ng-style="(lastUnique > totalUnique) ? {'color': '#6A0136'} : {'color': '#65A300'}">UNIQUE VIEWS</span>
+									<span  style="color: #666; font-size: 1.2em;" ng-style="(lastUnique > totalUnique) ? {'color': '#A4163A'} : {'color': '#7CC900'}">UNIQUE VIEWS</span>
 									<span flex>&nbsp;</span>
-									<span  style="color: #444; font-size: 2em; padding-bottom: 10px;" ng-style="(lastUnique > totalUnique) ? {'color': '#6A0136'} : {'color': '#65A300'}">{{ totalUnique | number:0 }}</span>
+									<span  style="color: #444; font-size: 2em; padding-bottom: 10px;" ng-style="(lastUnique > totalUnique) ? {'color': '#A4163A'} : {'color': '#65A300'}">{{ totalUnique | number:0 }}</span>
 									<span  style="color: #999; font-size: 0.8em;">Last Month:</span>
 									<span  style="color: #666; font-size: 1.2em; ">{{ lastUnique | number:0 }}</span>
 									<span flex>&nbsp;</span>
@@ -280,7 +282,7 @@
 						</div>
 						<div layout="column" layout-align="start center" style="color: #fff; box-shadow: 1px 1px #e0e0e0; background-color: #fff; border-radius: 6px; width: 280px; height: 150px; margin: 20px;">
 							<div layout="row" layout-align="start start" style="width: 100%; height: 100%;">
-								<div layout="column" layout-align="center center" ng-style="(lastppv > totalppv) ? {'background-color': '#77013C'} : {'background-color': '#65A300'}" flex="30" style="background-color: #228CDB; border-top-left-radius: 6px; border-bottom-left-radius: 6px; font-size: 1.2em; width: 100%; height: 100%;">
+								<div layout="column" layout-align="center center" ng-style="(lastppv > totalppv) ? {'background-color': '#A4163A'} : {'background-color': '#7CC900'}" flex="30" style="background-color: #228CDB; border-top-left-radius: 6px; border-bottom-left-radius: 6px; font-size: 1.2em; width: 100%; height: 100%;">
 									<span style="font-size: 1em; color: #fff;"><span ng-if="(totalppv - lastppv) > 0">+</span>{{ totalppv - lastppv | number:2 }}</span>
 									 <span style="font-size: 2em; color: #fff;" ng-if="lastppv > totalppv">
 										 <i class="icon ion-arrow-down-a"></i>
@@ -290,9 +292,9 @@
 									</span>
 								</div>
 								<div layout="column" flex="70" layout-align="start center" style="padding-top: 10px; margin-bottom: 15px;">
-									<span  style="color: #666; font-size: 1.2em;" ng-style="(lastppv > totalppv) ? {'color': '#6A0136'} : {'color': '#65A300'}">PAGES / SESSION</span>
+									<span  style="color: #666; font-size: 1.2em;" ng-style="(lastppv > totalppv) ? {'color': '#A4163A'} : {'color': '#7CC900'}">PAGES / SESSION</span>
 									<span flex>&nbsp;</span>
-									<span  style="color: #444; font-size: 2em; padding-bottom: 10px;" ng-style="(lastppv > totalppv) ? {'color': '#6A0136'} : {'color': '#65A300'}">{{ totalppv | number:2 }}</span>
+									<span  style="color: #444; font-size: 2em; padding-bottom: 10px;" ng-style="(lastppv > totalppv) ? {'color': '#A4163A'} : {'color': '#65A300'}">{{ totalppv | number:2 }}</span>
 									<span  style="color: #999; font-size: 0.8em;">Last Month:</span>
 									<span  style="color: #666; font-size: 1.2em; ">{{ lastppv | number:2 }}</span>
 									<span flex>&nbsp;</span>
@@ -302,7 +304,7 @@
 
 						<div layout="column" layout-align="start center" style="color: #fff; box-shadow: 1px 1px #e0e0e0; background-color: #fff; border-radius: 6px; width: 280px; height: 150px; margin: 20px;">
 							<div layout="row" layout-align="start start" style="width: 100%; height: 100%;">
-								<div layout="column" layout-align="center center" ng-style="(lastDuration < totalDuration) ? {'background-color': '#65A300'} : {'background-color': '#77013C'}" flex="30" style="background-color: #228CDB; border-top-left-radius: 6px; border-bottom-left-radius: 6px; font-size: 1.2em; width: 100%; height: 100%;">
+								<div layout="column" layout-align="center center" ng-style="(lastDuration < totalDuration) ? {'background-color': '#7CC900'} : {'background-color': '#A4163A'}" flex="30" style="background-color: #228CDB; border-top-left-radius: 6px; border-bottom-left-radius: 6px; font-size: 1.2em; width: 100%; height: 100%;">
 									<span style="font-size: 1em; color: #fff;"><span ng-if="(totalDuration - lastDuration) > 0">+</span>{{ Math.abs(totalDuration - lastDuration)*1000 | date:'mm:ss' }}</span>
 									 <span style="font-size: 2em; color: #fff;" ng-if="lastDuration > totalDuration">
 										 <i class="icon ion-arrow-down-a"></i>
@@ -312,9 +314,9 @@
 									</span>
 								</div>
 								<div layout="column" flex="70" layout-align="start center" style="padding-top: 10px; margin-bottom: 15px;">
-									<span  style="color: #666; font-size: 1.2em;" ng-style="(lastDuration < totalDuration) ? {'color': '#65A300'} : {'color': '#6A0136'}">DURATION</span>
+									<span  style="color: #666; font-size: 1.2em;" ng-style="(lastDuration < totalDuration) ? {'color': '#7CC900'} : {'color': '#A4163A'}">DURATION</span>
 									<span flex>&nbsp;</span>
-									<span  style="color: #444; font-size: 2em; padding-bottom: 10px;" ng-style="(lastDuration < totalDuration) ? {'color': '#65A300'} : {'color': '#6A0136'}">{{ totalDuration*1000 | date:'mm:ss' }}</span>
+									<span  style="color: #444; font-size: 2em; padding-bottom: 10px;" ng-style="(lastDuration < totalDuration) ? {'color': '#65A300'} : {'color': '#A4163A'}">{{ totalDuration*1000 | date:'mm:ss' }}</span>
 									<span  style="color: #999; font-size: 0.8em;">Last Month:</span>
 									<span  style="color: #666; font-size: 1.2em; ">{{ lastDuration*1000 | date:'mm:ss' }}</span>
 									<span flex>&nbsp;</span>
@@ -326,10 +328,10 @@
 			</md-tab>
 			<md-tab class="md-accent" label="Historical Data" >
 				<md-tab-body>
-					<div layout="row" layout-align="start center" style="width: 100%; min-height: 2400px; background-color: #f7f7f7;">
+					<div layout="row" layout-align="start center" style="width: 100%; min-height: 2400px; background-color: #fff;">
 						<div layout="column" style="width: 100%; ">
 							<div layout="row" layout-align="start start" style=" background-color: #f7f7f7; width: 100%; ">
-								<md-card style="box-shadow: none; position: absolute; top: 20px; left: 60px; width: 550px; height: 320px; background-color: #fff; border-radius: 6px; ">&nbsp;</md-card>
+								<md-card style="position: absolute; top: 20px; left: 60px; width: 550px; height: 320px; background-color: #fff; border-radius: 6px; ">&nbsp;</md-card>
 								<div layout="column" flex >
 									<span style=" border-bottom: 1px solid #3A1772; position: absolute; width: 350px; top: 30px; left: 70px;"><h1 style="color: #3A1772; font-family: 'Roboto'; font-size: 24px; margin-top: 10px; margin-left: 40px;">Impressions</h1></span>
 									<div id="impressions-linechart" style="position: absolute; top: 0; left: 0; height: 300px;  z-index: 0; padding: 0; margin: 0; background: none; ">
@@ -338,7 +340,7 @@
 									</div>
 								</div>
 								<div layout="column" flex >
-									<md-card style="box-shadow: none; position: absolute; top: 20px; left: 660px; width: 550px; height: 320px; background-color: #fff; border-radius: 6px; ">&nbsp;</md-card>
+									<md-card style="position: absolute; top: 20px; left: 660px; width: 550px; height: 320px; background-color: #fff; border-radius: 6px; ">&nbsp;</md-card>
 									<span style="border-bottom: 1px solid #3A1772; position: absolute; width: 350px; top: 30px; left: 670px;"><h1 style="color: #3A1772; font-family: 'Roboto'; font-size: 24px; margin-top: 10px; margin-left: 40px;">Clicks</h1></span>
 									<div id="clicks-linechart" style="position: absolute; top: 0; left: 600px; height: 300px;  z-index: 0; padding: 0; margin: 0; background: none; ">
 									</div>
@@ -348,7 +350,7 @@
 							</div>
 							<div layout="row" layout-align="start start" style="background-color: #f7f7f7; width: 100%; ">
 								<div layout="column" flex >
-									<md-card style="box-shadow: none; position: absolute; top: 400px; left: 60px; width: 550px; height: 320px; background-color: #fff; border-radius: 6px; ">&nbsp;</md-card>
+									<md-card style="position: absolute; top: 400px; left: 60px; width: 550px; height: 320px; background-color: #fff; border-radius: 6px; ">&nbsp;</md-card>
 									<span style="border-bottom: 1px solid #3A1772; position: absolute; width: 350px; top: 410px; left: 70px;"><h1 style="color: #3A1772; font-family: 'Roboto'; font-size: 24px; margin-top: 10px; margin-left: 40px;">CTR</h1></span>
 									<div id="ctr-linechart" style="position: absolute; top: 400px; left: 0; height: 300px;  z-index: 0; padding: 0; margin: 0; background: none; ">
 									</div>
@@ -356,7 +358,7 @@
 									</div>
 								</div>
 								<div layout="column" flex >
-									<md-card style="box-shadow: none; position: absolute; top: 400px; left: 660px; width: 550px; height: 320px; background-color: #fff; border-radius: 6px; ">&nbsp;</md-card>
+									<md-card style=" position: absolute; top: 400px; left: 660px; width: 550px; height: 320px; background-color: #fff; border-radius: 6px; ">&nbsp;</md-card>
 									<span style="border-bottom: 1px solid #3A1772; position: absolute; width: 350px; top: 410px; left: 670px;"><h1 style="color: #3A1772; font-family: 'Roboto'; font-size: 24px; margin-top: 10px; margin-left: 40px;">Position</h1></span>
 									<div id="position-linechart" style="position: absolute; top: 400px; left: 600px; height: 300px;  z-index: 0; padding: 0; margin: 0; background: none; ">
 									</div>
@@ -366,7 +368,7 @@
 							</div>
 							<div layout="row" layout-align="start start" style="background-color: #f7f7f7; width: 100%; ">
 								<div layout="column" flex >
-									<md-card style="box-shadow: none; position: absolute; top: 800px; left: 60px; width: 550px; height: 320px; background-color: #fff; border-radius: 6px; ">&nbsp;</md-card>
+									<md-card style="position: absolute; top: 800px; left: 60px; width: 550px; height: 320px; background-color: #fff; border-radius: 6px; ">&nbsp;</md-card>
 									<span style="border-bottom: 1px solid #3A1772; position: absolute; width: 350px; top: 810px; left: 70px;"><h1 style="color: #3A1772; font-family: 'Roboto'; font-size: 24px; margin-top: 10px; margin-left: 40px;">Page Load</h1></span>
 									<div id="pageload-linechart" style="position: absolute; top: 800px; left: 0; height: 300px;  z-index: 0; padding: 0; margin: 0; background: none; ">
 									</div>
@@ -374,7 +376,7 @@
 									</div>
 								</div>
 								<div layout="column" flex >
-									<md-card style="box-shadow: none; position: absolute; top: 800px; left: 660px; width: 550px; height: 320px; background-color: #fff; border-radius: 6px; ">&nbsp;</md-card>
+									<md-card style=" position: absolute; top: 800px; left: 660px; width: 550px; height: 320px; background-color: #fff; border-radius: 6px; ">&nbsp;</md-card>
 									<span style="border-bottom: 1px solid #3A1772; position: absolute; width: 350px; top: 810px; left: 670px;"><h1 style="color: #3A1772; font-family: 'Roboto'; font-size: 24px; margin-top: 10px; margin-left: 40px;">Sessions</h1></span>
 									<div id="sessions-linechart" style="position: absolute; top: 800px; left: 600px; height: 300px;  z-index: 0; padding: 0; margin: 0; background: none; ">
 									</div>
@@ -384,7 +386,7 @@
 							</div>
 							<div layout="row" layout-align="start start" style="background-color: #f7f7f7; width: 100%; ">
 								<div layout="column" flex >
-									<md-card style="box-shadow: none; position: absolute; top: 1200px; left: 60px; width: 550px; height: 320px; background-color: #fff; border-radius: 6px; ">&nbsp;</md-card>
+									<md-card style="position: absolute; top: 1200px; left: 60px; width: 550px; height: 320px; background-color: #fff; border-radius: 6px; ">&nbsp;</md-card>
 									<span style="border-bottom: 1px solid #3A1772; position: absolute; width: 350px; top: 1210px; left: 70px;"><h1 style="color: #3A1772; font-family: 'Roboto'; font-size: 24px; margin-top: 10px; margin-left: 40px;">Bounces</h1></span>
 									<div id="bounces-linechart" style="position: absolute; top: 1200px; left: 0; height: 300px;  z-index: 0; padding: 0; margin: 0; background: none; ">
 									</div>
@@ -392,7 +394,7 @@
 									</div>
 								</div>
 								<div layout="column" flex >
-									<md-card style="box-shadow: none; position: absolute; top: 1200px; left: 660px; width: 550px; height: 320px; background-color: #fff; border-radius: 6px; ">&nbsp;</md-card>
+									<md-card style="position: absolute; top: 1200px; left: 660px; width: 550px; height: 320px; background-color: #fff; border-radius: 6px; ">&nbsp;</md-card>
 									<span style="border-bottom: 1px solid #3A1772; position: absolute; width: 350px; top: 1210px; left: 670px;"><h1 style="color: #3A1772; font-family: 'Roboto'; font-size: 24px; margin-top: 10px; margin-left: 40px;">Bounce Rate</h1></span>
 									<div id="bouncerate-linechart" style="position: absolute; top: 1200px; left: 600px; height: 300px;  z-index: 0; padding: 0; margin: 0; background: none; ">
 									</div>
@@ -402,7 +404,7 @@
 							</div>
 							<div layout="row" layout-align="start start" style="background-color: #f7f7f7; width: 100%; ">
 								<div layout="column" flex >
-									<md-card style="box-shadow: none; position: absolute; top: 1600px; left: 60px; width: 550px; height: 320px; background-color: #fff; border-radius: 6px; ">&nbsp;</md-card>
+									<md-card style=" position: absolute; top: 1600px; left: 60px; width: 550px; height: 320px; background-color: #fff; border-radius: 6px; ">&nbsp;</md-card>
 									<span style="border-bottom: 1px solid #3A1772; position: absolute; width: 350px; top: 1610px; left: 70px;"><h1 style="color: #3A1772; font-family: 'Roboto'; font-size: 24px; margin-top: 10px; margin-left: 40px;">Page Views</h1></span>
 									<div id="pageviews-linechart" style="position: absolute; top: 1600px; left: 0; height: 300px;  z-index: 0; padding: 0; margin: 0; background: none; ">
 									</div>
@@ -410,7 +412,7 @@
 									</div>
 								</div>
 								<div layout="column" flex >
-									<md-card style="box-shadow: none; position: absolute; top: 1600px; left: 660px; width: 550px; height: 320px; background-color: #fff; border-radius: 6px; ">&nbsp;</md-card>
+									<md-card style="position: absolute; top: 1600px; left: 660px; width: 550px; height: 320px; background-color: #fff; border-radius: 6px; ">&nbsp;</md-card>
 									<span style="border-bottom: 1px solid #3A1772; position: absolute; width: 350px; top: 1610px; left: 670px;"><h1 style="color: #3A1772; font-family: 'Roboto'; font-size: 24px; margin-top: 10px; margin-left: 40px;">Unique Views</h1></span>
 									<div id="uniqueviews-linechart" style="position: absolute; top: 1600px; left: 600px; height: 300px;  z-index: 0; padding: 0; margin: 0; background: none; ">
 									</div>
@@ -420,7 +422,7 @@
 							</div>
 							<div layout="row" layout-align="start start" style="background-color: #f7f7f7; width: 100%; ">
 								<div layout="column" flex >
-									<md-card style="box-shadow: none; position: absolute; top: 2000px; left: 60px; width: 550px; height: 320px; background-color: #fff; border-radius: 6px; ">&nbsp;</md-card>
+									<md-card style=" position: absolute; top: 2000px; left: 60px; width: 550px; height: 320px; background-color: #fff; border-radius: 6px; ">&nbsp;</md-card>
 									<span style="border-bottom: 1px solid #3A1772; position: absolute; width: 350px; top: 2010px; left: 70px;"><h1 style="color: #3A1772; font-family: 'Roboto'; font-size: 24px; margin-top: 10px; margin-left: 40px;">Pages / Session</h1></span>
 									<div id="ppv-linechart" style="position: absolute; top: 2000px; left: 0; height: 300px;  z-index: 0; padding: 0; margin: 0; background: none; ">
 									</div>
@@ -428,7 +430,7 @@
 									</div>
 								</div>
 								<div layout="column" flex >
-									<md-card style="box-shadow: none; position: absolute; top: 2000px; left: 660px; width: 550px; height: 320px; background-color: #fff; border-radius: 6px; ">&nbsp;</md-card>
+									<md-card style=" position: absolute; top: 2000px; left: 660px; width: 550px; height: 320px; background-color: #fff; border-radius: 6px; ">&nbsp;</md-card>
 									<span style="border-bottom: 1px solid #3A1772; position: absolute; width: 350px; top: 2010px; left: 670px;"><h1 style="color: #3A1772; font-family: 'Roboto'; font-size: 24px; margin-top: 10px; margin-left: 40px;">Duration</h1></span>
 									<div id="duration-linechart" style="position: absolute; top: 2000px; left: 600px; height: 300px;  z-index: 0; padding: 0; margin: 0; background: none; ">
 									</div>
@@ -441,6 +443,25 @@
 					<section layout="column" layout-align="center center" style="width: 100%; margin-left: 20px;">
 
 					</section>
+				</md-tab-body>
+			</md-tab>
+			<md-tab class="md-accent" label="Top Performers" >
+				<md-tab-body style="">
+					<div layout="row" layout-align="center start" style="margin-top: 40px; min-height: 360px; width: 100%; height: 100%; background-color: #fff;">
+						<div layout="column" style="width: 100%; height: 360px; padding-right: 10px;">
+							
+							<div id="grid1" ui-grid="pageOptions" ui-grid-selection style="margin-top: 0px; font-size: 0.8em; height: 360px;" class="myGrid" ></div>
+
+						</div>
+
+					</div>
+					<div layout="row" layout-align="center start" style="margin-top: 40px; min-height: 800px; width: 100%; height: 100%; background-color: #fff;">
+						<div layout="column" style="width: 100%; ">
+							
+							<div id="grid2" ui-grid="queryOptions" ui-grid-selection style="margin-top: 0px; font-size: 0.8em; height: 500px;" class="myGrid" ></div>
+						
+						</div>
+					</div>
 				</md-tab-body>
 			</md-tab>
 		</md-tabs>

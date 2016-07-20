@@ -32,10 +32,6 @@
     "dataSource": "db",
     "public": false
   },
-  "Gapi": {
-    "dataSource": "db",
-    "public": true
-  },
   "Operator": {
     "dataSource": "mysqlConn",
     "public": true
@@ -68,15 +64,15 @@
     "dataSource": "mysqlConn",
     "public": true
   },
-  "LandingPageMetric": {
-    "dataSource": "mysqlConn",
-    "public": true
-  },
   "Referrer": {
     "dataSource": "mysqlConn",
     "public": true
   },
-  "ReferrerMetric": {
+  "Query": {
+    "dataSource": "mysqlConn",
+    "public": true
+  },
+  "Channel": {
     "dataSource": "mysqlConn",
     "public": true
   }

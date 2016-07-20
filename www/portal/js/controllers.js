@@ -274,122 +274,121 @@ angular.module('app.controllers', [])
 	}
 })
 
-	.controller('uploadCtrl', ['$scope', '$timeout', 'Company', 'CompanyMetric', 'CompetitorMetric', 'KeywordMetric', 'StatService', '$mdDialog', function($scope, $timeout, Company, CompanyMetric, CompetitorMetric, KeywordMetric, StatService, $mdDialog ) {
+	.controller('uploadCtrl', ['$scope', '$timeout', 'Company', 'CompanyMetric', 'CompetitorMetric', 'KeywordMetric', 'StatService', '$mdDialog', 'ErrorService', function($scope, $timeout, Company, CompanyMetric, CompetitorMetric, KeywordMetric, StatService, $mdDialog, ErrorService ) {
 		
 		$scope.msg = {};
 		$scope.gridOptions = {};
 		$scope.gridOptions.columnDefs = [];
 		$scope.gridOptions.data = [];
-		
-		var chartObj = StatService.getChartObj();
+		$scope.selectedCompany = {
+			id: null,
+			profileId: null,
+			url: '',
+			metricId: null
+		};
+		//var chartObj = StatService.getChartObj();
 		var d = new Date();
 		var curMonth = d.getMonth();
+		$scope.stats = {
+			clicks: null,
+			impressions: null,
+			ctr: null,
+			position: null,
+			sessions: null,
+			bounces: null,
+			bouncerate: null,
+			duration: null,
+			pageviews: null,
+			ppv: null,
+			uniqueviews: null,
+			pageload: null
+		};
+		$scope.myDate = new Date();
+		$scope.minDate = new Date(
+			$scope.myDate.getFullYear(),
+			$scope.myDate.getMonth() - 6,
+			$scope.myDate.getDate());
+		$scope.maxDate = new Date(
+			$scope.myDate.getFullYear(),
+			$scope.myDate.getMonth() - 1,
+			$scope.myDate.getDate());
 		
-		var getMetrics = function(companies) {
-			var companies = companies;
-			for(var i = 0; i < companies.length; i++) {
-				Company.metrics({id: companies[i].id}).$promise.then(function(res) {
-					var reply = res;
-					populateData(reply);
-				})
-			}
-			
-		}
-
-		var populateData = function(data) {
-			var data = data;
-			var compMonth = null;
-			var obj = {};
-			for(var i = 0; i < data.length; i++) {
-				metricMonth = new Date(data[i].month);
-				compMonth = metricMonth.getMonth();
-				if(compMonth === (curMonth - 1)) {
-					obj = data[i];
-					populateTable(obj);
-				}
-				var obj = data[i];
-				
-			}
-			
-		}
-		
-		var populateTable = function(data) {
-			var data = data;
-			var obj = {};
-			var keys = Object.keys(data);
-			for(var i = 0; i < data.length; i++) {
-				
-				for(var j = 0; j < data[i].length; j++) {
-				//	$scope.gridOptions.push(data[j]);
-					if(keys[j] === chartObj[i][0].fieldName) {
-						
-					}
-					var obj1 = data[j];
-					
-				}
-				obj = CompanyMetric[i];
-				
-			}
-			
-		}
+	
+		var loadViewSelector = function() {
+			$timeout(function() {
+				//$scope.createView();
+				$scope.reportView = new gapi.analytics.ext.ViewSelector2({
+					container: 'view-selector-container2',
+				}).execute()
+				  .on('viewChange', function(data) {
+					  $scope.changeView(data);
+				  });
+			},4000);
+		};
 		
 		$scope.initPage = function() {
-			var headers = {
-				name: '',
-				displayName: '',
-				type: 'number'
-			};
-			var stats = {};
-			var chartData = {};
-			var thisid = { name: 'id', enableCellEdit: false, width: '10%' };
-			var comp = { name: 'company', displayName: 'Company'};
-			$scope.showConfirm = function(ev) {
-				// Appending dialog to document.body to cover sidenav in docs app
-				var confirm = $mdDialog.confirm()
-									   .title('Would you like to delete your debt?')
-									   .textContent('All of the banks have agreed to forgive you your debts.')
-									   .ariaLabel('Lucky day')
-									   .targetEvent(ev)
-									   .ok('Please do it!')
-									   .cancel('Sounds like a scam');
-				$mdDialog.show(confirm).then(function() {
-					$scope.status = 'You decided to get rid of your debt.';
-				}, function() {
-					$scope.status = 'You decided to keep your debt.';
-				});
-			};
-			//$scope.showConfirm();
-			//$scope.gridOptions.columnDefs.push(thisid);
-		//	$scope.gridOptions.columnDefs.push(comp);
-			
-			CompanyMetric.find(null, {filter: {where: {month: '2016-05-01TT00:00:00.000Z'}}}).$promise.then(function(resp) {
-				var reply = resp;
-				$scope.gridOptions.data = reply;
-				
-			}, function(err) {
-				return err;
-			});
-			
-			stats = StatService.getDataObj();
-			chartData =  StatService.getChartObj();
-			console.log(StatService.getChartObj());
-			console.log(chartData);
-			for(var i = 0; i < chartData.length; i++) {
-				headers.name = chartData[i][0].fieldName;
-				console.log(headers.name);
-				headers.displayName = chartData[i][0].displayName;
-			//	$scope.gridOptions.columnDefs.push(headers);
-			}
+
 			Company.find().$promise.then(function(res) {
 				$scope.companies = res;
-				$scope.gridOptions
-				getMetrics($scope.companies);
 				
 			});
 			
-		};
+			loadViewSelector();
 			
+		};
 		
+		$scope.getDateString = function() {
+			var d = new Date($scope.myDate);
+			var month = d.getMonth() + 1;
+			var year = d.getFullYear();
+			if(month < 10) {
+				month = '0' + month;
+			}
+			var str = year + '-' + month + '-01T00:00:00.000Z';
+			return str;
+		}
+		$scope.showPrompt = function() {
+			// Appending dialog to document.body to cover sidenav in docs app
+			var confirm = $mdDialog.confirm()
+			   .title('No Matches Found')
+			   .textContent('Would you like to add a new record?')
+			   .ariaLabel('Error')
+			   .targetEvent()
+			   .ok('Yes')
+			   .cancel('No');
+			$mdDialog.show(confirm).then(function(result) {
+				$scope.new = true;
+				return;
+			}, function() {
+				$scope.new = false;
+				return;
+			});
+		};
+		
+		$scope.getAllStats = function() {
+			var str = $scope.getDateString();
+			var id = $scope.selectedCompany.id;
+			CompanyMetric.find({filter: {where: {month: str, companyId: id}}}).$promise.then(function(resp) {
+				var reply = resp;
+				if(reply.length === 0 || reply === null) {
+					$scope.showPrompt();
+					$scope.selectedCompany.metricId = null;
+					return;
+				} else {
+					var chartData = [];
+					$scope.myMetrics = reply[0];
+					$scope.selectedCompany.metricId = reply[0].id;
+					stats = StatService.getDataObj();
+					chartData =  StatService.getChartObj($scope.myMetrics);
+					$scope.gridOptions.columnDefs = chartData;
+					$scope.gridOptions.data = reply;
+				}
+				
+			}, function(err) {
+				ErrorService.handleError(err);
+			});
+		};
+
 		$scope.gridOptions.onRegisterApi = function(gridApi){
 			//set gridApi on scope
 			$scope.gridApi = gridApi;
@@ -399,22 +398,19 @@ angular.module('app.controllers', [])
 		//	});
 		};
 
-	$scope.webmasterData = function(company) {
-			var company = company;
-			var url = company.url;
-			var clicks = null;
-			var impressions = null;
-			var ctr = null;
-			var position = null;
-			var avgPosition = null;
-			var avgCTR = null;
-			StatService.getWebmasterData(url)
+	$scope.webmasterData = function() {
+			
+			var url = $scope.selectedCompany.url;
+			var clicks = 0;
+			var impressions = 0;
+			var ctr = 0;
+			var position = 0;
+			var avgPosition = 0;
+			var avgCTR = 0;
+			StatService.getWebmasterData(url, $scope.myDate)
 			
 				.then(function(resp) {
 					var reply = resp.rows;
-					console.log(resp);
-					$scope.gwtResults = reply;
-					
 					for(var i = 0; i < reply.length; i++) {
 						clicks = reply[i].clicks + clicks;
 						impressions = reply[i].impressions + impressions;
@@ -427,45 +423,111 @@ angular.module('app.controllers', [])
 					$scope.stats.impressions = impressions;
 					$scope.stats.ctr = avgCTR;
 					$scope.stats.position = avgPosition;
-	
 				}, function(err) {
 					console.log(err);
 				});
+		};
+		
+		$scope.saveGWTData = function() {
+			var options = {	};
+			options.month = $scope.getDateString();
+			options.clicks = $scope.stats.clicks;
+			options.impressions = $scope.stats.impressions;
+			options.ctr = $scope.stats.ctr;
+			options.position = $scope.stats.position;
+			if($scope.selectedCompany.metricId == null && $scope.new == true) {
+				
+				Company.metrics.create({id: $scope.selectedCompany.id}, options).$promise.then(function(res) {
+					var data = res;
+					$scope.selectedCompany.metricId = data.id;
+					$scope.getAllStats();
+					return;
+				}, function(err) {
+					if(err) {
+						ErrorService.handleError();
+					} else {
+						return;
+					}
+				})
+				
+			} else if($scope.selectedCompany.metricId > 0) {
+				var id = $scope.selectedCompany.metricId;
+				CompanyMetric.prototype$updateAttributes({id: id}, options).$promise.then(function(res) {
+					var data = res;
+					$scope.getAllStats();
+				}, function(err) {
+					if(err) {
+						return err;
+					} else {
+						return null;
+					}
+				})
+			} else if(($scope.selectedCompany.metricId == null && $scope.new == false) || $scope.selectedCompany.id === null) {
+				var showAlert = function() {
+				$mdDialog.show(
+				$mdDialog.alert()
+						 .parent(angular.element(document.querySelector('#popupContainer')))
+						 .clickOutsideToClose(true)
+						 .title('Uh-oh')
+						 .textContent('Please select another company.')
+						 .ariaLabel('Aaaaaaaaahhhhhh!!!')
+						 .ok('OK')
+						 .targetEvent()
+					);
+				};
+				showAlert();
+				return;
+			} else {
+				var silently = null;
+				return silently;
+			}
+		};
+		
+		$scope.saveAnalytics = function() {
+			var options = {
+				sessions: $scope.stats.sessions,
+				bounces: $scope.stats.bounces,
+				bounceRate: $scope.stats.bouncerate,
+				duration: $scope.stats.duration,
+				pageViews: $scope.stats.pageviews,
+				ppv: $scope.stats.ppv,
+				uniquePageViews: $scope.stats.uniqueviews,
+				pageLoadTime: $scope.stats.pageload
+			};
+			var id = $scope.selectedCompany.metricId;
+			CompanyMetric.prototype$updateAttributes({id: id}, options).$promise.then(function(res) {
+				var data = res;
+				$scope.getAllStats();
+			}, function(err) {
+				if(err) {
+					return err;
+				} else {
+					return null;
+				}
+			})
 		}
 		
 		
-		$scope.analyticsData = function(account) {
-			console.log(account);
-			var profileId = account;
-			var clicks = null;
-			var impressions = null;
-			var ctr = null;
-			var position = null;
-			var avgPosition = null;
-			var avgCTR = null;
-			StatService.getAnalyticsData(profileId)
+		$scope.analyticsData = function() {
+			var profileId = $scope.selectedCompany.profileId;
+			StatService.getAnalyticsData(profileId, $scope.myDate)
 			
 				.then(function(resp) {
 				   var handler = resp;
-				   console.log(resp);
-					$scope.stats = {
-						
-						sessions: Number(handler.totalsForAllResults['ga:sessions']),
-						bounces: Number(handler.totalsForAllResults['ga:bounces']),
-						bouncerate: Number(handler.totalsForAllResults['ga:bounceRate']),
-						duration: Number(handler.totalsForAllResults['ga:avgSessionDuration']),
-						pageviews: Number(handler.totalsForAllResults['ga:pageviews']),
-						ppv: Number(handler.totalsForAllResults['ga:pageviewsPerSession']),
-						uniqueviews: Number(handler.totalsForAllResults['ga:uniquePageviews']),
-						pageload: Number(handler.totalsForAllResults['ga:avgPageLoadTime'])
-					}
+					$scope.stats.sessions = Number(handler.totalsForAllResults['ga:sessions']);
+					$scope.stats.bounces = Number(handler.totalsForAllResults['ga:bounces']);
+					$scope.stats.bouncerate = Number(handler.totalsForAllResults['ga:bounceRate']);
+					$scope.stats.duration = Number(handler.totalsForAllResults['ga:avgSessionDuration']);
+					$scope.stats.pageviews = Number(handler.totalsForAllResults['ga:pageviews']);
+					$scope.stats.ppv = Number(handler.totalsForAllResults['ga:pageviewsPerSession']);
+					$scope.stats.uniqueviews = Number(handler.totalsForAllResults['ga:uniquePageviews']);
+					$scope.stats.pageload = Number(handler.totalsForAllResults['ga:avgPageLoadTime']);
 					return $scope.stats;
 				}, function(err) {
 				   console.log(err);
 				});
 		}
 
-		
 		$scope.percentLoaded = 0;
 		$scope.completed = false;
 		$scope.fileparsed = false;
@@ -474,42 +536,45 @@ angular.module('app.controllers', [])
 		
 		$scope.mydata = {};
 
-		$timeout(function() {
-			//$scope.createView();
-			$scope.reportView = new gapi.analytics.ext.ViewSelector2({
-				container: 'view-selector-container2',
-			}).execute()
-			.on('viewChange', function(data) {
-				$scope.changeView(data);
-			});
-		},2000);
-
 		$scope.changeView = function(data) {
+			$scope.selectedCompany.id = null;
+			$scope.selectedCompany.url = '';
+			$scope.selectedCompany.profileId = null;
+			$scope.selectedCompany.metricId = null;
+			$scope.stats = {
+				clicks: null,
+				impressions: null,
+				ctr: null,
+				position: null,
+				sessions: null,
+				bounces: null,
+				bouncerate: null,
+				duration: null,
+				pageviews: null,
+				ppv: null,
+				uniqueviews: null,
+				pageload: null
+			};
 			var reply = data;
-			console.log(reply);
+			console.log(data);
+			var profileId = reply.ids;
+			$scope.selectedCompany.profileId = reply.ids;
+			$scope.gridOptions.data = [];
+			
 			var properties = [];
 			var url = '';
 			var siteUrl = '';
-			$scope.selectedAcct = null;
-			for(var i = 0; i < reply.account.webProperties.length; i++) {
-				properties.push(reply.account.webProperties[i]);
-			}
-			for(var j = 0; j < $scope.companies.length; j++) {
-				for(k = 0; k < properties.length; k++) {
-					url = 'http://' + $scope.companies[j].url;
-					siteUrl = properties[k].websiteUrl.replace(/\/$/, "");
-					if(siteUrl === url) {
-							$scope.selectedAcct = reply.ids;
-							$scope.selectedCompany = $scope.companies[j];
-							console.log($scope.selectedAcct);
-							return;
-
-					}
+			for(var i = 0; i < $scope.companies.length; i++) {
+				if($scope.companies[i].profileId == profileId) {
+					$scope.selectedCompany.id = $scope.companies[i].id;
+					url = 'http://' + $scope.companies[i].url;
+					$scope.selectedCompany.url = url;
+					$scope.selectedCompany.profileId = $scope.companies[i].profileId;
+					break;
 				}
-
 			}
-			if($scope.selectedAcct == null) {
-				return error;
+			if($scope.selectedCompany.id == null) {
+				ErrorService.handleError();
 			}
 		}
 
@@ -833,10 +898,25 @@ angular.module('app.controllers', [])
 // 'http://res.cloudinary.com/grooveio88/image/upload/bo_1px_solid_rgb:ccc,w_200,c_fit,g_north,o_90,r_0/yokvm8a9trv7aapa0fvz.jpg';
 })
 
-.controller('reportCtrl', function($scope, CompanyService, Company, $timeout, uiGridConstants, DashConfig) {
+.controller('reportCtrl', function($scope, CompanyService, Company, $timeout, uiGridConstants, DashConfig, StatService) {
 
 	$scope.Math = window.Math;
 
+	$scope.pageObj = [{
+		clicks: 576,
+		impressions: null,
+		ctr: null,
+		position: null,
+		sessions: null,
+		bounces: null,
+		bouncerate: null,
+		duration: null,
+		pageviews: null,
+		ppv: null,
+		uniqueviews: null,
+		pageload: null
+	}];
+	
 	$scope.initPage = function() {
 		Company.find({filter:{include: [{keywords: 'keywordMetrics'},{competitors: 'competitorMetrics'},'metrics']}}).$promise.then(function(res) {
 			var handler = res;
@@ -846,8 +926,80 @@ angular.module('app.controllers', [])
 
 		}, function(err) {
 			return err;
-		})
+		});
+		
+		
 	};
+	
+	$scope.pageObj = [
+	
+	];
+	$scope.pageOptions = {};
+	$scope.pageOptions.columnDefs = [];
+	$scope.pageOptions.data = [];
+	$scope.pageObj = [{
+		type: 'string', displayName: 'Landing Pages', name: 'landingPages', field: 'url'
+	}, {
+		type: 'number', displayName: 'Clicks', name: 'clicks', field: 'clicks'
+	}, {
+		type: 'number', displayName: 'Impressions', name: 'impressions', field: 'impressions'
+	}, {
+		type: 'number', displayName: 'CTR', name: 'ctr', field: 'ctr'
+	}, {
+		type: 'number', displayName: 'Position', name: 'position', field: 'position'
+	}];
+	
+	$scope.getPageChart = function(id) {
+		var id = id;
+		Company.landingPages({id: id}).$promise.then(function(res) {
+			var data = res;
+			$scope.pageData = data;
+			$scope.pageOptions.columnDefs = $scope.pageObj;
+			$scope.pageOptions.data = $scope.pageData;
+		}, function(err) {
+			if(err) {
+				var silently = null;
+				return silently;
+			}
+		})
+	}
+	
+	$scope.queryObj = [
+	
+	];
+	$scope.queryOptions = {};
+	$scope.queryOptions.columnDefs = [];
+	$scope.queryOptions.data = [];
+	$scope.queryObj = [{
+		type: 'string', displayName: 'Search Query', name: 'query', field: 'query'
+	}, {
+		type: 'number', displayName: 'Clicks', name: 'clicks', field: 'clicks'
+	}, {
+		type: 'number', displayName: 'Impressions', name: 'impressions', field: 'impressions'
+	}, {
+		type: 'number', displayName: 'CTR', name: 'ctr', field: 'ctr'
+	}, {
+		type: 'number', displayName: 'Position', name: 'position', field: 'position'
+	}];
+	
+	$scope.getQueryChart = function(id) {
+		var id = id;
+		Company.queries({id: id}).$promise.then(function(res) {
+			var data = res;
+			$scope.queryData = data;
+			$scope.queryOptions.columnDefs = $scope.queryObj;
+			$scope.queryOptions.data = $scope.queryData;
+		}, function(err) {
+			if(err) {
+				var silently = null;
+				return silently;
+			}
+		})
+	}
+	
+	
+	
+	
 
 	$scope.gridOptions = DashConfig.getKeyGridConfig();
 	$scope.compOptions = DashConfig.getCompGridConfig();
@@ -925,7 +1077,9 @@ angular.module('app.controllers', [])
 			chart.draw(data, options);
 		},1200);
 
-	}
+	};
+	
+	
 
 	$scope.mozRankChart = function() {
 
@@ -1243,7 +1397,10 @@ angular.module('app.controllers', [])
 			var dateA = new Date(a.month), dateB = new Date(b.month);
 			return dateA-dateB;
 		})
-
+		
+		$scope.getQueryChart(company.id);
+		$scope.getPageChart(company.id);
+		
 		$scope.makeHistData(sortedHandler);
 		var now = new Date();
 		var thismonth = now.getMonth();
@@ -1258,9 +1415,6 @@ angular.module('app.controllers', [])
 			t = new Date(d);
 			month = t.getMonth() + 1;
 			year = t.getFullYear();
-			console.log('lastmonth ' + lastmonth);
-			console.log('month ' + handler.metrics[m].month);
-			console.log('month ' + month);
 			if(lastmonth === month && thisyear === year) {
 				var compInfo = [handler.url, handler.metrics[m].domainAuthority, "#228CDB"];
 				var compRank = [handler.url, handler.metrics[m].mozRank, "#228CDB"];

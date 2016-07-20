@@ -44,8 +44,8 @@ angular.module('app', ['ngMaterial', 'ui.router', 'app.controllers', 'app.direct
 				gapi.client.plus.people.get({userId: 'me'}).execute(function(resp) {
 					$rootScope.user = resp;
 					if($rootScope.user.id === '109792126873673599082' || $rootScope.user.id === '103294612803329153998') {
-						var profileImg = document.getElementById('profileImg');
-						profileImg.src = $rootScope.user.image.url;
+						//var profileImg = document.getElementById('profileImg');
+						//profileImg.src = $rootScope.user.image.url;
 						$rootScope.authenticated = true;
 						$rootScope.$broadcast('authenticated');
 					} else {

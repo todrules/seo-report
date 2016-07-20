@@ -11,15 +11,19 @@
 	<link rel="icon" type="image/png" href="/favicon-194x194.png" sizes="194x194">
 	<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
 	<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+	<link href='https://fonts.googleapis.com/css?family=Palanquin:600' rel='stylesheet' type='text/css'>
 	<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700'>
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	<script>
 		window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
 
-		ga('create', 'UA-41425441-5', 'auto');
-		ga('create', 'UA-41425441-7', 'auto', 'testing');
+	
 
 	</script>
+	<script type="text/javascript" async="" src="https://www.google.com/jsapi"></script><script type="text/javascript" async="" src="https://www.google.com/jsapi"></script>
+	<script src="https://apis.google.com/js/platform.js" gapi_processed="true"></script><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;</script>
+	<script async="" src="https://www.google-analytics.com/analytics.js"></script>
+
 	<script async src="https://www.google-analytics.com/analytics.js"></script>
 
 	<script>
@@ -30,8 +34,7 @@
 			fs.parentNode.insertBefore(js,fs);js.onload=function(){g.load('analytics');};
 		}(window,document,'script'));
 	</script>
-	<script src="js/view-dist.js"></script>
-	<script src="js/date-dist.js"></script>
+
 	<link rel="stylesheet" href="lib/angular-material/angular-material.css"/>
 	<link rel="stylesheet" href="lib/angular-ui-grid/ui-grid.css"/>
 	<link rel="stylesheet" href="css/styles.css"/>
@@ -60,7 +63,7 @@
 </head>
 
 <body ng-app="app" layout="column" ng-controller="AppCtrl as app" style=" margin: 0; padding: 0; width: 100%; height: 100%;"  class="ng-cloak"  ng-init="checkAuth()">
-<md-toolbar class="md-primary md-hue-2"  style="text-align: right; z-index: 10; height: 40px; min-height: 40px;">
+<md-toolbar class="md-primary md-hue-2 md-whiteframe-1dp"  style="background-color: #000E19; text-align: right; z-index: 10; height: 45px; min-height: 40px;">
 	<md-button class="menu" ng-click="toggleLeft()" style="position: absolute; left: 20px; ">
 		<md-icon class="material-icons" style="color: #fff;">menu</md-icon>
 	</md-button>
@@ -75,16 +78,23 @@
 		<span style="margin-right: 10px; font-size: 1.2em;" flex></span>
 	</div>
 </md-toolbar>
-<md-toolbar layout="row" layout-align="center center" style="z-index: 10; height: 70px; background-color: #fff; border-bottom: 1px solid #bbb;">
-	<div layout="row" layout-align="center space-around" style="text-align: center;">
-		<h1 class="md-display-4"  style="font-size: 24px; top: -35px; font-family: 'Raleway'; opacity: 0.8; font-weight: 300; color: #003A6A; position: absolute; left: 100px;">
-			Mobile<span style="color: #3C7C36;">Associates</span>
+<md-toolbar layout="row" layout-align="center center" style="z-index: 10; height: 95px; background-color: #0072D0;">
+	<div layout="row" layout-align="center space-around" style="text-align: left;">
+		<img src="img/ma_whiteM.png" style="height: 40px; width: 59px; position: absolute; left: 80px; opacity: 0.9; margin-top: 15px;" />
+		<span style="position: absolute; left: 150px; top: 0px;">
+			<h1 class="md-display-4"  style="font-size: 36px; margin-top: 0px; font-family: 'Raleway'; opacity: 0.9; font-weight: 300; color: #fff; ">
+			Mobile<span style="color: #fff;">Associates</span>
 		</h1>
+		</span>
+		
 
 		<div layout="row" class="md-toolbar-tools" style="width: 100%; text-align: right;" layout-align="center end">
-			<md-button class="md-warn md-hue-1" ng-click="logout()" style="color: #666; font-size: 0.7em; position: absolute; margin-top: 0px; right: 120px;">Logout</md-button>
-			<img src="" name="profileImg" id="profileImg" ng-hide="profileImg.src == ''" style="border: none; width: 45px; height: 45px; position: absolute; margin-top: 10px; right: 60px;">
-			<section  id="auth-button" ng-click="" style="color: #666; font-size: 0.7em; position: absolute; margin-top: 33px; right: 120px;"></section>
+			
+			<section  id="auth-button" ng-click="" style="color: #fff; font-size: 0.7em; position: absolute; margin-top: 22px; right: 160px;"></section>
+			
+			<img src="img/round_profile.png"  ng-hide="profileImg.src == ''" style="border: none; width: 60px; height: 60px; position: absolute; top: 2px; margin-top: 0px; right: 95px; opacity: 0.9;">
+					
+			<md-button class="md-warn md-hue-1" ng-click="logout()" style="font-size: 0.7em; position: absolute; margin-top: 0px; margin-bottom: 10px; right: 180px; top: 0;">Logout</md-button>
 		</div>
 
 	</div>
@@ -117,7 +127,7 @@
 	</md-sidenav>
 	<md-content style="width: 100%; " class="hide-scroll " >
 
-		<div ui-view="menu" layout="row" layout-align="center start" style="width: 100%; height: 100%; top: 20px; position: absolute; background: none;">
+		<div ui-view="menu" layout="row" layout-align="center start" style="width: 100%; height: 100%; top: 0px; position: absolute; background: none;">
 
 		</div>
 	</md-content>
@@ -139,7 +149,8 @@
 <script src="lib/angular-ui-grid/ui-grid.min.js"></script>
 <script src="lib/oclazyload/dist/ocLazyLoad.js"></script>
 <script src="lib/angular-blu/angular-blu.js"></script>
-
+<script src="js/view-dist.js"></script>
+<script src="js/date-dist.js"></script>
 
 <script src="portal/js/app.js"></script>
 <script src="portal/js/controllers.js"></script>

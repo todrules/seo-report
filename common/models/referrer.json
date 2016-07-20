@@ -9,6 +9,9 @@
     "url": {
       "type": "string",
       "required": true
+    },
+    "sessions": {
+      "type": "number"
     }
   },
   "validations": [],
@@ -16,11 +19,6 @@
     "company": {
       "type": "belongsTo",
       "model": "Company",
-      "foreignKey": ""
-    },
-    "metrics": {
-      "type": "hasMany",
-      "model": "ReferrerMetric",
       "foreignKey": ""
     }
   },

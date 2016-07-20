@@ -6,9 +6,21 @@
     "validateUpsert": true
   },
   "properties": {
-    "url": {
+    "query": {
       "type": "string",
       "required": true
+    },
+    "impressions": {
+      "type": "number"
+    },
+    "clicks": {
+      "type": "number"
+    },
+    "ctr": {
+      "type": "number"
+    },
+    "position": {
+      "type": "number"
     }
   },
   "validations": [],
@@ -16,11 +28,6 @@
     "company": {
       "type": "belongsTo",
       "model": "Company",
-      "foreignKey": ""
-    },
-    "metrics": {
-      "type": "hasMany",
-      "model": "QueryMetric",
       "foreignKey": ""
     }
   },

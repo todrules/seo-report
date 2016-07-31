@@ -1,37 +1,52 @@
-<md-content style="width: 100%; height: 100%; top: 20px;" layout="row" class="hide-scroll" flex layout-align="center">
-	<md-content class="hide-scroll md-whiteframe-1dp" flex layout-align="center" style="width: 100%; min-width: 820px; max-width: 820px; background-color: #fff;" >
+<md-content style="width: 100%; height: 100%; top: -2px;" layout="row" class="hide-scroll" flex layout-align="center" ng-init="initPage()">
+	<md-content class="hide-scroll md-whiteframe-1dp" flex layout-align="center" style="width: 100%;background-color: #fff;" >
 		<div style="width: 100%; text-align: center;" layout="row" layout-align="center start" >
-			<md-toolbar class="md-primary" style="width: 820px;">
-				<div class="md-toolbar-tools">
+			<md-toolbar class="md-primary" style="border: none; margin: 0; background-color: #0072D0;">
+				<div class="md-toolbar-tools" style="margin-left: 100px;">
 					<h2>
-						<span>Add Company</span>
+						<span>Manage Clients</span>
 					</h2>
 					<span flex></span>
-					<button  id="upload_widget_opener" class="md-button md-warn">Add Logo</button>
-					<button id="ss_upload" class="md-button md-warn">Add Screenshot</button>
+					<span flex="25" style="text-align: right;">
+					<md-menu md-position-mode="target-right target" style="margin-right: 80px;">
+						<md-button aria-label="iii" class="md-button" style="opacity: 1; padding: 2px 5px 2px 5px; background-color: #74BF0E;" ng-click="$mdOpenMenu($event)">
+							Select Client
+							<md-icon class="material icons" style="margin-bottom: 2px;">person_outline</md-icon>
+						</md-button>
+						<md-menu-content width="4" >
+							<md-menu-item ng-repeat="company in companies">
+								<md-button ng-click="viewReports(company)">
+									<div layout="row" flex>
+										<p flex>{{company.name}}</p>
+									</div>
+								</md-button>
+							</md-menu-item>
+						</md-menu-content>
+					</md-menu>
+				</span>
+					<span flex></span>
 				</div>
 			</md-toolbar>
 		</div>
-		<div>
-		<md-list style="padding: 10px 40px 0px 40px;">
+		<md-tabs md-dynamic-height md-border-bottom class="md-hue-1 " style="padding-left: 100px; padding-right: 100px;">
+			<md-tab class="md-accent md-hue-1 " label="Edit Client" style="width: 100%; height: 100%;  border-right: 1px solid #ccc;">
+		<md-list style="padding: 10px 40px 0px 40px; max-width: 820px;">
 			<form name="myForm" novalidate>
-				<div class="md-headline" ng-show="successMsg == true">Success!</div>
-				<div layout="row" layout="space-around center" style="width: 100%; margin-bottom: 10px;">
-					<md-subheader style="width: 352px;">Upload Logo</md-subheader>
+				
+				<div layout="row" layout-align="space-around center" style="width: 100%; margin-bottom: 10px;">
+					<span style="width: 352px; padding: 0; text-align: right;"><button  id="upload_widget_opener" ng-click="uploadImg('logoImg', 'logo')" class="md-button md-warn">Add Logo</button></span>
+
 					<span flex>&nbsp;</span>
-					<md-subheader style="width: 352px;">Upload Screenshot</md-subheader>
+					<span style="width: 352px; padding: 0; text-align: right;"><button id="ss_upload" ng-click="uploadImg('ssImg', 'ss')" class="md-button md-warn">Add Screenshot</button></span>
 					<span flex>&nbsp;</span>
 				</div>
 				<div layout-gt-sm="row">
 					<div layout="column" flex="50" layout-align="start start">
 						<img id="logoImg" ng-src='https://res.cloudinary.com/grooveio88/image/upload/bo_1px_solid_rgb:e0e0e0,c_fill,h_250,o_15,r_0,w_350/{{ logo  }}.jpg' />
-
 					</div>
 					<div layout="column" flex="50" layout-align="start start">
 						<img id="ssImg" ng-src='https://res.cloudinary.com/grooveio88/image/upload/bo_1px_solid_rgb:e0e0e0,c_fill,h_250,o_15,r_0,w_350/{{ ss }}.jpg' />
 					</div>
-
-
 				</div>
 				<div layout-gt-sm="row">
 					<md-input-container class="md-block" flex-gt-sm>
@@ -52,10 +67,7 @@
 					</md-input-container>
 				</div>
 				<div layout-gt-sm="row">
-
 				</div>
-
-
 				<div layout-gt-sm="row">
 					<md-input-container class="md-block" flex-gt-sm>
 						<label>Contact Person</label>
@@ -84,24 +96,96 @@
 						</div>
 					</md-input-container>
 				</div>
-				<div layout-gt-sm="row">
-					<md-input-container class="md-block" flex-gt-sm>
-						<label>Spreadsheet ID</label>
-						<input type="text" ng-model="company.sheetId" name="sheetId" >
-						<div ng-messages="myForm.sheetId.$error">
-							<div ng-message="required">This is required.</div>
-						</div>
-					</md-input-container>
-				</div>
 				<div layout-gt-sm="row" layout-align="center center">
+					<div class="md-headline" style="color: #7CC900;" ng-show="successMsg == true">Success!</div>
 					<md-progress-circular class="md-primary" md-mode="{{ mode }}"></md-progress-circular>
 				</div>
-
-				<div layout-gt-sm="row" layout-align="end center">
+  			<div layout-gt-sm="row" layout-align="end center">
 					<md-button name="clear" ng-click="myForm.reset(); myForm.$setPristine()" class="md-raised md-accent md-hue-2" ng-disabled="!myForm.modified">Clear</md-button>
 					<md-button name="login" ng-click="addCompany(myForm)" class="md-raised md-primary" ng-disabled="myForm.$invalid">Save</md-button>
 				</div>
 			</form>
 		</md-list>
+  </md-tab>
+  <md-tab class="md-accent md-hue-1 " label="Add Client" style="width: 100%; height: 100%;  border-right: 1px solid #ccc;">
+    <md-list style="padding: 10px 40px 0px 40px; max-width: 820px;">
+      <form name="myForm" novalidate>
+        <div layout="row" layout-align="space-around center" style="width: 100%; margin-bottom: 10px;">
+          <span style="width: 352px; padding: 0; text-align: right;"><button  id="upload_widget_opener" ng-click="uploadImg('logoImg', 'logo')" class="md-button md-warn">Add Logo</button></span>
+          
+          <span flex>&nbsp;</span>
+          <span style="width: 352px; padding: 0; text-align: right;"><button id="ss_upload" ng-click="uploadImg('ssImg', 'ss')" class="md-button md-warn">Add Screenshot</button></span>
+          <span flex>&nbsp;</span>
+        </div>
+        <div layout-gt-sm="row">
+          <div layout="column" flex="50" layout-align="start start">
+            <img id="logoImg" ng-src='https://res.cloudinary.com/grooveio88/image/upload/bo_1px_solid_rgb:e0e0e0,c_fill,h_250,o_15,r_0,w_350/{{ logo  }}.jpg' />
+          
+          </div>
+          <div layout="column" flex="50" layout-align="start start">
+            <img id="ssImg" ng-src='https://res.cloudinary.com/grooveio88/image/upload/bo_1px_solid_rgb:e0e0e0,c_fill,h_250,o_15,r_0,w_350/{{ ss }}.jpg' />
+          </div>
+        </div>
+        <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Company Name</label>
+            <input type="text" ng-model="company.name" name="name" required>
+            <div ng-messages="myForm.name.$error">
+              <div ng-message="required">This is required.</div>
+            </div>
+          </md-input-container>
+        </div>
+        <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Website</label>
+            <input type="text" ng-model="company.url" name="url" required>
+            <div ng-messages="myForm.url.$error">
+              <div ng-message="required">This is required.</div>
+            </div>
+          </md-input-container>
+        </div>
+        <div layout-gt-sm="row">
+        </div>
+        <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Contact Person</label>
+            <input type="text" ng-model="company.poc" name="poc">
+            <div ng-messages="myForm.poc.$error">
+              <div ng-message="required">This is required.</div>
+            </div>
+          </md-input-container>
+        </div>
+        <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Analytics ID</label>
+            <input type="text" ng-model="company.profileId" name="profileId" >
+            <div ng-messages="myForm.profileId.$error">
+              <div ng-message="required">This is required.</div>
+            </div>
+          </md-input-container>
+        </div>
+        <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Webmaster Account</label>
+            <input type="email" ng-model="company.webmasterAcct" name="webmasterAcct" >
+            <div ng-messages="myForm.webmasterAcct.$error">
+              <div ng-message="required">This is required.</div>
+              <div ng-message="email">This field must be a valid email address.</div>
+            </div>
+          </md-input-container>
+        </div>
+        <div layout-gt-sm="row" layout-align="center center">
+          <div class="md-headline" style="color: #7CC900;" ng-show="successMsg == true">Success!</div>
+          <md-progress-circular class="md-primary" md-mode="{{ mode }}"></md-progress-circular>
+        </div>
+        
+        <div layout-gt-sm="row" layout-align="end center">
+          <md-button name="clear" ng-click="myForm.reset(); myForm.$setPristine()" class="md-raised md-accent md-hue-2" ng-disabled="!myForm.modified">Clear</md-button>
+          <md-button name="login" ng-click="addCompany(myForm)" class="md-raised md-primary" ng-disabled="myForm.$invalid">Save</md-button>
+        </div>
+      </form>
+    </md-list>
+  </md-tab>
+</md-tabs>
 	</md-content>
 </md-content>

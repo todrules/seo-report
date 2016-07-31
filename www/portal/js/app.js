@@ -2,9 +2,6 @@ angular.module('app', ['ngMaterial', 'ui.router', 'app.controllers', 'app.direct
 
 	.run([ 'GAuth', 'GApi', 'GData', 'CLIENTID', 'SCOPES', '$rootScope', '$state', '$stateParams', '$location', '$timeout', 'SCOPE', 'APIKEY', function(GAuth, GApi, GData, CLIENTID, SCOPES, $rootScope, $state, $stateParams, $location, $timeout, SCOPE, APIKEY) {
 
-
-		
-		
 		root = $rootScope;
 
 		GApi.load('webmasters','v3');
@@ -88,7 +85,7 @@ angular.module('app', ['ngMaterial', 'ui.router', 'app.controllers', 'app.direct
 
 	.config(function(LoopBackResourceProvider) {
 		LoopBackResourceProvider
-			.setUrlBase('https://mobile-associates-seo.herokuapp.com/api')
+			.setUrlBase('http://localhost:5000/api')
 	})
 
 	.config(function($mdIconProvider){
@@ -421,7 +418,7 @@ angular.module('app', ['ngMaterial', 'ui.router', 'app.controllers', 'app.direct
 
 
 		// if none of the above states are matched, use this as the fallback
-		$urlRouterProvider.otherwise('/clients');
+		$urlRouterProvider.otherwise('/home');
 	}])
 	//take all whitespace out of string
 	.filter('nospace', function () {

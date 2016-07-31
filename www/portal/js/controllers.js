@@ -169,58 +169,45 @@ angular.module('app.controllers', [])
 
 })
 
-.controller('editClientCtrl', ['$scope', 'Company', '$timeout', '$rootScope', '$state',  function($scope, Company, $timeout, $rootScope, $state) {
+.controller('editClientCtrl', ['$scope', 'Company', '$timeout', '$rootScope', '$state', 'ErrorService',  function($scope, Company, $timeout, $rootScope, $state, ErrorService) {
 	
 	$scope.mode = '';
-
+  $scope.currentNavItem = 'page1';
 	$scope.ss = 'plaster';
 	$scope.logo = 'plaster';
 
+	$scope.initPage = function() {
+		
+	}
 
-	document.getElementById("ss_upload").addEventListener("click", function($scope, $rootScope) {
-
+	$scope.uploadImg = function(ele, type) {
+		var doc_id = document.getElementById(ele);
+		var type = type;
 		cloudinary.openUploadWidget({ cloud_name: 'grooveio88', upload_preset: 'portal'},
-			function(error, result) {
+		function(error, result) {
+			if(error) {
+				console.log(error);
+				return;
+			} else {
 				for(var i = 0; i < result.length; i++) {
-					console.log(result[i]);
-					$scope.ss = result[i].public_id;
-					var img = document.getElementById('ssImg');
-					img.src = 'https://res.cloudinary.com/grooveio88/image/upload/bo_1px_solid_rgb:ccc,c_fit,h_300,o_100,r_0,w_300/' + $scope.ss + '.jpg';
+					var id = result[i].public_id
+					if(type === 'ss') {
+						$scope.ss = id;
+					} else  {
+						$scope.logo = id;
+					}
+					doc_id.src = 'https://res.cloudinary.com/grooveio88/image/upload/bo_1px_solid_rgb:ccc,c_fit,h_150,o_100,r_0,w_300/' + id + '.jpg';
 					$scope.$apply;
-
-					//$scope.logo = result[i].public_id;
-					console.log(result[i].public_id);
+					
 				}
-			});
-
-	}, false);
-
-	document.getElementById("upload_widget_opener").addEventListener("click", function($scope, $rootScope) {
-
-		cloudinary.openUploadWidget({ cloud_name: 'grooveio88', upload_preset: 'portal'},
-			function(error, result) {
-				for(var i = 0; i < result.length; i++) {
-					console.log(result[i]);
-					$scope.logo = result[i].public_id;
-					var img = document.getElementById('logoImg');
-					img.src = 'https://res.cloudinary.com/grooveio88/image/upload/bo_1px_solid_rgb:ccc,c_fit,h_150,o_100,r_0,w_300/' + $scope.logo + '.jpg';
-						$scope.$apply;
-
-					//$scope.logo = result[i].public_id;
-					console.log(result[i].public_id);
-				}
-
-
-
-			});
-
-	}, false);
-
+			}
+			
+		});
+		
+	};
 
 	$scope.$on('cloudinary', function(event, args) {
 
-		$scope.ss = $rootScope.ss;
-		$scope.logo = $rootScope.logo;
 	});
 	
 	$scope.addCompany = function(myForm) {
@@ -230,22 +217,21 @@ angular.module('app.controllers', [])
 			poc: myForm.poc.$viewValue,
 			url: myForm.url.$viewValue,
 			profileId: myForm.profileId.$viewValue,
-			sheetId: myForm.sheetId.$viewValue,
-			webmasterAcct: myForm.webmasterAcct.$viewValue
+			webmasterAcct: myForm.webmasterAcct.$viewValue,
+      screenshotUrl: $scope.ss,
+      logoUrl: $scope.logo
 		}
 
 		$timeout(function() {
 			Company.create(data).$promise.then(function(res) {
 				//console.log(res);
 				$scope.mode = '';
-				if(!res.error) {
-					console.log(res);
-					$scope.successMsg = true;
-				} else {
-					console.log(res.error.message);
-				};
-
-			})
+        $scope.successMsg = true;
+				return $scope.successMsg;
+			}, function (err) {
+        $scope.mode = '';
+				return ErrorService.handleError(err);
+ 			});
 		});
 	}
 }])
